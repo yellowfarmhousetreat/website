@@ -18,7 +18,7 @@
 			</header>
 
 			<!-- Nav -->
-			<nav id="nav">
+			<nav id="nav" aria-label="Main navigation">
 				<ul class="links">
 					<li><a href="index.html">Home</a></li>
 					<li class="active"><a href="menu.html">Menu</a></li>
@@ -41,48 +41,49 @@
 					</header>
 				</article>
 
-				<!-- Posts -->
-				<section class="posts">
-					<article>
-						<header>
-							<h2><a href="cookies.html">Cookies</a></h2>
-						</header>
-						<a href="cookies.html" class="image fit" title="Cookies"><img src="images/pic02.jpg" alt="Browse our cookie selection" /></a>
-						<p>Simple favorites to complex creations - chocolate chip, fancy filled varieties, and seasonal specials</p>
-						<ul class="actions special">
-							<li><a href="cookies.html" class="button">Shop Cookies</a></li>
-						</ul>
-					</article>
-					<article>
-						<header>
-							<h2><a href="cakes.html">Cakes</a></h2>
-						</header>
-						<a href="cakes.html" class="image fit" title="Cakes"><img src="images/pic03.jpg" alt="Browse our cake selection" /></a>
-						<p>Mini cakes, cupcakes, and specialty cakes perfect for any occasion</p>
-						<ul class="actions special">
-							<li><a href="cakes.html" class="button">Shop Cakes</a></li>
-						</ul>
-					</article>
-					<article>
-						<header>
-							<h2><a href="pies.html">Pies & Crisps</a></h2>
-						</header>
-						<a href="pies.html" class="image fit" title="Pies & Crisps"><img src="images/pic04.jpg" alt="Browse our pies and crisps selection" /></a>
-						<p>Fresh fruit pies, crisps, and cobblers made with seasonal ingredients</p>
-						<ul class="actions special">
-							<li><a href="pies.html" class="button">Shop Pies</a></li>
-						</ul>
-					</article>
-					<article>
-						<header>
-							<h2><a href="breads.html">Breads & More</a></h2>
-						</header>
-						<a href="breads.html" class="image fit" title="Breads & More"><img src="images/pic05.jpg" alt="Browse our breads and specialty items selection" /></a>
-						<p>Artisan milk bread, pumpkin bread, muffins, and specialty baked goods</p>
-						<ul class="actions special">
-							<li><a href="breads.html" class="button">Shop Breads</a></li>
-						</ul>
-					</article>
+				<!-- Sub-Menu Tabs -->
+				<nav class="submenu-tabs" aria-label="Menu category tabs">
+					<ul>
+						<li><a href="#" class="tab-link active" data-category="cookies">Cookies</a></li>
+						<li><a href="#" class="tab-link" data-category="cakes">Cakes</a></li>
+						<li><a href="#" class="tab-link" data-category="pies">Pies & Crisps</a></li>
+						<li><a href="#" class="tab-link" data-category="breads">Breads & More</a></li>
+						<li><a href="#" class="tab-link" data-category="all">All Items</a></li>
+					</ul>
+				</nav>
+
+				<!-- Sub-Menu Content -->
+				<section class="submenu-content">
+					<div id="submenu-cookies" class="submenu-panel active">
+						<div class="placeholder-item">
+							<h3>🍪 Cookies Coming Soon</h3>
+							<p>Delicious cookies featuring chocolate chip, fancy filled varieties, and seasonal specials. Menu items launching soon!</p>
+						</div>
+					</div>
+					<div id="submenu-cakes" class="submenu-panel">
+						<div class="placeholder-item">
+							<h3>🎂 Cakes Coming Soon</h3>
+							<p>Mini cakes, cupcakes, and specialty cakes perfect for any occasion. Menu items launching soon!</p>
+						</div>
+					</div>
+					<div id="submenu-pies" class="submenu-panel">
+						<div class="placeholder-item">
+							<h3>🥧 Pies & Crisps Coming Soon</h3>
+							<p>Fresh fruit pies, crisps, and cobblers made with seasonal ingredients. Menu items launching soon!</p>
+						</div>
+					</div>
+					<div id="submenu-breads" class="submenu-panel">
+						<div class="placeholder-item">
+							<h3>🍞 Breads & More Coming Soon</h3>
+							<p>Artisan milk bread, pumpkin bread, muffins, and specialty baked goods. Menu items launching soon!</p>
+						</div>
+					</div>
+					<div id="submenu-all" class="submenu-panel">
+						<div class="placeholder-item">
+							<h3>✨ Explore Everything</h3>
+							<p>Browse all our fresh baked goods across all categories. Menu items launching soon!</p>
+						</div>
+					</div>
 				</section>
 
 			</div>
@@ -132,6 +133,35 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 		<script src="/cart.js"></script>
+
+		<!-- Sub-Menu Tab Switching -->
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const tabLinks = document.querySelectorAll('.tab-link');
+				const panels = document.querySelectorAll('.submenu-panel');
+
+				tabLinks.forEach(link => {
+					link.addEventListener('click', function(e) {
+						e.preventDefault();
+						
+						// Get the category from data attribute
+						const category = this.getAttribute('data-category');
+						
+						// Remove active class from all links and panels
+						tabLinks.forEach(l => l.classList.remove('active'));
+						panels.forEach(p => p.classList.remove('active'));
+						
+						// Add active class to clicked link and corresponding panel
+						this.classList.add('active');
+						const panelId = 'submenu-' + category;
+						const activePanel = document.getElementById(panelId);
+						if (activePanel) {
+							activePanel.classList.add('active');
+						}
+					});
+				});
+			});
+		</script>
 
 	</body>
 </html>
