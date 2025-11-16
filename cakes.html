@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cakes | Yellow Farmhouse Stand</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    <header id="header">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart & Checkout</a></li>
+            </ul>
+        </nav>
+        <h1>Cakes</h1>
+    </header>
+    <main id="main" class="product-catalog">
+        <section class="products-grid">
+            <!-- Example Cake Product -->
+            <div class="product-card">
+                <img src="images/cake-chocolate.jpg" alt="Chocolate Cake" class="product-img">
+                <h2>Chocolate Cake</h2>
+                <p>Rich, moist chocolate cake with creamy frosting.</p>
+                <div class="product-details">
+                    <span class="product-price">$30</span>
+                    <label><input type="checkbox" id="choc-gf"> Gluten Free</label>
+                    <label><input type="checkbox" id="choc-sf"> Sugar Free</label>
+                    <input type="number" id="choc-qty" min="1" value="1" class="qty-input">
+                    <button onclick="addToCart('Chocolate Cake', 30, 'choc-gf', 'choc-sf', 'choc-qty')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/cake-vanilla.jpg" alt="Vanilla Cake" class="product-img">
+                <h2>Vanilla Cake</h2>
+                <p>Classic vanilla cake with a light, fluffy texture.</p>
+                <div class="product-details">
+                    <span class="product-price">$30</span>
+                    <label><input type="checkbox" id="van-gf"> Gluten Free</label>
+                    <label><input type="checkbox" id="van-sf"> Sugar Free</label>
+                    <input type="number" id="van-qty" min="1" value="1" class="qty-input">
+                    <button onclick="addToCart('Vanilla Cake', 30, 'van-gf', 'van-sf', 'van-qty')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/cake-carrot.jpg" alt="Carrot Cake" class="product-img">
+                <h2>Carrot Cake</h2>
+                <p>Moist carrot cake with cream cheese frosting.</p>
+                <div class="product-details">
+                    <span class="product-price">$32</span>
+                    <label><input type="checkbox" id="carrot-gf"> Gluten Free</label>
+                    <label><input type="checkbox" id="carrot-sf"> Sugar Free</label>
+                    <input type="number" id="carrot-qty" min="1" value="1" class="qty-input">
+                    <button onclick="addToCart('Carrot Cake', 32, 'carrot-gf', 'carrot-sf', 'carrot-qty')">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="cart.js"></script>
+</body>
+</html>

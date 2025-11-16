@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pies | Yellow Farmhouse Stand</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    <header id="header">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart & Checkout</a></li>
+            </ul>
+        </nav>
+        <h1>Pies</h1>
+    </header>
+    <main id="main" class="product-catalog">
+        <section class="products-grid">
+            <div class="product-card">
+                <img src="images/pie-apple.jpg" alt="Apple Pie" class="product-img">
+                <h2>Apple Pie</h2>
+                <p>Classic apple pie with a flaky crust and cinnamon apples.</p>
+                <div class="product-details">
+                    <span class="product-price">$25</span>
+                    <label><input type="checkbox" id="apple-gf"> Gluten Free</label>
+                    <label><input type="checkbox" id="apple-sf"> Sugar Free</label>
+                    <input type="number" id="apple-qty" min="1" value="1" class="qty-input">
+                    <button onclick="addToCart('Apple Pie', 25, 'apple-gf', 'apple-sf', 'apple-qty')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/pie-pumpkin.jpg" alt="Pumpkin Pie" class="product-img">
+                <h2>Pumpkin Pie</h2>
+                <p>Spiced pumpkin filling in a buttery crust. A holiday favorite.</p>
+                <div class="product-details">
+                    <span class="product-price">$25</span>
+                    <label><input type="checkbox" id="pumpkin-gf"> Gluten Free</label>
+                    <label><input type="checkbox" id="pumpkin-sf"> Sugar Free</label>
+                    <input type="number" id="pumpkin-qty" min="1" value="1" class="qty-input">
+                    <button onclick="addToCart('Pumpkin Pie', 25, 'pumpkin-gf', 'pumpkin-sf', 'pumpkin-qty')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/pie-peach.jpg" alt="Peach Pie" class="product-img">
+                <h2>Peach Pie</h2>
+                <p>Sweet peaches baked in a golden crust.</p>
+                <div class="product-details">
+                    <span class="product-price">$25</span>
+                    <label><input type="checkbox" id="peach-gf"> Gluten Free</label>
+                    <label><input type="checkbox" id="peach-sf"> Sugar Free</label>
+                    <input type="number" id="peach-qty" min="1" value="1" class="qty-input">
+                    <button onclick="addToCart('Peach Pie', 25, 'peach-gf', 'peach-sf', 'peach-qty')">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="cart.js"></script>
+</body>
+</html>

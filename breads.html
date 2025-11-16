@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breads | Yellow Farmhouse Stand</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    <header id="header">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart & Checkout</a></li>
+            </ul>
+        </nav>
+        <h1>Breads</h1>
+    </header>
+    <main id="main" class="product-catalog">
+        <section class="products-grid">
+            <div class="product-card">
+                <img src="images/bread-milk.jpg" alt="Milk Bread" class="product-img">
+                <h2>Milk Bread</h2>
+                <p>Soft, fluffy bread made with fresh milk. Perfect for sandwiches.</p>
+                <div class="product-details">
+                    <span class="product-price">$12/loaf</span>
+                    <label><input type="checkbox" id="milk-gf"> Gluten Free</label>
+                    <label><input type="checkbox" id="milk-sf"> Sugar Free</label>
+                    <input type="number" id="milk-qty" min="1" value="1" class="qty-input">
+                    <button onclick="addToCart('Milk Bread', 12, 'milk-gf', 'milk-sf', 'milk-qty')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/bread-pumpkin.jpg" alt="Pumpkin Bread" class="product-img">
+                <h2>Pumpkin Bread</h2>
+                <p>Moist pumpkin bread with warm spices. A fall favorite.</p>
+                <div class="product-details">
+                    <span class="product-price">$12/loaf</span>
+                    <label><input type="checkbox" id="pumpkinbread-gf"> Gluten Free</label>
+                    <label><input type="checkbox" id="pumpkinbread-sf"> Sugar Free</label>
+                    <input type="number" id="pumpkinbread-qty" min="1" value="1" class="qty-input">
+                    <button onclick="addToCart('Pumpkin Bread', 12, 'pumpkinbread-gf', 'pumpkinbread-sf', 'pumpkinbread-qty')">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="cart.js"></script>
+</body>
+</html>

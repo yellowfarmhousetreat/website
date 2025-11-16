@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart & Checkout | Yellow Farmhouse Stand</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    <header id="header">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart & Checkout</a></li>
+            </ul>
+        </nav>
+        <h1>Shopping Cart</h1>
+    </header>
+    <main id="main" class="cart-main">
+        <section class="cart-section">
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <span>Total: $<span id="cart-total">0.00</span></span>
+            </div>
+            <button id="paypal-checkout" class="btn-paypal">Checkout with PayPal</button>
+            <div class="cart-links">
+                <a href="menu.html">Back to Menu</a>
+            </div>
+        </section>
+    </main>
+    <script src="cart.js"></script>
+</body>
+</html>
