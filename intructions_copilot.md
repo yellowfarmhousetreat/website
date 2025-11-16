@@ -1,2 +1,0 @@
-you are going to go to www.yellowfarmhousestand.com and retrieve the index.html file that exists there and use it ONLY as a refrerence file to incorporate all of its current back end functionality into the new template that exists in this repo. From there analyze the template to make full use of its beauty and ease of use but incorporate the menu items that are in the old website but follow the new template's look and feel. 
-Stop there and let me see what you've done.

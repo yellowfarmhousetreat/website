@@ -2035,6 +2035,24 @@ input, select, textarea {
 
 		}
 
+/* Cart badge */
+.cart-count {
+	display: inline-block;
+	min-width: 20px;
+	padding: 2px 6px;
+	margin-left: 8px;
+	background: #e74c3c;
+	color: #fff;
+	border-radius: 999px;
+	font-size: 0.8rem;
+	text-align: center;
+	vertical-align: middle;
+}
+
+@media screen and (max-width: 736px) {
+	.cart-count { font-size: 0.75rem; min-width: 18px; }
+}
+
 /* Box */
 
 	.box {

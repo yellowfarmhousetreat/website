@@ -1,0 +1,288 @@
+<!DOCTYPE HTML>
+<!--
+    Massively by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+        <title>Order - Yellow Farmhouse Stand</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    </head>
+    <body class="is-preload">
+
+        <!-- Wrapper -->
+            <div id="wrapper">
+
+                <!-- Header -->
+                    <header id="header">
+                        <a href="index.html" class="logo">🌾 Yellow Farmhouse Stand</a>
+                    </header>
+
+                <!-- Nav -->
+                    <nav id="nav">
+                        <ul class="links">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active"><a href="order.html">Order</a></li>
+                        <li><a href="cart.html">Cart <span id="cart-count" class="cart-count">0</span></a></li>
+                        </ul>
+                        <ul class="icons">
+                            <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                            <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                            <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                            <li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+                        </ul>
+                    </nav>
+
+                <!-- Main -->
+                    <div id="main">
+
+                        <!-- Post -->
+                            <section class="post">
+                                <header class="major">
+                                <h1>Order Fresh Baked Goods</h1>
+                                <p>Fill out the form below to order pies, cakes, breads, and more.<br />
+                                Please allow up to 48 hours for items to be prepared.</p>
+                                </header>
+                                <section class="order-form">
+                                <!-- Begin imported order form from reference_document.md, formatted for Massively template -->
+                                <div class="order-form-massively">
+                                    <div class="box">
+                                        <form id="orderForm" action="https://formspree.io/f/mblpnapy" method="POST">
+                                            <!-- Alerts -->
+                                            <div class="alert error" id="errorAlert"></div>
+                                            <div class="alert success" id="successAlert"></div>
+
+                                            <!-- Step 1: Select Products -->
+                                            <h2 class="major">Step 1: Select Your Items</h2>
+                                            <div class="note-box">
+                                                <strong>Note:</strong> Regular items contain gluten and sugar.
+                                            </div>
+                                            <div class="footnote-legend">
+                                                <strong>Footnote Legend:</strong>
+                                                <div class="footnote-item"><strong>*</strong> = Can be made Gluten Free</div>
+                                                <div class="footnote-item"><strong>^</strong> = Can be made Sugar Free</div>
+                                            </div>
+                                            <div class="products-grid" id="productsGrid"></div>
+                                            <div class="order-items" id="orderItems">
+                                                <div class="empty-items">No items added yet</div>
+                                            </div>
+                                            <input type="hidden" id="orderSummary" name="order_items" value="">
+
+                                            <!-- Step 2: Customer Information -->
+                                            <h2 class="major">Step 2: Your Information</h2>
+                                            <div class="fields">
+                                                <div class="field">
+                                                    <label for="customerName">Full Name *</label>
+                                                    <input type="text" id="customerName" name="name" required />
+                                                </div>
+                                                <div class="field">
+                                                    <label for="customerPhone">Phone Number *</label>
+                                                    <input type="tel" id="customerPhone" name="phone" required />
+                                                </div>
+                                                <div class="field">
+                                                    <label for="customerEmail">Email Address</label>
+                                                    <input type="email" id="customerEmail" name="email" />
+                                                </div>
+                                            </div>
+
+                                            <!-- Step 3: Fulfillment Method -->
+                                            <h2 class="major">Step 3: How Would You Like Your Order?</h2>
+                                            <div class="fields">
+                                                <div class="field">
+                                                    <input type="radio" id="fulfillmentPickup" name="fulfillment_method" value="Pickup" checked onchange="handleFulfillmentChange()" />
+                                                    <label for="fulfillmentPickup"><strong>Pickup</strong> (Pick up at farmstand)</label>
+                                                </div>
+                                                <div class="field" id="shippingOption">
+                                                    <input type="radio" id="fulfillmentShip" name="fulfillment_method" value="Shipping" onchange="handleFulfillmentChange()" disabled />
+                                                    <label for="fulfillmentShip"><strong>Ship to Me</strong> (Delivered to your address)</label>
+                                                </div>
+                                                <div class="fulfillment-note" id="fulfillmentNote" style="display: none;">
+                                                    Shipping is only available when ordering Pecan English Toffee.
+                                                </div>
+                                                <div id="pickupSection" class="visible">
+                                                    <label for="pickupDate">Desired Pickup Date *</label>
+                                                    <input type="date" id="pickupDate" name="pickup_date" required />
+                                                    <label for="pickupTime">Pickup Time *</label>
+                                                    <input type="time" id="pickupTime" name="pickup_time" required />
+                                                </div>
+                                                <div id="shippingSection" class="hidden-section">
+                                                    <label for="shippingAddress">Shipping Address *</label>
+                                                    <input type="text" id="shippingAddress" name="shipping_address" placeholder="Street address" />
+                                                    <label for="shippingCity">City *</label>
+                                                    <input type="text" id="shippingCity" name="shipping_city" />
+                                                    <label for="shippingState">State *</label>
+                                                    <input type="text" id="shippingState" name="shipping_state" placeholder="ID" maxlength="2" />
+                                                    <label for="shippingZip">ZIP Code *</label>
+                                                    <input type="text" id="shippingZip" name="shipping_zip" onchange="calculateShipping()" />
+                                                    <label>Estimated Shipping Cost</label>
+                                                    <span id="shippingCost">$0.00</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Step 4: Special Instructions -->
+                                            <h2 class="major">Step 4: Special Instructions</h2>
+                                            <div class="field">
+                                                <label for="specialInstructions">Any special requests or dietary needs?</label>
+                                                <textarea id="specialInstructions" name="special_instructions" placeholder="E.g., gluten-free, sugar-free, allergies, delivery instructions, etc."></textarea>
+                                            </div>
+
+                                            <!-- Order Summary -->
+                                            <div class="summary-box">
+                                                <h3 class="major">Order Summary</h3>
+                                                <div class="summary-row">
+                                                    <span>Subtotal:</span>
+                                                    <span id="summarySubtotal">$0.00</span>
+                                                </div>
+                                                <div class="summary-row" id="summaryShippingRow" style="display: none;">
+                                                    <span>Shipping:</span>
+                                                    <span id="summaryShipping">$0.00</span>
+                                                </div>
+                                                <div class="summary-row total">
+                                                    <span>Total Due:</span>
+                                                    <span id="summaryTotal">$0.00</span>
+                                                </div>
+                                                <div class="summary-row deposit" id="depositRow">
+                                                    <span>50% Deposit Due Now:</span>
+                                                    <span id="summaryDeposit">$0.00</span>
+                                                </div>
+                                                <div class="summary-row" id="balanceRow" style="padding: 8px 0; margin: 0; margin-top: 8px; font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.2);">
+                                                    <span>Balance Due at Pickup:</span>
+                                                    <span id="summaryBalance">$0.00</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Deposit Information -->
+                                            <div id="depositPickupInfo" class="deposit-alert" style="display: none;">
+                                                <strong>50% Deposit to Secure Your Pickup Appointment</strong>
+                                                <p>A 50% deposit is required to confirm and secure your pickup appointment. The remaining balance is due at the time of pickup.</p>
+                                                <div class="deposit-row">
+                                                    <div class="deposit-info">
+                                                        <div class="deposit-info-label">Deposit Amount:</div>
+                                                        <div class="deposit-amount-display" id="depositDisplayAmount">$0.00</div>
+                                                    </div>
+                                                    <div class="deposit-info">
+                                                        <div class="deposit-info-label">Balance Due at Pickup:</div>
+                                                        <div class="deposit-amount-display" id="balanceDisplayAmount">$0.00</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Step 5: Payment Method -->
+                                            <h2 class="major">Step 5: Select Payment Method</h2>
+                                            <div class="fields">
+                                                <div class="field">
+                                                    <input type="radio" id="paymentCash" name="payment_method" value="Cash" required onchange="updatePaymentDetails()" />
+                                                    <label for="paymentCash"><strong>Cash</strong> (Pay deposit now, balance at pickup)</label>
+                                                </div>
+                                                <div class="field">
+                                                    <input type="radio" id="paymentCashApp" name="payment_method" value="Cash App" onchange="updatePaymentDetails()" />
+                                                    <label for="paymentCashApp"><strong>Cash App</strong> $DanaBlueMoonHaven</label>
+                                                </div>
+                                                <div class="field">
+                                                    <input type="radio" id="paymentVenmo" name="payment_method" value="Venmo" onchange="updatePaymentDetails()" />
+                                                    <label for="paymentVenmo"><strong>Venmo</strong> @BlueMoonHaven</label>
+                                                </div>
+                                                <div class="field">
+                                                    <input type="radio" id="paymentPayPal" name="payment_method" value="PayPal" onchange="updatePaymentDetails()" />
+                                                    <label for="paymentPayPal"><strong>PayPal</strong> @BlueMoonHaven</label>
+                                                </div>
+                                                <div class="field">
+                                                    <input type="radio" id="paymentZelle" name="payment_method" value="Zelle" onchange="updatePaymentDetails()" />
+                                                    <label for="paymentZelle"><strong>Zelle</strong> 805-709-4686</label>
+                                                </div>
+                                                <div class="payment-details" id="paymentDetails" style="display: none; margin-top: 15px;">
+                                                    <div id="paymentDetailsContent"></div>
+                                                </div>
+                                                <div class="payment-note">
+                                                    <strong>Payment Instructions:</strong> A 50% deposit is required to secure your pickup appointment. Your confirmation email will include payment details. The remaining 50% balance is due at pickup.
+                                                </div>
+                                            </div>
+
+                                            <!-- Submit -->
+                                            <ul class="actions">
+                                                <li><button type="submit" class="primary">Submit Order & Secure Appointment</button></li>
+                                                <li><button type="reset" onclick="resetFormComplete()">Clear Form</button></li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- End imported order form -->
+</section>
+                            </section>
+
+                    </div>
+
+                <!-- Footer -->
+                    <footer id="footer">
+                        <section>
+                            <form method="post" action="#">
+                                <div class="fields">
+                                    <div class="field">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" id="name" />
+                                    </div>
+                                    <div class="field">
+                                        <label for="email">Email</label>
+                                        <input type="text" name="email" id="email" />
+                                    </div>
+                                    <div class="field">
+                                        <label for="message">Message</label>
+                                        <textarea name="message" id="message" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <ul class="actions">
+                                    <li><input type="submit" value="Send Message" /></li>
+                                </ul>
+                            </form>
+                        </section>
+                        <section class="split contact">
+                            <section class="alt">
+                                <h3>Address</h3>
+                                <p>1234 Somewhere Road #87257<br />
+                                Nashville, TN 00000-0000</p>
+                            </section>
+                            <section>
+                                <h3>Phone</h3>
+                                <p><a href="#">(000) 000-0000</a></p>
+                            </section>
+                            <section>
+                                <h3>Email</h3>
+                                <p><a href="#">info@untitled.tld</a></p>
+                            </section>
+                            <section>
+                                <h3>Social</h3>
+                                <ul class="icons alt">
+                                    <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+                                    <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                                    <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                                    <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                                </ul>
+                            </section>
+                        </section>
+                    </footer>
+
+                <!-- Copyright -->
+                    <div id="copyright">
+                        <ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+                    </div>
+
+            </div>
+
+        <!-- Scripts -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/jquery.scrollex.min.js"></script>
+            <script src="assets/js/jquery.scrolly.min.js"></script>
+            <script src="assets/js/browser.min.js"></script>
+            <script src="assets/js/breakpoints.min.js"></script>
+            <script src="assets/js/util.js"></script>
+            <script src="assets/js/main.js"></script>
+            <!-- Begin imported order form scripts -->
+            <script src="/cart.js"></script>
+            <!-- End imported order form scripts -->
+
+    </body>
+</html>

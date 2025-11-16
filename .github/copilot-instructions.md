@@ -6,7 +6,7 @@ This is a static HTML/CSS/JS website for the Yellow Farmhouse Stand, built on th
 
 ## Key Files & Structure
 
-- **HTML Pages:** `index.html`, `elements.html`, `generic.html`, `menu.html`
+- **HTML Pages:** `index.html`, `cart.html`, `order.html`, `menu.html`
 - **Order Form Logic:** Embedded in `reference_document.md` (used for new template and order flow)
 - **Assets:** 
   - CSS: `assets/css/main.css` (template styles), `noscript.css`
