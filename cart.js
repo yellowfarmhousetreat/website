@@ -5,6 +5,7 @@
 function showToast(message, type = 'success') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
+    // Sanitize message to prevent XSS
     toast.textContent = message;
     document.body.appendChild(toast);
     
