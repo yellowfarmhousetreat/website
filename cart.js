@@ -48,20 +48,28 @@ function renderCart() {
     const cartItemsDiv = document.getElementById('cart-items');
     if (!cartItemsDiv) return;
     if (cart.length === 0) {
-        cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+        cartItemsDiv.textContent = 'Your cart is empty.';
         document.getElementById('cart-total').textContent = '0.00';
         return;
     }
-    let html = '<ul class="cart-list">';
+    const ul = document.createElement('ul');
+    ul.className = 'cart-list';
     let total = 0;
     cart.forEach((item, idx) => {
-        const gf = item.glutenFree ? 'GF' : '';
-        const sf = item.sugarFree ? 'SF' : '';
-        html += `<li>${item.name} ${gf} ${sf} - $${item.price} x ${item.quantity} <button onclick="removeFromCart(${idx})">Remove</button></li>`;
+        const li = document.createElement('li');
+        const gf = item.glutenFree ? ' GF' : '';
+        const sf = item.sugarFree ? ' SF' : '';
+        const itemText = document.createTextNode(`${item.name}${gf}${sf} - $${item.price} x ${item.quantity} `);
+        li.appendChild(itemText);
+        const btn = document.createElement('button');
+        btn.textContent = 'Remove';
+        btn.onclick = () => removeFromCart(idx);
+        li.appendChild(btn);
+        ul.appendChild(li);
         total += item.price * item.quantity;
     });
-    html += '</ul>';
-    cartItemsDiv.innerHTML = html;
+    cartItemsDiv.textContent = '';
+    cartItemsDiv.appendChild(ul);
     document.getElementById('cart-total').textContent = total.toFixed(2);
 }
 
