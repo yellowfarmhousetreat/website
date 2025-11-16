@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart & Checkout | Yellow Farmhouse Stand</title>
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="styles-products.css">
 </head>
 <body>
     <header id="header">
@@ -25,10 +26,12 @@
             </div>
             <button id="paypal-checkout" class="btn-paypal">Checkout with PayPal</button>
             <div class="cart-links">
+                <button onclick="clearCart()" style="background: #d32f2f; color: #fff; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; margin-right: 0.5rem;">Clear Cart</button>
                 <a href="menu.html">Back to Menu</a>
             </div>
         </section>
     </main>
+    <script src="products.js"></script>
     <script src="cart.js"></script>
 </body>
 </html>
