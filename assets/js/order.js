@@ -9,7 +9,7 @@
         const orderSummaryInput = document.getElementById('orderSummary');
         
         if (cart.length === 0) {
-            orderItemsDiv.innerHTML = '<div class="empty-items">No items added yet. <a href="menu.html">Go to Menu</a></div>';
+            orderItemsDiv.innerHTML = '<div class="empty-items">Your cart is empty. <a href="menu.html">Browse the menu</a> to add items.</div>';
             orderSummaryInput.value = '';
             updateOrderSummary(0, 0);
             return;
