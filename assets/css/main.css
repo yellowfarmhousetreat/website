@@ -5070,34 +5070,33 @@ input, select, textarea {
 }
 
 .empty-items {
-	padding: 2rem;
+	padding: 2rem 1rem;
 	text-align: center;
-	color: #1a1d23;
+	color: #9aa4af;
 	font-style: italic;
-	background: #FFD866;
-	border-radius: 6px;
+	background: transparent;
 }
 
 .empty-items a {
-	color: #1a1d23;
+	color: #FFD866;
 	text-decoration: underline;
-	font-weight: 700;
+	font-weight: 600;
 }
 
 /* Cart count badge */
 #cart-count {
-	display: inline-block;
-	background: #e74c3c;
-	color: #fff;
-	font-size: 0.7em;
-	padding: 0.15rem 0.4rem;
-	border-radius: 10px;
-	margin-left: 0.3rem;
-	font-weight: bold;
-	line-height: 1;
-	vertical-align: middle;
-	position: relative;
-	top: -1px; /* nudge up slightly without affecting link height */
+    display: inline-block;
+    color: #fff;
+    font-size: 0.7em;
+    padding: 0.15rem 0.4rem;
+    border-radius: 10px;
+    margin-left: 0.3rem;
+    font-weight: bold;
+    line-height: 1;
+    vertical-align: middle;
+    position: relative;
+    top: -1px; /* nudge up slightly without affecting link height */
+    background-color: #E5CC3D;
 }
 
 /* Payment amount choice */
@@ -5309,15 +5308,26 @@ input[type="number"], textarea, select {
 
 input::placeholder, textarea::placeholder { color: #9aa4af; }
 
-/* Summary/Note boxes - dark text on yellow background for high contrast */
+/* Summary/Note boxes - subtle dark tile with left yellow accent bar */
 .note-box, .summary-box, .deposit-alert {
-    background: #FFD866;
-    border: 1px solid #FFEB66;
-    color: #1a1d23;
+	background: #2d3138;
+	border: 1px solid rgba(255,255,255,0.12);
+	color: #e6e9ed;
+	position: relative;
+	padding-left: 1.25rem;
 }
 
-.note-box strong, .summary-box strong { color: #1a1d23; font-weight: 900; }
-.note-box a, .summary-box a { color: #1a1d23; text-decoration: underline; font-weight: 700; }
+.note-box:before, .summary-box:before, .deposit-alert:before {
+	content: "";
+	position: absolute;
+	top: 0; left: 0; bottom: 0;
+	width: 4px;
+	background: linear-gradient(#FFD866,#FFEB66);
+	border-radius: 4px 0 0 4px;
+}
+
+.note-box strong, .summary-box strong { color: #FFD866; font-weight: 900; }
+.note-box a, .summary-box a { color: #FFD866; text-decoration: underline; font-weight: 600; }
 
 /* Radio/Checkbox labels - brighter for readability */
 input[type="radio"] + label, input[type="checkbox"] + label {
