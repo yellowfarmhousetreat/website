@@ -5317,6 +5317,12 @@ input[type="radio"] + label, input[type="checkbox"] + label {
     color: #f5f7fa !important;
 }
 
+/* Strong text inside labels - yellow accent for emphasis */
+label strong {
+    color: #FFD866;
+    font-weight: 900;
+}
+
 /* Links */
 #main a { color: #FFD866; }
 #main a:hover { color: #FFEB66; }
