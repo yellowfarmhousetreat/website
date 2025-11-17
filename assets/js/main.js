@@ -165,30 +165,30 @@
 			// Get inner.
 				$navPanelInner = $navPanel.children('nav');
 
-			// Move nav content on breakpoint change.
-				var $navContent = $nav.children();
+			// DISABLED: We keep nav inline at all breakpoints instead of moving to side panel
+				// var $navContent = $nav.children();
 
-				breakpoints.on('>medium', function() {
+				// breakpoints.on('>medium', function() {
 
-					// NavPanel -> Nav.
-						$navContent.appendTo($nav);
+				// 	// NavPanel -> Nav.
+				// 		$navContent.appendTo($nav);
 
-					// Flip icon classes.
-						$nav.find('.icons, .icon')
-							.removeClass('alt');
+				// 	// Flip icon classes.
+				// 		$nav.find('.icons, .icon')
+				// 			.removeClass('alt');
 
-				});
+				// });
 
-				breakpoints.on('<=medium', function() {
+				// breakpoints.on('<=medium', function() {
 
-					// Nav -> NavPanel.
-						$navContent.appendTo($navPanelInner);
+				// 	// Nav -> NavPanel.
+				// 		$navContent.appendTo($navPanelInner);
 
-					// Flip icon classes.
-						$navPanelInner.find('.icons, .icon')
-							.addClass('alt');
+				// 	// Flip icon classes.
+				// 		$navPanelInner.find('.icons, .icon')
+				// 			.addClass('alt');
 
-				});
+				// });
 
 			// Hack: Disable transitions on WP.
 				if (browser.os == 'wp'
