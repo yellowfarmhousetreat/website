@@ -114,9 +114,9 @@ table {
 }
 
 .submenu-tabs .tab-link.active {
-	color: #ffffff;
-	background: #27ae60;
-	border-bottom-color: #27ae60;
+	color: #333333;
+	background: #e8e8e8;
+	border-bottom-color: #333333;
 	font-weight: 700;
 }
 
