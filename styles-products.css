@@ -1,3 +1,85 @@
+/* Cookie Tier Sub-Tabs */
+.cookie-tier-tabs {
+	background: #333333;
+	border-bottom: 2px solid #27ae60;
+	padding: 0;
+	margin: 0 auto;
+	width: calc(100% - 4rem);
+	max-width: 72rem;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	position: relative;
+	z-index: 2;
+	margin-left: 2rem;
+	margin-right: 2rem;
+	margin-bottom: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+.cookie-tier-tabs ul {
+	list-style: none;
+	display: flex;
+	gap: 0;
+	margin: 0;
+	padding: 0;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+}
+
+.cookie-tier-tabs li {
+	margin: 0;
+	padding: 0;
+}
+
+.cookie-tier-link {
+	display: inline-block;
+	padding: 0.8rem 1.5rem;
+	text-decoration: none;
+	color: #e0e0e0;
+	font-weight: 600;
+	border-bottom: 3px solid transparent;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	font-size: 0.95rem;
+	background: transparent;
+	flex: 1;
+	text-align: center;
+	max-width: 200px;
+}
+
+.cookie-tier-link:hover {
+	color: #fff;
+	border-bottom-color: #27ae60;
+	background: rgba(39, 174, 96, 0.15);
+}
+
+.cookie-tier-link.active {
+	color: #fff;
+	background: #27ae60;
+	border-bottom-color: #1e8449;
+	font-weight: 700;
+}
+
+.cookie-tier-panel {
+	display: none;
+}
+
+.cookie-tier-panel.active {
+	display: block;
+	animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
 /* Cookie Tier Styling */
 .cookie-tier {
 	margin-bottom: 3rem;

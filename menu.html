@@ -45,20 +45,21 @@
 			<!-- Main -->
 			<div id="main">
 
-				<!-- Featured Post -->
-				<article class="post featured">
-					<header class="major">
-						<h2>Our Menu</h2>
-						<p>Browse our categories of fresh baked goods</p>
-					</header>
-				</article>
-
 				<!-- Sub-Menu Content -->
 				<section class="submenu-content">
-					<!-- Cookies Panel with Tiers -->
+					<!-- Cookies Panel with Sub-Tiers -->
 					<div id="submenu-cookies" class="submenu-panel active">
+						<!-- Cookie Tier Tabs -->
+						<nav class="cookie-tier-tabs" aria-label="Cookie tier selection">
+							<ul>
+								<li><a href="#" class="cookie-tier-link active" data-tier="regular">Regular</a></li>
+								<li><a href="#" class="cookie-tier-link" data-tier="fancy">Fancy</a></li>
+								<li><a href="#" class="cookie-tier-link" data-tier="complex">Complex</a></li>
+							</ul>
+						</nav>
+
 						<!-- Regular Tier -->
-						<div class="cookie-tier">
+						<div id="tier-regular" class="cookie-tier-panel active">
 							<h3 class="tier-header">Regular Cookies</h3>
 							<section class="products-grid">
 								<!-- Chocolate Chip Cookies -->
@@ -129,7 +130,7 @@
 						</div>
 
 						<!-- Fancy Tier -->
-						<div class="cookie-tier">
+						<div id="tier-fancy" class="cookie-tier-panel">
 							<h3 class="tier-header">Fancy Cookies</h3>
 							<section class="products-grid">
 								<!-- Mint Fudge Cookies -->
@@ -184,7 +185,7 @@
 						</div>
 
 						<!-- Complex Tier -->
-						<div class="cookie-tier">
+						<div id="tier-complex" class="cookie-tier-panel">
 							<h3 class="tier-header">Complex Cookies</h3>
 							<section class="products-grid">
 								<!-- Matcha Cheesecake Cookies -->
@@ -585,6 +586,31 @@
 						// Add active class to clicked link and corresponding panel
 						this.classList.add('active');
 						const panelId = 'submenu-' + category;
+						const activePanel = document.getElementById(panelId);
+						if (activePanel) {
+							activePanel.classList.add('active');
+						}
+					});
+				});
+
+				// Cookie tier tab switching
+				const cookieTierLinks = document.querySelectorAll('.cookie-tier-link');
+				const cookieTierPanels = document.querySelectorAll('.cookie-tier-panel');
+
+				cookieTierLinks.forEach(link => {
+					link.addEventListener('click', function(e) {
+						e.preventDefault();
+						
+						// Get the tier from data attribute
+						const tier = this.getAttribute('data-tier');
+						
+						// Remove active class from all links and panels
+						cookieTierLinks.forEach(l => l.classList.remove('active'));
+						cookieTierPanels.forEach(p => p.classList.remove('active'));
+						
+						// Add active class to clicked link and corresponding panel
+						this.classList.add('active');
+						const panelId = 'tier-' + tier;
 						const activePanel = document.getElementById(panelId);
 						if (activePanel) {
 							activePanel.classList.add('active');
