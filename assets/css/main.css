@@ -64,10 +64,12 @@ table {
 	background: #f9f9f9;
 	border-bottom: 2px solid #ddd;
 	padding: 0;
-	margin: 2rem 0;
+	margin: 0;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
+	position: relative;
+	top: -2px;
 }
 
 .submenu-tabs ul {
@@ -87,13 +89,14 @@ table {
 
 .submenu-tabs .tab-link {
 	display: inline-block;
-	padding: 1rem 1.5rem;
+	padding: 0.8rem 1.5rem;
 	text-decoration: none;
 	color: #555;
 	font-weight: 600;
 	border-bottom: 3px solid transparent;
 	transition: all 0.3s ease;
 	cursor: pointer;
+	font-size: 0.95rem;
 }
 
 .submenu-tabs .tab-link:hover {
