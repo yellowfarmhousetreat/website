@@ -1,23 +1,23 @@
 /* Cookie Tier Sub-Tabs */
 .cookie-tier-tabs {
-	background: #ffffff;
-	border-bottom: 2px solid #ddd;
-	border-top: 1px solid #f0f0f0;
-	padding: 0;
-	margin: 0 auto;
-	width: calc(100% - 4rem);
-	max-width: 72rem;
-	display: none;
-	justify-content: center;
-	flex-wrap: wrap;
-	position: relative;
-	top: -10px;
-	z-index: 3;
-	margin-left: 2rem;
-	margin-right: 2rem;
-	margin-bottom: -2px;
-	margin-top: 0;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    background: #f9f9f9; /* match main submenu background */
+    border-bottom: 2px solid #ddd;
+    border-top: 0;
+    padding: 0;
+    margin: 0 auto;
+    width: calc(100% - 4rem);
+    max-width: 72rem;
+    display: none;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    top: -2px; /* sit flush with content */
+    z-index: 2;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 0;
+    margin-top: 0;
+    box-shadow: none; /* remove dark divider */
 }
 
 .cookie-tier-tabs.active {
@@ -64,10 +64,11 @@
 }
 
 .cookie-tier-link.active {
-	color: #27ae60;
-	background: transparent;
-	border-bottom-color: #27ae60;
-	font-weight: 600;
+    color: #27ae60;
+    background: transparent;
+    border-bottom-color: #27ae60;
+    font-weight: 600;
+    position: relative;
 }
 
 .cookie-tier-panel {

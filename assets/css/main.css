@@ -123,13 +123,15 @@ table {
 /* Sub-Menu Content */
 .submenu-content {
 	margin: 0;
-	padding: 0;
+	/* Tighten the gap beneath the tier tabs and align content */
+	padding: 1.25rem 2rem 2rem;
 }
 
 .submenu-panel {
 	display: none;
 	animation: fadeIn 0.3s ease;
-	padding: 0 2rem;
+	/* Avoid double horizontal padding; handled by .submenu-content */
+	padding: 0;
 }
 
 .submenu-panel.active {
