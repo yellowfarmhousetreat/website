@@ -32,11 +32,19 @@
                         ${item.size ? `<span class="item-size">${item.size}</span>` : ''}
                         ${item.isGF ? '<span class="dietary-badge">GF</span>' : ''}
                         ${item.isSF ? '<span class="dietary-badge">SF</span>' : ''}
-                        <div class="item-qty-price">
-                            Qty: ${item.quantity} × $${item.price.toFixed(2)} = $${itemTotal.toFixed(2)}
-                        </div>
+                        <div class="item-price-line">$${item.price.toFixed(2)} each</div>
                     </div>
-                    <button type="button" class="remove-item" onclick="removeCartItem(${index})" aria-label="Remove item">×</button>
+                    <div class="cart-item-controls">
+                        <div class="quantity-controls">
+                            <button type="button" class="qty-btn qty-decrease" onclick="updateCartQuantity(${index}, -1)" aria-label="Decrease quantity">−</button>
+                            <span class="qty-display">${item.quantity}</span>
+                            <button type="button" class="qty-btn qty-increase" onclick="updateCartQuantity(${index}, 1)" aria-label="Increase quantity">+</button>
+                        </div>
+                        <div class="item-total">$${itemTotal.toFixed(2)}</div>
+                        <button type="button" class="remove-item-subtle" onclick="removeCartItem(${index})" aria-label="Remove item" title="Remove from cart">
+                            <span class="remove-icon">✕</span>
+                        </button>
+                    </div>
                 </div>
             `;
 
@@ -94,11 +102,34 @@
 
     // Remove item from cart
     window.removeCartItem = function(index) {
+        if (confirm('Remove this item from your cart?')) {
+            const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
+            cart.splice(index, 1);
+            localStorage.setItem('yfhs_cart', JSON.stringify(cart));
+            loadCartToOrder();
+            updateCartCount();
+        }
+    };
+
+    // Update quantity in cart
+    window.updateCartQuantity = function(index, change) {
         const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
-        cart.splice(index, 1);
-        localStorage.setItem('yfhs_cart', JSON.stringify(cart));
-        loadCartToOrder();
-        updateCartCount();
+        if (cart[index]) {
+            cart[index].quantity += change;
+            
+            // Remove item if quantity goes to 0
+            if (cart[index].quantity <= 0) {
+                if (confirm('Remove this item from your cart?')) {
+                    cart.splice(index, 1);
+                } else {
+                    cart[index].quantity = 1; // Reset to 1 if they cancel
+                }
+            }
+            
+            localStorage.setItem('yfhs_cart', JSON.stringify(cart));
+            loadCartToOrder();
+            updateCartCount();
+        }
     };
 
     // Update cart count badge
