@@ -208,6 +208,51 @@ input, select, textarea {
 
 	}
 
+	/* ===== Custom overrides for Yellow Farmhouse menu controls ===== */
+	.quantity-selector {
+		background: rgba(0,0,0,0.03);
+		border: 1px solid rgba(0,0,0,0.08);
+		border-radius: 6px;
+		padding: 0.75rem 0.85rem;
+	}
+	.quantity-selector label {
+		display: block;
+		cursor: pointer;
+		margin: 0.15rem 0;
+	}
+	.quantity-selector input[type="radio"] {
+		/* Ensure radios are visible even if a base style hides them */
+		display: inline-block !important;
+		-webkit-appearance: radio !important;
+		-moz-appearance: radio !important;
+		appearance: radio !important;
+		margin-right: 8px;
+		width: auto !important;
+		height: auto !important;
+		opacity: 1 !important;
+		position: relative !important;
+	}
+	.qty-input {
+		width: 68px;
+	}
+
+	/* Lightweight toast so add-to-cart feedback is visible */
+	.toast {
+		position: fixed;
+		right: 20px;
+		bottom: 20px;
+		background: #2e8b57;
+		color: #fff;
+		padding: 10px 14px;
+		border-radius: 6px;
+		box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+		z-index: 9999;
+		animation: fadeIn 0.2s ease;
+	}
+	.toast.error { background: #c0392b; }
+	@keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
+	@keyframes slideOut { from { opacity: 1; } to { opacity: 0; } }
+
 	html {
 		box-sizing: border-box;
 	}
