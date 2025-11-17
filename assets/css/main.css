@@ -3577,17 +3577,27 @@ input, select, textarea {
 			opacity: 0;
 		}
 
-			body.is-preload #intro:not(.hidden) + #header + #nav {
-				-moz-transform: translateY(4rem);
-				-webkit-transform: translateY(4rem);
-				-ms-transform: translateY(4rem);
-				transform: translateY(4rem);
-				opacity: 0;
-			}
+		body.is-preload #intro:not(.hidden) + #header + #nav {
+			-moz-transform: translateY(4rem);
+			-webkit-transform: translateY(4rem);
+			-ms-transform: translateY(4rem);
+			transform: translateY(4rem);
+			opacity: 0;
+		}
 
-		@media screen and (max-width: 980px) {
+		/* Ensure nav is visible when there's no intro section */
+		body:not(:has(#intro)) #nav,
+		#header + #nav {
+			-moz-transform: translateY(0);
+			-webkit-transform: translateY(0);
+			-ms-transform: translateY(0);
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+			margin-top: 0;
+		}
 
-			#intro {
+	@media screen and (max-width: 980px) {			#intro {
 				padding: 4rem 4rem 2rem 4rem ;
 				min-height: 90vh;
 			}
