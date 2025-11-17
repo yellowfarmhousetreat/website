@@ -5094,7 +5094,10 @@ input, select, textarea {
 	border-radius: 10px;
 	margin-left: 0.3rem;
 	font-weight: bold;
-	vertical-align: super;
+	line-height: 1;
+	vertical-align: middle;
+	position: relative;
+	top: -1px; /* nudge up slightly without affecting link height */
 }
 
 /* Payment amount choice */
