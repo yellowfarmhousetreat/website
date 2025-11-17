@@ -71,6 +71,12 @@
 .cookie-tier-panel.active {
 	display: block;
 	animation: fadeIn 0.3s ease;
+	margin-top: 0;
+	padding-top: 0;
+}
+
+.cookie-tier-panel .products-grid {
+	margin-top: 0;
 }
 
 @keyframes fadeIn {
@@ -97,9 +103,10 @@
 	font-size: 1.3rem;
 	color: #27ae60;
 	font-weight: 700;
-	margin: 1.5rem 0 1.5rem 0;
+	margin: 0 0 1.5rem 0;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
+	padding-top: 1.5rem;
 }
 
 .quantity-selector {
