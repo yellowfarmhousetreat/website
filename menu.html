@@ -5,6 +5,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="styles-products.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -54,35 +55,338 @@
 
 				<!-- Sub-Menu Content -->
 				<section class="submenu-content">
+					<!-- Cookies Panel -->
 					<div id="submenu-cookies" class="submenu-panel active">
-						<div class="placeholder-item">
-							<h3>🍪 Cookies Coming Soon</h3>
-							<p>Delicious cookies featuring chocolate chip, fancy filled varieties, and seasonal specials. Menu items launching soon!</p>
-						</div>
+						<section class="products-grid">
+							<!-- Chocolate Chip Cookies -->
+							<div class="product-card">
+								<img src="images/cookies-chocolate-chip.jpg" alt="Chocolate Chip Cookies" class="product-img">
+								<h3>Chocolate Chip Cookies</h3>
+								<p>Classic cookies loaded with chocolate chips. Soft and chewy.</p>
+								<div class="product-details">
+									<span class="product-price">$20/dozen</span>
+									<label><input type="checkbox" id="cc-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="cc-sf"> Sugar Free</label>
+									<input type="number" id="cc-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Chocolate Chip Cookies', 20, 'cc-gf', 'cc-sf', 'cc-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Peanut Butter Cookies -->
+							<div class="product-card">
+								<img src="images/cookies-peanut-butter.jpg" alt="Peanut Butter Cookies" class="product-img">
+								<h3>Peanut Butter Cookies</h3>
+								<p>Rich peanut butter flavor, soft and crumbly. A classic favorite.</p>
+								<div class="product-details">
+									<span class="product-price">$20/dozen</span>
+									<label><input type="checkbox" id="pb-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="pb-sf"> Sugar Free</label>
+									<input type="number" id="pb-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Peanut Butter Cookies', 20, 'pb-gf', 'pb-sf', 'pb-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Sugar Cookies -->
+							<div class="product-card">
+								<img src="images/cookies-sugar.jpg" alt="Sugar Cookies" class="product-img">
+								<h3>Sugar Cookies</h3>
+								<p>Sweet, buttery cookies with a soft texture. Perfect for any occasion.</p>
+								<div class="product-details">
+									<span class="product-price">$20/dozen</span>
+									<label><input type="checkbox" id="sc-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="sc-sf"> Sugar Free</label>
+									<input type="number" id="sc-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Sugar Cookies', 20, 'sc-gf', 'sc-sf', 'sc-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Oatmeal Raisin Cookies -->
+							<div class="product-card">
+								<img src="images/cookies-oatmeal-raisin.jpg" alt="Oatmeal Raisin Cookies" class="product-img">
+								<h3>Oatmeal Raisin Cookies</h3>
+								<p>Hearty oatmeal cookies with plump raisins. Chewy and satisfying.</p>
+								<div class="product-details">
+									<span class="product-price">$20/dozen</span>
+									<label><input type="checkbox" id="or-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="or-sf"> Sugar Free</label>
+									<input type="number" id="or-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Oatmeal Raisin Cookies', 20, 'or-gf', 'or-sf', 'or-qty')">Add to Cart</button>
+								</div>
+							</div>
+						</section>
 					</div>
+
+					<!-- Cakes Panel -->
 					<div id="submenu-cakes" class="submenu-panel">
-						<div class="placeholder-item">
-							<h3>🎂 Cakes Coming Soon</h3>
-							<p>Mini cakes, cupcakes, and specialty cakes perfect for any occasion. Menu items launching soon!</p>
-						</div>
+						<section class="products-grid">
+							<!-- Chocolate Cake -->
+							<div class="product-card">
+								<img src="images/cake-chocolate.jpg" alt="Chocolate Cake" class="product-img">
+								<h3>Chocolate Cake</h3>
+								<p>Rich, moist chocolate cake with creamy frosting.</p>
+								<div class="product-details">
+									<span class="product-price">$30</span>
+									<label><input type="checkbox" id="choc-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="choc-sf"> Sugar Free</label>
+									<input type="number" id="choc-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Chocolate Cake', 30, 'choc-gf', 'choc-sf', 'choc-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Vanilla Cake -->
+							<div class="product-card">
+								<img src="images/cake-vanilla.jpg" alt="Vanilla Cake" class="product-img">
+								<h3>Vanilla Cake</h3>
+								<p>Classic vanilla cake with a light, fluffy texture.</p>
+								<div class="product-details">
+									<span class="product-price">$30</span>
+									<label><input type="checkbox" id="van-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="van-sf"> Sugar Free</label>
+									<input type="number" id="van-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Vanilla Cake', 30, 'van-gf', 'van-sf', 'van-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Carrot Cake -->
+							<div class="product-card">
+								<img src="images/cake-carrot.jpg" alt="Carrot Cake" class="product-img">
+								<h3>Carrot Cake</h3>
+								<p>Moist carrot cake with cream cheese frosting.</p>
+								<div class="product-details">
+									<span class="product-price">$32</span>
+									<label><input type="checkbox" id="carrot-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="carrot-sf"> Sugar Free</label>
+									<input type="number" id="carrot-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Carrot Cake', 32, 'carrot-gf', 'carrot-sf', 'carrot-qty')">Add to Cart</button>
+								</div>
+							</div>
+						</section>
 					</div>
+
+					<!-- Pies Panel -->
 					<div id="submenu-pies" class="submenu-panel">
-						<div class="placeholder-item">
-							<h3>🥧 Pies & Crisps Coming Soon</h3>
-							<p>Fresh fruit pies, crisps, and cobblers made with seasonal ingredients. Menu items launching soon!</p>
-						</div>
+						<section class="products-grid">
+							<!-- Apple Pie -->
+							<div class="product-card">
+								<img src="images/pie-apple.jpg" alt="Apple Pie" class="product-img">
+								<h3>Apple Pie</h3>
+								<p>Classic apple pie with a flaky crust and cinnamon apples.</p>
+								<div class="product-details">
+									<span class="product-price">$25</span>
+									<label><input type="checkbox" id="apple-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="apple-sf"> Sugar Free</label>
+									<input type="number" id="apple-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Apple Pie', 25, 'apple-gf', 'apple-sf', 'apple-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Pumpkin Pie -->
+							<div class="product-card">
+								<img src="images/pie-pumpkin.jpg" alt="Pumpkin Pie" class="product-img">
+								<h3>Pumpkin Pie</h3>
+								<p>Spiced pumpkin filling in a buttery crust. A holiday favorite.</p>
+								<div class="product-details">
+									<span class="product-price">$25</span>
+									<label><input type="checkbox" id="pumpkin-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="pumpkin-sf"> Sugar Free</label>
+									<input type="number" id="pumpkin-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Pumpkin Pie', 25, 'pumpkin-gf', 'pumpkin-sf', 'pumpkin-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Peach Pie -->
+							<div class="product-card">
+								<img src="images/pie-peach.jpg" alt="Peach Pie" class="product-img">
+								<h3>Peach Pie</h3>
+								<p>Sweet peaches baked in a golden crust.</p>
+								<div class="product-details">
+									<span class="product-price">$25</span>
+									<label><input type="checkbox" id="peach-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="peach-sf"> Sugar Free</label>
+									<input type="number" id="peach-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Peach Pie', 25, 'peach-gf', 'peach-sf', 'peach-qty')">Add to Cart</button>
+								</div>
+							</div>
+						</section>
 					</div>
+
+					<!-- Breads Panel -->
 					<div id="submenu-breads" class="submenu-panel">
-						<div class="placeholder-item">
-							<h3>🍞 Breads & More Coming Soon</h3>
-							<p>Artisan milk bread, pumpkin bread, muffins, and specialty baked goods. Menu items launching soon!</p>
-						</div>
+						<section class="products-grid">
+							<!-- Milk Bread -->
+							<div class="product-card">
+								<img src="images/bread-milk.jpg" alt="Milk Bread" class="product-img">
+								<h3>Milk Bread</h3>
+								<p>Soft, fluffy bread made with fresh milk. Perfect for sandwiches.</p>
+								<div class="product-details">
+									<span class="product-price">$12/loaf</span>
+									<label><input type="checkbox" id="milk-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="milk-sf"> Sugar Free</label>
+									<input type="number" id="milk-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Milk Bread', 12, 'milk-gf', 'milk-sf', 'milk-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Pumpkin Bread -->
+							<div class="product-card">
+								<img src="images/bread-pumpkin.jpg" alt="Pumpkin Bread" class="product-img">
+								<h3>Pumpkin Bread</h3>
+								<p>Moist pumpkin bread with warm spices. A fall favorite.</p>
+								<div class="product-details">
+									<span class="product-price">$12/loaf</span>
+									<label><input type="checkbox" id="pumpkinbread-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="pumpkinbread-sf"> Sugar Free</label>
+									<input type="number" id="pumpkinbread-qty" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Pumpkin Bread', 12, 'pumpkinbread-gf', 'pumpkinbread-sf', 'pumpkinbread-qty')">Add to Cart</button>
+								</div>
+							</div>
+						</section>
 					</div>
+
+					<!-- All Items Panel -->
 					<div id="submenu-all" class="submenu-panel">
-						<div class="placeholder-item">
-							<h3>✨ Explore Everything</h3>
-							<p>Browse all our fresh baked goods across all categories. Menu items launching soon!</p>
-						</div>
+						<section class="products-grid">
+							<!-- Cookies Section -->
+							<div class="product-card">
+								<img src="images/cookies-chocolate-chip.jpg" alt="Chocolate Chip Cookies" class="product-img">
+								<h3>Chocolate Chip Cookies</h3>
+								<p>Classic cookies loaded with chocolate chips. Soft and chewy.</p>
+								<div class="product-details">
+									<span class="product-price">$20/dozen</span>
+									<label><input type="checkbox" id="cc-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="cc-sf-all"> Sugar Free</label>
+									<input type="number" id="cc-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Chocolate Chip Cookies', 20, 'cc-gf-all', 'cc-sf-all', 'cc-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+							<div class="product-card">
+								<img src="images/cookies-peanut-butter.jpg" alt="Peanut Butter Cookies" class="product-img">
+								<h3>Peanut Butter Cookies</h3>
+								<p>Rich peanut butter flavor, soft and crumbly. A classic favorite.</p>
+								<div class="product-details">
+									<span class="product-price">$20/dozen</span>
+									<label><input type="checkbox" id="pb-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="pb-sf-all"> Sugar Free</label>
+									<input type="number" id="pb-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Peanut Butter Cookies', 20, 'pb-gf-all', 'pb-sf-all', 'pb-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+							<div class="product-card">
+								<img src="images/cookies-sugar.jpg" alt="Sugar Cookies" class="product-img">
+								<h3>Sugar Cookies</h3>
+								<p>Sweet, buttery cookies with a soft texture. Perfect for any occasion.</p>
+								<div class="product-details">
+									<span class="product-price">$20/dozen</span>
+									<label><input type="checkbox" id="sc-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="sc-sf-all"> Sugar Free</label>
+									<input type="number" id="sc-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Sugar Cookies', 20, 'sc-gf-all', 'sc-sf-all', 'sc-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+							<div class="product-card">
+								<img src="images/cookies-oatmeal-raisin.jpg" alt="Oatmeal Raisin Cookies" class="product-img">
+								<h3>Oatmeal Raisin Cookies</h3>
+								<p>Hearty oatmeal cookies with plump raisins. Chewy and satisfying.</p>
+								<div class="product-details">
+									<span class="product-price">$20/dozen</span>
+									<label><input type="checkbox" id="or-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="or-sf-all"> Sugar Free</label>
+									<input type="number" id="or-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Oatmeal Raisin Cookies', 20, 'or-gf-all', 'or-sf-all', 'or-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Cakes Section -->
+							<div class="product-card">
+								<img src="images/cake-chocolate.jpg" alt="Chocolate Cake" class="product-img">
+								<h3>Chocolate Cake</h3>
+								<p>Rich, moist chocolate cake with creamy frosting.</p>
+								<div class="product-details">
+									<span class="product-price">$30</span>
+									<label><input type="checkbox" id="choc-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="choc-sf-all"> Sugar Free</label>
+									<input type="number" id="choc-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Chocolate Cake', 30, 'choc-gf-all', 'choc-sf-all', 'choc-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+							<div class="product-card">
+								<img src="images/cake-vanilla.jpg" alt="Vanilla Cake" class="product-img">
+								<h3>Vanilla Cake</h3>
+								<p>Classic vanilla cake with a light, fluffy texture.</p>
+								<div class="product-details">
+									<span class="product-price">$30</span>
+									<label><input type="checkbox" id="van-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="van-sf-all"> Sugar Free</label>
+									<input type="number" id="van-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Vanilla Cake', 30, 'van-gf-all', 'van-sf-all', 'van-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+							<div class="product-card">
+								<img src="images/cake-carrot.jpg" alt="Carrot Cake" class="product-img">
+								<h3>Carrot Cake</h3>
+								<p>Moist carrot cake with cream cheese frosting.</p>
+								<div class="product-details">
+									<span class="product-price">$32</span>
+									<label><input type="checkbox" id="carrot-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="carrot-sf-all"> Sugar Free</label>
+									<input type="number" id="carrot-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Carrot Cake', 32, 'carrot-gf-all', 'carrot-sf-all', 'carrot-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Pies Section -->
+							<div class="product-card">
+								<img src="images/pie-apple.jpg" alt="Apple Pie" class="product-img">
+								<h3>Apple Pie</h3>
+								<p>Classic apple pie with a flaky crust and cinnamon apples.</p>
+								<div class="product-details">
+									<span class="product-price">$25</span>
+									<label><input type="checkbox" id="apple-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="apple-sf-all"> Sugar Free</label>
+									<input type="number" id="apple-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Apple Pie', 25, 'apple-gf-all', 'apple-sf-all', 'apple-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+							<div class="product-card">
+								<img src="images/pie-pumpkin.jpg" alt="Pumpkin Pie" class="product-img">
+								<h3>Pumpkin Pie</h3>
+								<p>Spiced pumpkin filling in a buttery crust. A holiday favorite.</p>
+								<div class="product-details">
+									<span class="product-price">$25</span>
+									<label><input type="checkbox" id="pumpkin-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="pumpkin-sf-all"> Sugar Free</label>
+									<input type="number" id="pumpkin-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Pumpkin Pie', 25, 'pumpkin-gf-all', 'pumpkin-sf-all', 'pumpkin-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+							<div class="product-card">
+								<img src="images/pie-peach.jpg" alt="Peach Pie" class="product-img">
+								<h3>Peach Pie</h3>
+								<p>Sweet peaches baked in a golden crust.</p>
+								<div class="product-details">
+									<span class="product-price">$25</span>
+									<label><input type="checkbox" id="peach-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="peach-sf-all"> Sugar Free</label>
+									<input type="number" id="peach-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Peach Pie', 25, 'peach-gf-all', 'peach-sf-all', 'peach-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Breads Section -->
+							<div class="product-card">
+								<img src="images/bread-milk.jpg" alt="Milk Bread" class="product-img">
+								<h3>Milk Bread</h3>
+								<p>Soft, fluffy bread made with fresh milk. Perfect for sandwiches.</p>
+								<div class="product-details">
+									<span class="product-price">$12/loaf</span>
+									<label><input type="checkbox" id="milk-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="milk-sf-all"> Sugar Free</label>
+									<input type="number" id="milk-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Milk Bread', 12, 'milk-gf-all', 'milk-sf-all', 'milk-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+							<div class="product-card">
+								<img src="images/bread-pumpkin.jpg" alt="Pumpkin Bread" class="product-img">
+								<h3>Pumpkin Bread</h3>
+								<p>Moist pumpkin bread with warm spices. A fall favorite.</p>
+								<div class="product-details">
+									<span class="product-price">$12/loaf</span>
+									<label><input type="checkbox" id="pumpkinbread-gf-all"> Gluten Free</label>
+									<label><input type="checkbox" id="pumpkinbread-sf-all"> Sugar Free</label>
+									<input type="number" id="pumpkinbread-qty-all" min="1" value="1" class="qty-input">
+									<button onclick="addToCart('Pumpkin Bread', 12, 'pumpkinbread-gf-all', 'pumpkinbread-sf-all', 'pumpkinbread-qty-all')">Add to Cart</button>
+								</div>
+							</div>
+						</section>
 					</div>
 				</section>
 
@@ -132,7 +436,8 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
-		<script src="/cart.js"></script>
+		<script src="products.js"></script>
+		<script src="cart.js"></script>
 
 		<!-- Sub-Menu Tab Switching -->
 		<script>

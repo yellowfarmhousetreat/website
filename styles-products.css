@@ -34,13 +34,12 @@
     background: #f0f0f0;
 }
 
-.product-card h2 {
-    font-size: 1.1rem;
-    margin: 1rem 1rem 0.5rem;
-    color: #333;
-}
-
-.product-card p {
+.product-card h2,
+.product-card h3 {
+	font-size: 1.1rem;
+	margin: 1rem 1rem 0.5rem;
+	color: #333;
+}.product-card p {
     font-size: 0.95rem;
     color: #666;
     margin: 0 1rem 0.5rem;
