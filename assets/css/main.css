@@ -5072,13 +5072,16 @@ input, select, textarea {
 .empty-items {
 	padding: 2rem;
 	text-align: center;
-	color: rgba(0,0,0,0.5);
+	color: #1a1d23;
 	font-style: italic;
+	background: #FFD866;
+	border-radius: 6px;
 }
 
 .empty-items a {
-	color: #FFD866;
+	color: #1a1d23;
 	text-decoration: underline;
+	font-weight: 700;
 }
 
 /* Cart count badge */
@@ -5303,14 +5306,15 @@ input[type="number"], textarea, select {
 
 input::placeholder, textarea::placeholder { color: #9aa4af; }
 
-/* Summary/Note boxes - lighter tiles */
+/* Summary/Note boxes - dark text on yellow background for high contrast */
 .note-box, .summary-box, .deposit-alert {
-    background: #2d3138;
-    border: 1px solid rgba(255,255,255,0.12);
-    color: #f5f7fa;
+    background: #FFD866;
+    border: 1px solid #FFEB66;
+    color: #1a1d23;
 }
 
-.note-box strong, .summary-box strong { color: #ffffff; }
+.note-box strong, .summary-box strong { color: #1a1d23; font-weight: 900; }
+.note-box a, .summary-box a { color: #1a1d23; text-decoration: underline; font-weight: 700; }
 
 /* Radio/Checkbox labels - brighter for readability */
 input[type="radio"] + label, input[type="checkbox"] + label {
