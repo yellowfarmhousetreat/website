@@ -5266,3 +5266,41 @@ input, select, textarea {
 		letter-spacing: 0.02em;
 	}
 }
+/* ==== Dark Mode Overrides (sitewide) ==== */
+/* Background is dark, tiles/cards are lighter for visual hierarchy */
+
+/* Darken page background */
+#main {
+    background-color: #1a1d23;
+}
+
+#main > * {
+    border-top-color: rgba(255,255,255,0.08);
+}
+
+/* Typography */
+#main, #main p, #main li { color: #e6e9ed; }
+#main h1, #main h2, #main h3, #main h4, #main h5, #main h6 { color: #f5f7fa; }
+
+/* Cards/boxes - lighter tiles on dark background */
+.box { background: #2d3138; border: 1px solid rgba(255,255,255,0.12); }
+
+/* Inputs - lighter for visibility */
+input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="time"],
+input[type="number"], textarea, select {
+    background: #3a3f48;
+    border: 1px solid #4b5563;
+    color: #e6e9ed;
+}
+
+input::placeholder, textarea::placeholder { color: #9aa4af; }
+
+/* Summary/Note boxes - lighter tiles */
+.note-box, .summary-box, .deposit-alert {
+    background: #2d3138;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Links */
+#main a { color: #FFD866; }
+#main a:hover { color: #FFEB66; }

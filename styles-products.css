@@ -385,11 +385,11 @@
 
 /* ==== Dark Mode: product cards ==== */
 .product-card {
-    background: #2a2f36;
-    border: 1px solid #3a424b;
+    background: #3a3f48;
+    border: 1px solid #4b5563;
 }
 .product-card p, .product-card h2, .product-card h3 { color: #e6e9ed; }
-.product-img { background: #3a424b; }
+.product-img { background: #2d3138; }
 
 /* Responsive */
 @media (max-width: 768px) {
