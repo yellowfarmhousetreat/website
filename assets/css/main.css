@@ -4903,9 +4903,9 @@ input, select, textarea {
 /* Cart items display on order page */
 .cart-items-list {
 	margin: 1.5rem 0;
-	border: 1px solid rgba(0,0,0,0.1);
+	border: 1px solid rgba(255,255,255,0.15);
 	border-radius: 8px;
-	background: rgba(255,255,255,0.05);
+	background: #2d3138;
 }
 
 .cart-item {
@@ -4913,8 +4913,11 @@ input, select, textarea {
 	justify-content: space-between;
 	align-items: center;
 	padding: 1rem;
-	border-bottom: 1px solid rgba(0,0,0,0.08);
+	border-bottom: 1px solid rgba(255,255,255,0.1);
 	gap: 1rem;
+	background: #3a3f48;
+	margin-bottom: 0.5rem;
+	border-radius: 6px;
 }
 
 .cart-item:last-child {
@@ -4930,15 +4933,17 @@ input, select, textarea {
 	display: block;
 	font-size: 1.05em;
 	margin-bottom: 0.3rem;
+	color: #f5f7fa;
 }
 
 .item-size {
 	display: inline-block;
-	background: rgba(0,0,0,0.08);
+	background: rgba(255,255,255,0.12);
 	padding: 0.2rem 0.5rem;
 	border-radius: 4px;
 	font-size: 0.85em;
 	margin-left: 0.5rem;
+	color: #e6e9ed;
 }
 
 .dietary-badge {
