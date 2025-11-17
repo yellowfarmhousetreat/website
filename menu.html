@@ -42,16 +42,14 @@
 				</ul>
 			</nav>
 
-			<!-- Cookie Tier Tabs -->
-			<nav class="cookie-tier-tabs" aria-label="Cookie tier selection">
-				<ul>
-					<li><a href="#" class="cookie-tier-link active" data-tier="regular">Regular</a></li>
-					<li><a href="#" class="cookie-tier-link" data-tier="fancy">Fancy</a></li>
-					<li><a href="#" class="cookie-tier-link" data-tier="complex">Complex</a></li>
-				</ul>
-			</nav>
-
-			<!-- Main -->
+		<!-- Cookie Tier Tabs -->
+		<nav class="cookie-tier-tabs" aria-label="Cookie tier selection">
+			<ul>
+				<li><a href="#" class="cookie-tier-link active" data-tier="simple">Simple</a></li>
+				<li><a href="#" class="cookie-tier-link" data-tier="fancy">Fancy</a></li>
+				<li><a href="#" class="cookie-tier-link" data-tier="complex">Complex</a></li>
+			</ul>
+		</nav>			<!-- Main -->
 			<div id="main">
 
 				<!-- Sub-Menu Content -->
@@ -59,77 +57,82 @@
 					<!-- Cookies Panel with Sub-Tiers -->
 					<div id="submenu-cookies" class="submenu-panel active">
 						<!-- Regular Tier -->
-						<div id="tier-regular" class="cookie-tier-panel active">
-							<h3 class="tier-header">Regular Cookies</h3>
-							<section class="products-grid">
-								<!-- Chocolate Chip Cookies -->
-								<div class="product-card">
-									<img src="images/cookies-chocolate-chip.jpg" alt="Chocolate Chip Cookies" class="product-img">
-									<h4>Chocolate Chip Cookies</h4>
-									<p>Classic cookies loaded with chocolate chips. Soft and chewy.</p>
-									<div class="product-details">
-										<div class="quantity-selector">
-											<label><input type="radio" name="cc-size" value="12" data-price="12"> 1/2 dozen - $12</label>
-											<label><input type="radio" name="cc-size" value="20" data-price="20" checked> Dozen - $20</label>
-										</div>
-										<label><input type="checkbox" id="cc-gf"> Gluten Free</label>
-										<label><input type="checkbox" id="cc-sf"> Sugar Free</label>
-										<input type="number" id="cc-qty" min="1" value="1" class="qty-input" title="Quantity">
-										<button onclick="addCookiesToCart('Chocolate Chip Cookies', 'cc-size', 'cc-gf', 'cc-sf', 'cc-qty')">Add to Cart</button>
+					<div id="tier-simple" class="cookie-tier-panel active">
+						<h3 class="tier-header">Simple Cookies</h3>
+						<section class="products-grid">
+							<!-- Peanut Butter Cookies -->
+							<div class="product-card">
+								<img src="images/cookies-peanut-butter.jpg" alt="Peanut Butter Cookies" class="product-img">
+								<h4>Peanut Butter Cookies</h4>
+								<p>Rich peanut butter flavor, soft and crumbly. A classic favorite.</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="pb-size" value="12" data-price="12"> 1/2 dozen - $12</label>
+										<label><input type="radio" name="pb-size" value="20" data-price="20" checked> Dozen - $20</label>
 									</div>
+									<input type="number" id="pb-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addCookiesToCart('Peanut Butter Cookies', 'pb-size', null, null, 'pb-qty')">Add to Cart</button>
 								</div>
-								<!-- Peanut Butter Cookies -->
-								<div class="product-card">
-									<img src="images/cookies-peanut-butter.jpg" alt="Peanut Butter Cookies" class="product-img">
-									<h4>Peanut Butter Cookies</h4>
-									<p>Rich peanut butter flavor, soft and crumbly. A classic favorite.</p>
-									<div class="product-details">
-										<div class="quantity-selector">
-											<label><input type="radio" name="pb-size" value="12" data-price="12"> 1/2 dozen - $12</label>
-											<label><input type="radio" name="pb-size" value="20" data-price="20" checked> Dozen - $20</label>
-										</div>
-										<label><input type="checkbox" id="pb-gf"> Gluten Free</label>
-										<label><input type="checkbox" id="pb-sf"> Sugar Free</label>
-										<input type="number" id="pb-qty" min="1" value="1" class="qty-input" title="Quantity">
-										<button onclick="addCookiesToCart('Peanut Butter Cookies', 'pb-size', 'pb-gf', 'pb-sf', 'pb-qty')">Add to Cart</button>
+							</div>
+							<!-- Chocolate Cookies -->
+							<div class="product-card">
+								<img src="images/cookies-chocolate.jpg" alt="Chocolate Cookies" class="product-img">
+								<h4>Chocolate Cookies</h4>
+								<p>Rich, decadent chocolate cookies for chocolate lovers.</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="choc-size" value="12" data-price="12"> 1/2 dozen - $12</label>
+										<label><input type="radio" name="choc-size" value="20" data-price="20" checked> Dozen - $20</label>
 									</div>
+									<input type="number" id="choc-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addCookiesToCart('Chocolate Cookies', 'choc-size', null, null, 'choc-qty')">Add to Cart</button>
 								</div>
-								<!-- Sugar Cookies -->
-								<div class="product-card">
-									<img src="images/cookies-sugar.jpg" alt="Sugar Cookies" class="product-img">
-									<h4>Sugar Cookies</h4>
-									<p>Sweet, buttery cookies with a soft texture. Perfect for any occasion.</p>
-									<div class="product-details">
-										<div class="quantity-selector">
-											<label><input type="radio" name="sc-size" value="12" data-price="12"> 1/2 dozen - $12</label>
-											<label><input type="radio" name="sc-size" value="20" data-price="20" checked> Dozen - $20</label>
-										</div>
-										<label><input type="checkbox" id="sc-gf"> Gluten Free</label>
-										<label><input type="checkbox" id="sc-sf"> Sugar Free</label>
-										<input type="number" id="sc-qty" min="1" value="1" class="qty-input" title="Quantity">
-										<button onclick="addCookiesToCart('Sugar Cookies', 'sc-size', 'sc-gf', 'sc-sf', 'sc-qty')">Add to Cart</button>
+							</div>
+							<!-- Chocolate Chip Cookies -->
+							<div class="product-card">
+								<img src="images/cookies-chocolate-chip.jpg" alt="Chocolate Chip Cookies" class="product-img">
+								<h4>Chocolate Chip Cookies</h4>
+								<p>Classic cookies loaded with chocolate chips. Soft and chewy.</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="cc-size" value="12" data-price="12"> 1/2 dozen - $12</label>
+										<label><input type="radio" name="cc-size" value="20" data-price="20" checked> Dozen - $20</label>
 									</div>
+									<input type="number" id="cc-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addCookiesToCart('Chocolate Chip Cookies', 'cc-size', null, null, 'cc-qty')">Add to Cart</button>
 								</div>
-								<!-- Oatmeal Raisin Cookies -->
-								<div class="product-card">
-									<img src="images/cookies-oatmeal-raisin.jpg" alt="Oatmeal Raisin Cookies" class="product-img">
-									<h4>Oatmeal Raisin Cookies</h4>
-									<p>Hearty oatmeal cookies with plump raisins. Chewy and satisfying.</p>
-									<div class="product-details">
-										<div class="quantity-selector">
-											<label><input type="radio" name="or-size" value="12" data-price="12"> 1/2 dozen - $12</label>
-											<label><input type="radio" name="or-size" value="20" data-price="20" checked> Dozen - $20</label>
-										</div>
-										<label><input type="checkbox" id="or-gf"> Gluten Free</label>
-										<label><input type="checkbox" id="or-sf"> Sugar Free</label>
-										<input type="number" id="or-qty" min="1" value="1" class="qty-input" title="Quantity">
-										<button onclick="addCookiesToCart('Oatmeal Raisin Cookies', 'or-size', 'or-gf', 'or-sf', 'or-qty')">Add to Cart</button>
+							</div>
+							<!-- Oatmeal Cookies -->
+							<div class="product-card">
+								<img src="images/cookies-oatmeal.jpg" alt="Oatmeal Cookies" class="product-img">
+								<h4>Oatmeal Cookies</h4>
+								<p>Hearty oatmeal cookies. Chewy and satisfying. * Can be made Gluten Free</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="oat-size" value="12" data-price="12"> 1/2 dozen - $12</label>
+										<label><input type="radio" name="oat-size" value="20" data-price="20" checked> Dozen - $20</label>
 									</div>
+									<label><input type="checkbox" id="oat-gf"> Gluten Free</label>
+									<input type="number" id="oat-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addCookiesToCart('Oatmeal Cookies', 'oat-size', 'oat-gf', null, 'oat-qty')">Add to Cart</button>
 								</div>
-							</section>
-						</div>
-
-						<!-- Fancy Tier -->
+							</div>
+							<!-- Snickerdoodle Cookies -->
+							<div class="product-card">
+								<img src="images/cookies-snickerdoodle.jpg" alt="Snickerdoodle Cookies" class="product-img">
+								<h4>Snickerdoodle Cookies</h4>
+								<p>Cinnamon-sugar coated cookies with a soft, tender center.</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="snick-size" value="12" data-price="12"> 1/2 dozen - $12</label>
+										<label><input type="radio" name="snick-size" value="20" data-price="20" checked> Dozen - $20</label>
+									</div>
+									<input type="number" id="snick-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addCookiesToCart('Snickerdoodle Cookies', 'snick-size', null, null, 'snick-qty')">Add to Cart</button>
+								</div>
+							</div>
+						</section>
+					</div>						<!-- Fancy Tier -->
 						<div id="tier-fancy" class="cookie-tier-panel">
 							<h3 class="tier-header">Fancy Cookies</h3>
 							<section class="products-grid">
