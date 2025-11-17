@@ -42,6 +42,15 @@
 				</ul>
 			</nav>
 
+			<!-- Cookie Tier Tabs -->
+			<nav class="cookie-tier-tabs" aria-label="Cookie tier selection">
+				<ul>
+					<li><a href="#" class="cookie-tier-link active" data-tier="regular">Regular</a></li>
+					<li><a href="#" class="cookie-tier-link" data-tier="fancy">Fancy</a></li>
+					<li><a href="#" class="cookie-tier-link" data-tier="complex">Complex</a></li>
+				</ul>
+			</nav>
+
 			<!-- Main -->
 			<div id="main">
 
@@ -49,15 +58,6 @@
 				<section class="submenu-content">
 					<!-- Cookies Panel with Sub-Tiers -->
 					<div id="submenu-cookies" class="submenu-panel active">
-						<!-- Cookie Tier Tabs -->
-						<nav class="cookie-tier-tabs" aria-label="Cookie tier selection">
-							<ul>
-								<li><a href="#" class="cookie-tier-link active" data-tier="regular">Regular</a></li>
-								<li><a href="#" class="cookie-tier-link" data-tier="fancy">Fancy</a></li>
-								<li><a href="#" class="cookie-tier-link" data-tier="complex">Complex</a></li>
-							</ul>
-						</nav>
-
 						<!-- Regular Tier -->
 						<div id="tier-regular" class="cookie-tier-panel active">
 							<h3 class="tier-header">Regular Cookies</h3>
@@ -589,6 +589,14 @@
 						const activePanel = document.getElementById(panelId);
 						if (activePanel) {
 							activePanel.classList.add('active');
+						}
+						
+						// Show/hide cookie tier tabs based on category
+						const cookieTierTabs = document.querySelector('.cookie-tier-tabs');
+						if (category === 'cookies') {
+							cookieTierTabs.classList.add('active');
+						} else {
+							cookieTierTabs.classList.remove('active');
 						}
 					});
 				});
