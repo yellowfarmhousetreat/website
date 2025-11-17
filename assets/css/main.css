@@ -3577,24 +3577,14 @@ input, select, textarea {
 			opacity: 0;
 		}
 
-		body.is-preload #intro:not(.hidden) + #header + #nav {
-			-moz-transform: translateY(4rem);
-			-webkit-transform: translateY(4rem);
-			-ms-transform: translateY(4rem);
-			transform: translateY(4rem);
-			opacity: 0;
-		}
-
-		/* Ensure nav is visible when there's no intro section */
-		body:not(:has(#intro)) #nav,
-		#header + #nav {
+		/* Nav visibility always maintained - no preload hiding */
+		body.is-preload #nav {
+			opacity: 1;
+			visibility: visible;
 			-moz-transform: translateY(0);
 			-webkit-transform: translateY(0);
 			-ms-transform: translateY(0);
 			transform: translateY(0);
-			opacity: 1;
-			visibility: visible;
-			margin-top: 0;
 		}
 
 	@media screen and (max-width: 980px) {			#intro {
@@ -3764,7 +3754,7 @@ input, select, textarea {
 		background: rgba(255, 255, 255, 0.175);
 		height: 4rem;
 		line-height: 4rem;
-		margin: -4rem auto 0 auto;
+		margin: 0 auto;
 		overflow: hidden;
 		padding: 0 2rem 0 0;
 		position: sticky;
@@ -3772,6 +3762,8 @@ input, select, textarea {
 		width: calc(100% - 4rem);
 		max-width: 72rem;
 		z-index: 101;
+		opacity: 1;
+		visibility: visible;
 	}
 
 		#nav ul.divided li {
@@ -3892,10 +3884,13 @@ input, select, textarea {
 			margin-bottom: 0;
 		}
 
+		/* Mobile-first: nav is always visible */
 		@media screen and (max-width: 980px) {
 
 			#nav {
-				/* display: none; */ /* Keep nav visible on all screen sizes */
+				display: flex;
+				opacity: 1;
+				visibility: visible;
 			}
 
 		}
