@@ -136,52 +136,130 @@
 						<div id="tier-fancy" class="cookie-tier-panel">
 							<h3 class="tier-header">Fancy Cookies</h3>
 							<section class="products-grid">
-								<!-- Mint Fudge Cookies -->
+								<!-- Biscoff Cookies -->
 								<div class="product-card">
-									<img src="images/cookies-mint-fudge.jpg" alt="Mint Fudge Cookies" class="product-img">
-									<h4>Mint Fudge Cookies</h4>
-									<p>Rich mint and fudge combination. Decadent and elegant.</p>
+									<img src="images/cookies-biscoff.jpg" alt="Biscoff Cookies" class="product-img">
+									<h4>Biscoff Cookies</h4>
+									<p>Cookie butter-stuffed cookies with that signature Biscoff flavor.</p>
 									<div class="product-details">
 										<div class="quantity-selector">
-											<label><input type="radio" name="mf-size" value="15" data-price="15"> 1/2 dozen - $15</label>
-											<label><input type="radio" name="mf-size" value="26" data-price="26" checked> Dozen - $26</label>
+											<label><input type="radio" name="biscoff-size" value="20" data-price="20"> 1/2 dozen - $20</label>
+											<label><input type="radio" name="biscoff-size" value="32" data-price="32" checked> Dozen - $32</label>
 										</div>
-										<label><input type="checkbox" id="mf-gf"> Gluten Free</label>
-										<label><input type="checkbox" id="mf-sf"> Sugar Free</label>
-										<input type="number" id="mf-qty" min="1" value="1" class="qty-input" title="Quantity">
-										<button onclick="addCookiesToCart('Mint Fudge Cookies', 'mf-size', 'mf-gf', 'mf-sf', 'mf-qty')">Add to Cart</button>
+										<input type="number" id="biscoff-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Biscoff Cookies', 'biscoff-size', null, null, 'biscoff-qty')">Add to Cart</button>
 									</div>
 								</div>
 								<!-- Salted Caramel Swirl Cookies -->
 								<div class="product-card">
-									<img src="images/cookies-salted-caramel.jpg" alt="Salted Caramel Swirl Cookies" class="product-img">
-									<h4>Salted Caramel Swirl Cookies</h4>
-									<p>Buttery cookies with sweet and salty caramel swirl.</p>
+									<img src="images/cookies-oreo.jpg" alt="Oreo Cookies" class="product-img">
+									<h4>Oreo Cookies</h4>
+									<p>Cookies and cream perfection with real Oreo pieces.</p>
 									<div class="product-details">
 										<div class="quantity-selector">
-											<label><input type="radio" name="ssc-size" value="15" data-price="15"> 1/2 dozen - $15</label>
-											<label><input type="radio" name="ssc-size" value="26" data-price="26" checked> Dozen - $26</label>
+											<label><input type="radio" name="oreo-size" value="20" data-price="20"> 1/2 dozen - $20</label>
+											<label><input type="radio" name="oreo-size" value="32" data-price="32" checked> Dozen - $32</label>
 										</div>
-										<label><input type="checkbox" id="ssc-gf"> Gluten Free</label>
-										<label><input type="checkbox" id="ssc-sf"> Sugar Free</label>
-										<input type="number" id="ssc-qty" min="1" value="1" class="qty-input" title="Quantity">
-										<button onclick="addCookiesToCart('Salted Caramel Swirl Cookies', 'ssc-size', 'ssc-gf', 'ssc-sf', 'ssc-qty')">Add to Cart</button>
+										<input type="number" id="oreo-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Oreo Cookies', 'oreo-size', null, null, 'oreo-qty')">Add to Cart</button>
 									</div>
 								</div>
-								<!-- Strawberry Bliss Cookies -->
+								<!-- Twix Cookies -->
 								<div class="product-card">
-									<img src="images/cookies-strawberry-bliss.jpg" alt="Strawberry Bliss Cookies" class="product-img">
-									<h4>Strawberry Bliss Cookies</h4>
-									<p>Fresh strawberry filling with white chocolate chunks.</p>
+									<img src="images/cookies-twix.jpg" alt="Twix Cookies" class="product-img">
+									<h4>Twix Cookies</h4>
+									<p>Caramel, chocolate, and cookie layers. Pure indulgence.</p>
 									<div class="product-details">
 										<div class="quantity-selector">
-											<label><input type="radio" name="sb-size" value="15" data-price="15"> 1/2 dozen - $15</label>
-											<label><input type="radio" name="sb-size" value="26" data-price="26" checked> Dozen - $26</label>
+											<label><input type="radio" name="twix-size" value="20" data-price="20"> 1/2 dozen - $20</label>
+											<label><input type="radio" name="twix-size" value="32" data-price="32" checked> Dozen - $32</label>
 										</div>
-										<label><input type="checkbox" id="sb-gf"> Gluten Free</label>
-										<label><input type="checkbox" id="sb-sf"> Sugar Free</label>
-										<input type="number" id="sb-qty" min="1" value="1" class="qty-input" title="Quantity">
-										<button onclick="addCookiesToCart('Strawberry Bliss Cookies', 'sb-size', 'sb-gf', 'sb-sf', 'sb-qty')">Add to Cart</button>
+										<input type="number" id="twix-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Twix Cookies', 'twix-size', null, null, 'twix-qty')">Add to Cart</button>
+									</div>
+								</div>
+								<!-- Red Velvet Cookies -->
+								<div class="product-card">
+									<img src="images/cookies-red-velvet.jpg" alt="Red Velvet Cookies" class="product-img">
+									<h4>Red Velvet Cookies</h4>
+									<p>Classic red velvet with cream cheese filling.</p>
+									<div class="product-details">
+										<div class="quantity-selector">
+											<label><input type="radio" name="rv-size" value="20" data-price="20"> 1/2 dozen - $20</label>
+											<label><input type="radio" name="rv-size" value="32" data-price="32" checked> Dozen - $32</label>
+										</div>
+										<input type="number" id="rv-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Red Velvet Cookies', 'rv-size', null, null, 'rv-qty')">Add to Cart</button>
+									</div>
+								</div>
+								<!-- Chocolate Chip Cookies -->
+								<div class="product-card">
+									<img src="images/cookies-chocolate-chip.jpg" alt="Chocolate Chip Cookies" class="product-img">
+									<h4>Chocolate Chip Cookies</h4>
+									<p>Premium chocolate chips in a buttery cookie base.</p>
+									<div class="product-details">
+										<div class="quantity-selector">
+											<label><input type="radio" name="fcc-size" value="20" data-price="20"> 1/2 dozen - $20</label>
+											<label><input type="radio" name="fcc-size" value="32" data-price="32" checked> Dozen - $32</label>
+										</div>
+										<input type="number" id="fcc-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Chocolate Chip Cookies (Fancy)', 'fcc-size', null, null, 'fcc-qty')">Add to Cart</button>
+									</div>
+								</div>
+								<!-- Espresso Cookies -->
+								<div class="product-card">
+									<img src="images/cookies-espresso.jpg" alt="Espresso Cookies" class="product-img">
+									<h4>Espresso Cookies</h4>
+									<p>Rich coffee flavor with chocolate chips.</p>
+									<div class="product-details">
+										<div class="quantity-selector">
+											<label><input type="radio" name="esp-size" value="20" data-price="20"> 1/2 dozen - $20</label>
+											<label><input type="radio" name="esp-size" value="32" data-price="32" checked> Dozen - $32</label>
+										</div>
+										<input type="number" id="esp-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Espresso Cookies', 'esp-size', null, null, 'esp-qty')">Add to Cart</button>
+									</div>
+								</div>
+								<!-- Cinnamon Roll Cookies -->
+								<div class="product-card">
+									<img src="images/cookies-cinnamon-roll.jpg" alt="Cinnamon Roll Cookies" class="product-img">
+									<h4>Cinnamon Roll Cookies</h4>
+									<p>All the flavor of a cinnamon roll in cookie form.</p>
+									<div class="product-details">
+										<div class="quantity-selector">
+											<label><input type="radio" name="cr-size" value="20" data-price="20"> 1/2 dozen - $20</label>
+											<label><input type="radio" name="cr-size" value="32" data-price="32" checked> Dozen - $32</label>
+										</div>
+										<input type="number" id="cr-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Cinnamon Roll Cookies', 'cr-size', null, null, 'cr-qty')">Add to Cart</button>
+									</div>
+								</div>
+								<!-- Pumpkin Cookies -->
+								<div class="product-card">
+									<img src="images/cookies-pumpkin.jpg" alt="Pumpkin Cookies" class="product-img">
+									<h4>Pumpkin Cookies</h4>
+									<p>Seasonal pumpkin spice with cream cheese frosting.</p>
+									<div class="product-details">
+										<div class="quantity-selector">
+											<label><input type="radio" name="pump-size" value="20" data-price="20"> 1/2 dozen - $20</label>
+											<label><input type="radio" name="pump-size" value="32" data-price="32" checked> Dozen - $32</label>
+										</div>
+										<input type="number" id="pump-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Pumpkin Cookies', 'pump-size', null, null, 'pump-qty')">Add to Cart</button>
+									</div>
+								</div>
+								<!-- Holiday Specials Cookies -->
+								<div class="product-card">
+									<img src="images/cookies-holiday.jpg" alt="Holiday Specials Cookies" class="product-img">
+									<h4>Holiday Specials</h4>
+									<p>Seasonal cookies available during holidays - ask for current offerings!</p>
+									<div class="product-details">
+										<div class="quantity-selector">
+											<label><input type="radio" name="hol-size" value="20" data-price="20"> 1/2 dozen - $20</label>
+											<label><input type="radio" name="hol-size" value="32" data-price="32" checked> Dozen - $32</label>
+										</div>
+										<input type="number" id="hol-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Holiday Specials', 'hol-size', null, null, 'hol-qty')">Add to Cart</button>
 									</div>
 								</div>
 							</section>
@@ -191,52 +269,60 @@
 						<div id="tier-complex" class="cookie-tier-panel">
 							<h3 class="tier-header">Complex Cookies</h3>
 							<section class="products-grid">
-								<!-- Matcha Cheesecake Cookies -->
+								<!-- S'more Cookies -->
 								<div class="product-card">
-									<img src="images/cookies-matcha-cheesecake.jpg" alt="Matcha Cheesecake Cookies" class="product-img">
-									<h4>Matcha Cheesecake Cookies</h4>
-									<p>Sophisticated matcha with creamy cheesecake center.</p>
+									<img src="images/cookies-smore.jpg" alt="S'more Cookies" class="product-img">
+									<h4>S'more Cookies</h4>
+									<p>Graham cracker base, marshmallow, and chocolate. Campfire magic!</p>
 									<div class="product-details">
 										<div class="quantity-selector">
-											<label><input type="radio" name="mc-size" value="18" data-price="18"> 1/2 dozen - $18</label>
-											<label><input type="radio" name="mc-size" value="32" data-price="32" checked> Dozen - $32</label>
+											<label><input type="radio" name="smore-size" value="25" data-price="25"> 1/2 dozen - $25</label>
+											<label><input type="radio" name="smore-size" value="45" data-price="45" checked> Dozen - $45</label>
 										</div>
-										<label><input type="checkbox" id="mc-gf"> Gluten Free</label>
-										<label><input type="checkbox" id="mc-sf"> Sugar Free</label>
-										<input type="number" id="mc-qty" min="1" value="1" class="qty-input" title="Quantity">
-										<button onclick="addCookiesToCart('Matcha Cheesecake Cookies', 'mc-size', 'mc-gf', 'mc-sf', 'mc-qty')">Add to Cart</button>
+										<input type="number" id="smore-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('S\'more Cookies', 'smore-size', null, null, 'smore-qty')">Add to Cart</button>
 									</div>
 								</div>
-								<!-- Lavender Blueberry Cookies -->
+								<!-- Monster Cookies -->
 								<div class="product-card">
-									<img src="images/cookies-lavender-blueberry.jpg" alt="Lavender Blueberry Cookies" class="product-img">
-									<h4>Lavender Blueberry Cookies</h4>
-									<p>Delicate lavender with tart blueberries.</p>
+									<img src="images/cookies-monster.jpg" alt="Monster Cookies" class="product-img">
+									<h4>Monster Cookies</h4>
+									<p>Loaded with peanut butter, M&Ms, oats, and chocolate chips.</p>
 									<div class="product-details">
 										<div class="quantity-selector">
-											<label><input type="radio" name="lb-size" value="18" data-price="18"> 1/2 dozen - $18</label>
-											<label><input type="radio" name="lb-size" value="32" data-price="32" checked> Dozen - $32</label>
+											<label><input type="radio" name="monster-size" value="25" data-price="25"> 1/2 dozen - $25</label>
+											<label><input type="radio" name="monster-size" value="45" data-price="45" checked> Dozen - $45</label>
 										</div>
-										<label><input type="checkbox" id="lb-gf"> Gluten Free</label>
-										<label><input type="checkbox" id="lb-sf"> Sugar Free</label>
-										<input type="number" id="lb-qty" min="1" value="1" class="qty-input" title="Quantity">
-										<button onclick="addCookiesToCart('Lavender Blueberry Cookies', 'lb-size', 'lb-gf', 'lb-sf', 'lb-qty')">Add to Cart</button>
+										<input type="number" id="monster-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Monster Cookies', 'monster-size', null, null, 'monster-qty')">Add to Cart</button>
 									</div>
 								</div>
-								<!-- Triple Layer Cookies -->
+								<!-- Peanut Butter Cup Stuffed Cookies -->
 								<div class="product-card">
-									<img src="images/cookies-triple-layer.jpg" alt="Triple Layer Cookies" class="product-img">
-									<h4>Triple Layer Cookies</h4>
-									<p>Three distinct layers of flavor and texture.</p>
+									<img src="images/cookies-pb-cup.jpg" alt="Peanut Butter Cup Stuffed Cookies" class="product-img">
+									<h4>Peanut Butter Cup Stuffed</h4>
+									<p>Peanut butter cookie with a Reese's cup baked inside.</p>
 									<div class="product-details">
 										<div class="quantity-selector">
-											<label><input type="radio" name="tl-size" value="18" data-price="18"> 1/2 dozen - $18</label>
-											<label><input type="radio" name="tl-size" value="32" data-price="32" checked> Dozen - $32</label>
+											<label><input type="radio" name="pbcup-size" value="25" data-price="25"> 1/2 dozen - $25</label>
+											<label><input type="radio" name="pbcup-size" value="45" data-price="45" checked> Dozen - $45</label>
 										</div>
-										<label><input type="checkbox" id="tl-gf"> Gluten Free</label>
-										<label><input type="checkbox" id="tl-sf"> Sugar Free</label>
-										<input type="number" id="tl-qty" min="1" value="1" class="qty-input" title="Quantity">
-										<button onclick="addCookiesToCart('Triple Layer Cookies', 'tl-size', 'tl-gf', 'tl-sf', 'tl-qty')">Add to Cart</button>
+										<input type="number" id="pbcup-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Peanut Butter Cup Stuffed', 'pbcup-size', null, null, 'pbcup-qty')">Add to Cart</button>
+									</div>
+								</div>
+								<!-- Caramel Apple Pie Cookies -->
+								<div class="product-card">
+									<img src="images/cookies-caramel-apple-pie.jpg" alt="Caramel Apple Pie Cookies" class="product-img">
+									<h4>Caramel Apple Pie</h4>
+									<p>Spiced apple pie filling with caramel drizzle in cookie form.</p>
+									<div class="product-details">
+										<div class="quantity-selector">
+											<label><input type="radio" name="cap-size" value="25" data-price="25"> 1/2 dozen - $25</label>
+											<label><input type="radio" name="cap-size" value="45" data-price="45" checked> Dozen - $45</label>
+										</div>
+										<input type="number" id="cap-qty" min="1" value="1" class="qty-input" title="Quantity">
+										<button onclick="addCookiesToCart('Caramel Apple Pie', 'cap-size', null, null, 'cap-qty')">Add to Cart</button>
 									</div>
 								</div>
 							</section>
