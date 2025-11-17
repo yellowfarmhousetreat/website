@@ -383,6 +383,14 @@
     }
 }
 
+/* ==== Dark Mode: product cards ==== */
+.product-card {
+    background: #2a2f36;
+    border: 1px solid #3a424b;
+}
+.product-card p, .product-card h2, .product-card h3 { color: #e6e9ed; }
+.product-img { background: #3a424b; }
+
 /* Responsive */
 @media (max-width: 768px) {
     .products-grid {
