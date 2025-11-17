@@ -2,65 +2,143 @@
 (function() {
     'use strict';
 
-    // Load cart from localStorage
+    // Basic sanitizer (defensive; we mostly use textContent already)
+    function sanitize(str) {
+        return String(str).replace(/[<>]/g, '');
+    }
+
+    // Load cart from localStorage (secure DOM creation)
     function loadCartToOrder() {
         const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
         const orderItemsDiv = document.getElementById('orderItems');
         const orderSummaryInput = document.getElementById('orderSummary');
-        
+
+        if (!orderItemsDiv) return;
+
+        // Empty state
         if (cart.length === 0) {
-            orderItemsDiv.innerHTML = '<div class="empty-items">Your cart is empty. <a href="menu.html">Browse the menu</a> to add items.</div>';
-            orderSummaryInput.value = '';
+            orderItemsDiv.textContent = '';
+            const empty = document.createElement('div');
+            empty.className = 'empty-items';
+            empty.appendChild(document.createTextNode('Your cart is empty. '));
+            const link = document.createElement('a');
+            link.href = 'menu.html';
+            link.textContent = 'Browse the menu';
+            empty.appendChild(link);
+            empty.appendChild(document.createTextNode(' to add items.'));
+            orderItemsDiv.appendChild(empty);
+            if (orderSummaryInput) orderSummaryInput.value = '';
             updateOrderSummary(0, 0);
             return;
         }
 
-        // Build visible cart display
-        let itemsHTML = '<div class="cart-items-list">';
-        let orderSummaryText = '';
+        // Container for cart items
+        orderItemsDiv.textContent = '';
+        const listWrapper = document.createElement('div');
+        listWrapper.className = 'cart-items-list';
+
         let subtotal = 0;
+        let orderSummaryText = '';
 
         cart.forEach((item, index) => {
+            const safeName = sanitize(item.name);
+            const safeSize = item.size ? sanitize(item.size) : '';
             const itemTotal = item.price * item.quantity;
             subtotal += itemTotal;
 
-            // Build display HTML
-            itemsHTML += `
-                <div class="cart-item" data-index="${index}">
-                    <div class="cart-item-details">
-                        <strong>${item.name}</strong>
-                        ${item.size ? `<span class="item-size">${item.size}</span>` : ''}
-                        ${item.isGF ? '<span class="dietary-badge">GF</span>' : ''}
-                        ${item.isSF ? '<span class="dietary-badge">SF</span>' : ''}
-                        <div class="item-price-line">$${item.price.toFixed(2)} each</div>
-                    </div>
-                    <div class="cart-item-controls">
-                        <div class="quantity-controls">
-                            <button type="button" class="qty-btn qty-decrease" onclick="updateCartQuantity(${index}, -1)" aria-label="Decrease quantity">−</button>
-                            <span class="qty-display">${item.quantity}</span>
-                            <button type="button" class="qty-btn qty-increase" onclick="updateCartQuantity(${index}, 1)" aria-label="Increase quantity">+</button>
-                        </div>
-                        <div class="item-total">$${itemTotal.toFixed(2)}</div>
-                        <button type="button" class="remove-item-subtle" onclick="removeCartItem(${index})" aria-label="Remove item" title="Remove from cart">
-                            <span class="remove-icon">✕</span>
-                        </button>
-                    </div>
-                </div>
-            `;
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'cart-item';
+            itemDiv.dataset.index = String(index);
 
-            // Build text for form submission
+            // Details section
+            const detailsDiv = document.createElement('div');
+            detailsDiv.className = 'cart-item-details';
+
+            const nameStrong = document.createElement('strong');
+            nameStrong.textContent = safeName;
+            detailsDiv.appendChild(nameStrong);
+
+            if (safeSize) {
+                const sizeSpan = document.createElement('span');
+                sizeSpan.className = 'item-size';
+                sizeSpan.textContent = safeSize;
+                detailsDiv.appendChild(sizeSpan);
+            }
+            if (item.isGF) {
+                const gfSpan = document.createElement('span');
+                gfSpan.className = 'dietary-badge';
+                gfSpan.textContent = 'GF';
+                detailsDiv.appendChild(gfSpan);
+            }
+            if (item.isSF) {
+                const sfSpan = document.createElement('span');
+                sfSpan.className = 'dietary-badge';
+                sfSpan.textContent = 'SF';
+                detailsDiv.appendChild(sfSpan);
+            }
+            const priceLine = document.createElement('div');
+            priceLine.className = 'item-price-line';
+            priceLine.textContent = '$' + item.price.toFixed(2) + ' each';
+            detailsDiv.appendChild(priceLine);
+
+            // Controls section
+            const controlsDiv = document.createElement('div');
+            controlsDiv.className = 'cart-item-controls';
+
+            const qtyControls = document.createElement('div');
+            qtyControls.className = 'quantity-controls';
+            const decBtn = document.createElement('button');
+            decBtn.type = 'button';
+            decBtn.className = 'qty-btn qty-decrease';
+            decBtn.setAttribute('aria-label', 'Decrease quantity');
+            decBtn.textContent = '−';
+            decBtn.addEventListener('click', () => window.updateCartQuantity(index, -1));
+            const qtyDisplay = document.createElement('span');
+            qtyDisplay.className = 'qty-display';
+            qtyDisplay.textContent = String(item.quantity);
+            const incBtn = document.createElement('button');
+            incBtn.type = 'button';
+            incBtn.className = 'qty-btn qty-increase';
+            incBtn.setAttribute('aria-label', 'Increase quantity');
+            incBtn.textContent = '+';
+            incBtn.addEventListener('click', () => window.updateCartQuantity(index, 1));
+            qtyControls.appendChild(decBtn);
+            qtyControls.appendChild(qtyDisplay);
+            qtyControls.appendChild(incBtn);
+
+            const totalDiv = document.createElement('div');
+            totalDiv.className = 'item-total';
+            totalDiv.textContent = '$' + itemTotal.toFixed(2);
+
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'remove-item-subtle';
+            removeBtn.setAttribute('aria-label', 'Remove item');
+            removeBtn.title = 'Remove from cart';
+            const removeIcon = document.createElement('span');
+            removeIcon.className = 'remove-icon';
+            removeIcon.textContent = '✕';
+            removeBtn.appendChild(removeIcon);
+            removeBtn.addEventListener('click', () => window.removeCartItem(index));
+
+            controlsDiv.appendChild(qtyControls);
+            controlsDiv.appendChild(totalDiv);
+            controlsDiv.appendChild(removeBtn);
+
+            itemDiv.appendChild(detailsDiv);
+            itemDiv.appendChild(controlsDiv);
+            listWrapper.appendChild(itemDiv);
+
+            // Order summary text (not HTML injected anywhere except hidden field)
             const dietary = [item.isGF ? 'GF' : '', item.isSF ? 'SF' : ''].filter(Boolean).join(', ');
-            orderSummaryText += `${item.quantity}x ${item.name}`;
-            if (item.size) orderSummaryText += ` (${item.size})`;
+            orderSummaryText += `${item.quantity}x ${safeName}`;
+            if (safeSize) orderSummaryText += ` (${safeSize})`;
             if (dietary) orderSummaryText += ` [${dietary}]`;
             orderSummaryText += ` - $${itemTotal.toFixed(2)}\n`;
         });
 
-        itemsHTML += '</div>';
-        orderItemsDiv.innerHTML = itemsHTML;
-        orderSummaryInput.value = orderSummaryText;
-
-        // Update order summary totals
+        orderItemsDiv.appendChild(listWrapper);
+        if (orderSummaryInput) orderSummaryInput.value = orderSummaryText;
         updateOrderSummary(subtotal, 0);
     }
 
