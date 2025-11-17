@@ -86,6 +86,66 @@ function addToCart(name, price, gfId, sfId, qtyId) {
     qtyInput.value = 1;
 }
 
+// New function for cookies with size/quantity options
+function addCookiesToCart(name, sizeRadioName, gfId, sfId, qtyId) {
+    // Get selected size
+    const sizeRadio = document.querySelector(`input[name="${sizeRadioName}"]:checked`);
+    if (!sizeRadio) {
+        showToast('Please select a size.', 'error');
+        return;
+    }
+    
+    const price = parseFloat(sizeRadio.getAttribute('data-price'));
+    const size = sizeRadio.value;
+    const sizeLabel = sizeRadio.parentElement.textContent.trim();
+    
+    if (!isValidPrice(price)) {
+        showToast('Invalid price information.', 'error');
+        return;
+    }
+    
+    const qtyInput = document.getElementById(qtyId);
+    const quantity = parseInt(qtyInput.value);
+    
+    // Validate quantity
+    if (isNaN(quantity) || quantity < 1) {
+        qtyInput.value = 1;
+        showToast('Quantity must be at least 1.', 'error');
+        return;
+    }
+    
+    const cart = getCart();
+    const glutenFree = document.getElementById(gfId).checked;
+    const sugarFree = document.getElementById(sfId).checked;
+    
+    // Create unique item name with size
+    const itemName = `${name} (${sizeLabel.split(' - ')[0].trim()})`;
+    
+    // Check if item already exists (same name, size, GF/SF)
+    const idx = cart.findIndex(item => 
+        item.name === itemName && 
+        item.glutenFree === glutenFree && 
+        item.sugarFree === sugarFree
+    );
+    
+    if (idx > -1) {
+        cart[idx].quantity += quantity;
+    } else {
+        cart.push({ 
+            name: itemName, 
+            price: price, 
+            glutenFree, 
+            sugarFree, 
+            quantity 
+        });
+    }
+    
+    saveCart(cart);
+    updateCartCount();
+    showToast(`Added ${quantity}x ${itemName} to cart!`);
+    qtyInput.value = 1;
+}
+
 function removeFromCart(index) {
     const cart = getCart();
     if (index >= 0 && index < cart.length) {

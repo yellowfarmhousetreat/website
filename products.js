@@ -4,36 +4,114 @@
 const PRODUCTS = {
     cookies: [
         {
-            id: 'cc-cookies',
+            id: 'cc-cookies-regular',
             name: 'Chocolate Chip Cookies',
-            price: 20,
-            unit: 'dozen',
+            tier: 'Regular',
             image: 'images/cookies-chocolate-chip.jpg',
-            description: 'Classic cookies loaded with chocolate chips. Soft and chewy.'
+            description: 'Classic cookies loaded with chocolate chips. Soft and chewy.',
+            quantities: [
+                { size: '1/2 dozen', price: 12 },
+                { size: 'dozen', price: 20 }
+            ]
         },
         {
-            id: 'pb-cookies',
+            id: 'pb-cookies-regular',
             name: 'Peanut Butter Cookies',
-            price: 20,
-            unit: 'dozen',
+            tier: 'Regular',
             image: 'images/cookies-peanut-butter.jpg',
-            description: 'Rich peanut butter flavor, soft and crumbly. A classic favorite.'
+            description: 'Rich peanut butter flavor, soft and crumbly. A classic favorite.',
+            quantities: [
+                { size: '1/2 dozen', price: 12 },
+                { size: 'dozen', price: 20 }
+            ]
         },
         {
-            id: 'sc-cookies',
+            id: 'sc-cookies-regular',
             name: 'Sugar Cookies',
-            price: 20,
-            unit: 'dozen',
+            tier: 'Regular',
             image: 'images/cookies-sugar.jpg',
-            description: 'Sweet, buttery cookies with a soft texture. Perfect for any occasion.'
+            description: 'Sweet, buttery cookies with a soft texture. Perfect for any occasion.',
+            quantities: [
+                { size: '1/2 dozen', price: 12 },
+                { size: 'dozen', price: 20 }
+            ]
         },
         {
-            id: 'or-cookies',
+            id: 'or-cookies-regular',
             name: 'Oatmeal Raisin Cookies',
-            price: 20,
-            unit: 'dozen',
+            tier: 'Regular',
             image: 'images/cookies-oatmeal-raisin.jpg',
-            description: 'Hearty oatmeal cookies with plump raisins. Chewy and satisfying.'
+            description: 'Hearty oatmeal cookies with plump raisins. Chewy and satisfying.',
+            quantities: [
+                { size: '1/2 dozen', price: 12 },
+                { size: 'dozen', price: 20 }
+            ]
+        },
+        {
+            id: 'mf-cookies-fancy',
+            name: 'Mint Fudge Cookies',
+            tier: 'Fancy',
+            image: 'images/cookies-mint-fudge.jpg',
+            description: 'Rich mint and fudge combination. Decadent and elegant.',
+            quantities: [
+                { size: '1/2 dozen', price: 15 },
+                { size: 'dozen', price: 26 }
+            ]
+        },
+        {
+            id: 'ssc-cookies-fancy',
+            name: 'Salted Caramel Swirl Cookies',
+            tier: 'Fancy',
+            image: 'images/cookies-salted-caramel.jpg',
+            description: 'Buttery cookies with sweet and salty caramel swirl.',
+            quantities: [
+                { size: '1/2 dozen', price: 15 },
+                { size: 'dozen', price: 26 }
+            ]
+        },
+        {
+            id: 'sb-cookies-fancy',
+            name: 'Strawberry Bliss Cookies',
+            tier: 'Fancy',
+            image: 'images/cookies-strawberry-bliss.jpg',
+            description: 'Fresh strawberry filling with white chocolate chunks.',
+            quantities: [
+                { size: '1/2 dozen', price: 15 },
+                { size: 'dozen', price: 26 }
+            ]
+        },
+        {
+            id: 'mc-cookies-complex',
+            name: 'Matcha Cheesecake Cookies',
+            tier: 'Complex',
+            image: 'images/cookies-matcha-cheesecake.jpg',
+            description: 'Sophisticated matcha with creamy cheesecake center.',
+            quantities: [
+                { size: '1/2 dozen', price: 18 },
+                { size: 'dozen', price: 32 }
+            ]
+        },
+        {
+            id: 'lb-cookies-complex',
+            name: 'Lavender Blueberry Cookies',
+            tier: 'Complex',
+            image: 'images/cookies-lavender-blueberry.jpg',
+            description: 'Delicate lavender with tart blueberries.',
+            quantities: [
+                { size: '1/2 dozen', price: 18 },
+                { size: 'dozen', price: 32 }
+            ]
+        },
+        {
+            id: 'tl-cookies-complex',
+            name: 'Triple Layer Cookies',
+            tier: 'Complex',
+            image: 'images/cookies-triple-layer.jpg',
+            description: 'Three distinct layers of flavor and texture.',
+            quantities: [
+                { size: '1/2 dozen', price: 18 },
+                { size: 'dozen', price: 32 }
+            ]
         }
     ],
     cakes: [
