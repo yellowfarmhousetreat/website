@@ -332,43 +332,63 @@
 					<!-- Cakes Panel -->
 					<div id="submenu-cakes" class="submenu-panel">
 						<section class="products-grid">
-							<!-- Chocolate Cake -->
+							<!-- Mini Cakes -->
 							<div class="product-card">
-								<img src="images/cake-chocolate.jpg" alt="Chocolate Cake" class="product-img">
-								<h3>Chocolate Cake</h3>
-								<p>Rich, moist chocolate cake with creamy frosting.</p>
+								<img src="images/mini-cakes.jpg" alt="Mini Cakes" class="product-img">
+								<h3>🧁 Mini Cakes (Cream Cheese Frosting)</h3>
+								<p>Individual mini cakes with rich cream cheese frosting.</p>
 								<div class="product-details">
-									<span class="product-price">$30</span>
-									<label><input type="checkbox" id="choc-gf"> Gluten Free</label>
-									<label><input type="checkbox" id="choc-sf"> Sugar Free</label>
-									<input type="number" id="choc-qty" min="1" value="1" class="qty-input">
-									<button onclick="addToCart('Chocolate Cake', 30, 'choc-gf', 'choc-sf', 'choc-qty')">Add to Cart</button>
+									<div class="quantity-selector">
+										<label><input type="radio" name="minicake-size" value="6" data-price="6"> Single - $6</label>
+										<label><input type="radio" name="minicake-size" value="30" data-price="30"> Half Dozen - $30</label>
+										<label><input type="radio" name="minicake-size" value="50" data-price="50" checked> Dozen - $50</label>
+									</div>
+									<input type="number" id="minicake-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSizedProductToCart('Mini Cakes', 'minicake-size', 'minicake-qty')">Add to Cart</button>
 								</div>
 							</div>
-							<!-- Vanilla Cake -->
+							<!-- Cupcakes - Chocolate Lava -->
 							<div class="product-card">
-								<img src="images/cake-vanilla.jpg" alt="Vanilla Cake" class="product-img">
-								<h3>Vanilla Cake</h3>
-								<p>Classic vanilla cake with a light, fluffy texture.</p>
+								<img src="images/cupcake-chocolate-lava.jpg" alt="Chocolate Lava Cupcakes" class="product-img">
+								<h3>🧁 Chocolate Lava Cupcakes</h3>
+								<p>Rich chocolate cupcakes with a molten center.</p>
 								<div class="product-details">
-									<span class="product-price">$30</span>
-									<label><input type="checkbox" id="van-gf"> Gluten Free</label>
-									<label><input type="checkbox" id="van-sf"> Sugar Free</label>
-									<input type="number" id="van-qty" min="1" value="1" class="qty-input">
-									<button onclick="addToCart('Vanilla Cake', 30, 'van-gf', 'van-sf', 'van-qty')">Add to Cart</button>
+									<div class="quantity-selector">
+										<label><input type="radio" name="choclava-size" value="15" data-price="15"> Half Dozen - $15</label>
+										<label><input type="radio" name="choclava-size" value="28" data-price="28" checked> Dozen - $28</label>
+									</div>
+									<label><input type="checkbox" id="choclava-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="choclava-sf"> Sugar Free</label>
+									<input type="number" id="choclava-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addCupcakesToCart('Chocolate Lava Cupcakes', 'choclava-size', 'choclava-gf', 'choclava-sf', 'choclava-qty')">Add to Cart</button>
 								</div>
 							</div>
-							<!-- Carrot Cake -->
+							<!-- Cupcakes - Ding Dongs -->
 							<div class="product-card">
-								<img src="images/cake-carrot.jpg" alt="Carrot Cake" class="product-img">
-								<h3>Carrot Cake</h3>
-								<p>Moist carrot cake with cream cheese frosting.</p>
+								<img src="images/cupcake-ding-dong.jpg" alt="Ding Dong Cupcakes" class="product-img">
+								<h3>🧁 Ding Dong Cupcakes</h3>
+								<p>Chocolate cupcakes with creamy filling, inspired by the classic treat.</p>
 								<div class="product-details">
-									<span class="product-price">$32</span>
-									<label><input type="checkbox" id="carrot-gf"> Gluten Free</label>
-									<label><input type="checkbox" id="carrot-sf"> Sugar Free</label>
-									<input type="number" id="carrot-qty" min="1" value="1" class="qty-input">
-									<button onclick="addToCart('Carrot Cake', 32, 'carrot-gf', 'carrot-sf', 'carrot-qty')">Add to Cart</button>
+									<div class="quantity-selector">
+										<label><input type="radio" name="dingdong-size" value="15" data-price="15"> Half Dozen - $15</label>
+										<label><input type="radio" name="dingdong-size" value="28" data-price="28" checked> Dozen - $28</label>
+									</div>
+									<input type="number" id="dingdong-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSizedProductToCart('Ding Dong Cupcakes', 'dingdong-size', 'dingdong-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Cupcakes - Holiday Specials -->
+							<div class="product-card">
+								<img src="images/cupcake-holiday.jpg" alt="Holiday Special Cupcakes" class="product-img">
+								<h3>🧁 Holiday Special Cupcakes</h3>
+								<p>Seasonal cupcakes - ask for current holiday offerings!</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="holcup-size" value="15" data-price="15"> Half Dozen - $15</label>
+										<label><input type="radio" name="holcup-size" value="28" data-price="28" checked> Dozen - $28</label>
+									</div>
+									<input type="number" id="holcup-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSizedProductToCart('Holiday Special Cupcakes', 'holcup-size', 'holcup-qty')">Add to Cart</button>
 								</div>
 							</div>
 						</section>
@@ -377,43 +397,79 @@
 					<!-- Pies Panel -->
 					<div id="submenu-pies" class="submenu-panel">
 						<section class="products-grid">
+							<p class="category-note">🥧 <strong>$5 deposit required for all pies & crisps.</strong></p>
 							<!-- Apple Pie -->
 							<div class="product-card">
 								<img src="images/pie-apple.jpg" alt="Apple Pie" class="product-img">
-								<h3>Apple Pie</h3>
-								<p>Classic apple pie with a flaky crust and cinnamon apples.</p>
+								<h3>🥧 Apple Pie</h3>
+								<p>Classic apple pie with flaky crust and cinnamon apples. $25/pie</p>
 								<div class="product-details">
-									<span class="product-price">$25</span>
-									<label><input type="checkbox" id="apple-gf"> Gluten Free</label>
-									<label><input type="checkbox" id="apple-sf"> Sugar Free</label>
-									<input type="number" id="apple-qty" min="1" value="1" class="qty-input">
-									<button onclick="addToCart('Apple Pie', 25, 'apple-gf', 'apple-sf', 'apple-qty')">Add to Cart</button>
+									<input type="number" id="applepie-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addPieToCart('Apple Pie', 25, 'applepie-qty')">Add to Cart</button>
 								</div>
 							</div>
 							<!-- Pumpkin Pie -->
 							<div class="product-card">
 								<img src="images/pie-pumpkin.jpg" alt="Pumpkin Pie" class="product-img">
-								<h3>Pumpkin Pie</h3>
-								<p>Spiced pumpkin filling in a buttery crust. A holiday favorite.</p>
+								<h3>🥧 Pumpkin Pie</h3>
+								<p>Spiced pumpkin filling in buttery crust. A holiday favorite. $25/pie</p>
 								<div class="product-details">
-									<span class="product-price">$25</span>
-									<label><input type="checkbox" id="pumpkin-gf"> Gluten Free</label>
-									<label><input type="checkbox" id="pumpkin-sf"> Sugar Free</label>
-									<input type="number" id="pumpkin-qty" min="1" value="1" class="qty-input">
-									<button onclick="addToCart('Pumpkin Pie', 25, 'pumpkin-gf', 'pumpkin-sf', 'pumpkin-qty')">Add to Cart</button>
+									<input type="number" id="pumpkinpie-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addPieToCart('Pumpkin Pie', 25, 'pumpkinpie-qty')">Add to Cart</button>
 								</div>
 							</div>
 							<!-- Peach Pie -->
 							<div class="product-card">
 								<img src="images/pie-peach.jpg" alt="Peach Pie" class="product-img">
-								<h3>Peach Pie</h3>
-								<p>Sweet peaches baked in a golden crust.</p>
+								<h3>🥧 Peach Pie</h3>
+								<p>Sweet peaches baked in a golden crust. $25/pie</p>
 								<div class="product-details">
-									<span class="product-price">$25</span>
-									<label><input type="checkbox" id="peach-gf"> Gluten Free</label>
-									<label><input type="checkbox" id="peach-sf"> Sugar Free</label>
-									<input type="number" id="peach-qty" min="1" value="1" class="qty-input">
-									<button onclick="addToCart('Peach Pie', 25, 'peach-gf', 'peach-sf', 'peach-qty')">Add to Cart</button>
+									<input type="number" id="peachpie-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addPieToCart('Peach Pie', 25, 'peachpie-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Lemon Meringue Pie -->
+							<div class="product-card">
+								<img src="images/pie-lemon.jpg" alt="Lemon Meringue Pie" class="product-img">
+								<h3>🥧 Lemon Meringue Pie</h3>
+								<p>Tangy lemon filling topped with fluffy meringue. $25/pie</p>
+								<div class="product-details">
+									<input type="number" id="lemonpie-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addPieToCart('Lemon Meringue Pie', 25, 'lemonpie-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Apple Crisp -->
+							<div class="product-card">
+								<img src="images/crisp-apple.jpg" alt="Apple Crisp" class="product-img">
+								<h3>🥧 Apple Crisp</h3>
+								<p>Warm spiced apples with crunchy oat topping. $25/crisp</p>
+								<div class="product-details">
+									<label><input type="checkbox" id="applecrisp-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="applecrisp-sf"> Sugar Free</label>
+									<input type="number" id="applecrisp-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addCrispToCart('Apple Crisp', 25, 'applecrisp-gf', 'applecrisp-sf', 'applecrisp-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Pumpkin Crisp -->
+							<div class="product-card">
+								<img src="images/crisp-pumpkin.jpg" alt="Pumpkin Crisp" class="product-img">
+								<h3>🥧 Pumpkin Crisp</h3>
+								<p>Creamy pumpkin layer with buttery crisp topping. $25/crisp</p>
+								<div class="product-details">
+									<label><input type="checkbox" id="pumpkincrisp-gf"> Gluten Free</label>
+									<label><input type="checkbox" id="pumpkincrisp-sf"> Sugar Free</label>
+									<input type="number" id="pumpkincrisp-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addCrispToCart('Pumpkin Crisp', 25, 'pumpkincrisp-gf', 'pumpkincrisp-sf', 'pumpkincrisp-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Peach Cobbler -->
+							<div class="product-card">
+								<img src="images/cobbler-peach.jpg" alt="Peach Cobbler" class="product-img">
+								<h3>🥧 Peach Cobbler</h3>
+								<p>Juicy peaches with tender biscuit topping. $30/cobbler</p>
+								<div class="product-details">
+									<input type="number" id="peachcobbler-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addPieToCart('Peach Cobbler', 30, 'peachcobbler-qty')">Add to Cart</button>
 								</div>
 							</div>
 						</section>
@@ -425,27 +481,130 @@
 							<!-- Milk Bread -->
 							<div class="product-card">
 								<img src="images/bread-milk.jpg" alt="Milk Bread" class="product-img">
-								<h3>Milk Bread</h3>
-								<p>Soft, fluffy bread made with fresh milk. Perfect for sandwiches.</p>
+								<h3>🍞 Milk Bread</h3>
+								<p>Soft, fluffy bread made with fresh milk. Perfect for sandwiches. $12/loaf</p>
 								<div class="product-details">
-									<span class="product-price">$12/loaf</span>
-									<label><input type="checkbox" id="milk-gf"> Gluten Free</label>
-									<label><input type="checkbox" id="milk-sf"> Sugar Free</label>
-									<input type="number" id="milk-qty" min="1" value="1" class="qty-input">
-									<button onclick="addToCart('Milk Bread', 12, 'milk-gf', 'milk-sf', 'milk-qty')">Add to Cart</button>
+									<input type="number" id="milk-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSimpleProductToCart('Milk Bread', 12, 'milk-qty')">Add to Cart</button>
 								</div>
 							</div>
 							<!-- Pumpkin Bread -->
 							<div class="product-card">
 								<img src="images/bread-pumpkin.jpg" alt="Pumpkin Bread" class="product-img">
-								<h3>Pumpkin Bread</h3>
-								<p>Moist pumpkin bread with warm spices. A fall favorite.</p>
+								<h3>🎃 Pumpkin Bread</h3>
+								<p>Moist pumpkin bread with warm spices. A fall favorite. $12/loaf</p>
 								<div class="product-details">
-									<span class="product-price">$12/loaf</span>
-									<label><input type="checkbox" id="pumpkinbread-gf"> Gluten Free</label>
-									<label><input type="checkbox" id="pumpkinbread-sf"> Sugar Free</label>
-									<input type="number" id="pumpkinbread-qty" min="1" value="1" class="qty-input">
-									<button onclick="addToCart('Pumpkin Bread', 12, 'pumpkinbread-gf', 'pumpkinbread-sf', 'pumpkinbread-qty')">Add to Cart</button>
+									<input type="number" id="pumpkinbread-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSimpleProductToCart('Pumpkin Bread', 12, 'pumpkinbread-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Cinnamon Rolls -->
+							<div class="product-card">
+								<img src="images/cinnamon-rolls.jpg" alt="Cinnamon Rolls" class="product-img">
+								<h3>🌀 Cinnamon Rolls</h3>
+								<p>Fresh-baked cinnamon rolls with cream cheese icing.</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="cinroll-size" value="15" data-price="15"> Half Dozen - $15</label>
+										<label><input type="radio" name="cinroll-size" value="28" data-price="28" checked> Dozen - $28</label>
+									</div>
+									<input type="number" id="cinroll-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSizedProductToCart('Cinnamon Rolls', 'cinroll-size', 'cinroll-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Muffins - Pumpkin -->
+							<div class="product-card">
+								<img src="images/muffin-pumpkin.jpg" alt="Pumpkin Muffins" class="product-img">
+								<h3>🧁 Pumpkin Muffins</h3>
+								<p>Moist pumpkin muffins with autumn spices.</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="pumpmuf-size" value="15" data-price="15"> Half Dozen - $15</label>
+										<label><input type="radio" name="pumpmuf-size" value="28" data-price="28" checked> Dozen - $28</label>
+									</div>
+									<input type="number" id="pumpmuf-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSizedProductToCart('Pumpkin Muffins', 'pumpmuf-size', 'pumpmuf-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Muffins - Oatmeal -->
+							<div class="product-card">
+								<img src="images/muffin-oatmeal.jpg" alt="Oatmeal Muffins" class="product-img">
+								<h3>🧁 Oatmeal Muffins</h3>
+								<p>Hearty oatmeal muffins - a wholesome treat.</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="oatmuf-size" value="15" data-price="15"> Half Dozen - $15</label>
+										<label><input type="radio" name="oatmuf-size" value="28" data-price="28" checked> Dozen - $28</label>
+									</div>
+									<input type="number" id="oatmuf-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSizedProductToCart('Oatmeal Muffins', 'oatmuf-size', 'oatmuf-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Dipped Pretzel Rods - Chocolate -->
+							<div class="product-card">
+								<img src="images/pretzel-chocolate.jpg" alt="Chocolate Dipped Pretzel Rods" class="product-img">
+								<h3>🥨 Chocolate Dipped Pretzel Rods</h3>
+								<p>Crunchy pretzel rods dipped in smooth chocolate.</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="pretzel-choc-size" value="10" data-price="10"> Half Dozen - $10</label>
+										<label><input type="radio" name="pretzel-choc-size" value="18" data-price="18" checked> Dozen - $18</label>
+									</div>
+									<input type="number" id="pretzel-choc-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSizedProductToCart('Chocolate Dipped Pretzel Rods', 'pretzel-choc-size', 'pretzel-choc-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Dipped Pretzel Rods - Vanilla -->
+							<div class="product-card">
+								<img src="images/pretzel-vanilla.jpg" alt="Vanilla Dipped Pretzel Rods" class="product-img">
+								<h3>🥨 Vanilla Dipped Pretzel Rods</h3>
+								<p>Crunchy pretzel rods dipped in creamy white chocolate.</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="pretzel-van-size" value="10" data-price="10"> Half Dozen - $10</label>
+										<label><input type="radio" name="pretzel-van-size" value="18" data-price="18" checked> Dozen - $18</label>
+									</div>
+									<input type="number" id="pretzel-van-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSizedProductToCart('Vanilla Dipped Pretzel Rods', 'pretzel-van-size', 'pretzel-van-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Dipped Pretzel Rods - Candy -->
+							<div class="product-card">
+								<img src="images/pretzel-candy.jpg" alt="Candy Dipped Pretzel Rods" class="product-img">
+								<h3>🥨 Candy Dipped Pretzel Rods</h3>
+								<p>Pretzel rods dipped in chocolate and topped with candy pieces.</p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="pretzel-candy-size" value="10" data-price="10"> Half Dozen - $10</label>
+										<label><input type="radio" name="pretzel-candy-size" value="18" data-price="18" checked> Dozen - $18</label>
+									</div>
+									<input type="number" id="pretzel-candy-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSizedProductToCart('Candy Dipped Pretzel Rods', 'pretzel-candy-size', 'pretzel-candy-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Brownies -->
+							<div class="product-card">
+								<img src="images/brownies.jpg" alt="Large Brownies" class="product-img">
+								<h3>🍫 Brownies - Large</h3>
+								<p>Rich, fudgy brownies. 4-Pack for $18</p>
+								<div class="product-details">
+									<label><input type="checkbox" id="brownie-gf"> Gluten Free</label>
+									<input type="number" id="brownie-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addBrowniesToCart('Brownies - Large', 18, 'brownie-gf', 'brownie-qty')">Add to Cart</button>
+								</div>
+							</div>
+							<!-- Pecan English Toffee -->
+							<div class="product-card">
+								<img src="images/toffee.jpg" alt="Pecan English Toffee" class="product-img">
+								<h3>🎁 Pecan English Toffee</h3>
+								<p>Buttery toffee with pecans. <strong>⚠️ Can be shipped!</strong></p>
+								<div class="product-details">
+									<div class="quantity-selector">
+										<label><input type="radio" name="toffee-size" value="30" data-price="30"> 1 Pound (Regular Box) - $30</label>
+										<label><input type="radio" name="toffee-size" value="35" data-price="35" checked> 1 Pound (Mason Jar Gift) - $35</label>
+									</div>
+									<input type="number" id="toffee-qty" min="1" value="1" class="qty-input" title="Quantity">
+									<button onclick="addSizedProductToCart('Pecan English Toffee', 'toffee-size', 'toffee-qty')">Add to Cart</button>
 								</div>
 							</div>
 						</section>
