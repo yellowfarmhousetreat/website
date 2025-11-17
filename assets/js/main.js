@@ -165,30 +165,20 @@
 			// Get inner.
 				$navPanelInner = $navPanel.children('nav');
 
-			// DISABLED: We keep nav inline at all breakpoints instead of moving to side panel
-				// var $navContent = $nav.children();
+			// Clone nav content to side panel (instead of moving it)
+				// This keeps inline nav visible while also populating the hamburger menu
+				var $navContent = $nav.children();
 
-				// breakpoints.on('>medium', function() {
+				breakpoints.on('<=medium', function() {
 
-				// 	// NavPanel -> Nav.
-				// 		$navContent.appendTo($nav);
+					// Clone Nav -> NavPanel (don't move, so inline nav stays).
+						$navContent.clone().appendTo($navPanelInner);
 
-				// 	// Flip icon classes.
-				// 		$nav.find('.icons, .icon')
-				// 			.removeClass('alt');
+					// Flip icon classes.
+						$navPanelInner.find('.icons, .icon')
+							.addClass('alt');
 
-				// });
-
-				// breakpoints.on('<=medium', function() {
-
-				// 	// Nav -> NavPanel.
-				// 		$navContent.appendTo($navPanelInner);
-
-				// 	// Flip icon classes.
-				// 		$navPanelInner.find('.icons, .icon')
-				// 			.addClass('alt');
-
-				// });
+				});
 
 			// Hack: Disable transitions on WP.
 				if (browser.os == 'wp'

@@ -4963,15 +4963,8 @@ input, select, textarea {
 	-ms-transform: none !important;
 }
 
-/* Hide hamburger menu toggle - we don't use it */
-#navPanelToggle {
-	display: none !important;
-}
-
-/* Hide the side panel menu - we use inline nav instead */
-#navPanel {
-	display: none !important;
-}
+/* Keep hamburger menu available as alternative navigation */
+/* (Both inline nav and hamburger panel are available) */
 
 /* Ensure primary nav is responsive at medium widths (737px - 980px) */
 @media screen and (min-width: 737px) and (max-width: 980px) {
@@ -5032,8 +5025,6 @@ input, select, textarea {
 	}
 	/* Hide social icons row to save width on very small screens */
 	#nav ul.icons { display: none !important; }
-	/* Hide hamburger toggle when explicit tabs are shown */
-	#navPanelToggle { display: none !important; }
 }
 
 /* Extra-small phones: tighten spacing further */
