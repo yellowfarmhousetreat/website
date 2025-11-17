@@ -571,6 +571,10 @@
 			document.addEventListener('DOMContentLoaded', function() {
 				const tabLinks = document.querySelectorAll('.tab-link');
 				const panels = document.querySelectorAll('.submenu-panel');
+				const cookieTierTabs = document.querySelector('.cookie-tier-tabs');
+
+				// Show tier tabs on page load since cookies is active by default
+				cookieTierTabs.classList.add('active');
 
 				tabLinks.forEach(link => {
 					link.addEventListener('click', function(e) {
@@ -592,7 +596,6 @@
 						}
 						
 						// Show/hide cookie tier tabs based on category
-						const cookieTierTabs = document.querySelector('.cookie-tier-tabs');
 						if (category === 'cookies') {
 							cookieTierTabs.classList.add('active');
 						} else {
