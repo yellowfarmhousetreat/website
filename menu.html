@@ -938,8 +938,30 @@
 				const panels = document.querySelectorAll('.submenu-panel');
 				const cookieTierTabs = document.querySelector('.cookie-tier-tabs');
 
-				// Show tier tabs on page load since cookies is active by default
+				// Default to cookies tier visible
 				cookieTierTabs.classList.add('active');
+
+				// If a hash is present (e.g., #cakes), activate that tab
+				(function activateFromHash() {
+					const hash = (window.location.hash || '').replace('#', '').toLowerCase();
+					const valid = ['cookies','cakes','pies','breads','all'];
+					if (!hash || !valid.includes(hash)) return;
+
+					// Clear current active states
+					tabLinks.forEach(l => l.classList.remove('active'));
+					panels.forEach(p => p.classList.remove('active'));
+
+					// Activate matching tab and panel
+					const match = document.querySelector(`.tab-link[data-category="${hash}"]`);
+					const panelId = 'submenu-' + hash;
+					if (match) match.classList.add('active');
+					const panel = document.getElementById(panelId);
+					if (panel) panel.classList.add('active');
+
+					// Toggle cookie tier tabs
+					if (hash === 'cookies') cookieTierTabs.classList.add('active');
+					else cookieTierTabs.classList.remove('active');
+				})();
 
 				tabLinks.forEach(link => {
 					link.addEventListener('click', function(e) {
