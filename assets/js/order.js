@@ -102,13 +102,11 @@
 
     // Remove item from cart
     window.removeCartItem = function(index) {
-        if (confirm('Remove this item from your cart?')) {
-            const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
-            cart.splice(index, 1);
-            localStorage.setItem('yfhs_cart', JSON.stringify(cart));
-            loadCartToOrder();
-            updateCartCount();
-        }
+        const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
+        cart.splice(index, 1);
+        localStorage.setItem('yfhs_cart', JSON.stringify(cart));
+        loadCartToOrder();
+        updateCartCount();
     };
 
     // Update quantity in cart
@@ -119,11 +117,7 @@
             
             // Remove item if quantity goes to 0
             if (cart[index].quantity <= 0) {
-                if (confirm('Remove this item from your cart?')) {
-                    cart.splice(index, 1);
-                } else {
-                    cart[index].quantity = 1; // Reset to 1 if they cancel
-                }
+                cart.splice(index, 1);
             }
             
             localStorage.setItem('yfhs_cart', JSON.stringify(cart));
