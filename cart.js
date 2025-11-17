@@ -58,8 +58,8 @@ function addToCart(name, price, gfId, sfId, qtyId) {
     }
     
     const cart = getCart();
-    const glutenFree = document.getElementById(gfId).checked;
-    const sugarFree = document.getElementById(sfId).checked;
+    const glutenFree = gfId ? !!(document.getElementById(gfId) && document.getElementById(gfId).checked) : false;
+    const sugarFree = sfId ? !!(document.getElementById(sfId) && document.getElementById(sfId).checked) : false;
     
     // Check if item already exists (same name, GF/SF)
     const idx = cart.findIndex(item => 
@@ -96,7 +96,6 @@ function addCookiesToCart(name, sizeRadioName, gfId, sfId, qtyId) {
     }
     
     const price = parseFloat(sizeRadio.getAttribute('data-price'));
-    const size = sizeRadio.value;
     const sizeLabel = sizeRadio.parentElement.textContent.trim();
     
     if (!isValidPrice(price)) {
@@ -115,8 +114,8 @@ function addCookiesToCart(name, sizeRadioName, gfId, sfId, qtyId) {
     }
     
     const cart = getCart();
-    const glutenFree = document.getElementById(gfId).checked;
-    const sugarFree = document.getElementById(sfId).checked;
+    const glutenFree = gfId ? !!(document.getElementById(gfId) && document.getElementById(gfId).checked) : false;
+    const sugarFree = sfId ? !!(document.getElementById(sfId) && document.getElementById(sfId).checked) : false;
     
     // Create unique item name with size
     const itemName = `${name} (${sizeLabel.split(' - ')[0].trim()})`;
@@ -144,6 +143,93 @@ function addCookiesToCart(name, sizeRadioName, gfId, sfId, qtyId) {
     updateCartCount();
     showToast(`Added ${quantity}x ${itemName} to cart!`);
     qtyInput.value = 1;
+}
+
+// Helpers for menu page additions
+function getSelectedRadioByName(name) {
+    return document.querySelector(`input[name="${name}"]:checked`);
+}
+
+function ensureMinQty(qtyId) {
+    const el = document.getElementById(qtyId);
+    let q = parseInt(el && el.value ? el.value : 1, 10);
+    if (isNaN(q) || q < 1) q = 1;
+    if (el) el.value = q;
+    return q;
+}
+
+// Generic sized product (e.g., Mini Cakes, Pretzels, Cinnamon Rolls)
+function addSizedProductToCart(name, sizeRadioName, qtyId) {
+    const sel = getSelectedRadioByName(sizeRadioName);
+    if (!sel) { showToast('Please choose a size.','error'); return; }
+    const price = parseFloat(sel.value) || parseFloat(sel.getAttribute('data-price'));
+    if (!isValidPrice(price)) { showToast('Invalid price information.','error'); return; }
+    const sizeText = sel.parentElement ? sel.parentElement.textContent.trim() : '';
+    const quantity = ensureMinQty(qtyId);
+
+    const cart = getCart();
+    const itemName = `${name} (${sizeText.split(' - ')[0].trim()})`;
+    const idx = cart.findIndex(item => item.name === itemName);
+    if (idx > -1) cart[idx].quantity += quantity; else cart.push({ name: itemName, price, quantity });
+    saveCart(cart); updateCartCount(); showToast(`Added ${quantity}x ${itemName} to cart!`);
+}
+
+function addSimpleProductToCart(name, price, qtyId) {
+    if (!isValidPrice(price)) { showToast('Invalid price information.','error'); return; }
+    const quantity = ensureMinQty(qtyId);
+    const cart = getCart();
+    const idx = cart.findIndex(i => i.name === name && i.price === price);
+    if (idx > -1) cart[idx].quantity += quantity; else cart.push({ name, price, quantity });
+    saveCart(cart); updateCartCount(); showToast(`Added ${quantity}x ${name} to cart!`);
+}
+
+function addPieToCart(name, price, qtyId) {
+    if (!isValidPrice(price)) { showToast('Invalid price information.','error'); return; }
+    const quantity = ensureMinQty(qtyId);
+    const cart = getCart();
+    const idx = cart.findIndex(i => i.name === name && i.price === price);
+    if (idx > -1) cart[idx].quantity += quantity; else cart.push({ name, price, quantity });
+    saveCart(cart); updateCartCount(); showToast(`Added ${quantity}x ${name} to cart! ($5 deposit per item)`);
+}
+
+function addCrispToCart(name, price, gfId, sfId, qtyId) {
+    if (!isValidPrice(price)) { showToast('Invalid price information.','error'); return; }
+    const quantity = ensureMinQty(qtyId);
+    const gf = gfId ? !!(document.getElementById(gfId) && document.getElementById(gfId).checked) : false;
+    const sf = sfId ? !!(document.getElementById(sfId) && document.getElementById(sfId).checked) : false;
+    const cart = getCart();
+    const nameKey = `${name}${gf?' [GF]':''}${sf?' [SF]':''}`;
+    const idx = cart.findIndex(i => i.name === nameKey && i.price === price);
+    if (idx > -1) cart[idx].quantity += quantity; else cart.push({ name: nameKey, price, quantity, glutenFree: gf, sugarFree: sf });
+    saveCart(cart); updateCartCount(); showToast(`Added ${quantity}x ${nameKey} to cart! ($5 deposit per item)`);
+}
+
+function addBrowniesToCart(name, price, gfId, qtyId) {
+    if (!isValidPrice(price)) { showToast('Invalid price information.','error'); return; }
+    const quantity = ensureMinQty(qtyId);
+    const gf = gfId ? !!(document.getElementById(gfId) && document.getElementById(gfId).checked) : false;
+    const cart = getCart();
+    const nameKey = `${name}${gf?' [GF]':''}`;
+    const idx = cart.findIndex(i => i.name === nameKey && i.price === price);
+    if (idx > -1) cart[idx].quantity += quantity; else cart.push({ name: nameKey, price, quantity, glutenFree: gf });
+    saveCart(cart); updateCartCount(); showToast(`Added ${quantity}x ${nameKey} to cart!`);
+}
+
+function addCupcakesToCart(name, sizeRadioName, gfId, sfId, qtyId) {
+    const sel = getSelectedRadioByName(sizeRadioName);
+    if (!sel) { showToast('Please choose Half Dozen or Dozen.','error'); return; }
+    const price = parseFloat(sel.value) || parseFloat(sel.getAttribute('data-price'));
+    if (!isValidPrice(price)) { showToast('Invalid price information.','error'); return; }
+    const sizeText = sel.parentElement ? sel.parentElement.textContent.trim() : '';
+    const quantity = ensureMinQty(qtyId);
+    const gf = gfId ? !!(document.getElementById(gfId) && document.getElementById(gfId).checked) : false;
+    const sf = sfId ? !!(document.getElementById(sfId) && document.getElementById(sfId).checked) : false;
+
+    const cart = getCart();
+    const itemName = `${name} (${sizeText.split(' - ')[0].trim()})${gf?' [GF]':''}${sf?' [SF]':''}`;
+    const idx = cart.findIndex(i => i.name === itemName && i.price === price);
+    if (idx > -1) cart[idx].quantity += quantity; else cart.push({ name: itemName, price, quantity, glutenFree: gf, sugarFree: sf });
+    saveCart(cart); updateCartCount(); showToast(`Added ${quantity}x ${itemName} to cart!`);
 }
 
 function removeFromCart(index) {
