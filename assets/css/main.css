@@ -3914,18 +3914,19 @@ input, select, textarea {
 			padding: 8rem 8rem 6rem 8rem ;
 		}
 
-			#main > .post header.major > .date {
-				margin-top: -2rem;
-			}
-
-			#main > .post header.major > h1, #main > .post header.major h2 {
-				font-size: 4rem;
-				line-height: 1.1;
-				margin: 0 0 2rem 0;
-			}
-
 			#main > .post.featured {
+				padding: 2rem 8rem 2rem 8rem !important;
 				text-align: center;
+			}
+
+			#main > .post.featured header.major > h1,
+			#main > .post.featured header.major > h2 {
+				font-size: 2.5rem;
+				margin: 0;
+			}
+
+			#main > .post.featured header.major > p {
+				margin: 0.5rem 0 0 0;
 			}
 
 			@media screen and (max-width: 1280px) {
