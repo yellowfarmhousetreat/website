@@ -67,6 +67,14 @@
         document.getElementById('summaryDeposit').textContent = '$' + deposit.toFixed(2);
         document.getElementById('summaryBalance').textContent = '$' + balance.toFixed(2);
         
+        // Update payment amount displays
+        if (document.getElementById('depositAmountDisplay')) {
+            document.getElementById('depositAmountDisplay').textContent = '$' + deposit.toFixed(2);
+        }
+        if (document.getElementById('fullAmountDisplay')) {
+            document.getElementById('fullAmountDisplay').textContent = '$' + total.toFixed(2);
+        }
+        
         if (shipping > 0) {
             document.getElementById('summaryShipping').textContent = '$' + shipping.toFixed(2);
             document.getElementById('summaryShippingRow').style.display = 'flex';
@@ -143,30 +151,71 @@
     window.updatePaymentDetails = function() {
         const paymentDetails = document.getElementById('paymentDetails');
         const paymentContent = document.getElementById('paymentDetailsContent');
-        const deposit = document.getElementById('summaryDeposit').textContent;
+        const customerName = document.getElementById('customerName').value || 'YourName';
+        
+        // Get selected payment amount
+        const isDeposit = document.getElementById('payDeposit')?.checked;
+        const total = parseFloat(document.getElementById('summaryTotal').textContent.replace('$', ''));
+        const deposit = parseFloat(document.getElementById('summaryDeposit').textContent.replace('$', ''));
+        const amount = isDeposit ? deposit : total;
+        const amountLabel = isDeposit ? '50% Deposit' : 'Full Amount';
         
         let method = '';
         let details = '';
+        let payNowButton = '';
         
         if (document.getElementById('paymentCash').checked) {
             method = 'Cash';
-            details = `<p>Please bring ${deposit} cash as your deposit when you arrive for pickup. The remaining balance is due at pickup.</p>`;
+            details = `<p>Please bring $${amount.toFixed(2)} (${amountLabel}) in cash when you arrive for pickup.</p>`;
         } else if (document.getElementById('paymentCashApp').checked) {
             method = 'Cash App';
-            details = `<p>Send ${deposit} to <strong>$DanaBlueMoonHaven</strong> and include your order name in the note.</p>`;
+            const cashtag = 'DanaBlueMoonHaven';
+            const note = encodeURIComponent(`${customerName} - Yellow Farmhouse Order`);
+            const cashAppUrl = `https://cash.app/$${cashtag}/${amount.toFixed(2)}?note=${note}`;
+            
+            details = `
+                <p><strong>Send ${amountLabel}:</strong> $${amount.toFixed(2)}</p>
+                <p><strong>To:</strong> $${cashtag}</p>
+                <p><strong>Note:</strong> ${customerName} - Yellow Farmhouse Order</p>
+            `;
+            payNowButton = `<a href="${cashAppUrl}" class="button primary pay-now-btn" target="_blank">Pay Now with Cash App</a>`;
         } else if (document.getElementById('paymentVenmo').checked) {
             method = 'Venmo';
-            details = `<p>Send ${deposit} to <strong>@BlueMoonHaven</strong> and include your order name in the note.</p>`;
+            const venmoHandle = 'BlueMoonHaven';
+            const note = encodeURIComponent(`${customerName} - Yellow Farmhouse Order`);
+            const venmoUrl = `https://venmo.com/${venmoHandle}?txn=pay&amount=${amount.toFixed(2)}&note=${note}`;
+            
+            details = `
+                <p><strong>Send ${amountLabel}:</strong> $${amount.toFixed(2)}</p>
+                <p><strong>To:</strong> @${venmoHandle}</p>
+                <p><strong>Note:</strong> ${customerName} - Yellow Farmhouse Order</p>
+            `;
+            payNowButton = `<a href="${venmoUrl}" class="button primary pay-now-btn" target="_blank">Pay Now with Venmo</a>`;
         } else if (document.getElementById('paymentPayPal').checked) {
             method = 'PayPal';
-            details = `<p>Send ${deposit} to <strong>@BlueMoonHaven</strong> and include your order name in the note.</p>`;
+            const paypalMe = 'BlueMoonHaven';
+            const paypalUrl = `https://paypal.me/${paypalMe}/${amount.toFixed(2)}USD`;
+            
+            details = `
+                <p><strong>Send ${amountLabel}:</strong> $${amount.toFixed(2)}</p>
+                <p><strong>To:</strong> PayPal.Me/${paypalMe}</p>
+                <p><strong>Note:</strong> Include "${customerName} - Yellow Farmhouse Order" in payment note</p>
+            `;
+            payNowButton = `<a href="${paypalUrl}" class="button primary pay-now-btn" target="_blank">Pay Now with PayPal</a>`;
         } else if (document.getElementById('paymentZelle').checked) {
             method = 'Zelle';
-            details = `<p>Send ${deposit} to <strong>805-709-4686</strong> and include your order name in the note.</p>`;
+            const zellePhone = '805-709-4686';
+            
+            details = `
+                <p><strong>Send ${amountLabel}:</strong> $${amount.toFixed(2)}</p>
+                <p><strong>To:</strong> ${zellePhone}</p>
+                <p><strong>Note:</strong> ${customerName} - Yellow Farmhouse Order</p>
+                <p><em>Open your banking app and select Zelle to send payment.</em></p>
+            `;
         }
         
         if (method) {
-            paymentContent.innerHTML = details;
+            paymentContent.innerHTML = details + (payNowButton || '');
             paymentDetails.style.display = 'block';
         } else {
             paymentDetails.style.display = 'none';

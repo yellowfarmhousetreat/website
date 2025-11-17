@@ -166,10 +166,23 @@
 
                                             <!-- Step 5: Payment Method -->
                                             <h2 class="major">Step 5: Select Payment Method</h2>
+                                            
+                                            <!-- Payment Amount Choice -->
+                                            <div class="field">
+                                                <label><strong>Choose Payment Amount:</strong></label>
+                                                <div class="payment-amount-choice">
+                                                    <input type="radio" id="payDeposit" name="payment_amount" value="deposit" checked onchange="updatePaymentDetails()" />
+                                                    <label for="payDeposit">Pay 50% Deposit Now (<span id="depositAmountDisplay">$0.00</span>)</label>
+                                                    
+                                                    <input type="radio" id="payFull" name="payment_amount" value="full" onchange="updatePaymentDetails()" />
+                                                    <label for="payFull">Pay Full Amount (<span id="fullAmountDisplay">$0.00</span>)</label>
+                                                </div>
+                                            </div>
+
                                             <div class="fields">
                                                 <div class="field">
                                                     <input type="radio" id="paymentCash" name="payment_method" value="Cash" required onchange="updatePaymentDetails()" />
-                                                    <label for="paymentCash"><strong>Cash</strong> (Pay deposit now, balance at pickup)</label>
+                                                    <label for="paymentCash"><strong>Cash</strong> (Pay at pickup)</label>
                                                 </div>
                                                 <div class="field">
                                                     <input type="radio" id="paymentCashApp" name="payment_method" value="Cash App" onchange="updatePaymentDetails()" />
@@ -181,7 +194,7 @@
                                                 </div>
                                                 <div class="field">
                                                     <input type="radio" id="paymentPayPal" name="payment_method" value="PayPal" onchange="updatePaymentDetails()" />
-                                                    <label for="paymentPayPal"><strong>PayPal</strong> @BlueMoonHaven</label>
+                                                    <label for="paymentPayPal"><strong>PayPal</strong> PayPal.Me/BlueMoonHaven</label>
                                                 </div>
                                                 <div class="field">
                                                     <input type="radio" id="paymentZelle" name="payment_method" value="Zelle" onchange="updatePaymentDetails()" />
@@ -191,7 +204,7 @@
                                                     <div id="paymentDetailsContent"></div>
                                                 </div>
                                                 <div class="payment-note">
-                                                    <strong>Payment Instructions:</strong> A 50% deposit is required to secure your pickup appointment. Your confirmation email will include payment details. The remaining 50% balance is due at pickup.
+                                                    <strong>Note:</strong> After submitting this form, you'll receive confirmation and can complete payment using the "Pay Now" button above, or manually send payment to the selected method.
                                                 </div>
                                             </div>
 
