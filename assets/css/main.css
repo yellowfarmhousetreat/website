@@ -122,7 +122,8 @@ table {
 
 /* Sub-Menu Content */
 .submenu-content {
-	margin: 2rem 0;
+	margin: 0;
+	padding-top: 2rem;
 }
 
 .submenu-panel {

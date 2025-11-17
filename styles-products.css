@@ -10,12 +10,13 @@
 	justify-content: center;
 	flex-wrap: wrap;
 	position: relative;
-	top: -2px;
+	top: -4px;
 	z-index: 2;
 	margin-left: 2rem;
 	margin-right: 2rem;
-	margin-bottom: 0;
-	margin-top: -2px;
+	margin-bottom: 2rem;
+	margin-top: 0;
+	border-top: 1px solid #ddd;
 }
 
 .cookie-tier-tabs ul {
