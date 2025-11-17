@@ -4942,3 +4942,36 @@ input, select, textarea {
 		text-align: center;
 	}
 }
+
+/* Mobile-first visibility for primary nav tabs (Home | Menu | Order) */
+@media screen and (max-width: 736px) {
+	#nav {
+		background: #ffffff;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+		height: auto;
+		line-height: normal;
+		padding: 0.25rem 0.75rem;
+	}
+	#nav ul.links {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		gap: 0.25rem;
+	}
+	#nav ul.links li {
+		flex: 1 1 0;
+		text-align: center;
+	}
+	#nav ul.links li a {
+		color: #1e252d;
+		padding: 0.6rem 0.4rem;
+		border-radius: 6px;
+		font-size: 0.85rem;
+	}
+	#nav ul.links li.active a {
+		background: #1e252d;
+		color: #ffffff;
+	}
+	/* Hide hamburger toggle when explicit tabs are shown */
+	#navPanelToggle { display: none !important; }
+}
