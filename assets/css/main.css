@@ -4957,6 +4957,7 @@ input, select, textarea {
 		display: flex;
 		justify-content: space-between;
 		gap: 0.25rem;
+		letter-spacing: 0.04em;
 	}
 	#nav ul.links li {
 		flex: 1 1 0;
@@ -4964,14 +4965,24 @@ input, select, textarea {
 	}
 	#nav ul.links li a {
 		color: #1e252d;
-		padding: 0.6rem 0.4rem;
+		padding: 0.55rem 0.4rem;
 		border-radius: 6px;
-		font-size: 0.85rem;
+		font-size: 0.8rem;
 	}
 	#nav ul.links li.active a {
 		background: #1e252d;
 		color: #ffffff;
 	}
+	/* Hide social icons row to save width on very small screens */
+	#nav ul.icons { display: none !important; }
 	/* Hide hamburger toggle when explicit tabs are shown */
 	#navPanelToggle { display: none !important; }
+}
+
+/* Extra-small phones: tighten spacing further */
+@media screen and (max-width: 420px) {
+	#nav ul.links li a {
+		font-size: 0.76rem;
+		padding: 0.5rem 0.35rem;
+	}
 }
