@@ -4904,7 +4904,9 @@ input, select, textarea {
 /* Mobile optimizations for menu tabs */
 @media screen and (max-width: 736px) {
 	.submenu-tabs {
-		width: 100%;
+		width: calc(100% - 4rem);
+		max-width: 72rem;
+		margin: 0 auto;
 		position: sticky;
 		top: 0;
 		z-index: 200;
@@ -4914,16 +4916,20 @@ input, select, textarea {
 	.submenu-tabs ul {
 		width: 100%;
 		justify-content: space-around;
+		padding: 0 0.5rem;
 	}
 	.submenu-tabs .tab-link {
-		padding: 0.6rem 0.4rem;
-		font-size: 0.75rem;
+		padding: 0.6rem 0.35rem;
+		font-size: 0.72rem;
 		min-width: 60px;
 		max-width: none;
 		flex: 1;
+		white-space: nowrap;
 	}
 	.cookie-tier-tabs {
-		width: 100%;
+		width: calc(100% - 4rem);
+		max-width: 72rem;
+		margin: 0 auto;
 		position: sticky;
 		top: 50px;
 		z-index: 199;
@@ -4933,41 +4939,52 @@ input, select, textarea {
 	.cookie-tier-tabs ul {
 		justify-content: space-around;
 		width: 100%;
+		padding: 0 0.5rem;
 	}
 	.cookie-tier-link {
-		padding: 0.6rem 0.8rem;
-		font-size: 0.8rem;
+		padding: 0.6rem 0.5rem;
+		font-size: 0.78rem;
 		min-width: 70px;
 		flex: 1;
 		text-align: center;
+		white-space: nowrap;
 	}
 }
 
 /* Mobile-first visibility for primary nav tabs (Home | Menu | Order) */
 @media screen and (max-width: 736px) {
 	#nav {
+		/* Override base styles to match content container exactly */
+		width: calc(100% - 4rem) !important;
+		max-width: 72rem !important;
+		margin: 0 auto;
 		background: #ffffff;
 		box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 		height: auto;
 		line-height: normal;
-		padding: 0.25rem 0.75rem;
+		padding: 0.5rem 0 !important;
+		overflow: visible;
 	}
 	#nav ul.links {
 		width: 100%;
 		display: flex;
-		justify-content: space-between;
-		gap: 0.25rem;
-		letter-spacing: 0.04em;
+		justify-content: space-evenly;
+		gap: 0.5rem;
+		letter-spacing: 0.03em;
+		padding: 0 0.75rem;
 	}
 	#nav ul.links li {
 		flex: 1 1 0;
 		text-align: center;
+		min-width: 0;
 	}
 	#nav ul.links li a {
 		color: #1e252d;
-		padding: 0.55rem 0.4rem;
+		padding: 0.6rem 0.5rem;
 		border-radius: 6px;
-		font-size: 0.8rem;
+		font-size: 0.75rem;
+		white-space: nowrap;
+		display: block;
 	}
 	#nav ul.links li.active a {
 		background: #1e252d;
@@ -4981,8 +4998,13 @@ input, select, textarea {
 
 /* Extra-small phones: tighten spacing further */
 @media screen and (max-width: 420px) {
+	#nav ul.links {
+		gap: 0.35rem;
+		padding: 0 0.5rem;
+	}
 	#nav ul.links li a {
-		font-size: 0.76rem;
+		font-size: 0.7rem;
 		padding: 0.5rem 0.35rem;
+		letter-spacing: 0.02em;
 	}
 }
