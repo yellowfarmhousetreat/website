@@ -75,6 +75,11 @@ table {
 	z-index: 100;
 }
 
+/* Hide submenu tabs on index.html - show only when on menu page */
+body:not([data-page="menu"]) .submenu-tabs {
+	display: none;
+}
+
 .submenu-tabs ul {
 	list-style: none;
 	display: flex;
@@ -3886,15 +3891,11 @@ input, select, textarea {
 			margin-bottom: 0;
 		}
 
-		/* Mobile-first: nav is always visible */
-		@media screen and (max-width: 980px) {
-
-			#nav {
-				display: flex;
-				opacity: 1;
-				visibility: visible;
-			}
-
+		/* Ensure nav is always visible at all screen sizes */
+		#nav {
+			display: flex !important;
+			opacity: 1 !important;
+			visibility: visible !important;
 		}
 
 /* Main */
@@ -4948,6 +4949,24 @@ input, select, textarea {
 		flex: 1;
 		text-align: center;
 		white-space: nowrap;
+	}
+}
+
+/* Ensure primary nav is responsive at medium widths (737px - 980px) */
+@media screen and (min-width: 737px) and (max-width: 980px) {
+	#nav {
+		background: rgba(255, 255, 255, 0.95);
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		padding: 0 1.5rem 0 0;
+	}
+	#nav ul.links li a {
+		color: #1e252d;
+		font-size: 0.85rem;
+		padding: 0 1.5rem;
+	}
+	#nav ul.links li.active a {
+		background: #1e252d;
+		color: #ffffff;
 	}
 }
 
