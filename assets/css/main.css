@@ -5287,6 +5287,9 @@ input, select, textarea {
 #main, #main p, #main li { color: #e6e9ed; }
 #main h1, #main h2, #main h3, #main h4, #main h5, #main h6 { color: #f5f7fa; }
 
+/* Form labels - bright for readability */
+label, #main label { color: #f5f7fa !important; font-weight: 700; }
+
 /* Cards/boxes - lighter tiles on dark background */
 .box { background: #2d3138; border: 1px solid rgba(255,255,255,0.12); }
 
@@ -5304,6 +5307,14 @@ input::placeholder, textarea::placeholder { color: #9aa4af; }
 .note-box, .summary-box, .deposit-alert {
     background: #2d3138;
     border: 1px solid rgba(255,255,255,0.12);
+    color: #f5f7fa;
+}
+
+.note-box strong, .summary-box strong { color: #ffffff; }
+
+/* Radio/Checkbox labels - brighter for readability */
+input[type="radio"] + label, input[type="checkbox"] + label {
+    color: #f5f7fa !important;
 }
 
 /* Links */
