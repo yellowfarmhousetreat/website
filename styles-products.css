@@ -58,15 +58,15 @@
 }
 
 .cookie-tier-link:hover {
-	color: #27ae60;
-	border-bottom-color: #27ae60;
-	background: rgba(39, 174, 96, 0.03);
+    color: #FFD866;
+    border-bottom-color: #FFD866;
+    background: rgba(255, 216, 102, 0.15);
 }
 
 .cookie-tier-link.active {
-    color: #27ae60;
+    color: #FFD866;
     background: transparent;
-    border-bottom-color: #27ae60;
+    border-bottom-color: #FFD866;
     font-weight: 600;
     position: relative;
 }
@@ -107,15 +107,15 @@
 }
 
 .tier-header {
-	font-size: 1.2rem;
-	color: #27ae60;
-	font-weight: 600;
-	margin: 0 0 1.5rem 0;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	padding-top: 1.5rem;
-	padding-left: 2rem;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.2rem;
+    color: #FFD866;
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding-top: 1.5rem;
+    padding-left: 2rem;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .quantity-selector {
@@ -140,8 +140,8 @@
 }
 
 .quantity-selector input[type="radio"] {
-	cursor: pointer;
-	accent-color: #27ae60;
+    cursor: pointer;
+    accent-color: #FFD866;
 }
 
 /* Product Grid */
@@ -205,7 +205,7 @@
 .product-price {
     font-weight: bold;
     font-size: 1.2rem;
-    color: #27ae60;
+    color: #595842; /* deep olive from triad for readability */
 }
 
 .product-details label {
@@ -229,18 +229,18 @@
 }
 
 .product-details button {
-    background: #1a5e3c;
-    color: #fff;
-    border: none;
+    background: #FFD866;
+    color: #1e252d;
+    border: 1px solid rgba(0,0,0,0.1);
     padding: 0.75rem;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
-    transition: background 0.3s ease;
+    transition: background 0.2s ease, transform 0.05s ease;
 }
 
 .product-details button:hover {
-    background: #229954;
+    background: #FFEB66;
 }
 
 .product-details button:active {
@@ -356,13 +356,16 @@
     position: fixed;
     top: 20px;
     right: 20px;
-    background: #1e8449;
-    color: #fff;
-    padding: 1rem 1.5rem;
-    border-radius: 4px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-    animation: slideIn 0.3s ease;
+    background: #FFD866;
+    color: #1e252d;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    z-index: 9999;
+    animation: slideIn 0.2s ease;
+    font-weight: 600;
+    max-width: 360px;
+    width: max-content;
 }
 
 .toast.error {
