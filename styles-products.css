@@ -15,7 +15,7 @@
 	z-index: 3;
 	margin-left: 2rem;
 	margin-right: 2rem;
-	margin-bottom: 0;
+	margin-bottom: -2px;
 	margin-top: 0;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
@@ -109,10 +109,11 @@
 	font-size: 1.2rem;
 	color: #27ae60;
 	font-weight: 600;
-	margin: 0 0 2rem 0;
+	margin: 0 0 1.5rem 0;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
-	padding-top: 2.5rem;
+	padding-top: 1.5rem;
+	padding-left: 2rem;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -147,9 +148,9 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 	gap: 2rem;
-	padding: 0 2rem;
-	margin: 0 auto;
-	max-width: 1200px;
+	padding: 0;
+	margin: 0;
+	max-width: 100%;
 }
 
 /* Product Card h4 */
