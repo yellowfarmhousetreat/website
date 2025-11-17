@@ -61,7 +61,7 @@ table {
 
 /* Sub-Menu Tabs */
 .submenu-tabs {
-	background: #f9f9f9;
+	background: #768084;
 	border-bottom: 2px solid #ddd;
 	padding: 0;
 	margin: 0 auto;
@@ -100,7 +100,7 @@ body:not([data-page="menu"]) .submenu-tabs {
 	display: inline-block;
 	padding: 0.8rem 1.5rem;
 	text-decoration: none;
-	color: #555;
+	color: #ffffff;
 	font-weight: 600;
 	border-bottom: 3px solid transparent;
 	transition: all 0.3s ease;
@@ -113,15 +113,15 @@ body:not([data-page="menu"]) .submenu-tabs {
 }
 
 .submenu-tabs .tab-link:hover {
-	color: #FFD866;
-	border-bottom-color: #FFD866;
-	background: rgba(39, 174, 96, 0.05);
+	color: #FFEB66;
+	border-bottom-color: #FFEB66;
+	background: rgba(255, 255, 255, 0.06);
 }
 
 .submenu-tabs .tab-link.active {
-	color: #333333;
-	background: #e8e8e8;
-	border-bottom-color: #333333;
+	color: #FFEB66;
+	background: transparent;
+	border-bottom-color: #FFEB66;
 	font-weight: 700;
 }
 
@@ -3758,7 +3758,7 @@ input, select, textarea {
 		-webkit-transition: -webkit-transform 1s ease, opacity 1s ease;
 		-ms-transition: -ms-transform 1s ease, opacity 1s ease;
 		transition: transform 1s ease, opacity 1s ease;
-		background: rgba(255, 255, 255, 0.175);
+		background: #768084;
 		height: 4rem;
 		line-height: 4rem;
 		margin: 0 auto;
