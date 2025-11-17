@@ -4952,6 +4952,27 @@ input, select, textarea {
 	}
 }
 
+/* Force nav to always be visible - override template's hamburger menu behavior */
+#nav {
+	display: flex !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+	transform: none !important;
+	-moz-transform: none !important;
+	-webkit-transform: none !important;
+	-ms-transform: none !important;
+}
+
+/* Hide hamburger menu toggle - we don't use it */
+#navPanelToggle {
+	display: none !important;
+}
+
+/* Hide the side panel menu - we use inline nav instead */
+#navPanel {
+	display: none !important;
+}
+
 /* Ensure primary nav is responsive at medium widths (737px - 980px) */
 @media screen and (min-width: 737px) and (max-width: 980px) {
 	#nav {
