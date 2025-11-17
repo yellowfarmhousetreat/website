@@ -10,9 +10,9 @@
     display: none;
     justify-content: center;
     flex-wrap: wrap;
-    position: relative;
-    top: -2px; /* sit flush with content */
-    z-index: 2;
+    position: sticky;
+    top: 0; /* stick right below main tabs */
+    z-index: 99;
     margin-left: 2rem;
     margin-right: 2rem;
     margin-bottom: 0;
