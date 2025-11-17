@@ -1,7 +1,7 @@
 /* Cookie Tier Sub-Tabs */
 .cookie-tier-tabs {
-	background: #333333;
-	border-bottom: 2px solid #27ae60;
+	background: #f9f9f9;
+	border-bottom: 2px solid #ddd;
 	padding: 0;
 	margin: 0 auto;
 	width: calc(100% - 4rem);
@@ -10,11 +10,12 @@
 	justify-content: center;
 	flex-wrap: wrap;
 	position: relative;
+	top: -2px;
 	z-index: 2;
 	margin-left: 2rem;
 	margin-right: 2rem;
-	margin-bottom: 1.5rem;
-	margin-top: 1.5rem;
+	margin-bottom: 0;
+	margin-top: -2px;
 }
 
 .cookie-tier-tabs ul {
@@ -37,7 +38,7 @@
 	display: inline-block;
 	padding: 0.8rem 1.5rem;
 	text-decoration: none;
-	color: #e0e0e0;
+	color: #555;
 	font-weight: 600;
 	border-bottom: 3px solid transparent;
 	transition: all 0.3s ease;
@@ -50,15 +51,15 @@
 }
 
 .cookie-tier-link:hover {
-	color: #fff;
+	color: #27ae60;
 	border-bottom-color: #27ae60;
-	background: rgba(39, 174, 96, 0.15);
+	background: rgba(39, 174, 96, 0.05);
 }
 
 .cookie-tier-link.active {
-	color: #fff;
-	background: #27ae60;
-	border-bottom-color: #1e8449;
+	color: #333333;
+	background: #e8e8e8;
+	border-bottom-color: #333333;
 	font-weight: 700;
 }
 
