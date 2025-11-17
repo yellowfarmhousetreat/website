@@ -1,7 +1,8 @@
 /* Cookie Tier Sub-Tabs */
 .cookie-tier-tabs {
-	background: #f9f9f9;
+	background: #ffffff;
 	border-bottom: 2px solid #ddd;
+	border-top: 1px solid #f0f0f0;
 	padding: 0;
 	margin: 0 auto;
 	width: calc(100% - 4rem);
@@ -10,13 +11,13 @@
 	justify-content: center;
 	flex-wrap: wrap;
 	position: relative;
-	top: -8px;
-	z-index: 2;
+	top: -10px;
+	z-index: 3;
 	margin-left: 2rem;
 	margin-right: 2rem;
 	margin-bottom: 0;
 	margin-top: 0;
-	border-top: none;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .cookie-tier-tabs.active {
@@ -41,31 +42,32 @@
 
 .cookie-tier-link {
 	display: inline-block;
-	padding: 0.8rem 1.5rem;
+	padding: 0.75rem 1.75rem;
 	text-decoration: none;
-	color: #555;
-	font-weight: 600;
+	color: #666;
+	font-weight: 500;
 	border-bottom: 3px solid transparent;
-	transition: all 0.3s ease;
+	transition: all 0.25s ease;
 	cursor: pointer;
-	font-size: 0.95rem;
+	font-size: 0.9rem;
 	background: transparent;
 	flex: 1;
 	text-align: center;
-	max-width: 200px;
+	max-width: 180px;
+	letter-spacing: 0.5px;
 }
 
 .cookie-tier-link:hover {
 	color: #27ae60;
 	border-bottom-color: #27ae60;
-	background: rgba(39, 174, 96, 0.05);
+	background: rgba(39, 174, 96, 0.03);
 }
 
 .cookie-tier-link.active {
-	color: #333333;
-	background: #e8e8e8;
-	border-bottom-color: #333333;
-	font-weight: 700;
+	color: #27ae60;
+	background: transparent;
+	border-bottom-color: #27ae60;
+	font-weight: 600;
 }
 
 .cookie-tier-panel {
@@ -104,13 +106,14 @@
 }
 
 .tier-header {
-	font-size: 1.3rem;
+	font-size: 1.2rem;
 	color: #27ae60;
-	font-weight: 700;
-	margin: 0 0 1.5rem 0;
+	font-weight: 600;
+	margin: 0 0 2rem 0;
 	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	padding-top: 2rem;
+	letter-spacing: 0.08em;
+	padding-top: 2.5rem;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .quantity-selector {
@@ -137,6 +140,16 @@
 .quantity-selector input[type="radio"] {
 	cursor: pointer;
 	accent-color: #27ae60;
+}
+
+/* Product Grid */
+.products-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: 2rem;
+	padding: 0 2rem;
+	margin: 0 auto;
+	max-width: 1200px;
 }
 
 /* Product Card h4 */
