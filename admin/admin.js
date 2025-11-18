@@ -72,50 +72,136 @@ class AdminInterface {
   // Load current products from the main site
   async loadProducts() {
     try {
-      // Load the products-data.js file and execute it to get PRODUCTS array
-      const script = document.createElement('script');
-      script.src = '../products-data.js';
-      
-      // Wait for script to load and execute
-      await new Promise((resolve, reject) => {
-        script.onload = () => {
-          // PRODUCTS should now be available globally
-          if (typeof PRODUCTS !== 'undefined') {
-            this.products = JSON.parse(JSON.stringify(PRODUCTS)); // Deep clone
-            this.backupData = JSON.stringify(this.products, null, 2);
-            resolve();
-          } else {
-            reject(new Error('PRODUCTS array not found in products-data.js'));
-          }
-        };
-        script.onerror = () => reject(new Error('Failed to load products-data.js'));
-        document.head.appendChild(script);
-      });
-      
+      // Method 1: Try direct script loading
+      await this.loadProductsViaScript();
       this.showMessage(`Loaded ${this.products.length} products successfully`, 'success');
       
     } catch (error) {
-      this.showMessage('Error loading products: ' + error.message, 'error');
+      console.log('Script method failed, trying fetch method...', error.message);
       
-      // Fallback: create some default products if loading fails
-      this.products = [
-        {
-          id: 'sample-cookies',
-          name: 'Sample Cookies',
-          price: 20,
-          unit: 'dozen',
-          category: 'cookies',
-          description: 'Sample product - edit or delete this',
-          image: 'sample-cookies.jpg',
-          glutenFree: true,
-          sugarFree: true,
-          shippingEligible: false,
-          featured: false
-        }
-      ];
-      
-      this.showMessage('Created sample product. Add your real products below.', 'info');
+      try {
+        // Method 2: Try fetch and eval (fallback)
+        await this.loadProductsViaFetch();
+        this.showMessage(`Loaded ${this.products.length} products successfully (via fetch)`, 'success');
+        
+      } catch (fetchError) {
+        console.error('Both loading methods failed:', fetchError.message);
+        this.showMessage('Error loading products: ' + fetchError.message, 'error');
+        
+        // Fallback: create some default products if loading fails
+        this.products = [
+          {
+            id: 'sample-cookies',
+            name: 'Sample Cookies',
+            price: 20,
+            unit: 'dozen',
+            category: 'cookies',
+            description: 'Sample product - edit or delete this',
+            image: 'sample-cookies.jpg',
+            glutenFree: true,
+            sugarFree: true,
+            shippingEligible: false,
+            featured: false
+          }
+        ];
+        
+        this.showMessage('Created sample product. Add your real products below.', 'info');
+      }
     }
+  }
+
+  // Method 1: Load via script tag
+  async loadProductsViaScript() {
+    const script = document.createElement('script');
+    script.src = '../products-data.js?' + Date.now(); // Cache busting
+    
+    await new Promise((resolve, reject) => {
+      script.onload = () => {
+        setTimeout(() => {
+          console.log('Checking for PRODUCTS...', typeof window.PRODUCTS, window.PRODUCTS);
+          
+          if (typeof window.PRODUCTS !== 'undefined' && Array.isArray(window.PRODUCTS)) {
+            try {
+              this.products = window.PRODUCTS.map(product => this.convertToAdminFormat(product));
+              this.backupData = JSON.stringify(this.products, null, 2);
+              console.log('Successfully converted products:', this.products.length);
+              resolve();
+            } catch (conversionError) {
+              console.error('Error converting products:', conversionError);
+              reject(new Error('Error converting products: ' + conversionError.message));
+            }
+          } else {
+            reject(new Error('PRODUCTS array not found after script load'));
+          }
+        }, 100);
+      };
+      script.onerror = () => reject(new Error('Failed to load products-data.js script'));
+      document.head.appendChild(script);
+    });
+  }
+
+  // Method 2: Load via fetch and eval
+  async loadProductsViaFetch() {
+    const response = await fetch('../products-data.js?' + Date.now());
+    if (!response.ok) {
+      throw new Error('Failed to fetch products-data.js');
+    }
+    
+    const jsCode = await response.text();
+    
+    // Create a temporary global scope to execute the code
+    const originalProducts = window.PRODUCTS;
+    
+    try {
+      // Execute the JavaScript code
+      eval(jsCode);
+      
+      if (typeof window.PRODUCTS !== 'undefined' && Array.isArray(window.PRODUCTS)) {
+        this.products = window.PRODUCTS.map(product => this.convertToAdminFormat(product));
+        this.backupData = JSON.stringify(this.products, null, 2);
+        console.log('Successfully loaded via fetch:', this.products.length);
+      } else {
+        throw new Error('PRODUCTS array not available after eval');
+      }
+    } catch (evalError) {
+      // Restore original PRODUCTS if it existed
+      if (originalProducts) window.PRODUCTS = originalProducts;
+      throw new Error('Error executing products script: ' + evalError.message);
+    }
+  }
+
+  // Convert complex product format to simple admin format
+  convertToAdminFormat(product) {
+    const basePrice = product.sizes && product.sizes.length > 0 ? product.sizes[0].price : 20;
+    const baseUnit = this.extractUnitFromSize(product.sizes && product.sizes[0] ? product.sizes[0].name : 'dozen');
+    
+    return {
+      id: product.id,
+      name: product.name,
+      price: basePrice,
+      unit: baseUnit,
+      category: product.category,
+      description: product.description || '',
+      image: product.image || '',
+      glutenFree: product.dietary ? product.dietary.glutenFree || false : false,
+      sugarFree: product.dietary ? product.dietary.sugarFree || false : false,
+      shippingEligible: product.shippable || false,
+      featured: product.featured || false,
+      tier: product.tier || 'Regular',
+      emoji: product.emoji || '',
+      originalSizes: product.sizes || [] // Keep original sizes for export
+    };
+  }
+
+  // Extract unit from size name
+  extractUnitFromSize(sizeName) {
+    if (!sizeName) return 'dozen';
+    const lowerSize = sizeName.toLowerCase();
+    if (lowerSize.includes('dozen')) return 'dozen';
+    if (lowerSize.includes('loaf')) return 'loaf';
+    if (lowerSize.includes('pie')) return 'each';
+    if (lowerSize.includes('lb')) return 'lb';
+    return 'each';
   }
 
   // Detect mobile device and adjust UI
@@ -351,37 +437,99 @@ class AdminInterface {
 
   // Generate updated products-data.js content
   generateProductsJS() {
-    const jsContent = `/**
- * YELLOW FARMHOUSE TREATS - PRODUCT DATABASE
- * Last updated: ${new Date().toLocaleString()}
- * 
- * To add/edit products: Simply edit this file and save.
- * Changes appear instantly on the website.
- */
+    // Convert admin format back to complex format
+    const exportProducts = this.products.map(product => this.convertFromAdminFormat(product));
+    
+    const jsContent = `// products-data.js
+// Centralized product database for Yellow Farmhouse Treats
+// This is the single source of truth for all product information
 
-const PRODUCTS = ${JSON.stringify(this.products, null, 2)};
+const PRODUCTS = ${JSON.stringify(exportProducts, null, 4)};
 
-// Pricing for dietary options
+// Dietary pricing adjustments
 const DIETARY_PRICING = {
-  glutenFree: 5,  // +$5 for gluten free
-  sugarFree: 3    // +$3 for sugar free
+    glutenFree: 3,
+    sugarFree: 3,
+    vegan: 2
 };
 
-// Payment methods available
-const PAYMENT_METHODS = [
-  'Cash',
-  'Cash App', 
-  'Venmo',
-  'PayPal',
-  'Zelle'
-];
+// Payment methods
+const PAYMENT_METHODS = {
+    cash: { name: 'Cash', instructions: 'Payment due at pickup' },
+    cashapp: { name: 'Cash App', instructions: 'Send payment to $YellowFarmhouse' },
+    venmo: { name: 'Venmo', instructions: 'Send payment to @YellowFarmhouse' },
+    paypal: { name: 'PayPal', instructions: 'Send payment to yellowfarmhouse@email.com' },
+    zelle: { name: 'Zelle', instructions: 'Send payment to (555) 123-4567' }
+};
 
-// Export for use in other files
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { PRODUCTS, DIETARY_PRICING, PAYMENT_METHODS };
-}`;
+// Shipping ZIP codes and costs
+const SHIPPING_ZONES = {
+    '12345': 5.00,
+    '12346': 5.00,
+    '12347': 7.50,
+    '12348': 7.50,
+    '12349': 10.00
+};
+
+// Make data available globally
+window.PRODUCTS = PRODUCTS;
+window.DIETARY_PRICING = DIETARY_PRICING;
+window.PAYMENT_METHODS = PAYMENT_METHODS;
+window.SHIPPING_ZONES = SHIPPING_ZONES;`;
     
     return jsContent;
+  }
+
+  // Convert admin format back to complex format for export
+  convertFromAdminFormat(product) {
+    // Generate sizes array based on unit and price
+    let sizes = [];
+    if (product.originalSizes && product.originalSizes.length > 0) {
+      // Use original sizes if available, but update first size with current price
+      sizes = [...product.originalSizes];
+      if (sizes[0]) {
+        sizes[0].price = product.price;
+      }
+    } else {
+      // Generate default sizes based on unit and category
+      sizes = this.generateDefaultSizes(product);
+    }
+
+    return {
+      id: product.id,
+      name: product.name,
+      ...(product.tier && { tier: product.tier }),
+      category: product.category,
+      description: product.description,
+      ...(product.emoji && { emoji: product.emoji }),
+      image: product.image,
+      sizes: sizes,
+      dietary: {
+        glutenFree: product.glutenFree || false,
+        sugarFree: product.sugarFree || false,
+        vegan: false
+      },
+      shippable: product.shippingEligible || false
+    };
+  }
+
+  // Generate default sizes for a product
+  generateDefaultSizes(product) {
+    const basePrice = product.price || 20;
+    
+    switch (product.category) {
+      case 'cookies':
+        return [
+          { name: '1/2 dozen', price: Math.round(basePrice * 0.6) },
+          { name: 'dozen', price: basePrice }
+        ];
+      case 'pies':
+        return [{ name: '9 inch pie', price: basePrice }];
+      case 'breads':
+        return [{ name: 'loaf', price: basePrice }];
+      default:
+        return [{ name: product.unit || 'each', price: basePrice }];
+    }
   }
 
   // Save changes (download new file)
