@@ -1,0 +1,952 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Product Manager - Yellow Farmhouse Treats</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #f8f9fa;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Security Banners */
+        .security-banner {
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .security-notice {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid rgba(231, 76, 60, 0.5);
+            color: #ffffff;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Login Form */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+        }
+
+        .login-form {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-form h1 {
+            margin-bottom: 1.5rem;
+            color: #f4d03f;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e8ecf0;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            color: #f8f9fa;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #f4d03f;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-height: 44px; /* iPhone 6 touch target */
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f4d03f 0%, #f1c40f 100%);
+            color: #1a1a2e;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: #ffffff;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: #ffffff;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: #f8f9fa;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            min-height: 36px;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Admin Panel */
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .admin-header h1 {
+            color: #f4d03f;
+            margin: 0;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Product Cards */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .product-header h3 {
+            color: #f4d03f;
+            margin: 0;
+        }
+
+        /* Checkbox and Form Controls - iPhone 6 Ready */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin: 0.5rem 0;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-height: 44px; /* iPhone 6 touch target */
+            padding: 0.5rem 0;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Size Management */
+        .size-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .size-row input {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .size-row button {
+            flex-shrink: 0;
+        }
+
+        /* Photo Upload */
+        .photo-upload {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+
+        .photo-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Messages */
+        .messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 350px;
+        }
+
+        .message {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: 600;
+            animation: slideIn 0.3s ease;
+        }
+
+        .message-success { background: #27ae60; }
+        .message-error { background: #e74c3c; }
+        .message-info { background: #3498db; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Utility Classes */
+        .hidden { display: none !important; }
+
+        /* iPhone 6 and Mobile Optimizations */
+        @media (max-width: 480px) {
+            .container { padding: 0.5rem; }
+            
+            .login-form { 
+                margin: 0.5rem;
+                padding: 1.5rem 1rem;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .admin-actions {
+                justify-content: center;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-card {
+                padding: 1rem;
+            }
+            
+            .size-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .size-row input,
+            .size-row button {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            .photo-buttons {
+                flex-direction: column;
+            }
+            
+            .checkbox-group {
+                gap: 1rem; /* More spacing on mobile */
+            }
+            
+            .checkbox-item {
+                min-height: 48px; /* Larger touch target on small screens */
+                padding: 0.75rem 0.5rem;
+            }
+            
+            .checkbox-item input[type="checkbox"] {
+                width: 22px;
+                height: 22px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            /* iPhone 6 specific optimizations */
+            .btn {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
+            }
+            
+            .checkbox-item {
+                min-height: 50px;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Security Banners -->
+        <div class="security-banner">
+            🚨 DEVELOPMENT TOOL - NO REAL SECURITY 🚨<br>
+            <small>This interface can be bypassed by anyone • Use only on trusted networks • Password visible in source code</small>
+        </div>
+
+        <div class="security-notice">
+            <strong>⚠️ Admin Access Only</strong> - This page is for authorized personnel only. 
+            All actions are logged and monitored.
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="login-container">
+            <div class="login-form">
+                <h1>🏡 Farmhouse Admin</h1>
+                <p>Enter your admin password to manage products</p>
+                
+                <div class="form-group">
+                    <label for="admin-password">Admin Password:</label>
+                    <input type="password" id="admin-password" placeholder="Enter admin password" 
+                           onkeypress="if(event.key==='Enter') handleLogin()">
+                </div>
+                
+                <button onclick="handleLogin()" class="btn btn-primary" style="width: 100%;">
+                    🔓 Login to Admin Panel
+                </button>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="admin-panel" class="hidden">
+            <div class="admin-header">
+                <h1>🏡 Yellow Farmhouse Treats</h1>
+                <div class="admin-actions">
+                    <button onclick="addNewProduct()" class="btn btn-primary">+ Add Product</button>
+                    <button onclick="exportAll()" class="btn btn-secondary">📊 Export All</button>
+                    <button onclick="logout()" class="btn btn-secondary">🚪 Logout</button>
+                </div>
+            </div>
+            
+            <div id="product-list">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Messages Area -->
+        <div id="messages" class="messages"></div>
+    </div>
+
+    <script>
+        // Admin Interface Class
+        class SimpleAdminInterface {
+            constructor() {
+                this.products = [];
+                this.isAuthenticated = false;
+                this.password = 'FarmhouseBaker2024!'; // Change this
+            }
+
+            // Authentication
+            handleLogin() {
+                const inputPassword = document.getElementById('admin-password').value;
+                
+                if (inputPassword === this.password) {
+                    this.isAuthenticated = true;
+                    this.showAdminPanel();
+                    this.showMessage('Login successful!', 'success');
+                } else {
+                    this.showMessage('Invalid password!', 'error');
+                }
+            }
+
+            showAdminPanel() {
+                document.getElementById('login-form').classList.add('hidden');
+                document.getElementById('admin-panel').classList.remove('hidden');
+                this.loadProducts();
+            }
+
+            logout() {
+                this.isAuthenticated = false;
+                document.getElementById('admin-panel').classList.add('hidden');
+                document.getElementById('login-form').classList.remove('hidden');
+                document.getElementById('admin-password').value = '';
+                this.showMessage('Logged out', 'info');
+            }
+
+            // Product Loading
+            async loadProducts() {
+                try {
+                    const response = await fetch('../products-data.js');
+                    const jsCode = await response.text();
+                    
+                    // Execute the JS to get PRODUCTS array
+                    eval(jsCode);
+                    
+                    if (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) {
+                        this.products = PRODUCTS.map(p => this.convertProduct(p));
+                        this.renderProducts();
+                        this.showMessage(`Loaded ${this.products.length} products successfully`, 'success');
+                    } else {
+                        throw new Error('No PRODUCTS found');
+                    }
+                } catch (error) {
+                    console.error('Failed to load products:', error);
+                    this.createSampleProducts();
+                    this.renderProducts();
+                    this.showMessage('Using sample data - failed to load existing products', 'error');
+                }
+            }
+
+            // Convert complex product to simple format
+            convertProduct(product) {
+                return {
+                    id: product.id,
+                    name: product.name,
+                    category: product.category || 'cookies',
+                    description: product.description || '',
+                    ingredients: product.ingredients || '',
+                    allergens: product.allergens || [],
+                    image: product.image || '',
+                    sizes: product.sizes || [{ name: 'dozen', price: 20 }],
+                    dietary: product.dietary || { glutenFree: false, sugarFree: false, vegan: false },
+                    shippable: product.shippable || false,
+                    featured: product.featured || false
+                };
+            }
+
+            // Create sample products if loading fails
+            createSampleProducts() {
+                this.products = [
+                    {
+                        id: 'sample-cookies',
+                        name: 'Sample Cookies',
+                        category: 'cookies',
+                        description: 'Sample product - edit or delete this',
+                        ingredients: 'Flour, Sugar, Butter, Eggs, Vanilla Extract, Salt, Baking Soda',
+                        allergens: ['wheat', 'eggs', 'milk'],
+                        image: 'sample-cookies.jpg',
+                        sizes: [{ name: 'dozen', price: 20 }],
+                        dietary: { glutenFree: true, sugarFree: false, vegan: false },
+                        shippable: false,
+                        featured: false
+                    }
+                ];
+            }
+
+            // Render Products
+            renderProducts() {
+                const container = document.getElementById('product-list');
+                
+                if (this.products.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 2rem; opacity: 0.7;">
+                            <h3>No Products Found</h3>
+                            <p>Click "Add Product" to create your first product.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = `
+                    <div class="products-grid">
+                        ${this.products.map((product, index) => this.renderProductCard(product, index)).join('')}
+                    </div>
+                `;
+            }
+
+            // Render Individual Product Card
+            renderProductCard(product, index) {
+                return `
+                    <div class="product-card">
+                        <div class="product-header">
+                            <h3>${this.escapeHtml(product.name)}</h3>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button onclick="adminInterface.saveProduct(${index})" class="btn btn-success btn-small">
+                                    💾 Save
+                                </button>
+                                <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small">
+                                    🗑️ Delete
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Product Name:</label>
+                            <input type="text" value="${this.escapeHtml(product.name)}" 
+                                   onchange="adminInterface.updateProduct(${index}, 'name', this.value)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Category:</label>
+                            <select onchange="adminInterface.updateProduct(${index}, 'category', this.value)">
+                                <option value="cookies" ${product.category === 'cookies' ? 'selected' : ''}>Cookies</option>
+                                <option value="cakes" ${product.category === 'cakes' ? 'selected' : ''}>Cakes</option>
+                                <option value="pies" ${product.category === 'pies' ? 'selected' : ''}>Pies</option>
+                                <option value="breads" ${product.category === 'breads' ? 'selected' : ''}>Breads</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea onchange="adminInterface.updateProduct(${index}, 'description', this.value)">${this.escapeHtml(product.description)}</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Ingredients (in order of quantity):</label>
+                            <textarea placeholder="e.g., Flour, Sugar, Butter, Eggs, Vanilla Extract, Salt, Baking Soda" 
+                                      onchange="adminInterface.updateProduct(${index}, 'ingredients', this.value)">${this.escapeHtml(product.ingredients)}</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Sizes & Pricing:</label>
+                            <div id="sizes-${index}">
+                                ${this.renderSizes(product.sizes, index)}
+                            </div>
+                            <button type="button" class="btn btn-secondary btn-small" 
+                                    onclick="adminInterface.addSize(${index})">+ Add Size</button>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Allergen Information:</label>
+                            <div class="checkbox-group">
+                                ${this.renderAllergens(product.allergens, index)}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Dietary Options:</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="gf-${index}" ${product.dietary.glutenFree ? 'checked' : ''} 
+                                           onchange="adminInterface.updateDietary(${index}, 'glutenFree', this.checked)">
+                                    <label for="gf-${index}">Gluten Free Available</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="sf-${index}" ${product.dietary.sugarFree ? 'checked' : ''} 
+                                           onchange="adminInterface.updateDietary(${index}, 'sugarFree', this.checked)">
+                                    <label for="sf-${index}">Sugar Free Available</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="vegan-${index}" ${product.dietary.vegan ? 'checked' : ''} 
+                                           onchange="adminInterface.updateDietary(${index}, 'vegan', this.checked)">
+                                    <label for="vegan-${index}">Vegan Available</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Product Photo:</label>
+                            <div class="photo-upload">
+                                <div class="photo-buttons">
+                                    <button type="button" class="btn btn-secondary btn-small" 
+                                            onclick="adminInterface.triggerPhoto(${index}, 'library')">📱 Photos</button>
+                                    <button type="button" class="btn btn-secondary btn-small" 
+                                            onclick="adminInterface.triggerPhoto(${index}, 'camera')">📸 Camera</button>
+                                    <button type="button" class="btn btn-secondary btn-small" 
+                                            onclick="adminInterface.triggerPhoto(${index}, 'files')">📁 Files</button>
+                                </div>
+                                <input type="file" id="photo-library-${index}" class="file-input" 
+                                       accept="image/*" 
+                                       onchange="adminInterface.handlePhoto(event, ${index})">
+                                <input type="file" id="photo-camera-${index}" class="file-input" 
+                                       accept="image/*" capture="environment"
+                                       onchange="adminInterface.handlePhoto(event, ${index})">
+                                <input type="file" id="photo-files-${index}" class="file-input" 
+                                       accept="image/*,image/heic,image/jpeg,image/png,image/gif,image/webp" 
+                                       onchange="adminInterface.handlePhoto(event, ${index})">
+                            </div>
+                            <input type="text" value="${this.escapeHtml(product.image)}" 
+                                   placeholder="Or enter filename manually"
+                                   onchange="adminInterface.updateProduct(${index}, 'image', this.value)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="ship-${index}" ${product.shippable ? 'checked' : ''} 
+                                           onchange="adminInterface.updateProduct(${index}, 'shippable', this.checked)">
+                                    <label for="ship-${index}">Shipping Available</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="feat-${index}" ${product.featured ? 'checked' : ''} 
+                                           onchange="adminInterface.updateProduct(${index}, 'featured', this.checked)">
+                                    <label for="feat-${index}">Featured Product</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Render Sizes
+            renderSizes(sizes, productIndex) {
+                return sizes.map((size, sizeIndex) => `
+                    <div class="size-row">
+                        <input type="text" value="${this.escapeHtml(size.name)}" 
+                               placeholder="Size name" 
+                               onchange="adminInterface.updateSize(${productIndex}, ${sizeIndex}, 'name', this.value)">
+                        <input type="number" step="0.01" value="${size.price}" 
+                               placeholder="Price" 
+                               onchange="adminInterface.updateSize(${productIndex}, ${sizeIndex}, 'price', parseFloat(this.value))">
+                        <button type="button" class="btn btn-danger btn-small" 
+                                onclick="adminInterface.removeSize(${productIndex}, ${sizeIndex})"
+                                ${sizes.length <= 1 ? 'disabled' : ''}>×</button>
+                    </div>
+                `).join('');
+            }
+
+            // Render Allergens
+            renderAllergens(allergens, productIndex) {
+                const commonAllergens = ['wheat', 'eggs', 'milk', 'nuts', 'peanuts', 'soy'];
+                
+                return commonAllergens.map(allergen => `
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="allergen-${allergen}-${productIndex}" 
+                               ${allergens.includes(allergen) ? 'checked' : ''} 
+                               onchange="adminInterface.updateAllergen(${productIndex}, '${allergen}', this.checked)">
+                        <label for="allergen-${allergen}-${productIndex}">Contains ${allergen.charAt(0).toUpperCase() + allergen.slice(1)}</label>
+                    </div>
+                `).join('');
+            }
+
+            // Update Functions
+            updateProduct(index, field, value) {
+                if (this.products[index]) {
+                    this.products[index][field] = value;
+                    this.showMessage(`Updated ${field}`, 'info');
+                }
+            }
+
+            updateDietary(index, field, value) {
+                if (this.products[index]) {
+                    this.products[index].dietary[field] = value;
+                    this.showMessage(`Updated dietary option`, 'info');
+                }
+            }
+
+            updateAllergen(index, allergen, isChecked) {
+                if (this.products[index]) {
+                    if (isChecked) {
+                        if (!this.products[index].allergens.includes(allergen)) {
+                            this.products[index].allergens.push(allergen);
+                        }
+                    } else {
+                        this.products[index].allergens = this.products[index].allergens.filter(a => a !== allergen);
+                    }
+                    this.showMessage(`Updated allergen info`, 'info');
+                }
+            }
+
+            updateSize(productIndex, sizeIndex, field, value) {
+                if (this.products[productIndex] && this.products[productIndex].sizes[sizeIndex]) {
+                    this.products[productIndex].sizes[sizeIndex][field] = value;
+                    this.showMessage(`Updated size ${field}`, 'info');
+                }
+            }
+
+            // Size Management
+            addSize(productIndex) {
+                if (this.products[productIndex]) {
+                    this.products[productIndex].sizes.push({ name: 'new size', price: 20 });
+                    document.getElementById(`sizes-${productIndex}`).innerHTML = 
+                        this.renderSizes(this.products[productIndex].sizes, productIndex);
+                    this.showMessage('Added new size', 'success');
+                }
+            }
+
+            removeSize(productIndex, sizeIndex) {
+                if (this.products[productIndex] && this.products[productIndex].sizes.length > 1) {
+                    this.products[productIndex].sizes.splice(sizeIndex, 1);
+                    document.getElementById(`sizes-${productIndex}`).innerHTML = 
+                        this.renderSizes(this.products[productIndex].sizes, productIndex);
+                    this.showMessage('Removed size', 'info');
+                }
+            }
+
+            // Photo Management
+            triggerPhoto(index, type) {
+                document.getElementById(`photo-${type}-${index}`).click();
+            }
+
+            handlePhoto(event, index) {
+                const file = event.target.files[0];
+                if (file) {
+                    const filename = `${this.products[index].name.toLowerCase().replace(/[^a-z0-9]/g, '-')}.${file.name.split('.').pop()}`;
+                    this.products[index].image = filename;
+                    
+                    // Update the manual filename input
+                    const manualInput = event.target.closest('.form-group').querySelector('input[type="text"]');
+                    if (manualInput) {
+                        manualInput.value = filename;
+                    }
+                    
+                    this.showMessage(`Photo selected: ${filename}`, 'success');
+                    
+                    // TODO: In a real app, upload the file here
+                }
+            }
+
+            // Product Management
+            addNewProduct() {
+                const newProduct = {
+                    id: `product-${Date.now()}`,
+                    name: 'New Product',
+                    category: 'cookies',
+                    description: 'Enter product description',
+                    ingredients: 'List ingredients here',
+                    allergens: [],
+                    image: 'product-image.jpg',
+                    sizes: [{ name: 'dozen', price: 20 }],
+                    dietary: { glutenFree: false, sugarFree: false, vegan: false },
+                    shippable: false,
+                    featured: false
+                };
+                
+                this.products.push(newProduct);
+                this.renderProducts();
+                this.showMessage('New product added', 'success');
+            }
+
+            deleteProduct(index) {
+                if (confirm('Are you sure you want to delete this product?')) {
+                    const productName = this.products[index].name;
+                    this.products.splice(index, 1);
+                    this.renderProducts();
+                    this.showMessage(`Deleted ${productName}`, 'info');
+                }
+            }
+
+            // Save Individual Product
+            saveProduct(index) {
+                const product = this.products[index];
+                const exportProduct = this.convertToExportFormat(product);
+                const jsContent = this.generateIndividualJS(exportProduct, index);
+                
+                this.downloadFile(jsContent, `${product.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}.js`);
+                this.showMessage(`Saved ${product.name}`, 'success');
+            }
+
+            // Export All Products
+            exportAll() {
+                const exportProducts = this.products.map(p => this.convertToExportFormat(p));
+                const jsContent = this.generateFullJS(exportProducts);
+                
+                this.downloadFile(jsContent, 'products-data.js');
+                this.showMessage('Exported all products', 'success');
+            }
+
+            // Convert to Export Format
+            convertToExportFormat(product) {
+                return {
+                    id: product.id,
+                    name: product.name,
+                    category: product.category,
+                    description: product.description,
+                    ingredients: product.ingredients,
+                    allergens: product.allergens,
+                    image: product.image,
+                    sizes: product.sizes,
+                    dietary: product.dietary,
+                    shippable: product.shippable,
+                    featured: product.featured,
+                    idahoDisclaimer: "This product was produced in a home kitchen that is not subject to public health inspection that may also process common food allergens. If you have safety concerns, contact your local health department."
+                };
+            }
+
+            // Generate JS Files
+            generateIndividualJS(product, index) {
+                return `/**
+ * INDIVIDUAL PRODUCT UPDATE
+ * Product: ${product.name}
+ * Generated: ${new Date().toLocaleString()}
+ */
+
+const UPDATED_PRODUCT = ${JSON.stringify(product, null, 4)};
+
+// Original array index: ${index}
+// Product ID: ${product.id}
+
+/* 
+TO UPDATE YOUR MAIN FILE:
+1. Open products-data.js
+2. Find the product with id: '${product.id}'
+3. Replace it with the UPDATED_PRODUCT object above
+4. Save the file
+*/`;
+            }
+
+            generateFullJS(products) {
+                return `// products-data.js
+// Generated by Yellow Farmhouse Admin Tool
+// ${new Date().toLocaleString()}
+
+const PRODUCTS = ${JSON.stringify(products, null, 4)};
+
+// Dietary pricing adjustments
+const DIETARY_PRICING = {
+    glutenFree: 3,
+    sugarFree: 3,
+    vegan: 2
+};
+
+// Payment methods
+const PAYMENT_METHODS = {
+    cash: { name: 'Cash', instructions: 'Payment due at pickup' },
+    cashapp: { name: 'Cash App', instructions: 'Send payment to $YellowFarmhouse' },
+    venmo: { name: 'Venmo', instructions: 'Send payment to @YellowFarmhouse' },
+    paypal: { name: 'PayPal', instructions: 'Send payment to yellowfarmhouse@email.com' },
+    zelle: { name: 'Zelle', instructions: 'Send payment to (555) 123-4567' }
+};
+
+// Make data available globally
+window.PRODUCTS = PRODUCTS;
+window.DIETARY_PRICING = DIETARY_PRICING;
+window.PAYMENT_METHODS = PAYMENT_METHODS;`;
+            }
+
+            // Utility Functions
+            downloadFile(content, filename) {
+                const blob = new Blob([content], { type: 'text/javascript' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            showMessage(message, type = 'info') {
+                const messagesContainer = document.getElementById('messages');
+                const messageEl = document.createElement('div');
+                messageEl.className = `message message-${type}`;
+                messageEl.textContent = message;
+                
+                messagesContainer.appendChild(messageEl);
+                
+                setTimeout(() => {
+                    if (messageEl.parentNode) {
+                        messageEl.parentNode.removeChild(messageEl);
+                    }
+                }, 3000);
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+
+        // Global Functions
+        let adminInterface;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            adminInterface = new SimpleAdminInterface();
+        });
+
+        function handleLogin() {
+            adminInterface.handleLogin();
+        }
+
+        function logout() {
+            adminInterface.logout();
+        }
+
+        function addNewProduct() {
+            adminInterface.addNewProduct();
+        }
+
+        function exportAll() {
+            adminInterface.exportAll();
+        }
+    </script>
+</body>
+</html>
