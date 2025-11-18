@@ -185,13 +185,178 @@
         }
     }
 
-    // Remove item from cart
+    // Enhanced toast system with undo support (simplified version for order page)
+    function showOrderToast(message, type = 'success', undoAction = null) {
+        const toast = document.createElement('div');
+        toast.className = `order-toast ${type}`;
+        
+        const sanitizedMessage = String(message).replace(/[<>&"']/g, '').substring(0, 200);
+        
+        const messageContainer = document.createElement('div');
+        messageContainer.textContent = sanitizedMessage;
+        toast.appendChild(messageContainer);
+        
+        // Add undo button if undo action is provided
+        if (undoAction && undoAction.id) {
+            const undoButton = document.createElement('button');
+            undoButton.textContent = 'Undo';
+            undoButton.style.cssText = `
+                background: rgba(255,255,255,0.2);
+                border: 1px solid rgba(255,255,255,0.3);
+                color: white;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 11px;
+                cursor: pointer;
+                margin-left: 10px;
+            `;
+            
+            undoButton.onclick = (e) => {
+                e.stopPropagation();
+                const success = executeOrderUndo(undoAction);
+                if (success) {
+                    toast.remove();
+                }
+            };
+            
+            toast.appendChild(undoButton);
+        }
+        
+        toast.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'error' ? '#ff4757' : type === 'warning' ? '#ffa502' : '#2ed573'};
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+            max-width: 350px;
+            font-size: 13px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        `;
+        
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(0)';
+        }, 10);
+        
+        const duration = undoAction ? 8000 : 3000;
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }
+        }, duration);
+    }
+    
+    // Simple undo system for order page
+    const orderUndoActions = [];
+    
+    function addOrderUndoAction(action) {
+        action.timestamp = Date.now();
+        action.id = Math.random().toString(36).substr(2, 9);
+        orderUndoActions.unshift(action);
+        
+        // Keep only recent actions (max 3 for order page)
+        if (orderUndoActions.length > 3) {
+            orderUndoActions.splice(3);
+        }
+    }
+    
+    function executeOrderUndo(undoAction) {
+        const actionIndex = orderUndoActions.findIndex(action => action.id === undoAction.id);
+        if (actionIndex === -1) {
+            showOrderToast('Undo action expired.', 'error');
+            return false;
+        }
+        
+        const action = orderUndoActions[actionIndex];
+        
+        try {
+            if (action.type === 'remove') {
+                // Restore item to cart
+                const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
+                
+                if (action.index >= 0 && action.index <= cart.length) {
+                    cart.splice(action.index, 0, action.item);
+                } else {
+                    cart.push(action.item);
+                }
+                
+                localStorage.setItem('yfhs_cart', JSON.stringify(cart));
+                loadCartToOrder();
+                updateCartCount();
+                
+                const itemName = String(action.item.name || '').replace(/[<>&"']/g, '');
+                showOrderToast(`Restored ${itemName} to cart.`, 'success');
+                
+                // Remove action from history
+                orderUndoActions.splice(actionIndex, 1);
+                return true;
+            } else if (action.type === 'reset') {
+                // Restore form data and cart
+                localStorage.setItem('yfhs_cart', JSON.stringify(action.cartData));
+                
+                // Restore form fields
+                const form = document.getElementById('orderForm');
+                if (form && action.formData) {
+                    Object.keys(action.formData).forEach(fieldName => {
+                        const field = form.elements[fieldName];
+                        if (field) {
+                            field.value = action.formData[fieldName];
+                        }
+                    });
+                }
+                
+                loadCartToOrder();
+                updateCartCount();
+                
+                const itemCount = action.cartData.length;
+                showOrderToast(`Restored ${itemCount} item${itemCount !== 1 ? 's' : ''} and form data.`, 'success');
+                
+                orderUndoActions.splice(actionIndex, 1);
+                return true;
+            }
+        } catch (error) {
+            console.error('Undo error:', error);
+            showOrderToast('Undo failed.', 'error');
+        }
+        
+        return false;
+    }
+    
+    // Remove item from cart with undo support
     window.removeCartItem = function(index) {
         const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
-        cart.splice(index, 1);
-        localStorage.setItem('yfhs_cart', JSON.stringify(cart));
-        loadCartToOrder();
-        updateCartCount();
+        
+        if (index >= 0 && index < cart.length) {
+            const item = cart[index];
+            
+            // Store undo action
+            const undoAction = {
+                type: 'remove',
+                item: { ...item },
+                index: index
+            };
+            addOrderUndoAction(undoAction);
+            
+            // Remove item
+            cart.splice(index, 1);
+            localStorage.setItem('yfhs_cart', JSON.stringify(cart));
+            loadCartToOrder();
+            updateCartCount();
+            
+            const itemName = String(item.name || '').replace(/[<>&"']/g, '');
+            showOrderToast(`Removed ${itemName} from order.`, 'warning', undoAction);
+        }
     };
 
     // Update quantity in cart
@@ -640,15 +805,58 @@
         }
     };
 
-    // Clear form completely
+    // Clear form completely with undo support
     window.resetFormComplete = function() {
+        const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
+        const form = document.getElementById('orderForm');
+        
+        if (cart.length === 0 && (!form || isFormEmpty(form))) {
+            showOrderToast('Form and cart are already empty.', 'warning');
+            return;
+        }
+        
         if (confirm('Clear the entire form and remove all items from cart?')) {
+            // Capture current form data for undo
+            const formData = {};
+            if (form) {
+                const formDataObj = new FormData(form);
+                for (let [key, value] of formDataObj.entries()) {
+                    formData[key] = value;
+                }
+            }
+            
+            // Store undo action
+            const undoAction = {
+                type: 'reset',
+                cartData: [...cart],
+                formData: formData
+            };
+            addOrderUndoAction(undoAction);
+            
+            // Clear everything
             localStorage.removeItem('yfhs_cart');
-            document.getElementById('orderForm').reset();
+            if (form) form.reset();
             loadCartToOrder();
             updateCartCount();
+            
+            const itemCount = cart.length;
+            const message = itemCount > 0 ? 
+                `Cleared form and ${itemCount} item${itemCount !== 1 ? 's' : ''} from cart.` : 
+                'Cleared form data.';
+            showOrderToast(message, 'warning', undoAction);
         }
     };
+    
+    // Helper function to check if form is empty
+    function isFormEmpty(form) {
+        const formData = new FormData(form);
+        for (let [key, value] of formData.entries()) {
+            if (value && value.trim() !== '') {
+                return false;
+            }
+        }
+        return true;
+    }
 
     // Validate shipping form before submission
     window.validateShippingForm = function() {

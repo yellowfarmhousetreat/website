@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
     <title>Admin Panel (Dev Tool - No Real Security) - Yellow Farmhouse Treats</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow">
     <!-- ⚠️ SECURITY WARNING: This admin interface provides NO REAL SECURITY! -->
     <style>
@@ -15,16 +15,19 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #ffffff;
+            color: #f8f9fa;
             min-height: 100vh;
+            line-height: 1.6;
+            font-size: 16px;
+            letter-spacing: 0.3px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         /* Login Form Styles */
@@ -36,13 +39,16 @@
         }
 
         .login-form {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.12);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 3rem 2.5rem;
             text-align: center;
-            min-width: 400px;
+            min-width: 420px;
+            max-width: 480px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .login-form h1 {
@@ -51,31 +57,36 @@
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             text-align: left;
         }
 
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 1.2rem;
+            align-items: start;
         }
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #e8ecf0;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 0.75rem;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-            color: #ffffff;
+            padding: 0.9rem 1rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            color: #f8f9fa;
             font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s ease;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -91,35 +102,47 @@
 
         /* Button Styles */
         .btn {
-            padding: 0.75rem 1.5rem;
+            padding: 0.9rem 2rem;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: inherit;
+            transition: all 0.2s ease;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            letter-spacing: 0.3px;
         }
 
         .btn-primary {
-            background: #f4d03f;
+            background: linear-gradient(135deg, #f4d03f 0%, #f1c40f 100%);
             color: #1a1a2e;
+            box-shadow: 0 4px 12px rgba(244, 208, 63, 0.3);
         }
 
         .btn-primary:hover {
-            background: #f1c40f;
-            transform: translateY(-2px);
+            background: linear-gradient(135deg, #f1c40f 0%, #e6b800 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(244, 208, 63, 0.4);
+        }
+
+        .btn-full-width {
+            width: 100%;
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            color: #f8f9fa;
+            border: 1px solid rgba(255, 255, 255, 0.35);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
         }
 
         .btn-success {
@@ -150,29 +173,43 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+
+        .admin-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f4d03f;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .admin-actions {
             display: flex;
             gap: 1rem;
+            align-items: center;
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 2rem;
+            margin-top: 2rem;
         }
 
         .admin-product-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 2rem;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .admin-product-card:hover {
@@ -208,8 +245,9 @@
             margin-bottom: 0.5rem;
             border-radius: 6px;
             color: #ffffff;
-            font-weight: 500;
+            font-weight: 600;
             animation: slideIn 0.3s ease;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .message-success { background: #27ae60; }
@@ -328,8 +366,8 @@
         }
 
         .photo-size {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9rem;
         }
 
         .photo-actions {
@@ -372,13 +410,65 @@
         .photo-placeholder {
             width: 80px;
             height: 80px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(255, 255, 255, 0.5);
+            color: #e8ecf0;
             font-size: 1.5rem;
+        }
+
+        /* Additional utility classes */
+        .login-subtitle {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            color: #e8ecf0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .admin-panel {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Additional mobile improvements */
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                padding: 1.5rem 0;
+            }
+            
+            .admin-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .admin-product-card {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-form {
+                padding: 1.5rem 1rem;
+                margin: 0.5rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
@@ -394,7 +484,7 @@
         <div id="login-form" class="login-container">
             <div class="login-form">
                 <h1>🏡 Farmhouse Admin</h1>
-                <p style="margin-bottom: 2rem; opacity: 0.8;">Enter your admin password to manage products</p>
+                <p class="login-subtitle">Enter your admin password to manage products</p>
                 
                 <div class="form-group">
                     <label for="admin-password">Admin Password:</label>
@@ -402,17 +492,17 @@
                            onkeypress="if(event.key==='Enter') handleLogin()">
                 </div>
                 
-                <button onclick="handleLogin()" class="btn btn-primary" style="width: 100%;">
-                    Login to Admin Panel
+                <button onclick="handleLogin()" class="btn btn-primary btn-full-width">
+                    🔓 Login to Admin Panel
                 </button>
             </div>
         </div>
 
         <!-- Admin Panel -->
-        <div id="admin-panel" style="display: none;">
+        <div id="admin-panel" class="admin-panel hidden">
             <div class="admin-header">
-                <h1>🏡 Yellow Farmhouse Treats - Product Management</h1>
-                <button onclick="logout()" class="btn btn-secondary">Logout</button>
+                <h1>🏡 Yellow Farmhouse Treats</h1>
+                <button onclick="logout()" class="btn btn-secondary">🚪 Logout</button>
             </div>
             
             <div id="product-list">
