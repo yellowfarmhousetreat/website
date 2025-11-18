@@ -310,3 +310,31 @@ window.PRODUCTS = PRODUCTS;
 window.DIETARY_PRICING = DIETARY_PRICING;
 window.PAYMENT_METHODS = PAYMENT_METHODS;
 window.SHIPPING_ZONES = SHIPPING_ZONES;
+
+// Apply site configuration overrides
+(function applyConfigOverrides() {
+    // Only run if site-config is available
+    if (window.siteConfig && typeof window.siteConfig.get === 'function') {
+        const config = window.siteConfig.get();
+        
+        // Apply soldOut flags to products
+        if (config.soldOutProducts && Array.isArray(config.soldOutProducts)) {
+            window.PRODUCTS.forEach(product => {
+                product.soldOut = config.soldOutProducts.includes(product.id);
+            });
+        }
+        
+        // Store orders paused state globally
+        window.ORDERS_PAUSED = config.ordersPaused || false;
+        
+        console.log('Site config applied:', {
+            soldOutCount: config.soldOutProducts.length,
+            ordersPaused: config.ordersPaused,
+            lastUpdated: config.lastUpdated
+        });
+    } else {
+        // Fallback when site-config not available
+        window.ORDERS_PAUSED = false;
+        console.log('Site config not available - using defaults');
+    }
+})();

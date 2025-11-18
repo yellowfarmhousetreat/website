@@ -613,6 +613,9 @@
         <div id="messages" class="messages"></div>
     </div>
 
+    <!-- Site Configuration System -->
+    <script src="../site-config.js"></script>
+    
     <script>
         // Admin Interface Class
         class SimpleAdminInterface {
@@ -1177,66 +1180,74 @@ window.PAYMENT_METHODS = PAYMENT_METHODS;`;
                 URL.revokeObjectURL(url);
             }
 
-            // LocalStorage Persistence Methods
+            // Site Config Persistence Methods
             saveAdminState() {
                 try {
-                    // Save sold out products by ID
-                    const soldOutProducts = {};
-                    this.products.forEach(product => {
-                        if (product.soldOut) {
-                            soldOutProducts[product.id] = true;
-                        }
-                    });
-                    
-                    localStorage.setItem(this.STORAGE_KEYS.SOLD_OUT, JSON.stringify(soldOutProducts));
-                    localStorage.setItem(this.STORAGE_KEYS.ORDERS_PAUSED, JSON.stringify(this.pauseOrders));
-                    localStorage.setItem(this.STORAGE_KEYS.LAST_SAVED, new Date().toISOString());
-                    
-                    this.showMessage('✅ Admin state saved locally', 'success');
+                    // Use SiteConfig system for site-wide persistence
+                    if (typeof SiteConfig !== 'undefined') {
+                        // Save orders paused state
+                        SiteConfig.pauseOrders(this.pauseOrders);
+                        
+                        // Save sold out products by ID
+                        this.products.forEach(product => {
+                            SiteConfig.setSoldOut(product.id, product.soldOut || false);
+                        });
+                        
+                        this.showMessage('✅ Admin state saved site-wide', 'success');
+                        console.log('Admin state saved via SiteConfig system');
+                    } else {
+                        throw new Error('SiteConfig system not available');
+                    }
                 } catch (error) {
                     this.showMessage('❌ Failed to save admin state', 'error');
-                    console.error('LocalStorage save error:', error);
+                    console.error('Site config save error:', error);
                 }
             }
             
             loadAdminState() {
                 try {
-                    // Load orders paused state
-                    const pausedState = localStorage.getItem(this.STORAGE_KEYS.ORDERS_PAUSED);
-                    if (pausedState !== null) {
-                        this.pauseOrders = JSON.parse(pausedState);
-                    }
-                    
-                    // Load sold out products
-                    const soldOutData = localStorage.getItem(this.STORAGE_KEYS.SOLD_OUT);
-                    if (soldOutData) {
-                        const soldOutProducts = JSON.parse(soldOutData);
+                    // Use SiteConfig system for site-wide persistence
+                    if (typeof SiteConfig !== 'undefined') {
+                        const config = SiteConfig.getSiteConfig();
+                        
+                        // Load orders paused state
+                        this.pauseOrders = config.ordersPaused;
                         
                         // Apply sold out states to loaded products
                         this.products.forEach(product => {
-                            if (soldOutProducts[product.id]) {
+                            if (config.soldOut[product.id]) {
                                 product.soldOut = true;
                             }
                         });
-                    }
-                    
-                    const lastSaved = localStorage.getItem(this.STORAGE_KEYS.LAST_SAVED);
-                    if (lastSaved) {
-                        const savedDate = new Date(lastSaved).toLocaleString();
-                        this.showMessage(`📋 Admin state loaded (last saved: ${savedDate})`, 'info');
+                        
+                        if (config.lastUpdated) {
+                            const savedDate = new Date(config.lastUpdated).toLocaleString();
+                            this.showMessage(`📋 Admin state loaded (last updated: ${savedDate})`, 'info');
+                        }
+                        
+                        console.log('Admin state loaded via SiteConfig system', config);
+                    } else {
+                        console.warn('SiteConfig system not available - using defaults');
                     }
                 } catch (error) {
                     this.showMessage('⚠️ Failed to load saved admin state', 'warning');
-                    console.error('LocalStorage load error:', error);
+                    console.error('Site config load error:', error);
                 }
             }
             
             resetAdminState() {
                 if (confirm('⚠️ Reset all admin customizations?\n\nThis will clear:\n• All "Sold Out" flags\n• Orders paused status\n• Return to original products-data.js state\n\nContinue?')) {
                     try {
-                        localStorage.removeItem(this.STORAGE_KEYS.SOLD_OUT);
-                        localStorage.removeItem(this.STORAGE_KEYS.ORDERS_PAUSED);
-                        localStorage.removeItem(this.STORAGE_KEYS.LAST_SAVED);
+                        // Use SiteConfig system to reset site-wide state
+                        if (typeof SiteConfig !== 'undefined') {
+                            // Reset orders paused
+                            SiteConfig.pauseOrders(false);
+                            
+                            // Reset all sold out flags
+                            this.products.forEach(product => {
+                                SiteConfig.setSoldOut(product.id, false);
+                            });
+                        }
                         
                         // Reset in-memory state
                         this.pauseOrders = false;
@@ -1248,10 +1259,11 @@ window.PAYMENT_METHODS = PAYMENT_METHODS;`;
                         this.updateOrderStatusUI();
                         this.renderProducts();
                         
-                        this.showMessage('🔄 Admin state reset to defaults', 'success');
+                        this.showMessage('🔄 Admin state reset to defaults site-wide', 'success');
+                        console.log('Admin state reset via SiteConfig system');
                     } catch (error) {
                         this.showMessage('❌ Failed to reset admin state', 'error');
-                        console.error('LocalStorage reset error:', error);
+                        console.error('Site config reset error:', error);
                     }
                 }
             }

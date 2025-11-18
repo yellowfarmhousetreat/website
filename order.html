@@ -47,9 +47,16 @@
                                 <p>Review your items below, then provide your contact and pickup details.<br />
                                 Please allow up to 48 hours for items to be prepared.</p>
                                 </header>
+                                
+                                <!-- Orders Paused Alert -->
+                                <div id="ordersPausedAlert" class="alert error" style="display: none; margin-bottom: 2rem;">
+                                    <h3 style="color: #ff6b6b; margin-top: 0;">🚫 Orders Temporarily Paused</h3>
+                                    <p>We're not currently accepting new orders. Please check back soon or <a href="index.html#contact" style="color: #ff6b6b; text-decoration: underline;">contact us</a> for more information.</p>
+                                </div>
+                                
                                 <section class="order-form">
                                 <!-- Begin imported order form from reference_document.md, formatted for Massively template -->
-                                <div class="order-form-massively">
+                                <div class="order-form-massively" id="orderFormContainer">
                                     <div class="box">
                                         <form id="orderForm" action="https://formspree.io/f/mblpnapy" method="POST">
                                             <!-- Alerts -->
@@ -329,10 +336,38 @@
             <script src="assets/js/breakpoints.min.js" defer></script>
             <script src="assets/js/util.js" defer></script>
             <script src="assets/js/main.js" defer></script>
+            <!-- Site Configuration -->
+            <script src="site-config.js"></script>
             <!-- Begin imported order form scripts -->
             <script src="cart.js" defer></script>
             <script src="assets/js/order.js" defer></script>
             <!-- End imported order form scripts -->
+            
+            <!-- Orders Paused Check -->
+            <script>
+                // Check if orders are paused when page loads
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (typeof SiteConfig !== 'undefined') {
+                        const config = SiteConfig.getSiteConfig();
+                        const ordersPausedAlert = document.getElementById('ordersPausedAlert');
+                        const orderFormContainer = document.getElementById('orderFormContainer');
+                        
+                        if (config.ordersPaused) {
+                            // Show the alert and hide the form
+                            ordersPausedAlert.style.display = 'block';
+                            orderFormContainer.style.display = 'none';
+                            console.log('Orders are paused - form disabled');
+                        } else {
+                            // Hide the alert and show the form (default state)
+                            ordersPausedAlert.style.display = 'none';
+                            orderFormContainer.style.display = 'block';
+                            console.log('Orders are active - form enabled');
+                        }
+                    } else {
+                        console.warn('SiteConfig not available - defaulting to show form');
+                    }
+                });
+            </script>
 
     </body>
 </html>
