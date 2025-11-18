@@ -2160,23 +2160,7 @@ input, select, textarea {
 
 		}
 
-/* Cart badge */
-.cart-count {
-	display: none; /* Hidden by default, shown when count > 0 */
-	min-width: 20px;
-	padding: 2px 6px;
-	margin-left: 8px;
-	background: #e74c3c;
-	color: #fff;
-	border-radius: 999px;
-	font-size: 0.8rem;
-	text-align: center;
-	vertical-align: middle;
-}
-
-@media screen and (max-width: 736px) {
-	.cart-count { font-size: 0.75rem; min-width: 18px; }
-}
+/* Cart badge - consolidated with #cart-count below */
 
 /* Box */
 
@@ -5083,8 +5067,9 @@ input, select, textarea {
 	font-weight: 600;
 }
 
-/* Cart count badge */
-#cart-count {
+/* Cart count badge - consolidated selector */
+#cart-count,
+.cart-count {
     display: inline-block;
     color: #fff;
     font-size: 0.7em;
@@ -5095,8 +5080,19 @@ input, select, textarea {
     line-height: 1;
     vertical-align: middle;
     position: relative;
-    top: -1px; /* nudge up slightly without affecting link height */
+    top: -1px;
     background-color: #E5CC3D;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* Cart badge responsive */
+@media screen and (max-width: 736px) {
+	#cart-count, .cart-count { 
+		font-size: 0.65em; 
+		min-width: 16px;
+		padding: 0.1rem 0.3rem;
+	}
 }
 
 /* Payment amount choice */
