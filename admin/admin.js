@@ -12,9 +12,48 @@ class AdminInterface {
   }
 
   init() {
+    this.displaySecurityWarning();
     this.setupEventListeners();
     this.checkAuthentication();
     // Load products after authentication check
+  }
+
+  // Display security warning
+  displaySecurityWarning() {
+    console.warn('🚨 SECURITY WARNING: This admin interface provides NO REAL SECURITY!');
+    console.warn('⚠️  Client-side authentication can be bypassed by anyone with basic web knowledge');
+    console.warn('🔓 Password is visible in source code: View Source → Search for "FarmhouseBaker"');
+    console.warn('💻 Use ONLY on trusted devices and networks - NEVER in production!');
+    console.warn('🛡️  For real security, edit products-data.js directly and use Git for deployment');
+    
+    // Show warning banner
+    this.showSecurityBanner();
+  }
+
+  // Show security warning banner
+  showSecurityBanner() {
+    const banner = document.createElement('div');
+    banner.id = 'security-warning-banner';
+    banner.innerHTML = `
+      <div style="
+        background: linear-gradient(135deg, #ff4757, #ff3742);
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        font-weight: bold;
+        border-bottom: 3px solid #ff1e2d;
+        box-shadow: 0 2px 8px rgba(255, 71, 87, 0.3);
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+      ">
+        🚨 DEVELOPMENT TOOL - NO REAL SECURITY 🚨<br>
+        <small style="font-weight: normal; opacity: 0.9;">
+          This interface can be bypassed by anyone • Use only on trusted networks • Password visible in source code
+        </small>
+      </div>
+    `;
+    document.body.insertBefore(banner, document.body.firstChild);
   }
 
   // Security: Simple but effective authentication
@@ -39,6 +78,32 @@ class AdminInterface {
   showLoginForm() {
     document.getElementById('admin-panel').style.display = 'none';
     document.getElementById('login-form').style.display = 'block';
+    
+    // Add security disclaimer to login form if not already present
+    const loginContainer = document.getElementById('login-form');
+    if (!loginContainer.querySelector('.security-disclaimer')) {
+      const disclaimer = document.createElement('div');
+      disclaimer.className = 'security-disclaimer';
+      disclaimer.innerHTML = `
+        <div style="
+          background: rgba(255, 193, 7, 0.15);
+          border: 2px solid rgba(255, 193, 7, 0.4);
+          border-radius: 8px;
+          padding: 1rem;
+          margin-bottom: 1.5rem;
+          color: #ffffff;
+          font-size: 0.85rem;
+          line-height: 1.4;
+        ">
+          <strong>⚠️ SECURITY NOTICE:</strong><br>
+          This admin interface provides <strong>NO REAL SECURITY</strong>. The password is visible in the source code 
+          and can be bypassed using browser developer tools. Use only on trusted devices and networks.
+          <br><br>
+          <strong>For production:</strong> Edit products-data.js directly and deploy via Git.
+        </div>
+      `;
+      loginContainer.insertBefore(disclaimer, loginContainer.firstChild);
+    }
   }
 
   showAdminPanel() {
@@ -350,7 +415,7 @@ class AdminInterface {
     
     container.innerHTML = `
       <div class="admin-header">
-        <h2>Product Management</h2>
+        <h2>Product Management <span style="font-size: 0.6em; color: #ff6b6b; font-weight: normal;">(Development Tool)</span></h2>
         <div class="admin-actions">
           <button onclick="adminInterface.addNewProduct()" class="btn btn-primary">+ Add New Product</button>
           <button onclick="adminInterface.exportData()" class="btn btn-secondary">📊 Export All Data</button>
@@ -358,7 +423,8 @@ class AdminInterface {
         </div>
         <div class="save-instructions">
           <small style="color: rgba(255, 255, 255, 0.7); font-style: italic;">
-            💡 Tip: Use individual "Save" buttons on each product for quick updates, or "Save All" for bulk changes
+            💡 Tip: Use individual "Save" buttons on each product for quick updates, or "Save All" for bulk changes<br>
+            🔓 Remember: This interface has no real security - files download to your device for manual upload to production
           </small>
         </div>
       </div>
