@@ -1,8 +1,8 @@
-# Copilot Instructions for Yellow Farmhouse Stand Website
+# Copilot Instructions for Yellow Farmhouse Treats Website
 
 ## Project Overview
 
-This is a static HTML/CSS/JS website for the Yellow Farmhouse Stand, built on the "Massively" template by HTML5 UP. The site is text-heavy, article-oriented, and features a large background image with parallax and scroll effects. The main user-facing feature is a multi-step order form for baked goods, with dynamic product selection, dietary options, and payment instructions.
+This is a static HTML/CSS/JS website for the Yellow Farmhouse Treats, built on the "Massively" template by HTML5 UP. The site is text-heavy, article-oriented, and features a large background image with parallax and scroll effects. The main user-facing feature is a multi-step order form for baked goods, with dynamic product selection, dietary options, and payment instructions.
 
 ## Key Files & Structure
 

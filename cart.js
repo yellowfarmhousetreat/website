@@ -1,5 +1,5 @@
 // cart.js
-// Cart logic for Yellow Farmhouse Stand
+// Cart logic for Yellow Farmhouse Treats
 
 // Undo system state management
 const undoSystem = {
@@ -511,7 +511,11 @@ function updateCartCount() {
     const cart = getCart();
     const count = cart.reduce((sum, item) => sum + item.quantity, 0);
     const badge = document.getElementById('cart-count');
-    if (badge) badge.textContent = count;
+    if (badge) {
+        badge.textContent = count;
+        // Hide badge when count is 0
+        badge.style.display = count > 0 ? 'inline' : 'none';
+    }
 }
 
 function renderCart() {

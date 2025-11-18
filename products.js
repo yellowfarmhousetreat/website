@@ -1,5 +1,5 @@
 // products.js
-// Product database for Yellow Farmhouse Stand
+// Product database for Yellow Farmhouse Treats
 
 const PRODUCTS = {
     cookies: [

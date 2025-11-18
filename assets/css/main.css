@@ -2162,7 +2162,7 @@ input, select, textarea {
 
 /* Cart badge */
 .cart-count {
-	display: inline-block;
+	display: none; /* Hidden by default, shown when count > 0 */
 	min-width: 20px;
 	padding: 2px 6px;
 	margin-left: 8px;
