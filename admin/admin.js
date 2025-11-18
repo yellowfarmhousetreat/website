@@ -348,9 +348,14 @@ class AdminInterface {
       <div class="admin-header">
         <h2>Product Management</h2>
         <div class="admin-actions">
-          <button onclick="adminInterface.addNewProduct()" class="btn btn-primary">Add New Product</button>
-          <button onclick="adminInterface.exportData()" class="btn btn-secondary">Export Data</button>
-          <button onclick="adminInterface.saveChangesWithPhotos()" class="btn btn-success">💾 Save Products & Photos</button>
+          <button onclick="adminInterface.addNewProduct()" class="btn btn-primary">+ Add New Product</button>
+          <button onclick="adminInterface.exportData()" class="btn btn-secondary">📊 Export All Data</button>
+          <button onclick="adminInterface.saveChangesWithPhotos()" class="btn btn-success">💾 Save All Products</button>
+        </div>
+        <div class="save-instructions">
+          <small style="color: rgba(255, 255, 255, 0.7); font-style: italic;">
+            💡 Tip: Use individual "Save" buttons on each product for quick updates, or "Save All" for bulk changes
+          </small>
         </div>
       </div>
       
@@ -369,7 +374,14 @@ class AdminInterface {
       <div class="admin-product-card" data-index="${index}">
         <div class="product-header">
           <h3>${this.sanitizeText(product.name)}</h3>
-          <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small">Delete</button>
+          <div class="product-actions">
+            <button onclick="adminInterface.saveIndividualProduct(${index})" class="btn btn-success btn-small" title="Save this product">
+              💾 Save
+            </button>
+            <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small" title="Delete this product">
+              🗑️ Delete
+            </button>
+          </div>
         </div>
         
         <div class="product-form">
@@ -585,6 +597,42 @@ class AdminInterface {
     this.showMessage('New product added. Don\'t forget to save!', 'success');
   }
 
+  // Save individual product
+  saveIndividualProduct(index) {
+    if (index < 0 || index >= this.products.length) {
+      this.showMessage('Product not found', 'error');
+      return;
+    }
+
+    const product = this.products[index];
+    const productName = product.name;
+    
+    try {
+      // Convert single product to export format
+      const exportProduct = this.convertFromAdminFormat(product);
+      
+      // Generate individual product file
+      const productJS = this.generateIndividualProductJS(exportProduct, index);
+      
+      // Create downloadable file
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+      const filename = `${productName.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${timestamp}.js`;
+      
+      this.downloadFile(productJS, filename, 'text/javascript');
+      
+      // Also save any photos for this product
+      if (this.photoFiles && this.photoFiles[index]) {
+        const photoData = this.photoFiles[index];
+        this.downloadPhotoFile(photoData, index);
+      }
+      
+      this.showMessage(`✅ Saved ${productName} individually!`, 'success');
+      
+    } catch (error) {
+      this.showMessage(`Error saving ${productName}: ${error.message}`, 'error');
+    }
+  }
+
   // Delete product
   deleteProduct(index) {
     if (confirm('Are you sure you want to delete this product?')) {
@@ -701,6 +749,57 @@ window.SHIPPING_ZONES = SHIPPING_ZONES;`;
       default:
         return [{ name: product.unit || 'each', price: basePrice }];
     }
+  }
+
+  // Generate individual product JavaScript file
+  generateIndividualProductJS(product, index) {
+    return `/**
+ * INDIVIDUAL PRODUCT UPDATE
+ * Product: ${product.name}
+ * Generated: ${new Date().toLocaleString()}
+ * 
+ * Instructions:
+ * 1. Copy the product object below
+ * 2. Find this product in your main products-data.js file
+ * 3. Replace the existing product with this updated version
+ * 4. Save the main file
+ */
+
+// Updated product data:
+const UPDATED_PRODUCT = ${JSON.stringify(product, null, 4)};
+
+// Original array index: ${index}
+// Product ID: ${product.id}
+
+/* 
+TO UPDATE YOUR MAIN FILE:
+1. Open products-data.js
+2. Find the product with id: '${product.id}'
+3. Replace it with the UPDATED_PRODUCT object above
+4. Save the file
+*/`;
+  }
+
+  // Download photo file for individual product
+  downloadPhotoFile(photoData, productIndex) {
+    if (!photoData || !photoData.dataUrl) return;
+    
+    // Convert data URL to blob and download
+    fetch(photoData.dataUrl)
+      .then(res => res.blob())
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = photoData.filename || `product-${productIndex}-photo.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        this.showMessage('Error downloading photo: ' + error.message, 'error');
+      });
   }
 
   // Save changes (download new file)
