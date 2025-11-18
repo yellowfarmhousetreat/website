@@ -246,6 +246,27 @@
             color: #27ae60;
         }
 
+        /* Admin Title Section */
+        .admin-title-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .admin-title-section h1 {
+            margin: 0;
+        }
+
+        .persistence-notice {
+            font-size: 0.8rem;
+            color: #f39c12;
+            background: rgba(243, 156, 18, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(243, 156, 18, 0.3);
+            font-weight: 500;
+        }
+
         /* Product Card Sold Out Styles */
 
         .product-title-section {
@@ -559,7 +580,12 @@
         <!-- Admin Panel -->
         <div id="admin-panel" class="hidden">
             <div class="admin-header">
-                <h1>🏡 Yellow Farmhouse Treats</h1>
+                <div class="admin-title-section">
+                    <h1>🏡 Yellow Farmhouse Treats</h1>
+                    <div class="persistence-notice">
+                        💾 Changes saved locally - Use Reset to clear customizations
+                    </div>
+                </div>
                 <div class="admin-controls">
                     <div class="order-status-control">
                         <label class="toggle-switch">
@@ -573,6 +599,7 @@
                 <div class="admin-actions">
                     <button onclick="adminInterface.addNewProduct()" class="btn btn-primary">+ Add Product</button>
                     <button onclick="adminInterface.exportAll()" class="btn btn-secondary">📊 Export All</button>
+                    <button onclick="adminInterface.resetAdminState()" class="btn btn-secondary" title="Reset all customizations to defaults">🔄 Reset</button>
                     <button onclick="adminInterface.logout()" class="btn btn-secondary">🚪 Logout</button>
                 </div>
             </div>
@@ -599,6 +626,13 @@
                 this.lockoutTime = 5 * 60 * 1000; // 5 minutes
                 this.lastAttempt = 0;
                 this.pauseOrders = false; // Sitewide order pause flag
+                
+                // LocalStorage keys for persistence
+                this.STORAGE_KEYS = {
+                    SOLD_OUT: 'farmhouse_sold_out_products',
+                    ORDERS_PAUSED: 'farmhouse_orders_paused',
+                    LAST_SAVED: 'farmhouse_last_saved'
+                };
             }
 
             // Authentication with security improvements
@@ -654,8 +688,7 @@
             showAdminPanel() {
                 document.getElementById('login-form').classList.add('hidden');
                 document.getElementById('admin-panel').classList.remove('hidden');
-                this.updateOrderStatusUI(); // Initialize order status UI
-                this.loadProducts();
+                this.loadProducts(); // Load products first, then admin state
             }
 
             logout() {
@@ -696,6 +729,8 @@
                     
                     if (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) {
                         this.products = PRODUCTS.map(p => this.convertProduct(p));
+                        this.loadAdminState(); // Load saved state after products loaded
+                        this.updateOrderStatusUI(); // Initialize order status UI
                         this.renderProducts();
                         this.showMessage(`Loaded ${this.products.length} products successfully`, 'success');
                     } else {
@@ -1142,10 +1177,90 @@ window.PAYMENT_METHODS = PAYMENT_METHODS;`;
                 URL.revokeObjectURL(url);
             }
 
+            // LocalStorage Persistence Methods
+            saveAdminState() {
+                try {
+                    // Save sold out products by ID
+                    const soldOutProducts = {};
+                    this.products.forEach(product => {
+                        if (product.soldOut) {
+                            soldOutProducts[product.id] = true;
+                        }
+                    });
+                    
+                    localStorage.setItem(this.STORAGE_KEYS.SOLD_OUT, JSON.stringify(soldOutProducts));
+                    localStorage.setItem(this.STORAGE_KEYS.ORDERS_PAUSED, JSON.stringify(this.pauseOrders));
+                    localStorage.setItem(this.STORAGE_KEYS.LAST_SAVED, new Date().toISOString());
+                    
+                    this.showMessage('✅ Admin state saved locally', 'success');
+                } catch (error) {
+                    this.showMessage('❌ Failed to save admin state', 'error');
+                    console.error('LocalStorage save error:', error);
+                }
+            }
+            
+            loadAdminState() {
+                try {
+                    // Load orders paused state
+                    const pausedState = localStorage.getItem(this.STORAGE_KEYS.ORDERS_PAUSED);
+                    if (pausedState !== null) {
+                        this.pauseOrders = JSON.parse(pausedState);
+                    }
+                    
+                    // Load sold out products
+                    const soldOutData = localStorage.getItem(this.STORAGE_KEYS.SOLD_OUT);
+                    if (soldOutData) {
+                        const soldOutProducts = JSON.parse(soldOutData);
+                        
+                        // Apply sold out states to loaded products
+                        this.products.forEach(product => {
+                            if (soldOutProducts[product.id]) {
+                                product.soldOut = true;
+                            }
+                        });
+                    }
+                    
+                    const lastSaved = localStorage.getItem(this.STORAGE_KEYS.LAST_SAVED);
+                    if (lastSaved) {
+                        const savedDate = new Date(lastSaved).toLocaleString();
+                        this.showMessage(`📋 Admin state loaded (last saved: ${savedDate})`, 'info');
+                    }
+                } catch (error) {
+                    this.showMessage('⚠️ Failed to load saved admin state', 'warning');
+                    console.error('LocalStorage load error:', error);
+                }
+            }
+            
+            resetAdminState() {
+                if (confirm('⚠️ Reset all admin customizations?\n\nThis will clear:\n• All "Sold Out" flags\n• Orders paused status\n• Return to original products-data.js state\n\nContinue?')) {
+                    try {
+                        localStorage.removeItem(this.STORAGE_KEYS.SOLD_OUT);
+                        localStorage.removeItem(this.STORAGE_KEYS.ORDERS_PAUSED);
+                        localStorage.removeItem(this.STORAGE_KEYS.LAST_SAVED);
+                        
+                        // Reset in-memory state
+                        this.pauseOrders = false;
+                        this.products.forEach(product => {
+                            product.soldOut = false;
+                        });
+                        
+                        // Refresh UI
+                        this.updateOrderStatusUI();
+                        this.renderProducts();
+                        
+                        this.showMessage('🔄 Admin state reset to defaults', 'success');
+                    } catch (error) {
+                        this.showMessage('❌ Failed to reset admin state', 'error');
+                        console.error('LocalStorage reset error:', error);
+                    }
+                }
+            }
+
             // UX Enhancement Functions
             toggleOrderPause() {
                 this.pauseOrders = !this.pauseOrders;
                 this.updateOrderStatusUI();
+                this.saveAdminState(); // Auto-save on change
                 this.showMessage(`Orders ${this.pauseOrders ? 'paused' : 'resumed'}`, this.pauseOrders ? 'warning' : 'success');
             }
 
@@ -1166,6 +1281,7 @@ window.PAYMENT_METHODS = PAYMENT_METHODS;`;
                 if (this.products[productIndex]) {
                     this.products[productIndex].soldOut = !this.products[productIndex].soldOut;
                     const product = this.products[productIndex];
+                    this.saveAdminState(); // Auto-save on change
                     this.showMessage(`${product.name} marked as ${product.soldOut ? 'SOLD OUT' : 'available'}`, 
                                      product.soldOut ? 'warning' : 'success');
                     
