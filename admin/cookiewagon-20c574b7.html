@@ -246,6 +246,73 @@
             color: #27ae60;
         }
 
+        /* Product Card Sold Out Styles */
+
+        .product-title-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .product-title-section h3 {
+            margin: 0 0 0.5rem 0;
+            color: #f4d03f;
+        }
+
+        .sold-out-badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: #ffffff;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+
+        .sold-out-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .sold-out-toggle input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin: 0;
+        }
+
+        .sold-out-label {
+            color: #e8ecf0;
+            font-weight: 500;
+        }
+
+        /* Mobile adjustments for product controls */
+        @media (max-width: 768px) {
+            .product-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .product-controls {
+                align-items: stretch;
+            }
+            
+            .sold-out-toggle {
+                justify-content: flex-start;
+                margin-bottom: 0.5rem;
+            }
+        }
+
         .admin-header h1 {
             color: #f4d03f;
             margin: 0;
@@ -276,10 +343,12 @@
         .product-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
+            padding-bottom: 1rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .product-header h3 {
@@ -494,7 +563,7 @@
                 <div class="admin-controls">
                     <div class="order-status-control">
                         <label class="toggle-switch">
-                            <input type="checkbox" id="pause-orders-toggle" onchange="admin.toggleOrderPause()">
+                            <input type="checkbox" id="pause-orders-toggle" onchange="adminInterface.toggleOrderPause()">
                             <span class="toggle-slider"></span>
                             <span class="toggle-label">Orders Paused</span>
                         </label>
@@ -502,9 +571,9 @@
                     </div>
                 </div>
                 <div class="admin-actions">
-                    <button onclick="admin.addNewProduct()" class="btn btn-primary">+ Add Product</button>
-                    <button onclick="admin.exportAll()" class="btn btn-secondary">📊 Export All</button>
-                    <button onclick="admin.logout()" class="btn btn-secondary">🚪 Logout</button>
+                    <button onclick="adminInterface.addNewProduct()" class="btn btn-primary">+ Add Product</button>
+                    <button onclick="adminInterface.exportAll()" class="btn btn-secondary">📊 Export All</button>
+                    <button onclick="adminInterface.logout()" class="btn btn-secondary">🚪 Logout</button>
                 </div>
             </div>
             
@@ -585,6 +654,7 @@
             showAdminPanel() {
                 document.getElementById('login-form').classList.add('hidden');
                 document.getElementById('admin-panel').classList.remove('hidden');
+                this.updateOrderStatusUI(); // Initialize order status UI
                 this.loadProducts();
             }
 
@@ -700,16 +770,28 @@
             // Render Individual Product Card
             renderProductCard(product, index) {
                 return `
-                    <div class="product-card">
+                    <div class="product-card" data-product-index="${index}">
                         <div class="product-header">
-                            <h3>${this.escapeHtml(product.name)}</h3>
-                            <div style="display: flex; gap: 0.5rem;">
-                                <button onclick="adminInterface.saveProduct(${index})" class="btn btn-success btn-small">
-                                    💾 Save
-                                </button>
-                                <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small">
-                                    🗑️ Delete
-                                </button>
+                            <div class="product-title-section">
+                                <h3>${this.escapeHtml(product.name)}</h3>
+                                <div class="sold-out-badge" style="display: ${product.soldOut ? 'block' : 'none'};">
+                                    🚫 SOLD OUT
+                                </div>
+                            </div>
+                            <div class="product-controls">
+                                <label class="sold-out-toggle">
+                                    <input type="checkbox" ${product.soldOut ? 'checked' : ''} 
+                                           onchange="adminInterface.toggleProductSoldOut(${index})">
+                                    <span class="sold-out-label">Sold Out</span>
+                                </label>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button onclick="adminInterface.saveProduct(${index})" class="btn btn-success btn-small">
+                                        💾 Save
+                                    </button>
+                                    <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small">
+                                        🗑️ Delete
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         
@@ -1058,6 +1140,54 @@ window.PAYMENT_METHODS = PAYMENT_METHODS;`;
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
+            }
+
+            // UX Enhancement Functions
+            toggleOrderPause() {
+                this.pauseOrders = !this.pauseOrders;
+                this.updateOrderStatusUI();
+                this.showMessage(`Orders ${this.pauseOrders ? 'paused' : 'resumed'}`, this.pauseOrders ? 'warning' : 'success');
+            }
+
+            updateOrderStatusUI() {
+                const statusEl = document.getElementById('pause-status');
+                const statusText = statusEl.querySelector('.status-text');
+                
+                if (this.pauseOrders) {
+                    statusEl.className = 'status-indicator paused';
+                    statusText.textContent = 'Paused';
+                } else {
+                    statusEl.className = 'status-indicator active';
+                    statusText.textContent = 'Active';
+                }
+            }
+
+            toggleProductSoldOut(productIndex) {
+                if (this.products[productIndex]) {
+                    this.products[productIndex].soldOut = !this.products[productIndex].soldOut;
+                    const product = this.products[productIndex];
+                    this.showMessage(`${product.name} marked as ${product.soldOut ? 'SOLD OUT' : 'available'}`, 
+                                     product.soldOut ? 'warning' : 'success');
+                    
+                    // Update the UI for this product
+                    this.updateProductSoldOutUI(productIndex);
+                }
+            }
+
+            updateProductSoldOutUI(productIndex) {
+                const productCard = document.querySelector(`[data-product-index="${productIndex}"]`);
+                if (productCard) {
+                    const soldOutToggle = productCard.querySelector('.sold-out-toggle input');
+                    const soldOutBadge = productCard.querySelector('.sold-out-badge');
+                    
+                    if (soldOutToggle) {
+                        soldOutToggle.checked = this.products[productIndex].soldOut;
+                    }
+                    
+                    if (soldOutBadge) {
+                        soldOutBadge.style.display = this.products[productIndex].soldOut ? 'block' : 'none';
+                    }
+                }
             }
 
             showMessage(message, type = 'info') {
