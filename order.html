@@ -103,16 +103,59 @@
                                                     <input type="time" id="pickupTime" name="pickup_time" required />
                                                 </div>
                                                 <div id="shippingSection" class="hidden-section">
-                                                    <label for="shippingAddress">Shipping Address *</label>
-                                                    <input type="text" id="shippingAddress" name="shipping_address" placeholder="Street address" />
+                                                    <div class="shipping-notice">
+                                                        <strong>📦 Shipping Information</strong><br>
+                                                        <small>We ship to the 48 contiguous US states. Real-time validation will help ensure accurate delivery.</small>
+                                                    </div>
+                                                    
+                                                    <label for="shippingAddress">Street Address *</label>
+                                                    <input type="text" id="shippingAddress" name="shipping_address" 
+                                                           placeholder="123 Main Street, Apt 4B" 
+                                                           maxlength="100" 
+                                                           autocomplete="address-line1" 
+                                                           required />
+                                                    
                                                     <label for="shippingCity">City *</label>
-                                                    <input type="text" id="shippingCity" name="shipping_city" />
-                                                    <label for="shippingState">State *</label>
-                                                    <input type="text" id="shippingState" name="shipping_state" placeholder="ID" maxlength="2" />
-                                                    <label for="shippingZip">ZIP Code *</label>
-                                                    <input type="text" id="shippingZip" name="shipping_zip" onchange="calculateShipping()" />
-                                                    <label for="shippingCost">Estimated Shipping Cost</label>
-                                                    <span id="shippingCost">$0.00</span>
+                                                    <input type="text" id="shippingCity" name="shipping_city" 
+                                                           placeholder="Your City" 
+                                                           maxlength="50" 
+                                                           autocomplete="address-level2" 
+                                                           required />
+                                                    
+                                                    <div class="shipping-fields-row">
+                                                        <div class="shipping-field-half">
+                                                            <label for="shippingState">State *</label>
+                                                            <input type="text" id="shippingState" name="shipping_state" 
+                                                                   placeholder="ID" 
+                                                                   maxlength="2" 
+                                                                   minlength="2" 
+                                                                   autocomplete="address-level1" 
+                                                                   pattern="[A-Za-z]{2}" 
+                                                                   title="Enter 2-letter state abbreviation (e.g., ID, CA, TX)" 
+                                                                   required />
+                                                        </div>
+                                                        <div class="shipping-field-half">
+                                                            <label for="shippingZip">ZIP Code *</label>
+                                                            <input type="text" id="shippingZip" name="shipping_zip" 
+                                                                   placeholder="12345" 
+                                                                   maxlength="10" 
+                                                                   minlength="5" 
+                                                                   autocomplete="postal-code" 
+                                                                   pattern="[0-9]{5}(-[0-9]{4})?" 
+                                                                   title="Enter 5-digit ZIP code (e.g., 12345 or 12345-6789)" 
+                                                                   required />
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="shipping-cost-display">
+                                                        <div class="shipping-cost-details">
+                                                            <strong>Estimated Shipping Cost:</strong>
+                                                            <br><small>Based on your ZIP code • 2-5 business days</small>
+                                                        </div>
+                                                        <div class="shipping-cost-amount">
+                                                            <span id="shippingCost">$0.00</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 

@@ -239,22 +239,330 @@
         }
     };
 
-    // Calculate shipping based on ZIP
+    // US States with their ZIP code ranges and abbreviations
+    const US_STATES = {
+        'AL': { name: 'Alabama', zipRanges: [[35000, 36999]] },
+        'AK': { name: 'Alaska', zipRanges: [[99500, 99999]] },
+        'AZ': { name: 'Arizona', zipRanges: [[85000, 86999]] },
+        'AR': { name: 'Arkansas', zipRanges: [[71600, 72999]] },
+        'CA': { name: 'California', zipRanges: [[90000, 96199]] },
+        'CO': { name: 'Colorado', zipRanges: [[80000, 81999]] },
+        'CT': { name: 'Connecticut', zipRanges: [[6000, 6999]] },
+        'DE': { name: 'Delaware', zipRanges: [[19700, 19999]] },
+        'FL': { name: 'Florida', zipRanges: [[32000, 34999]] },
+        'GA': { name: 'Georgia', zipRanges: [[30000, 31999]] },
+        'HI': { name: 'Hawaii', zipRanges: [[96700, 96999]] },
+        'ID': { name: 'Idaho', zipRanges: [[83200, 83999]] },
+        'IL': { name: 'Illinois', zipRanges: [[60000, 62999]] },
+        'IN': { name: 'Indiana', zipRanges: [[46000, 47999]] },
+        'IA': { name: 'Iowa', zipRanges: [[50000, 52999]] },
+        'KS': { name: 'Kansas', zipRanges: [[66000, 67999]] },
+        'KY': { name: 'Kentucky', zipRanges: [[40000, 42999]] },
+        'LA': { name: 'Louisiana', zipRanges: [[70000, 71599]] },
+        'ME': { name: 'Maine', zipRanges: [[3900, 4999]] },
+        'MD': { name: 'Maryland', zipRanges: [[20600, 21999]] },
+        'MA': { name: 'Massachusetts', zipRanges: [[1000, 2799]] },
+        'MI': { name: 'Michigan', zipRanges: [[48000, 49999]] },
+        'MN': { name: 'Minnesota', zipRanges: [[55000, 56999]] },
+        'MS': { name: 'Mississippi', zipRanges: [[38600, 39999]] },
+        'MO': { name: 'Missouri', zipRanges: [[63000, 65999]] },
+        'MT': { name: 'Montana', zipRanges: [[59000, 59999]] },
+        'NE': { name: 'Nebraska', zipRanges: [[68000, 69999]] },
+        'NV': { name: 'Nevada', zipRanges: [[88900, 89999]] },
+        'NH': { name: 'New Hampshire', zipRanges: [[3000, 3899]] },
+        'NJ': { name: 'New Jersey', zipRanges: [[7000, 8999]] },
+        'NM': { name: 'New Mexico', zipRanges: [[87000, 88499]] },
+        'NY': { name: 'New York', zipRanges: [[10000, 14999]] },
+        'NC': { name: 'North Carolina', zipRanges: [[27000, 28999]] },
+        'ND': { name: 'North Dakota', zipRanges: [[58000, 58999]] },
+        'OH': { name: 'Ohio', zipRanges: [[43000, 45999]] },
+        'OK': { name: 'Oklahoma', zipRanges: [[73000, 74999]] },
+        'OR': { name: 'Oregon', zipRanges: [[97000, 97999]] },
+        'PA': { name: 'Pennsylvania', zipRanges: [[15000, 19699]] },
+        'RI': { name: 'Rhode Island', zipRanges: [[2800, 2999]] },
+        'SC': { name: 'South Carolina', zipRanges: [[29000, 29999]] },
+        'SD': { name: 'South Dakota', zipRanges: [[57000, 57999]] },
+        'TN': { name: 'Tennessee', zipRanges: [[37000, 38599]] },
+        'TX': { name: 'Texas', zipRanges: [[73300, 73399], [75000, 79999], [88500, 88599]] },
+        'UT': { name: 'Utah', zipRanges: [[84000, 84999]] },
+        'VT': { name: 'Vermont', zipRanges: [[5000, 5999]] },
+        'VA': { name: 'Virginia', zipRanges: [[20100, 20199], [22000, 24699]] },
+        'WA': { name: 'Washington', zipRanges: [[98000, 99499]] },
+        'WV': { name: 'West Virginia', zipRanges: [[24700, 26999]] },
+        'WI': { name: 'Wisconsin', zipRanges: [[53000, 54999]] },
+        'WY': { name: 'Wyoming', zipRanges: [[82000, 83199]] }
+    };
+
+    // Validate ZIP code format
+    function validateZipFormat(zip) {
+        return /^\d{5}(-\d{4})?$/.test(zip);
+    }
+
+    // Get state from ZIP code
+    function getStateFromZip(zip) {
+        const zipNum = parseInt(zip.substring(0, 5));
+        for (const [stateCode, stateData] of Object.entries(US_STATES)) {
+            for (const [min, max] of stateData.zipRanges) {
+                if (zipNum >= min && zipNum <= max) {
+                    return stateCode;
+                }
+            }
+        }
+        return null;
+    }
+
+    // Validate state abbreviation
+    function validateState(state) {
+        return US_STATES.hasOwnProperty(state.toUpperCase());
+    }
+
+    // Cross-validate ZIP and state
+    function validateZipStateMatch(zip, state) {
+        if (!zip || !state) return false;
+        const derivedState = getStateFromZip(zip);
+        return derivedState === state.toUpperCase();
+    }
+
+    // Show validation error
+    function showValidationError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        const existingError = field.parentNode.querySelector('.validation-error');
+        
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'validation-error';
+        errorDiv.style.cssText = `
+            color: #ff4757;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            padding: 6px 10px;
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        `;
+        errorDiv.innerHTML = `<span>⚠️</span><span>${message}</span>`;
+        
+        field.parentNode.insertBefore(errorDiv, field.nextSibling);
+        field.style.borderColor = '#ff4757';
+    }
+
+    // Clear validation error
+    function clearValidationError(fieldId) {
+        const field = document.getElementById(fieldId);
+        const existingError = field.parentNode.querySelector('.validation-error');
+        
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        field.style.borderColor = '';
+    }
+
+    // Show validation success
+    function showValidationSuccess(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        clearValidationError(fieldId);
+        
+        const successDiv = document.createElement('div');
+        successDiv.className = 'validation-success';
+        successDiv.style.cssText = `
+            color: #2ed573;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            padding: 4px 10px;
+            background: rgba(46, 213, 115, 0.1);
+            border: 1px solid rgba(46, 213, 115, 0.3);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        `;
+        successDiv.innerHTML = `<span>✅</span><span>${message}</span>`;
+        
+        field.parentNode.insertBefore(successDiv, field.nextSibling);
+        field.style.borderColor = '#2ed573';
+        
+        // Auto-remove success message after 3 seconds
+        setTimeout(() => {
+            if (successDiv.parentNode) {
+                successDiv.remove();
+                field.style.borderColor = '';
+            }
+        }, 3000);
+    }
+
+    // Validate ZIP code with comprehensive checks
+    window.validateZipCode = function() {
+        const zipInput = document.getElementById('shippingZip');
+        const stateInput = document.getElementById('shippingState');
+        const zip = zipInput.value.trim();
+        
+        clearValidationError('shippingZip');
+        
+        if (!zip) {
+            return false;
+        }
+        
+        // Format validation
+        if (!validateZipFormat(zip)) {
+            showValidationError('shippingZip', 'Please enter a valid 5-digit ZIP code (e.g., 12345)');
+            return false;
+        }
+        
+        // Check if ZIP is in supported range
+        const derivedState = getStateFromZip(zip);
+        if (!derivedState) {
+            showValidationError('shippingZip', 'Sorry, we currently only ship to the 48 contiguous US states');
+            return false;
+        }
+        
+        // Cross-validation with state if both are filled
+        const currentState = stateInput.value.trim().toUpperCase();
+        if (currentState && !validateZipStateMatch(zip, currentState)) {
+            showValidationError('shippingZip', `ZIP code ${zip} does not match state ${currentState}. Expected state: ${derivedState}`);
+            return false;
+        }
+        
+        // Auto-fill state if empty
+        if (!currentState) {
+            stateInput.value = derivedState;
+            showValidationSuccess('shippingState', `Auto-filled: ${US_STATES[derivedState].name}`);
+        }
+        
+        showValidationSuccess('shippingZip', `Valid ZIP code for ${US_STATES[derivedState].name}`);
+        return true;
+    };
+
+    // Validate state abbreviation
+    window.validateStateCode = function() {
+        const stateInput = document.getElementById('shippingState');
+        const zipInput = document.getElementById('shippingZip');
+        const state = stateInput.value.trim().toUpperCase();
+        
+        clearValidationError('shippingState');
+        
+        if (!state) {
+            return false;
+        }
+        
+        // Format validation
+        if (state.length !== 2) {
+            showValidationError('shippingState', 'Please enter a 2-letter state abbreviation (e.g., ID, CA, TX)');
+            return false;
+        }
+        
+        // Valid state check
+        if (!validateState(state)) {
+            showValidationError('shippingState', `"${state}" is not a valid US state abbreviation`);
+            return false;
+        }
+        
+        // Normalize case
+        stateInput.value = state;
+        
+        // Cross-validation with ZIP if both are filled
+        const currentZip = zipInput.value.trim();
+        if (currentZip && validateZipFormat(currentZip)) {
+            if (!validateZipStateMatch(currentZip, state)) {
+                const correctState = getStateFromZip(currentZip);
+                showValidationError('shippingState', `State ${state} does not match ZIP code ${currentZip}. Expected: ${correctState}`);
+                return false;
+            }
+        }
+        
+        showValidationSuccess('shippingState', `Valid state: ${US_STATES[state].name}`);
+        return true;
+    };
+
+    // Calculate shipping with enhanced validation
     window.calculateShipping = function() {
-        const zip = document.getElementById('shippingZip').value;
+        const zip = document.getElementById('shippingZip').value.trim();
+        const state = document.getElementById('shippingState').value.trim();
         let shippingCost = 0;
         
-        if (zip.length === 5) {
-            // Simple shipping calculation - can be enhanced
+        // Clear previous shipping cost
+        document.getElementById('shippingCost').textContent = '$0.00';
+        
+        // Validate both fields
+        const zipValid = validateZipCode();
+        const stateValid = validateStateCode();
+        
+        if (!zipValid || !stateValid) {
+            const subtotal = parseFloat(document.getElementById('summarySubtotal').textContent.replace('$', ''));
+            updateOrderSummary(subtotal, 0);
+            return;
+        }
+        
+        // Calculate shipping cost based on ZIP code zones
+        if (zip.length >= 5) {
             const firstDigit = parseInt(zip.charAt(0));
-            if (firstDigit <= 3) shippingCost = 12; // Eastern US
-            else if (firstDigit <= 6) shippingCost = 15; // Central US
-            else shippingCost = 18; // Western US
+            const secondDigit = parseInt(zip.charAt(1));
+            
+            // Enhanced shipping calculation based on actual USPS zones
+            if (firstDigit === 0) { // Northeast (CT, MA, ME, NH, NJ, RI, VT)
+                shippingCost = 14;
+            } else if (firstDigit === 1) { // NY, PA
+                shippingCost = 13;
+            } else if (firstDigit === 2) { // DC, DE, MD, NC, SC, VA, WV
+                shippingCost = 12;
+            } else if (firstDigit === 3) { // AL, FL, GA, MS, TN, parts of KY
+                shippingCost = 13;
+            } else if (firstDigit === 4) { // IN, KY, MI, OH
+                shippingCost = 11;
+            } else if (firstDigit === 5) { // IA, MN, MT, ND, SD, WI
+                shippingCost = 10;
+            } else if (firstDigit === 6) { // IL, KS, MO, NE
+                shippingCost = 9;
+            } else if (firstDigit === 7) { // AR, LA, OK, TX
+                shippingCost = 11;
+            } else if (firstDigit === 8) { // AZ, CO, ID, NM, NV, UT, WY
+                // Special handling for Idaho (our home state)
+                if (state.toUpperCase() === 'ID') {
+                    shippingCost = 8; // Reduced rate for local shipping
+                } else {
+                    shippingCost = 15;
+                }
+            } else if (firstDigit === 9) { // AK, CA, HI, OR, WA
+                if (state.toUpperCase() === 'HI' || state.toUpperCase() === 'AK') {
+                    // Show error for non-contiguous states
+                    showValidationError('shippingZip', 'Sorry, we currently only ship to the 48 contiguous US states');
+                    const subtotal = parseFloat(document.getElementById('summarySubtotal').textContent.replace('$', ''));
+                    updateOrderSummary(subtotal, 0);
+                    return;
+                } else {
+                    shippingCost = 18; // West Coast
+                }
+            }
+            
+            // Add weight-based shipping for heavier items (base rate + per-pound)
+            const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
+            const hasHeavyItems = cart.some(item => 
+                item.name.includes('Toffee') || 
+                item.name.includes('Bread') || 
+                item.quantity > 3
+            );
+            
+            if (hasHeavyItems) {
+                shippingCost += 3; // Additional handling fee
+            }
         }
         
         document.getElementById('shippingCost').textContent = '$' + shippingCost.toFixed(2);
         const subtotal = parseFloat(document.getElementById('summarySubtotal').textContent.replace('$', ''));
         updateOrderSummary(subtotal, shippingCost);
+        
+        // Show shipping confirmation
+        if (shippingCost > 0) {
+            const shippingDisplay = document.getElementById('shippingCost');
+            shippingDisplay.style.color = '#2ed573';
+            shippingDisplay.style.fontWeight = 'bold';
+        }
     };
 
     // Update payment details display
@@ -342,10 +650,53 @@
         }
     };
 
+    // Validate shipping form before submission
+    window.validateShippingForm = function() {
+        const fulfillmentMethod = document.querySelector('input[name="fulfillment_method"]:checked')?.value;
+        
+        if (fulfillmentMethod === 'Shipping') {
+            const zipValid = validateZipCode();
+            const stateValid = validateStateCode();
+            const address = document.getElementById('shippingAddress').value.trim();
+            const city = document.getElementById('shippingCity').value.trim();
+            
+            if (!address) {
+                showValidationError('shippingAddress', 'Shipping address is required');
+                return false;
+            }
+            
+            if (!city) {
+                showValidationError('shippingCity', 'City is required');
+                return false;
+            }
+            
+            if (!zipValid || !stateValid) {
+                return false;
+            }
+        }
+        
+        return true;
+    };
+
+    // Add form validation on submission
+    function addFormValidation() {
+        const orderForm = document.getElementById('orderForm');
+        if (orderForm) {
+            orderForm.addEventListener('submit', function(e) {
+                if (!validateShippingForm()) {
+                    e.preventDefault();
+                    alert('Please fix the shipping information errors before submitting.');
+                    return false;
+                }
+            });
+        }
+    }
+
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
         loadCartToOrder();
         updateCartCount();
+        addFormValidation();
         
         // Set minimum pickup date to tomorrow
         const tomorrow = new Date();
@@ -353,6 +704,47 @@
         const dateInput = document.getElementById('pickupDate');
         if (dateInput) {
             dateInput.min = tomorrow.toISOString().split('T')[0];
+        }
+        
+        // Add real-time validation to shipping fields
+        const zipInput = document.getElementById('shippingZip');
+        const stateInput = document.getElementById('shippingState');
+        
+        if (zipInput) {
+            zipInput.addEventListener('input', function() {
+                // Only validate when we have a complete ZIP
+                if (this.value.length === 5) {
+                    validateZipCode();
+                    calculateShipping();
+                }
+            });
+            
+            zipInput.addEventListener('blur', function() {
+                if (this.value.trim()) {
+                    validateZipCode();
+                    calculateShipping();
+                }
+            });
+        }
+        
+        if (stateInput) {
+            stateInput.addEventListener('input', function() {
+                // Convert to uppercase as user types
+                this.value = this.value.toUpperCase();
+                
+                // Validate when we have 2 characters
+                if (this.value.length === 2) {
+                    validateStateCode();
+                    calculateShipping();
+                }
+            });
+            
+            stateInput.addEventListener('blur', function() {
+                if (this.value.trim()) {
+                    validateStateCode();
+                    calculateShipping();
+                }
+            });
         }
     });
 
