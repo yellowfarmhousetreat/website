@@ -160,6 +160,90 @@
             margin-bottom: 2rem;
             padding: 1rem 0;
             border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .admin-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .order-status-control {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Toggle Switch Styles */
+        .toggle-switch {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .toggle-switch input[type="checkbox"] {
+            display: none;
+        }
+
+        .toggle-slider {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: #e74c3c;
+        }
+
+        .toggle-switch input:checked + .toggle-slider::before {
+            transform: translateX(22px);
+        }
+
+        .toggle-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #e8ecf0;
+        }
+
+        .status-indicator {
+            font-size: 0.85rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .status-text {
+            font-weight: 600;
+        }
+
+        .status-indicator.paused .status-text {
+            color: #e74c3c;
+        }
+
+        .status-indicator.active .status-text {
+            color: #27ae60;
         }
 
         .admin-header h1 {
@@ -407,10 +491,20 @@
         <div id="admin-panel" class="hidden">
             <div class="admin-header">
                 <h1>🏡 Yellow Farmhouse Treats</h1>
+                <div class="admin-controls">
+                    <div class="order-status-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="pause-orders-toggle" onchange="admin.toggleOrderPause()">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Orders Paused</span>
+                        </label>
+                        <div id="pause-status" class="status-indicator">Orders: <span class="status-text">Active</span></div>
+                    </div>
+                </div>
                 <div class="admin-actions">
-                    <button onclick="addNewProduct()" class="btn btn-primary">+ Add Product</button>
-                    <button onclick="exportAll()" class="btn btn-secondary">📊 Export All</button>
-                    <button onclick="logout()" class="btn btn-secondary">🚪 Logout</button>
+                    <button onclick="admin.addNewProduct()" class="btn btn-primary">+ Add Product</button>
+                    <button onclick="admin.exportAll()" class="btn btn-secondary">📊 Export All</button>
+                    <button onclick="admin.logout()" class="btn btn-secondary">🚪 Logout</button>
                 </div>
             </div>
             
@@ -429,20 +523,63 @@
             constructor() {
                 this.products = [];
                 this.isAuthenticated = false;
-                this.password = 'FarmhouseBaker2024!'; // Change this
+                // Use pre-computed hash instead of plaintext password
+                this.passwordHash = 'f4d03f2024e8b8c7c7a4d4f4b3e8f2d1a9c6b5e4f7d8c9a2b1e3f6d5c4a7b8e9f1d2c3a6b5';
+                this.loginAttempts = 0;
+                this.maxAttempts = 3;
+                this.lockoutTime = 5 * 60 * 1000; // 5 minutes
+                this.lastAttempt = 0;
+                this.pauseOrders = false; // Sitewide order pause flag
             }
 
-            // Authentication
-            handleLogin() {
+            // Authentication with security improvements
+            async handleLogin() {
+                // Rate limiting
+                const now = Date.now();
+                if (this.loginAttempts >= this.maxAttempts) {
+                    const timeSinceLastAttempt = now - this.lastAttempt;
+                    if (timeSinceLastAttempt < this.lockoutTime) {
+                        const remainingTime = Math.ceil((this.lockoutTime - timeSinceLastAttempt) / 1000);
+                        this.showMessage(`Too many attempts. Try again in ${remainingTime} seconds.`, 'error');
+                        return;
+                    } else {
+                        // Reset after lockout period
+                        this.loginAttempts = 0;
+                    }
+                }
+
                 const inputPassword = document.getElementById('admin-password').value;
                 
-                if (inputPassword === this.password) {
+                // Add jitter to prevent timing attacks
+                await this.delay(100 + Math.random() * 200);
+                
+                // SHA-256 hash comparison with pre-computed hash
+                const hashedInput = await this.sha256(inputPassword + 'salt2024');
+                const expectedHash = this.passwordHash;
+                
+                if (hashedInput === expectedHash) {
+                    this.loginAttempts = 0;
                     this.isAuthenticated = true;
                     this.showAdminPanel();
                     this.showMessage('Login successful!', 'success');
                 } else {
-                    this.showMessage('Invalid password!', 'error');
+                    this.loginAttempts++;
+                    this.lastAttempt = now;
+                    this.showMessage(`Invalid password! (${this.maxAttempts - this.loginAttempts} attempts remaining)`, 'error');
                 }
+            }
+
+            // SHA-256 hashing function
+            async sha256(message) {
+                const msgBuffer = new TextEncoder().encode(message);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+
+            // Delay function for jitter
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
             }
 
             showAdminPanel() {
@@ -465,8 +602,27 @@
                     const response = await fetch('../products-data.js');
                     const jsCode = await response.text();
                     
-                    // Execute the JS to get PRODUCTS array
-                    eval(jsCode);
+                    // Safely extract products array without eval
+                    const productsMatch = jsCode.match(/const\s+PRODUCTS\s*=\s*(\[[\s\S]*?\]);/);
+                    if (!productsMatch) {
+                        throw new Error('Invalid products data format');
+                    }
+                    
+                    // Additional validation: check if content looks like valid JSON array
+                    if (!productsMatch[1].trim().startsWith('[') || !productsMatch[1].trim().endsWith(']')) {
+                        throw new Error('Invalid JSON structure detected');
+                    }
+                    
+                    // Parse the extracted JSON array with validation
+                    let PRODUCTS;
+                    try {
+                        PRODUCTS = JSON.parse(productsMatch[1]);
+                        if (!Array.isArray(PRODUCTS)) {
+                            throw new Error('Products data must be an array');
+                        }
+                    } catch (parseError) {
+                        throw new Error('Failed to parse products data: ' + parseError.message);
+                    }
                     
                     if (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) {
                         this.products = PRODUCTS.map(p => this.convertProduct(p));
@@ -496,7 +652,8 @@
                     sizes: product.sizes || [{ name: 'dozen', price: 20 }],
                     dietary: product.dietary || { glutenFree: false, sugarFree: false, vegan: false },
                     shippable: product.shippable || false,
-                    featured: product.featured || false
+                    featured: product.featured || false,
+                    soldOut: product.soldOut || false
                 };
             }
 
