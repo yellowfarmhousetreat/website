@@ -1,0 +1,323 @@
+/* Enhanced CSS Fragility Protection - Advanced Safety Layer */
+/* This file provides additional protection against CSS breaks during cosmetic changes */
+
+/* ===== PAGE-SPECIFIC PROTECTION ===== */
+
+/* Menu page tab system - highly fragile to changes */
+.submenu-tabs {
+    /* Override fragile calc() with safer alternative */
+    width: 100% !important;
+    max-width: 72rem !important;
+    margin: 0 auto !important;
+    padding: 0 2rem !important;
+    box-sizing: border-box !important;
+}
+
+/* Prevent breaking of sticky navigation */
+.submenu-tabs,
+.cookie-tier-tabs {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 200 !important; /* Higher than base nav */
+}
+
+/* Tab link protection - prevent text overflow breaks */
+.submenu-tabs .tab-link,
+.cookie-tier-tabs .cookie-tier-link {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-width: 80px !important;
+    max-width: 200px !important;
+}
+
+/* ===== JAVASCRIPT-CSS COUPLING SAFETY ===== */
+
+/* Protect elements that JS depends on from accidental hiding */
+#products-container,
+#cart-count,
+.product-card,
+.add-to-cart-btn {
+    /* Ensure these never get accidentally hidden */
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Protect critical form elements */
+#orderForm,
+.size-selector,
+.qty-input,
+.dietary-options {
+    display: block !important;
+    position: static !important;
+}
+
+/* Protect interactive elements from pointer-events breaks */
+button,
+.button,
+input[type="submit"],
+.tab-link,
+.add-to-cart-btn {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+/* ===== Z-INDEX COLLISION PREVENTION ===== */
+
+/* Establish clear z-index hierarchy to prevent layering conflicts */
+.z-index-hierarchy-base { z-index: 1; }
+.z-index-hierarchy-content { z-index: 10; }
+.z-index-hierarchy-nav { z-index: 100; }
+.z-index-hierarchy-subnav { z-index: 200; }
+.z-index-hierarchy-dropdown { z-index: 300; }
+.z-index-hierarchy-modal { z-index: 1000; }
+.z-index-hierarchy-toast { z-index: 10000; }
+
+/* Apply hierarchy to existing elements */
+#wrapper { z-index: 1; }
+#main { z-index: 10; }
+#nav { z-index: 100; }
+.submenu-tabs, .cookie-tier-tabs { z-index: 200; }
+.toast, .order-toast { z-index: 10000; }
+
+/* ===== RESPONSIVE BREAK PROTECTION ===== */
+
+/* Prevent layout collapse at critical breakpoints */
+@media (max-width: 320px) {
+    /* Ultra-small screen protection */
+    .submenu-tabs .tab-link {
+        padding: 0.5rem 0.25rem !important;
+        font-size: 0.75rem !important;
+    }
+    
+    .product-card {
+        min-width: 280px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Small screen protection */
+    .products-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    .submenu-tabs {
+        flex-wrap: wrap !important;
+        overflow-x: auto !important;
+    }
+}
+
+@media (max-width: 736px) {
+    /* Template breakpoint protection */
+    .submenu-tabs .tab-link {
+        flex: 1 1 auto !important;
+        min-width: 70px !important;
+    }
+}
+
+@media (min-width: 737px) and (max-width: 980px) {
+    /* Tablet protection */
+    .products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    }
+}
+
+/* ===== CONTENT OVERFLOW PROTECTION ===== */
+
+/* Prevent content from breaking container bounds */
+.product-card,
+.submenu-panel,
+.cookie-tier-panel {
+    overflow: hidden !important;
+    word-wrap: break-word !important;
+    box-sizing: border-box !important;
+}
+
+/* Image protection */
+.product-img,
+img {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+}
+
+/* ===== FORM ELEMENT PROTECTION ===== */
+
+/* Prevent form breaks that disable functionality */
+select, input, textarea, button {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+}
+
+/* Size selector protection (critical for pricing) */
+.size-selector {
+    width: 100% !important;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Quantity input protection */
+.qty-input {
+    min-width: 60px !important;
+    text-align: center !important;
+}
+
+/* ===== ANIMATION SAFETY ===== */
+
+/* Prevent animation conflicts */
+@keyframes safe-fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Safe animation classes */
+.safe-animate-in {
+    animation: safe-fadeIn 0.3s ease-out !important;
+}
+
+/* Disable animations if user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ===== GRID LAYOUT PROTECTION ===== */
+
+/* Prevent grid collapse */
+.products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 2rem !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Grid item protection */
+.product-card {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 400px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+}
+
+/* ===== ACCESSIBILITY PROTECTION ===== */
+
+/* Ensure focus indicators are never hidden */
+*:focus,
+*:focus-visible {
+    outline: 2px solid #FFD866 !important;
+    outline-offset: 2px !important;
+}
+
+/* Screen reader protection */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* ===== PRINT SAFETY ===== */
+
+@media print {
+    /* Hide interactive elements when printing */
+    .submenu-tabs,
+    .cookie-tier-tabs,
+    .add-to-cart-btn,
+    .toast,
+    #cart-count {
+        display: none !important;
+    }
+    
+    /* Ensure content prints properly */
+    .product-card {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+    
+    /* Reset colors for print */
+    .product-card {
+        background: white !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+    }
+}
+
+/* ===== EMERGENCY OVERRIDES ===== */
+
+/* Use these classes to force fixes if CSS breaks */
+.force-visible { display: block !important; visibility: visible !important; opacity: 1 !important; }
+.force-hidden { display: none !important; }
+.force-flex { display: flex !important; }
+.force-grid { display: grid !important; }
+.force-relative { position: relative !important; }
+.force-static { position: static !important; }
+.force-full-width { width: 100% !important; }
+.force-auto-width { width: auto !important; }
+.force-no-margin { margin: 0 !important; }
+.force-no-padding { padding: 0 !important; }
+
+/* ===== BROWSER COMPATIBILITY FIXES ===== */
+
+/* Safari flexbox fixes */
+@supports (-webkit-appearance: none) {
+    .products-grid {
+        display: -webkit-box !important;
+        display: -webkit-flex !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
+        -webkit-flex-wrap: wrap !important;
+        -ms-flex-wrap: wrap !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .product-card {
+        -webkit-box-flex: 0 !important;
+        -webkit-flex: 0 0 calc(33.333% - 2rem) !important;
+        -ms-flex: 0 0 calc(33.333% - 2rem) !important;
+        flex: 0 0 calc(33.333% - 2rem) !important;
+    }
+}
+
+/* Internet Explorer 11 fixes */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .products-grid {
+        display: -ms-flexbox !important;
+        -ms-flex-wrap: wrap !important;
+    }
+    
+    .product-card {
+        -ms-flex: 0 0 300px !important;
+        max-width: 300px !important;
+    }
+}
+
+/* ===== DEBUGGING AIDS ===== */
+
+/* Add these classes temporarily to debug layout issues */
+.debug-border { border: 2px solid red !important; }
+.debug-background { background: rgba(255, 0, 0, 0.1) !important; }
+.debug-outline { outline: 2px dashed blue !important; }
+.debug-grid {
+    background-image: linear-gradient(rgba(255,0,0,0.1) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,0,0,0.1) 1px, transparent 1px) !important;
+    background-size: 20px 20px !important;
+}
