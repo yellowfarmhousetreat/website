@@ -1,24 +1,219 @@
 // cart.js
 // Cart logic for Yellow Farmhouse Stand
 
-// Toast notification system
-function showToast(message, type = 'success') {
+// Undo system state management
+const undoSystem = {
+    actions: [], // Store recent actions for undo
+    maxActions: 5, // Maximum number of undo actions to keep
+    timeoutDuration: 10000, // 10 seconds to undo
+    
+    addAction(action) {
+        // Add timestamp to action
+        action.timestamp = Date.now();
+        action.id = Math.random().toString(36).substr(2, 9);
+        
+        // Add to front of array
+        this.actions.unshift(action);
+        
+        // Keep only recent actions
+        if (this.actions.length > this.maxActions) {
+            this.actions = this.actions.slice(0, this.maxActions);
+        }
+        
+        // Clean up expired actions
+        this.cleanupExpired();
+    },
+    
+    cleanupExpired() {
+        const now = Date.now();
+        this.actions = this.actions.filter(action => 
+            (now - action.timestamp) < this.timeoutDuration
+        );
+    },
+    
+    executeUndo(actionId) {
+        const actionIndex = this.actions.findIndex(action => action.id === actionId);
+        if (actionIndex === -1) {
+            showToast('Undo action expired.', 'error');
+            return false;
+        }
+        
+        const action = this.actions[actionIndex];
+        let success = false;
+        
+        try {
+            switch (action.type) {
+                case 'remove':
+                    success = this.undoRemove(action);
+                    break;
+                case 'clear':
+                    success = this.undoClear(action);
+                    break;
+            }
+            
+            if (success) {
+                // Remove the action from undo history
+                this.actions.splice(actionIndex, 1);
+            }
+        } catch (error) {
+            console.error('Undo error:', error);
+            showToast('Undo failed. Please try again.', 'error');
+        }
+        
+        return success;
+    },
+    
+    undoRemove(action) {
+        const cart = getCart();
+        
+        // Restore the item at its original position
+        if (action.index >= 0 && action.index <= cart.length) {
+            cart.splice(action.index, 0, action.item);
+        } else {
+            // If original position is invalid, add to end
+            cart.push(action.item);
+        }
+        
+        saveCart(cart);
+        renderCart();
+        updateCartCount();
+        
+        const itemName = String(action.item.name || '').replace(/[<>&"']/g, '');
+        showToast(`Restored ${itemName} to cart.`, 'success');
+        return true;
+    },
+    
+    undoClear(action) {
+        // Restore the entire cart
+        saveCart(action.cartData);
+        renderCart();
+        updateCartCount();
+        
+        const itemCount = action.cartData.length;
+        showToast(`Restored ${itemCount} item${itemCount !== 1 ? 's' : ''} to cart.`, 'success');
+        return true;
+    }
+};
+
+// Enhanced toast notification system with undo support
+function showToast(message, type = 'success', undoAction = null) {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
+    
     // Security: Double sanitization - input validation + safe DOM insertion
     const sanitizedMessage = String(message).replace(/[<>&"']/g, '').substring(0, 200);
-    // Use textContent (not innerHTML) to prevent XSS injection
-    toast.textContent = sanitizedMessage;
     
-    // Validate toast element before DOM insertion
-    if (toast.textContent === sanitizedMessage && document.body) {
-        document.body.appendChild(toast);
+    // Create toast content container
+    const messageContainer = document.createElement('div');
+    messageContainer.className = 'toast-message';
+    messageContainer.textContent = sanitizedMessage;
+    toast.appendChild(messageContainer);
+    
+    // Add undo button if undo action is provided
+    if (undoAction && undoAction.id) {
+        const undoContainer = document.createElement('div');
+        undoContainer.className = 'toast-undo-container';
+        
+        const undoButton = document.createElement('button');
+        undoButton.className = 'toast-undo-btn';
+        undoButton.textContent = 'Undo';
+        undoButton.setAttribute('aria-label', 'Undo last action');
+        undoButton.title = 'Click to undo this action';
+        
+        undoButton.onclick = (e) => {
+            e.stopPropagation();
+            const success = undoSystem.executeUndo(undoAction.id);
+            if (success) {
+                // Remove the toast immediately on successful undo
+                toast.remove();
+            }
+        };
+        
+        undoContainer.appendChild(undoButton);
+        toast.appendChild(undoContainer);
+        
+        // Add special styling for undo toasts
+        toast.classList.add('toast-with-undo');
     }
     
-    setTimeout(() => {
-        toast.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    // Apply toast styling
+    toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'error' ? '#ff4757' : type === 'warning' ? '#ffa502' : '#2ed573'};
+        color: white;
+        padding: ${undoAction ? '12px 16px' : '12px 20px'};
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10000;
+        max-width: 400px;
+        font-size: 14px;
+        line-height: 1.4;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: ${undoAction ? '12px' : '0'};
+        justify-content: ${undoAction ? 'space-between' : 'center'};
+    `;
+    
+    // Add styles for undo button
+    if (undoAction) {
+        const style = document.createElement('style');
+        style.textContent = `
+            .toast-undo-btn {
+                background: rgba(255,255,255,0.2);
+                border: 1px solid rgba(255,255,255,0.3);
+                color: white;
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-size: 12px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+            }
+            .toast-undo-btn:hover {
+                background: rgba(255,255,255,0.3);
+                border-color: rgba(255,255,255,0.5);
+                transform: translateY(-1px);
+            }
+            .toast-undo-btn:active {
+                transform: translateY(0);
+            }
+            .toast-message {
+                flex: 1;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Validate toast element before DOM insertion
+    if (document.body) {
+        document.body.appendChild(toast);
+        
+        // Trigger animation
+        setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(0)';
+        }, 10);
+        
+        // Auto-remove toast (longer duration for undo toasts)
+        const duration = undoAction ? undoSystem.timeoutDuration : 3000;
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 300);
+            }
+        }, duration);
+    }
 }
 
 function getCart() {
@@ -265,22 +460,50 @@ function removeFromCart(index) {
     const cart = getCart();
     if (index >= 0 && index < cart.length) {
         const item = cart[index];
+        
+        // Store undo action before making changes
+        const undoAction = {
+            type: 'remove',
+            item: { ...item }, // Create a copy of the item
+            index: index
+        };
+        undoSystem.addAction(undoAction);
+        
+        // Remove item from cart
         cart.splice(index, 1);
         saveCart(cart);
         renderCart();
         updateCartCount();
+        
         // Sanitize item name to prevent XSS
         const sanitizedName = String(item.name || '').replace(/[<>&"']/g, '');
-        showToast(`Removed ${sanitizedName} from cart.`);
+        showToast(`Removed ${sanitizedName} from cart.`, 'warning', undoAction);
     }
 }
 
 function clearCart() {
+    const cart = getCart();
+    
+    if (cart.length === 0) {
+        showToast('Cart is already empty.', 'warning');
+        return;
+    }
+    
     if (confirm('Are you sure you want to clear your entire cart?')) {
+        // Store undo action before clearing
+        const undoAction = {
+            type: 'clear',
+            cartData: [...cart] // Create a copy of the entire cart
+        };
+        undoSystem.addAction(undoAction);
+        
+        // Clear the cart
         localStorage.removeItem('yfhs_cart');
         renderCart();
         updateCartCount();
-        showToast('Cart cleared.');
+        
+        const itemCount = cart.length;
+        showToast(`Cleared ${itemCount} item${itemCount !== 1 ? 's' : ''} from cart.`, 'warning', undoAction);
     }
 }
 
