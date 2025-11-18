@@ -495,33 +495,33 @@ class AdminInterface {
           
           <div class="form-group">
             <label>Allergen Information:</label>
-            <div class="allergen-checkboxes" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0.5rem 0;">
-              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+            <div class="allergen-checkboxes">
+              <label class="checkbox-item">
                 <input type="checkbox" ${product.allergens?.includes('wheat') ? 'checked' : ''} 
                        onchange="adminInterface.updateAllergen(${index}, 'wheat', this.checked)">
                 Contains Wheat
               </label>
-              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+              <label class="checkbox-item">
                 <input type="checkbox" ${product.allergens?.includes('eggs') ? 'checked' : ''} 
                        onchange="adminInterface.updateAllergen(${index}, 'eggs', this.checked)">
                 Contains Eggs
               </label>
-              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+              <label class="checkbox-item">
                 <input type="checkbox" ${product.allergens?.includes('milk') ? 'checked' : ''} 
                        onchange="adminInterface.updateAllergen(${index}, 'milk', this.checked)">
                 Contains Milk/Dairy
               </label>
-              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+              <label class="checkbox-item">
                 <input type="checkbox" ${product.allergens?.includes('nuts') ? 'checked' : ''} 
                        onchange="adminInterface.updateAllergen(${index}, 'nuts', this.checked)">
                 Contains Tree Nuts
               </label>
-              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+              <label class="checkbox-item">
                 <input type="checkbox" ${product.allergens?.includes('peanuts') ? 'checked' : ''} 
                        onchange="adminInterface.updateAllergen(${index}, 'peanuts', this.checked)">
                 Contains Peanuts
               </label>
-              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+              <label class="checkbox-item">
                 <input type="checkbox" ${product.allergens?.includes('soy') ? 'checked' : ''} 
                        onchange="adminInterface.updateAllergen(${index}, 'soy', this.checked)">
                 Contains Soy
@@ -584,47 +584,56 @@ class AdminInterface {
           
           <div class="form-group">
             <label>Dietary Options & Pricing:</label>
-            <div class="dietary-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px;">
-              <div style="display: flex; align-items: center; gap: 5px;">
-                <input type="checkbox" id="gf-${index}" ${product.glutenFree ? 'checked' : ''} 
-                       onchange="adminInterface.updateProduct(${index}, 'glutenFree', this.checked)">
-                <label for="gf-${index}" style="margin: 0;">Gluten Free</label>
-                <span>+$</span>
-                <input type="number" step="0.01" value="${product.glutenFreePrice || 3}" 
-                       style="width: 50px;" 
-                       onchange="adminInterface.updateProduct(${index}, 'glutenFreePrice', parseFloat(this.value))">
+            <div class="dietary-options">
+              <div class="checkbox-row">
+                <label class="checkbox-item">
+                  <input type="checkbox" id="gf-${index}" ${product.glutenFree ? 'checked' : ''} 
+                         onchange="adminInterface.updateProduct(${index}, 'glutenFree', this.checked)">
+                  Gluten Free
+                </label>
+                <div class="price-input-group">
+                  <span>+$</span>
+                  <input type="number" step="0.01" value="${product.glutenFreePrice || 3}" 
+                         onchange="adminInterface.updateProduct(${index}, 'glutenFreePrice', parseFloat(this.value))">
+                </div>
               </div>
-              <div style="display: flex; align-items: center; gap: 5px;">
-                <input type="checkbox" id="sf-${index}" ${product.sugarFree ? 'checked' : ''} 
-                       onchange="adminInterface.updateProduct(${index}, 'sugarFree', this.checked)">
-                <label for="sf-${index}" style="margin: 0;">Sugar Free</label>
-                <span>+$</span>
-                <input type="number" step="0.01" value="${product.sugarFreePrice || 3}" 
-                       style="width: 50px;" 
-                       onchange="adminInterface.updateProduct(${index}, 'sugarFreePrice', parseFloat(this.value))">
+              <div class="checkbox-row">
+                <label class="checkbox-item">
+                  <input type="checkbox" id="sf-${index}" ${product.sugarFree ? 'checked' : ''} 
+                         onchange="adminInterface.updateProduct(${index}, 'sugarFree', this.checked)">
+                  Sugar Free
+                </label>
+                <div class="price-input-group">
+                  <span>+$</span>
+                  <input type="number" step="0.01" value="${product.sugarFreePrice || 3}" 
+                         onchange="adminInterface.updateProduct(${index}, 'sugarFreePrice', parseFloat(this.value))">
+                </div>
               </div>
-              <div style="display: flex; align-items: center; gap: 5px;">
-                <input type="checkbox" id="vegan-${index}" ${product.vegan ? 'checked' : ''} 
-                       onchange="adminInterface.updateProduct(${index}, 'vegan', this.checked)">
-                <label for="vegan-${index}" style="margin: 0;">Vegan</label>
-                <span>+$</span>
-                <input type="number" step="0.01" value="${product.veganPrice || 2}" 
-                       style="width: 50px;" 
-                       onchange="adminInterface.updateProduct(${index}, 'veganPrice', parseFloat(this.value))">
+              <div class="checkbox-row">
+                <label class="checkbox-item">
+                  <input type="checkbox" id="vegan-${index}" ${product.vegan ? 'checked' : ''} 
+                         onchange="adminInterface.updateProduct(${index}, 'vegan', this.checked)">
+                  Vegan
+                </label>
+                <div class="price-input-group">
+                  <span>+$</span>
+                  <input type="number" step="0.01" value="${product.veganPrice || 2}" 
+                         onchange="adminInterface.updateProduct(${index}, 'veganPrice', parseFloat(this.value))">
+                </div>
               </div>
             </div>
           </div>
           
           <div class="form-group">
             <label>Shipping & Features:</label>
-            <div class="shipping-options" style="margin-top: 5px;">
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                <label style="display: flex; align-items: center; gap: 5px; margin: 0;">
+            <div class="shipping-options">
+              <div class="checkbox-row">
+                <label class="checkbox-item">
                   <input type="checkbox" ${product.shippingEligible ? 'checked' : ''} 
                          onchange="adminInterface.updateProduct(${index}, 'shippingEligible', this.checked)">
                   Shipping Eligible
                 </label>
-                <label style="display: flex; align-items: center; gap: 5px; margin: 0;">
+                <label class="checkbox-item">
                   <input type="checkbox" ${product.featured ? 'checked' : ''} 
                          onchange="adminInterface.updateProduct(${index}, 'featured', this.checked)">
                   Featured Product

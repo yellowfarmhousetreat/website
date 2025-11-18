@@ -441,6 +441,62 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Checkbox and Radio Button Improvements */
+        .allergen-checkboxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin: 0.8rem 0;
+        }
+        
+        .dietary-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        
+        .shipping-options {
+            margin-top: 8px;
+        }
+        
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin: 0;
+            min-width: fit-content;
+        }
+        
+        .price-input-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: auto;
+        }
+        
+        .price-input-group input {
+            width: 60px;
+            padding: 4px 6px;
+            font-size: 0.9rem;
+        }
+        
+        /* Custom checkbox and radio styling */
+        input[type="checkbox"], input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            flex-shrink: 0;
+        }
+        
         /* Additional mobile improvements */
         @media (max-width: 768px) {
             .admin-header {
@@ -457,6 +513,42 @@
             .admin-product-card {
                 padding: 1.5rem;
             }
+            
+            /* Mobile checkbox/radio fixes */
+            .allergen-checkboxes {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+            
+            .dietary-options {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .checkbox-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+            }
+            
+            .checkbox-item {
+                justify-content: flex-start;
+            }
+            
+            .price-input-group {
+                margin-left: 0;
+                justify-content: flex-start;
+                margin-top: 4px;
+            }
+            
+            .shipping-details {
+                padding: 8px !important;
+            }
+            
+            .shipping-details > div {
+                grid-template-columns: 1fr !important;
+                gap: 8px !important;
+            }
         }
         
         @media (max-width: 480px) {
@@ -468,6 +560,26 @@
             .btn {
                 padding: 0.8rem 1.5rem;
                 font-size: 0.95rem;
+            }
+        }
+        
+        
+        /* Enhanced mobile touch targets */
+        @media (max-width: 480px) {
+            .checkbox-item {
+                min-height: 48px;
+                padding: 8px 4px;
+            }
+            
+            input[type=\"checkbox\"], input[type=\"radio\"] {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .price-input-group input {
+                width: 70px;
+                padding: 8px;
+                font-size: 1rem;
             }
         }
     </style>
