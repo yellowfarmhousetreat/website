@@ -1,0 +1,639 @@
+/*
+ Yellow Farmhouse Treats — Application Styles
+ --------------------------------------------------
+ Purpose: Single source of truth for all custom styling that
+ layers on top of the Massively template (`assets/css/main.css`).
+ This file is organized so changing colors, buttons, or layout
+ placements happens here without digging through multiple CSS files.
+
+ Sections
+ 1. Design Tokens & Resets
+ 2. Layout & Navigation
+ 3. Tabs & Sub-navigation
+ 4. Product Grid & Cards
+ 5. Cart & Buttons
+ 6. Order Form & Shipping
+ 7. Toasts & Alerts
+ 8. Utilities & Responsive Rules
+*/
+
+/* -------------------------------------------------- */
+/* 1. DESIGN TOKENS & RESETS                           */
+/* -------------------------------------------------- */
+:root {
+  --color-bg: #1a1d23;
+  --color-surface: #212931;
+  --color-panel: rgba(255, 255, 255, 0.04);
+  --color-border: rgba(255, 255, 255, 0.15);
+  --color-highlight: #ffd866;
+  --color-highlight-soft: #ffe566;
+  --color-accent: #e74c3c;
+  --color-text: #f5f5f5;
+  --color-muted: rgba(255, 255, 255, 0.65);
+  --color-success: #2ed573;
+  --color-warning: #ffa502;
+  --color-danger: #ff4757;
+
+  --font-primary: "Merriweather", Georgia, serif;
+  --font-display: "Source Sans Pro", "Helvetica Neue", sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-strong: 0 12px 30px rgba(0, 0, 0, 0.35);
+
+  --content-max: 72rem;
+  --gutter: 2rem;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.safe-container,
+#nav,
+.submenu-tabs,
+.cookie-tier-tabs,
+.products-grid,
+#footer > section,
+#footer > section.split {
+  width: calc(100% - 2 * var(--gutter));
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* -------------------------------------------------- */
+/* 2. LAYOUT & NAVIGATION                              */
+/* -------------------------------------------------- */
+#wrapper {
+  background: rgba(15, 18, 24, 0.92);
+  box-shadow: var(--shadow-strong);
+}
+
+#nav {
+  background: #ffffff;
+  color: #1e252d;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  line-height: normal;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 1rem;
+  z-index: 120;
+}
+
+#nav ul.links {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 0;
+}
+
+#nav ul.links li {
+  margin: 0;
+}
+
+#nav ul.links li a {
+  color: #1e252d;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-md);
+  transition: 0.2s ease;
+}
+
+#nav ul.links li.active a,
+#nav ul.links li a:hover {
+  background: var(--color-highlight);
+  color: #1a1d23;
+}
+
+#nav ul.icons {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+#nav ul.icons a {
+  color: inherit;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transition: 0.2s ease;
+}
+
+#nav ul.icons a:hover {
+  background: #1e252d;
+  color: #ffffff;
+}
+
+/* Intro adjustments */
+#intro {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+#intro h1 {
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+}
+
+/* -------------------------------------------------- */
+/* 3. TABS & SUB-NAVIGATION                            */
+/* -------------------------------------------------- */
+.submenu-tabs,
+.cookie-tier-tabs {
+  display: flex;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
+  padding: 0.25rem 0.5rem;
+  box-shadow: var(--shadow-soft);
+  position: sticky;
+  top: 6.5rem;
+  z-index: 110;
+  gap: 0.5rem;
+}
+
+.submenu-tabs ul,
+.cookie-tier-tabs ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  margin: 0;
+  list-style: none;
+}
+
+.tab-link,
+.cookie-tier-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.65rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  color: var(--color-text);
+  font-weight: 600;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.2s ease;
+  min-width: 120px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.tab-link.active,
+.cookie-tier-link.active {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--color-highlight);
+  color: var(--color-highlight);
+}
+
+/* -------------------------------------------------- */
+/* 4. PRODUCT GRID & CARDS                             */
+/* -------------------------------------------------- */
+.products-grid,
+.safe-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin: 2rem var(--gutter);
+  padding: 0;
+}
+
+.product-card {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.product-card h3,
+.product-card h4 {
+  font-family: var(--font-display);
+  margin-bottom: 0.5rem;
+}
+
+.product-img {
+  height: 220px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.product-details {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quantity-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.quantity-selector label,
+.product-details label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 500;
+}
+
+.qty-input {
+  width: 90px;
+  padding: 0.6rem;
+  text-align: center;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--color-text);
+}
+
+.shipping-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(46, 213, 115, 0.25);
+  border: 1px solid rgba(46, 213, 115, 0.5);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Product info blocks */
+.shipping-info,
+.ingredients-info,
+.allergen-info,
+.legal-disclaimer {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  margin: 0.5rem 0;
+}
+
+.shipping-info {
+  background: rgba(46, 213, 115, 0.15);
+  border: 1px solid rgba(46, 213, 115, 0.4);
+}
+
+.ingredients-info {
+  background: rgba(255, 193, 7, 0.25);
+  border: 1px solid rgba(255, 193, 7, 0.45);
+}
+
+.allergen-info {
+  background: rgba(255, 99, 71, 0.3);
+  border: 1px solid rgba(255, 99, 71, 0.6);
+}
+
+.legal-disclaimer {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-style: italic;
+}
+
+/* -------------------------------------------------- */
+/* 5. CART & BUTTONS                                   */
+/* -------------------------------------------------- */
+.cart-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: 999px;
+  margin-left: 0.35rem;
+}
+
+button,
+.button,
+.product-card button,
+.add-to-cart-btn,
+.actions .button,
+input[type="submit"] {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, var(--color-highlight), var(--color-highlight-soft));
+  color: #1e252d;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover,
+.button:hover,
+input[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
+
+button:disabled,
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* -------------------------------------------------- */
+/* 6. ORDER FORM & SHIPPING                            */
+/* -------------------------------------------------- */
+#orderForm,
+form.order-form {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+form .fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+form .field {
+  flex: 1 1 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+form label {
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+
+form input,
+form select,
+form textarea {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  padding: 0.65rem;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--color-text);
+}
+
+.field-label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-display);
+}
+
+.shipping-fields-row,
+.safe-form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.shipping-field-half,
+.safe-form-half,
+.safe-form-third {
+  flex: 1 1 220px;
+}
+
+.validation-error,
+.validation-success {
+  display: inline-flex;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+}
+
+.validation-error {
+  color: var(--color-danger);
+  background: rgba(255, 71, 87, 0.12);
+  border-color: rgba(255, 71, 87, 0.35);
+}
+
+.validation-success {
+  color: var(--color-success);
+  background: rgba(46, 213, 115, 0.12);
+  border-color: rgba(46, 213, 115, 0.35);
+}
+
+.summary-box {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+}
+
+.deposit-alert,
+.orders-paused-alert {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#ordersPausedAlert,
+#fulfillmentNote,
+#summaryShippingRow,
+#depositPickupInfo,
+#paymentDetails {
+  display: none;
+}
+
+.alert-paused {
+  margin-bottom: 2rem;
+}
+
+.alert-paused h3 {
+  color: var(--color-danger);
+  margin-top: 0;
+}
+
+.link-danger {
+  color: var(--color-danger);
+  text-decoration: underline;
+}
+
+.link-danger:hover,
+.link-danger:focus {
+  color: #ff8c94;
+}
+
+.summary-row.balance-row {
+  padding: 0.5rem 0;
+  margin: 0;
+  margin-top: 0.5rem;
+  font-size: 0.9em;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.payment-details {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-top: 1rem;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* -------------------------------------------------- */
+/* 7. TOASTS & ALERTS                                  */
+/* -------------------------------------------------- */
+.toast,
+.order-toast,
+.safe-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  max-width: 380px;
+  border-radius: var(--radius-lg);
+  padding: 0.9rem 1rem;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+  transform: translateX(120%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+  z-index: 400;
+}
+
+.toast.show,
+.order-toast.show,
+.safe-toast.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.toast.success,
+.order-toast.success {
+  background: linear-gradient(135deg, var(--color-success), #1fb862);
+}
+
+.toast.error,
+.order-toast.error {
+  background: linear-gradient(135deg, var(--color-danger), #ff2f45);
+}
+
+.toast.warning,
+.order-toast.warning {
+  background: linear-gradient(135deg, var(--color-warning), #ff8c00);
+}
+
+.toast-with-undo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.toast-undo-btn {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-md);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* -------------------------------------------------- */
+/* 8. UTILITIES & RESPONSIVE RULES                     */
+/* -------------------------------------------------- */
+.z-nav { z-index: 120; }
+.z-subnav { z-index: 110; }
+.z-modal { z-index: 300; }
+.z-toast { z-index: 400; }
+
+.hidden-admin {
+  opacity: 0.1;
+  font-size: 0.7em;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.hidden-admin a {
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+}
+
+@media (max-width: 980px) {
+  #nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 736px) {
+  #nav {
+    position: static;
+    border-radius: var(--radius-md);
+  }
+
+  .submenu-tabs,
+  .cookie-tier-tabs {
+    position: static;
+    flex-direction: column;
+  }
+
+  .products-grid {
+    margin: 1.25rem 0;
+    gap: 1.25rem;
+  }
+
+  #orderForm,
+  .summary-box {
+    padding: 1.25rem;
+  }
+
+  .toast,
+  .order-toast {
+    left: 1rem;
+    right: 1rem;
+  }
+}

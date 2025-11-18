@@ -141,7 +141,7 @@ Protection Added: ✅
 
 ✅ SAFE approach:
 - Use new classes: .safe-btn-primary, .safe-btn-secondary
-- Override colors with !important in fragility-protection.css
+- Adjust color tokens inside app.css instead of editing template selectors
 - Test JavaScript functionality after changes
 ```
 
@@ -235,7 +235,7 @@ Protection Added: ✅
 1. **Immediate Rollback**
    ```html
    <!-- Comment out the problematic CSS file -->
-   <!-- <link rel="stylesheet" href="assets/css/fragility-protection.css"> -->
+   <!-- <link rel="stylesheet" href="assets/css/app.css"> -->
    ```
 
 2. **Emergency Override Classes**
@@ -304,24 +304,20 @@ Protection Added: ✅
 ```html
 <!-- EXACT ORDER REQUIRED -->
 <link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/site-fixes.css" />
-<link rel="stylesheet" href="assets/css/fragility-protection.css" />
-<link rel="stylesheet" href="styles-products.css" />
-<link rel="stylesheet" href="assets/css/toast-undo.css" />
-<link rel="stylesheet" href="assets/css/shipping-validation.css" />
+<link rel="stylesheet" href="assets/css/app.css" />
+<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 ```
 
 **Why this order matters:**
+
 1. `main.css` - Template base (never edit)
-2. `site-fixes.css` - Basic safety overrides
-3. `fragility-protection.css` - Advanced protection layer
-4. `styles-products.css` - Product-specific styles
-5. `toast-undo.css` - Notification system
-6. `shipping-validation.css` - Form enhancements
+2. `app.css` - Single source for all custom tokens, safe utilities, components, and overrides
+3. `noscript.css` - Progressive enhancement fallback when JavaScript is disabled
 
 ## Summary: Safe Cosmetic Changes
 
 ### ✅ **ALWAYS SAFE to change:**
+
 - Colors (background, text, borders)
 - Font properties (size, weight, family)
 - Margins and padding (with rem units)
@@ -329,6 +325,7 @@ Protection Added: ✅
 - Opacity and visibility
 
 ### ⚠️ **PROCEED WITH CAUTION:**
+
 - Display properties (block, flex, grid)
 - Position properties (absolute, relative, fixed, sticky)
 - Width/height with calc() expressions
@@ -336,6 +333,7 @@ Protection Added: ✅
 - Overflow properties
 
 ### 🚫 **NEVER CHANGE:**
+
 - CSS class names used by JavaScript
 - Grid template columns with complex calc()
 - Position sticky on navigation elements

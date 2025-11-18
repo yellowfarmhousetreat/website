@@ -12,30 +12,33 @@ This document outlines the CSS fragility issues found in the Yellow Farmhouse Tr
 - **Fix**: Consolidated into single selector in main.css (lines 5087-5108)
 
 ### 2. **Multiple CSS Files with Overlapping Concerns**
-```
-assets/css/main.css          - Template base styles (5346 lines)
-styles-products.css          - Product grid and cards
-assets/css/toast-undo.css    - Notification styles  
-assets/css/shipping-validation.css - Form validation styles
-assets/css/site-fixes.css    - NEW: Consolidated safety fixes
+
+```text
+assets/css/main.css   - Template base styles (5346 lines)
+assets/css/app.css    - All custom tokens, utilities, and component overrides
 ```
 
+*Status*: Resolved. All bespoke styling now lives inside `assets/css/app.css`, so there is one place to edit tokens, utilities, product grids, toasts, and validation states.
+
 ### 3. **Fragile calc() Expressions**
+
 - **Issue**: Hardcoded values that break when containers change
-- **Examples**: 
+- **Examples**:
   - `width: calc(100% - 4rem)` (21 instances)
   - `width: calc(50% - 0.75rem)`
 - **Risk**: Any margin/padding change breaks layout
-- **Solution**: Use flexbox and safe containers in site-fixes.css
+- **Solution**: Use flexbox and safe containers defined in app.css
 
 ### 4. **Inconsistent Breakpoint Management**
-- **Template breakpoints**: 361px, 481px, 737px, 981px, 1281px, 1681px  
+
+- **Template breakpoints**: 361px, 481px, 737px, 981px, 1281px, 1681px
 - **Custom breakpoints**: 768px, 736px (inconsistent)
 - **Risk**: Responsive behavior conflicts
-- **Solution**: Standardized to 736px/980px in site-fixes.css
+- **Solution**: Standardized to 736px/980px within app.css
 
 ### 5. **Excessive !important Usage**
-- **Files**: toast-undo.css, shipping-validation.css
+
+- **Legacy files**: toast-undo.css, shipping-validation.css (now merged into app.css)
 - **Risk**: Makes CSS changes unpredictable
 - **Impact**: Any cosmetic change requires more !important declarations
 
@@ -48,23 +51,25 @@ assets/css/site-fixes.css    - NEW: Consolidated safety fixes
    - Tablet: 737px - 980px  
    - Desktop: 981px+
 
-2. **Use the safe CSS classes from site-fixes.css**:
-   ```css
-   .safe-container     /* Instead of calc(100% - 4rem) */
-   .safe-form-row      /* Instead of fragile calc() forms */
-   .safe-products-grid /* Instead of complex grid calc() */
-   .safe-btn           /* Consistent button styling */
-   ```
+2. **Use the safe CSS classes documented in app.css**:
 
-3. **Add new styles to site-fixes.css** rather than inline or new files
+  ```css
+  .safe-container     /* Instead of calc(100% - 4rem) */
+  .safe-form-row      /* Instead of fragile calc() forms */
+  .safe-products-grid /* Instead of complex grid calc() */
+  .safe-btn           /* Consistent button styling */
+  ```
 
-4. **Use these standardized z-index values**:
-   ```css
-   .z-nav { z-index: 100; }
-   .z-dropdown { z-index: 200; }  
-   .z-modal { z-index: 1000; }
-   .z-toast { z-index: 10000; }
-   ```
+3. **Add new styles to app.css** rather than inline or new files
+
+4. **Use these standardized z-index values (already defined in app.css)**:
+
+  ```css
+  .z-nav { z-index: 120; }
+  .z-subnav { z-index: 110; }
+  .z-modal { z-index: 300; }
+  .z-toast { z-index: 400; }
+  ```
 
 ### DON'Ts ❌
 
@@ -77,11 +82,12 @@ assets/css/site-fixes.css    - NEW: Consolidated safety fixes
 ### Making Safe Cosmetic Changes
 
 #### Example: Changing Button Colors
+
 ```css
 /* ❌ DON'T - Fragile approach */
 .button { background: #newcolor !important; }
 
-/* ✅ DO - Safe approach in site-fixes.css */
+/* ✅ DO - Safe approach in app.css */
 .safe-btn-primary { 
   background: #newcolor;
   border: 1px solid #newcolor;
@@ -92,12 +98,13 @@ assets/css/site-fixes.css    - NEW: Consolidated safety fixes
 ```
 
 #### Example: Adjusting Layout Spacing
+
 ```css
 /* ❌ DON'T - Fragile calc() */
 .container { width: calc(100% - 6rem); }
 
-/* ✅ DO - Safe responsive approach */
-.safe-container { 
+/* ✅ DO - Safe responsive approach (already in app.css) */
+.safe-container {
   width: 100%; 
   max-width: 72rem; 
   margin: 0 auto; 
@@ -109,6 +116,7 @@ assets/css/site-fixes.css    - NEW: Consolidated safety fixes
 ```
 
 #### Example: Product Grid Changes
+
 ```css
 /* ❌ DON'T - Modify existing complex grid */
 .products-grid { grid-template-columns: complex-calc-expression; }
@@ -137,43 +145,47 @@ Before deploying any CSS changes:
 
 If CSS changes break the site:
 
-1. **Remove site-fixes.css** from HTML pages temporarily
+1. **Remove app.css** from HTML pages temporarily (reverts to raw template)
 2. **Revert to last known good commit**:
+
    ```bash
    git log --oneline -5
    git checkout [previous-commit-hash] -- assets/css/
    ```
+
 3. **Or disable problematic CSS**:
+
    ```html
-   <!-- <link rel="stylesheet" href="assets/css/site-fixes.css"> -->
+   <!-- <link rel="stylesheet" href="assets/css/app.css"> -->
    ```
 
 ## File Load Order (Critical)
 
 CSS files must load in this exact order:
+
 1. `assets/css/main.css` (template base)
-2. `assets/css/site-fixes.css` (safety overrides) 
-3. `styles-products.css` (product-specific)
-4. `assets/css/toast-undo.css` (notifications)
-5. `assets/css/shipping-validation.css` (forms)
+2. `assets/css/app.css` (all customizations)
+3. `assets/css/noscript.css` (inside `<noscript>` for graceful degradation)
 
 ## Architecture Improvements Made
 
-### Fixed Issues:
-✅ Consolidated cart badge selectors  
-✅ Created safe CSS utility classes  
-✅ Standardized responsive breakpoints  
-✅ Added comprehensive safety CSS file  
-✅ Updated all HTML pages to include site-fixes.css  
+### Fixed Issues
 
-### Remaining Risks:
+✅ Consolidated cart badge selectors  
+✅ Created safe CSS utility classes (now centralized in app.css)  
+✅ Standardized responsive breakpoints  
+✅ Added comprehensive safety CSS file (`app.css`)  
+✅ Updated all HTML pages to include app.css  
+
+### Remaining Risks
+
 ⚠️ Large main.css file (5346 lines) - handle with care  
 ⚠️ Inline styles still present (should be moved to CSS files)  
 ⚠️ Complex template JavaScript interactions with CSS classes  
 
 ## Future Maintenance
 
-1. **Always add new styles to site-fixes.css**
+1. **Always add new styles to app.css**
 2. **Never edit main.css** (preserve template integrity)
 3. **Test thoroughly** after any cosmetic changes
 4. **Document any new utility classes** in this guide
@@ -182,6 +194,7 @@ CSS files must load in this exact order:
 ## Contact for CSS Changes
 
 When requesting cosmetic changes, always provide:
+
 - Specific element to change (with screenshot)
 - Desired outcome (with mockup if possible)  
 - Affected pages/components

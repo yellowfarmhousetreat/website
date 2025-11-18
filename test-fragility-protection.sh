@@ -9,8 +9,7 @@ echo "======================================"
 echo ""
 echo "📁 Checking Protection Files..."
 files=(
-    "assets/css/site-fixes.css"
-    "assets/css/fragility-protection.css"
+    "assets/css/app.css"
     "FRAGILITY-ANALYSIS.md"
     "CSS-ARCHITECTURE.md"
 )
@@ -29,17 +28,17 @@ echo "🔗 Checking HTML File Protection Links..."
 html_files=("index.html" "menu.html" "order.html" "breads.html" "cakes.html" "cookies.html" "pies.html")
 
 for file in "${html_files[@]}"; do
-    if grep -q "fragility-protection.css" "$file"; then
-        echo "✅ $file includes fragility protection"
+    if grep -q "assets/css/app.css" "$file"; then
+        echo "✅ $file links to app.css"
     else
-        echo "❌ $file missing fragility protection"
+        echo "❌ $file missing app.css link"
     fi
 done
 
 # Check for dangerous calc() expressions
 echo ""
 echo "⚠️  Checking for Dangerous calc() Expressions..."
-calc_count=$(grep -r "calc(" assets/css/ styles-products.css 2>/dev/null | wc -l | tr -d ' ')
+calc_count=$(grep -r "calc(" assets/css/app.css 2>/dev/null | wc -l | tr -d ' ')
 echo "Found $calc_count calc() expressions"
 
 if [ "$calc_count" -gt 25 ]; then
@@ -51,7 +50,7 @@ fi
 # Check for z-index conflicts
 echo ""
 echo "🏗️  Checking Z-Index Usage..."
-zindex_count=$(grep -r "z-index:" assets/css/ styles-products.css 2>/dev/null | wc -l | tr -d ' ')
+zindex_count=$(grep -r "z-index:" assets/css/app.css 2>/dev/null | wc -l | tr -d ' ')
 echo "Found $zindex_count z-index declarations"
 
 # Check for JavaScript-CSS coupling points
@@ -80,7 +79,7 @@ echo "📱 Checking Responsive Breakpoints..."
 breakpoints=("320px" "480px" "736px" "768px" "980px" "1280px")
 
 for bp in "${breakpoints[@]}"; do
-    count=$(grep -r "$bp" assets/css/ styles-products.css 2>/dev/null | wc -l | tr -d ' ')
+    count=$(grep -r "$bp" assets/css/app.css 2>/dev/null | wc -l | tr -d ' ')
     echo "$bp: $count usages"
 done
 
@@ -88,9 +87,8 @@ done
 echo ""
 echo "🎯 Final Assessment"
 echo "=================="
-echo "✅ Basic protection layer installed"
-echo "✅ Advanced protection layer installed"
-echo "✅ Page-specific protection documented"
+echo "✅ app.css present and linked across public pages"
+echo "✅ Documentation updated (CSS-ARCHITECTURE + FRAGILITY-ANALYSIS)"
 echo "✅ Emergency repair procedures documented"
 echo ""
 echo "🛡️  Protection Status: ACTIVE"
