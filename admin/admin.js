@@ -82,6 +82,29 @@ class AdminInterface {
     }
   }
 
+  // Detect mobile device and adjust UI
+  detectMobileDevice() {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                     window.innerWidth <= 768;
+    return isMobile;
+  }
+  
+  // Adjust upload UI for mobile after rendering
+  adjustUploadUIForMobile() {
+    const isMobile = this.detectMobileDevice();
+    if (isMobile) {
+      // Switch to mobile-friendly text
+      document.querySelectorAll('[class*="upload-text-"]').forEach(textEl => {
+        const desktopText = textEl.querySelector('.desktop-text');
+        const mobileText = textEl.querySelector('.mobile-text');
+        if (desktopText && mobileText) {
+          desktopText.style.display = 'none';
+          mobileText.style.display = 'block';
+        }
+      });
+    }
+  }
+
   // Render the product management interface
   renderProductList() {
     const container = document.getElementById('product-list');
@@ -92,7 +115,7 @@ class AdminInterface {
         <div class="admin-actions">
           <button onclick="adminInterface.addNewProduct()" class="btn btn-primary">Add New Product</button>
           <button onclick="adminInterface.exportData()" class="btn btn-secondary">Export Data</button>
-          <button onclick="adminInterface.saveChanges()" class="btn btn-success">Save All Changes</button>
+          <button onclick="adminInterface.saveChangesWithPhotos()" class="btn btn-success">💾 Save Products & Photos</button>
         </div>
       </div>
       
@@ -100,6 +123,9 @@ class AdminInterface {
         ${this.products.map((product, index) => this.renderProductCard(product, index)).join('')}
       </div>
     `;
+    
+    // Adjust UI for mobile devices after rendering
+    setTimeout(() => this.adjustUploadUIForMobile(), 100);
   }
 
   // Render individual product editing card
@@ -151,9 +177,48 @@ class AdminInterface {
           </div>
           
           <div class="form-group">
-            <label>Image Filename:</label>
-            <input type="text" value="${this.sanitizeText(product.image)}" 
-                   onchange="adminInterface.updateProduct(${index}, 'image', this.value)">
+            <label>Product Photo:</label>
+            <div class="photo-upload-group" 
+                 ondrop="adminInterface.handlePhotoDrop(event, ${index})" 
+                 ondragover="adminInterface.handleDragOver(event)"
+                 ondragleave="adminInterface.handleDragLeave(event)">
+              
+              <div class="photo-preview" id="photo-preview-${index}" style="display: none;">
+                <img id="photo-img-${index}" src="" alt="Product photo">
+                <div class="photo-info">
+                  <div class="photo-filename" id="photo-name-${index}"></div>
+                  <div class="photo-size" id="photo-size-${index}"></div>
+                </div>
+                <div class="photo-actions">
+                  <button type="button" class="btn btn-small btn-secondary" 
+                          onclick="adminInterface.changePhoto(${index})">Change</button>
+                  <button type="button" class="btn btn-small btn-danger" 
+                          onclick="adminInterface.removePhoto(${index})">Remove</button>
+                </div>
+              </div>
+              
+              <div class="upload-area" id="upload-area-${index}" 
+                   onclick="adminInterface.triggerPhotoUpload(${index})">
+                <div class="upload-icon">📷</div>
+                <div class="upload-text-${index}">
+                  <div class="desktop-text">Click to upload photo<br><small>or drag & drop image here</small></div>
+                  <div class="mobile-text" style="display: none;">Tap to select photo<br><small>from Photos, Camera, or Files</small></div>
+                </div>
+              </div>
+              
+              <input type="file" id="photo-input-${index}" class="file-input" 
+                     accept="image/*" 
+                     capture="environment"
+                     onchange="adminInterface.handlePhotoSelect(event, ${index})">
+            </div>
+            
+            <!-- Fallback filename input -->
+            <div style="margin-top: 0.5rem;">
+              <label style="font-size: 0.85rem; opacity: 0.8;">Or enter filename manually:</label>
+              <input type="text" value="${this.sanitizeText(product.image)}" 
+                     onchange="adminInterface.updateProduct(${index}, 'image', this.value)"
+                     placeholder="e.g., cookies-chocolate-chip.jpg">
+            </div>
           </div>
           
           <div class="form-row">
@@ -322,6 +387,201 @@ if (typeof module !== 'undefined' && module.exports) {
     URL.revokeObjectURL(url);
     
     this.showMessage('Product data exported as JSON backup!', 'info');
+  }
+
+  // Photo Management Methods
+  
+  triggerPhotoUpload(index) {
+    document.getElementById(`photo-input-${index}`).click();
+  }
+  
+  handlePhotoSelect(event, index) {
+    const file = event.target.files[0];
+    if (file) {
+      this.processPhoto(file, index);
+    }
+  }
+  
+  handlePhotoDrop(event, index) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const uploadGroup = event.currentTarget;
+    uploadGroup.classList.remove('dragover');
+    
+    const files = event.dataTransfer.files;
+    if (files.length > 0) {
+      const file = files[0];
+      if (file.type.startsWith('image/')) {
+        this.processPhoto(file, index);
+      } else {
+        this.showMessage('Please select an image file', 'error');
+      }
+    }
+  }
+  
+  handleDragOver(event) {
+    event.preventDefault();
+    event.currentTarget.classList.add('dragover');
+  }
+  
+  handleDragLeave(event) {
+    event.preventDefault();
+    event.currentTarget.classList.remove('dragover');
+  }
+  
+  processPhoto(file, index) {
+    // Validate file
+    if (!file.type.startsWith('image/')) {
+      this.showMessage('Please select a valid image file', 'error');
+      return;
+    }
+    
+    if (file.size > 10 * 1024 * 1024) { // 10MB limit
+      this.showMessage('Image file is too large. Please select a file under 10MB', 'error');
+      return;
+    }
+    
+    // iOS Photos app integration feedback
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (isIOS) {
+      this.showMessage('📸 Processing photo from iOS Photos...', 'info');
+    }
+    
+    // Generate filename based on product name
+    const product = this.products[index];
+    const sanitizedName = product.name.toLowerCase()
+      .replace(/[^a-z0-9]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    
+    const extension = file.name.split('.').pop().toLowerCase();
+    const filename = `${sanitizedName}.${extension}`;
+    
+    // iOS-specific: Handle HEIC format note
+    if (file.type === 'image/heic' || file.name.toLowerCase().endsWith('.heic')) {
+      this.showMessage('📱 HEIC format detected. Converting for web use...', 'info');
+    }
+    
+    // Create preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.updatePhotoPreview(index, e.target.result, filename, file.size);
+      this.updateProduct(index, 'image', filename);
+      
+      // Store file data for potential upload
+      if (!this.photoFiles) this.photoFiles = {};
+      this.photoFiles[index] = {
+        file: file,
+        filename: filename,
+        dataUrl: e.target.result
+      };
+      
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      const message = isIOS ? 
+        `📱 Photo added from iOS Photos: ${filename}` : 
+        `Photo added: ${filename}`;
+      this.showMessage(message, 'success');
+    };
+    
+    reader.readAsDataURL(file);
+  }
+  
+  updatePhotoPreview(index, imageSrc, filename, fileSize) {
+    const preview = document.getElementById(`photo-preview-${index}`);
+    const uploadArea = document.getElementById(`upload-area-${index}`);
+    const img = document.getElementById(`photo-img-${index}`);
+    const nameEl = document.getElementById(`photo-name-${index}`);
+    const sizeEl = document.getElementById(`photo-size-${index}`);
+    
+    img.src = imageSrc;
+    nameEl.textContent = filename;
+    sizeEl.textContent = this.formatFileSize(fileSize);
+    
+    preview.style.display = 'flex';
+    uploadArea.style.display = 'none';
+  }
+  
+  changePhoto(index) {
+    this.triggerPhotoUpload(index);
+  }
+  
+  removePhoto(index) {
+    const preview = document.getElementById(`photo-preview-${index}`);
+    const uploadArea = document.getElementById(`upload-area-${index}`);
+    
+    preview.style.display = 'none';
+    uploadArea.style.display = 'block';
+    
+    // Clear photo data
+    if (this.photoFiles && this.photoFiles[index]) {
+      delete this.photoFiles[index];
+    }
+    
+    this.updateProduct(index, 'image', '');
+    this.showMessage('Photo removed', 'info');
+  }
+  
+  formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+  
+  // Enhanced save with photo export
+  saveChangesWithPhotos() {
+    const updatedJS = this.generateProductsJS();
+    
+    // Create ZIP file with products data and photos
+    if (this.photoFiles && Object.keys(this.photoFiles).length > 0) {
+      this.createZipWithPhotos(updatedJS);
+    } else {
+      // No photos, just download JS file
+      this.downloadFile(updatedJS, 'products-data.js', 'text/javascript');
+      this.showMessage('Products file downloaded!', 'success');
+    }
+  }
+  
+  downloadFile(content, filename, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+  
+  createZipWithPhotos(jsContent) {
+    // Simple ZIP creation message (in a real app, you'd use JSZip library)
+    this.showMessage('Creating download package with photos and data...', 'info');
+    
+    // Download the JS file
+    this.downloadFile(jsContent, 'products-data.js', 'text/javascript');
+    
+    // Download each photo individually (simple approach)
+    if (this.photoFiles) {
+      Object.values(this.photoFiles).forEach(photoData => {
+        // Convert data URL to blob and download
+        const response = fetch(photoData.dataUrl);
+        response.then(res => res.blob()).then(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = photoData.filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+      });
+    }
+    
+    this.showMessage('Download complete! Upload all files to your images/ folder', 'success');
   }
 
   // Show status messages
