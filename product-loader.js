@@ -64,7 +64,10 @@ class ProductLoader {
             <div class="product-info">
                 <h3>${product.name} ${product.emoji || ''}</h3>
                 <p>${product.description}</p>
+                ${product.ingredients ? `<div class="ingredients-info"><strong>Ingredients:</strong> ${product.ingredients}</div>` : ''}
+                ${product.allergens && product.allergens.length > 0 ? `<div class="allergen-info"><strong>Contains:</strong> ${product.allergens.join(', ')}</div>` : ''}
                 ${product.shippable ? '<div class="shipping-info"><span>🚚</span>Ships to 48 US states • 2-5 days • Fresh arrival guaranteed</div>' : ''}
+                <div class="legal-disclaimer"><small><strong>Idaho Home Kitchen:</strong> This product was produced in a home kitchen not subject to public health inspection that may also process common food allergens.</small></div>
                 <div class="product-details">
                     <div class="size-price-selector">
                         <label for="${product.id}-size">Size & Price:</label>

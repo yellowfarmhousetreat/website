@@ -97,6 +97,8 @@ class AdminInterface {
             unit: 'dozen',
             category: 'cookies',
             description: 'Sample product - edit or delete this',
+            ingredients: 'Flour, Sugar, Butter, Eggs, Vanilla Extract, Salt, Baking Soda',
+            allergens: ['wheat', 'eggs', 'milk'],
             image: 'sample-cookies.jpg',
             glutenFree: true,
             sugarFree: true,
@@ -189,6 +191,8 @@ class AdminInterface {
       unit: baseUnit,
       category: product.category,
       description: product.description || '',
+      ingredients: product.ingredients || '',
+      allergens: product.allergens || [],
       image: product.image || '',
       glutenFree: product.dietary ? product.dietary.glutenFree || false : false,
       sugarFree: product.dietary ? product.dietary.sugarFree || false : false,
@@ -417,6 +421,49 @@ class AdminInterface {
           </div>
           
           <div class="form-group">
+            <label>Ingredients (in order of quantity):</label>
+            <textarea placeholder="e.g., Flour, Sugar, Butter, Eggs, Vanilla Extract, Salt, Baking Soda" 
+                      onchange="adminInterface.updateProduct(${index}, 'ingredients', this.value)">${this.sanitizeText(product.ingredients || '')}</textarea>
+            <small style="color: rgba(255, 255, 255, 0.6); font-style: italic;">List all ingredients in descending order by weight/volume</small>
+          </div>
+          
+          <div class="form-group">
+            <label>Allergen Information:</label>
+            <div class="allergen-checkboxes" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0.5rem 0;">
+              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+                <input type="checkbox" ${product.allergens?.includes('wheat') ? 'checked' : ''} 
+                       onchange="adminInterface.updateAllergen(${index}, 'wheat', this.checked)">
+                Contains Wheat
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+                <input type="checkbox" ${product.allergens?.includes('eggs') ? 'checked' : ''} 
+                       onchange="adminInterface.updateAllergen(${index}, 'eggs', this.checked)">
+                Contains Eggs
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+                <input type="checkbox" ${product.allergens?.includes('milk') ? 'checked' : ''} 
+                       onchange="adminInterface.updateAllergen(${index}, 'milk', this.checked)">
+                Contains Milk/Dairy
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+                <input type="checkbox" ${product.allergens?.includes('nuts') ? 'checked' : ''} 
+                       onchange="adminInterface.updateAllergen(${index}, 'nuts', this.checked)">
+                Contains Tree Nuts
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+                <input type="checkbox" ${product.allergens?.includes('peanuts') ? 'checked' : ''} 
+                       onchange="adminInterface.updateAllergen(${index}, 'peanuts', this.checked)">
+                Contains Peanuts
+              </label>
+              <label style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+                <input type="checkbox" ${product.allergens?.includes('soy') ? 'checked' : ''} 
+                       onchange="adminInterface.updateAllergen(${index}, 'soy', this.checked)">
+                Contains Soy
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
             <label>Product Photo:</label>
             <div class="photo-upload-group" 
                  ondrop="adminInterface.handlePhotoDrop(event, ${index})" 
@@ -576,6 +623,25 @@ class AdminInterface {
     }
   }
 
+  // Update allergen data
+  updateAllergen(index, allergen, isChecked) {
+    if (index >= 0 && index < this.products.length) {
+      if (!this.products[index].allergens) {
+        this.products[index].allergens = [];
+      }
+      
+      if (isChecked) {
+        if (!this.products[index].allergens.includes(allergen)) {
+          this.products[index].allergens.push(allergen);
+        }
+      } else {
+        this.products[index].allergens = this.products[index].allergens.filter(a => a !== allergen);
+      }
+      
+      this.showMessage(`Updated allergen info for ${this.products[index].name}`, 'info');
+    }
+  }
+
   // Add new product
   addNewProduct() {
     const newProduct = {
@@ -709,6 +775,8 @@ window.SHIPPING_ZONES = SHIPPING_ZONES;`;
       ...(product.tier && { tier: product.tier }),
       category: product.category,
       description: product.description,
+      ingredients: product.ingredients || '',
+      allergens: product.allergens || [],
       ...(product.emoji && { emoji: product.emoji }),
       image: product.image,
       sizes: sizes,
@@ -728,7 +796,8 @@ window.SHIPPING_ZONES = SHIPPING_ZONES;`;
           baseShippingCost: product.baseShippingCost || 5,
           perPoundRate: product.perPoundRate || 2
         }
-      })
+      }),
+      idahoDisclaimer: "This product was produced in a home kitchen that is not subject to public health inspection that may also process common food allergens. If you have safety concerns, contact your local health department."
     };
   }
 
