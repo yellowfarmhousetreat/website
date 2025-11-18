@@ -165,6 +165,56 @@
     flex-direction: column;
     transition: all 0.3s ease;
     margin-bottom: 1rem;
+    position: relative;
+}
+
+/* Shipping badge */
+.shipping-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(52, 211, 153, 0.2);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    z-index: 2;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.shipping-badge:hover {
+    opacity: 1;
+    background: rgba(52, 211, 153, 0.25);
+    transform: scale(1.05);
+}
+
+.shipping-badge .icon {
+    font-size: 0.7rem;
+}
+
+/* Shipping info text */
+.shipping-info {
+    background: rgba(52, 211, 153, 0.3);
+    border: 1px solid rgba(52, 211, 153, 0.5);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    margin: 0.75rem 0;
+    font-size: 0.85rem !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 .products-grid .product-card:hover {
@@ -444,6 +494,77 @@
 
 .cart-links a:hover {
     background: #e0e0e0;
+}
+
+/* Enhanced iOS Photo Upload Styles */
+.photo-upload-section {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.upload-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+}
+
+.upload-buttons .btn {
+    min-width: 100px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-photo-library {
+    background: #0056CC;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.btn-photo-library:hover {
+    background: #0056CC;
+    transform: translateY(-1px);
+}
+
+.upload-hint {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+    .upload-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .upload-buttons .btn {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .btn-photo-library {
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
+    }
+    
+    .upload-buttons .btn {
+        -webkit-user-select: none;
+        user-select: none;
+    }
 }
 
 /* Toast Notifications */

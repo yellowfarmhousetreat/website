@@ -59,10 +59,12 @@ class ProductLoader {
         const dietaryOptions = this.generateDietaryOptions(product);
 
         card.innerHTML = `
+            ${product.shippable ? '<div class="shipping-badge"><span class="icon">🚚</span>We Ship!</div>' : ''}
             <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='images/placeholder.jpg'">
             <div class="product-info">
                 <h3>${product.name} ${product.emoji || ''}</h3>
                 <p>${product.description}</p>
+                ${product.shippable ? '<div class="shipping-info"><span>🚚</span>Ships to 48 US states • 2-5 days • Fresh arrival guaranteed</div>' : ''}
                 <div class="product-details">
                     <div class="size-price-selector">
                         <label for="${product.id}-size">Size & Price:</label>

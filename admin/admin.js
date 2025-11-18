@@ -122,7 +122,9 @@ class AdminInterface {
           
           if (typeof window.PRODUCTS !== 'undefined' && Array.isArray(window.PRODUCTS)) {
             try {
+              console.log('Original PRODUCTS data (first product):', window.PRODUCTS[0]);
               this.products = window.PRODUCTS.map(product => this.convertToAdminFormat(product));
+              console.log('Converted admin products (first product):', this.products[0]);
               this.backupData = JSON.stringify(this.products, null, 2);
               console.log('Successfully converted products:', this.products.length);
               resolve();
@@ -175,6 +177,11 @@ class AdminInterface {
     const basePrice = product.sizes && product.sizes.length > 0 ? product.sizes[0].price : 20;
     const baseUnit = this.extractUnitFromSize(product.sizes && product.sizes[0] ? product.sizes[0].name : 'dozen');
     
+    // Deep clone the sizes array to prevent reference issues
+    const originalSizes = product.sizes ? JSON.parse(JSON.stringify(product.sizes)) : [
+      { name: 'dozen', price: basePrice }
+    ];
+    
     return {
       id: product.id,
       name: product.name,
@@ -185,11 +192,17 @@ class AdminInterface {
       image: product.image || '',
       glutenFree: product.dietary ? product.dietary.glutenFree || false : false,
       sugarFree: product.dietary ? product.dietary.sugarFree || false : false,
+      vegan: product.dietary ? product.dietary.vegan || false : false,
+      glutenFreePrice: product.glutenFreePrice || 3,
+      sugarFreePrice: product.sugarFreePrice || 3,
+      veganPrice: product.veganPrice || 2,
       shippingEligible: product.shippable || false,
+      baseShippingCost: product.baseShippingCost || 5,
+      perPoundRate: product.perPoundRate || 2,
       featured: product.featured || false,
       tier: product.tier || 'Regular',
       emoji: product.emoji || '',
-      originalSizes: product.sizes || [] // Keep original sizes for export
+      originalSizes: originalSizes // Keep original sizes with deep clone
     };
   }
 
@@ -202,6 +215,106 @@ class AdminInterface {
     if (lowerSize.includes('pie')) return 'each';
     if (lowerSize.includes('lb')) return 'lb';
     return 'each';
+  }
+
+  // Render sizes editor for a product
+  renderSizesEditor(product, productIndex) {
+    // Ensure we have the originalSizes array
+    let sizes = product.originalSizes || [];
+    
+    // If no sizes exist, create default based on existing data
+    if (sizes.length === 0) {
+      sizes = [{ name: 'dozen', price: product.price || 20 }];
+      // Update the product to have this default
+      this.products[productIndex].originalSizes = sizes;
+    }
+
+    console.log(`Rendering sizes for ${product.name}:`, sizes); // Debug log
+
+    return sizes.map((size, sizeIndex) => {
+      const sizeName = size.name || '';
+      const sizePrice = size.price || 0;
+      
+      return `
+        <div class="size-row" style="display: flex; gap: 8px; margin-bottom: 8px; align-items: center; flex-wrap: wrap;">
+          <input type="text" value="${this.sanitizeText(sizeName)}" 
+                 placeholder="Size name (e.g., 1/2 dozen, dozen)" 
+                 style="flex: 1; min-width: 140px;"
+                 onchange="adminInterface.updateSize(${productIndex}, ${sizeIndex}, 'name', this.value)">
+          <div style="display: flex; align-items: center; gap: 5px;">
+            <span>$</span>
+            <input type="number" step="0.01" value="${sizePrice}" 
+                   placeholder="Price" 
+                   style="width: 80px;"
+                   onchange="adminInterface.updateSize(${productIndex}, ${sizeIndex}, 'price', parseFloat(this.value))">
+          </div>
+          <div style="display: flex; align-items: center; gap: 5px;">
+            <input type="number" step="0.1" value="${size.weight || ''}" 
+                   placeholder="Weight (lbs)" 
+                   style="width: 90px;"
+                   onchange="adminInterface.updateSize(${productIndex}, ${sizeIndex}, 'weight', parseFloat(this.value))">
+            <small style="color: #666;">lbs</small>
+          </div>
+          <button type="button" class="btn btn-small btn-danger" 
+                  onclick="adminInterface.removeSize(${productIndex}, ${sizeIndex})"
+                  ${sizes.length <= 1 ? 'disabled' : ''}>×</button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Update a specific size
+  updateSize(productIndex, sizeIndex, field, value) {
+    if (!this.products[productIndex].originalSizes) {
+      this.products[productIndex].originalSizes = [];
+    }
+    
+    if (!this.products[productIndex].originalSizes[sizeIndex]) {
+      this.products[productIndex].originalSizes[sizeIndex] = { name: '', price: 0 };
+    }
+    
+    this.products[productIndex].originalSizes[sizeIndex][field] = value;
+    
+    // Update the main price to be the first size's price
+    if (sizeIndex === 0 && field === 'price') {
+      this.products[productIndex].price = value;
+    }
+    
+    this.showMessage(`Updated ${field} for size ${sizeIndex + 1}`, 'info');
+  }
+
+  // Add a new size to a product
+  addSize(productIndex) {
+    if (!this.products[productIndex].originalSizes) {
+      this.products[productIndex].originalSizes = [];
+    }
+    
+    this.products[productIndex].originalSizes.push({
+      name: 'new size',
+      price: this.products[productIndex].price || 20
+    });
+    
+    // Re-render the sizes editor
+    document.getElementById(`sizes-${productIndex}`).innerHTML = 
+      this.renderSizesEditor(this.products[productIndex], productIndex);
+    
+    this.showMessage('Added new size option', 'success');
+  }
+
+  // Remove a size from a product
+  removeSize(productIndex, sizeIndex) {
+    if (!this.products[productIndex].originalSizes || this.products[productIndex].originalSizes.length <= 1) {
+      this.showMessage('Cannot remove the last size option', 'error');
+      return;
+    }
+    
+    this.products[productIndex].originalSizes.splice(sizeIndex, 1);
+    
+    // Re-render the sizes editor
+    document.getElementById(`sizes-${productIndex}`).innerHTML = 
+      this.renderSizesEditor(this.products[productIndex], productIndex);
+    
+    this.showMessage('Removed size option', 'warning');
   }
 
   // Detect mobile device and adjust UI
@@ -266,21 +379,14 @@ class AdminInterface {
                    onchange="adminInterface.updateProduct(${index}, 'name', this.value)">
           </div>
           
-          <div class="form-row">
-            <div class="form-group">
-              <label>Price ($):</label>
-              <input type="number" step="0.01" value="${product.price}" 
-                     onchange="adminInterface.updateProduct(${index}, 'price', parseFloat(this.value))">
+          <div class="form-group">
+            <label>Sizes & Pricing:</label>
+            <div class="sizes-container" id="sizes-${index}">
+              ${this.renderSizesEditor(product, index)}
             </div>
-            <div class="form-group">
-              <label>Unit:</label>
-              <select onchange="adminInterface.updateProduct(${index}, 'unit', this.value)">
-                <option value="dozen" ${product.unit === 'dozen' ? 'selected' : ''}>Dozen</option>
-                <option value="each" ${product.unit === 'each' ? 'selected' : ''}>Each</option>
-                <option value="bag" ${product.unit === 'bag' ? 'selected' : ''}>Bag</option>
-                <option value="loaf" ${product.unit === 'loaf' ? 'selected' : ''}>Loaf</option>
-              </select>
-            </div>
+            <button type="button" class="btn btn-small btn-secondary" 
+                    onclick="adminInterface.addSize(${index})" 
+                    style="margin-top: 5px;">+ Add Size</button>
           </div>
           
           <div class="form-group">
@@ -319,19 +425,27 @@ class AdminInterface {
                 </div>
               </div>
               
-              <div class="upload-area" id="upload-area-${index}" 
-                   onclick="adminInterface.triggerPhotoUpload(${index})">
-                <div class="upload-icon">📷</div>
-                <div class="upload-text-${index}">
-                  <div class="desktop-text">Click to upload photo<br><small>or drag & drop image here</small></div>
-                  <div class="mobile-text" style="display: none;">Tap to select photo<br><small>from Photos, Camera, or Files</small></div>
+              <div class="photo-upload-section">
+                <div class="upload-buttons">
+                  <button type="button" class="btn btn-primary btn-photo-library" 
+                          onclick="adminInterface.triggerPhotoLibrary(${index})">📱 Photos</button>
+                  <button type="button" class="btn btn-secondary btn-camera" 
+                          onclick="adminInterface.triggerCamera(${index})">📸 Camera</button>
+                  <button type="button" class="btn btn-secondary btn-files" 
+                          onclick="adminInterface.triggerFiles(${index})">📁 Files</button>
                 </div>
+                <div class="upload-hint">Select from Photos app, take new photo, or browse files</div>
               </div>
               
-              <input type="file" id="photo-input-${index}" class="file-input" 
+              <input type="file" id="photo-input-library-${index}" class="file-input" 
                      accept="image/*" 
-                     capture="environment"
-                     onchange="adminInterface.handlePhotoSelect(event, ${index})">
+                     onchange="adminInterface.handlePhotoSelect(event, ${index}, 'library')" style="display: none;">
+              <input type="file" id="photo-input-camera-${index}" class="file-input" 
+                     accept="image/*" capture="environment"
+                     onchange="adminInterface.handlePhotoSelect(event, ${index}, 'camera')" style="display: none;">
+              <input type="file" id="photo-input-files-${index}" class="file-input" 
+                     accept="image/*,image/heic,image/jpeg,image/png,image/gif,image/webp" 
+                     onchange="adminInterface.handlePhotoSelect(event, ${index}, 'files')" style="display: none;">
             </div>
             
             <!-- Fallback filename input -->
@@ -343,37 +457,83 @@ class AdminInterface {
             </div>
           </div>
           
-          <div class="form-row">
-            <div class="form-group">
-              <label>
-                <input type="checkbox" ${product.glutenFree ? 'checked' : ''} 
+          <div class="form-group">
+            <label>Dietary Options & Pricing:</label>
+            <div class="dietary-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px;">
+              <div style="display: flex; align-items: center; gap: 5px;">
+                <input type="checkbox" id="gf-${index}" ${product.glutenFree ? 'checked' : ''} 
                        onchange="adminInterface.updateProduct(${index}, 'glutenFree', this.checked)">
-                Gluten Free Available
-              </label>
-            </div>
-            <div class="form-group">
-              <label>
-                <input type="checkbox" ${product.sugarFree ? 'checked' : ''} 
+                <label for="gf-${index}" style="margin: 0;">Gluten Free</label>
+                <span>+$</span>
+                <input type="number" step="0.01" value="${product.glutenFreePrice || 3}" 
+                       style="width: 50px;" 
+                       onchange="adminInterface.updateProduct(${index}, 'glutenFreePrice', parseFloat(this.value))">
+              </div>
+              <div style="display: flex; align-items: center; gap: 5px;">
+                <input type="checkbox" id="sf-${index}" ${product.sugarFree ? 'checked' : ''} 
                        onchange="adminInterface.updateProduct(${index}, 'sugarFree', this.checked)">
-                Sugar Free Available
-              </label>
+                <label for="sf-${index}" style="margin: 0;">Sugar Free</label>
+                <span>+$</span>
+                <input type="number" step="0.01" value="${product.sugarFreePrice || 3}" 
+                       style="width: 50px;" 
+                       onchange="adminInterface.updateProduct(${index}, 'sugarFreePrice', parseFloat(this.value))">
+              </div>
+              <div style="display: flex; align-items: center; gap: 5px;">
+                <input type="checkbox" id="vegan-${index}" ${product.vegan ? 'checked' : ''} 
+                       onchange="adminInterface.updateProduct(${index}, 'vegan', this.checked)">
+                <label for="vegan-${index}" style="margin: 0;">Vegan</label>
+                <span>+$</span>
+                <input type="number" step="0.01" value="${product.veganPrice || 2}" 
+                       style="width: 50px;" 
+                       onchange="adminInterface.updateProduct(${index}, 'veganPrice', parseFloat(this.value))">
+              </div>
             </div>
           </div>
           
-          <div class="form-row">
-            <div class="form-group">
-              <label>
-                <input type="checkbox" ${product.shippingEligible ? 'checked' : ''} 
-                       onchange="adminInterface.updateProduct(${index}, 'shippingEligible', this.checked)">
-                Shipping Eligible
-              </label>
-            </div>
-            <div class="form-group">
-              <label>
-                <input type="checkbox" ${product.featured ? 'checked' : ''} 
-                       onchange="adminInterface.updateProduct(${index}, 'featured', this.checked)">
-                Featured Product
-              </label>
+          <div class="form-group">
+            <label>Shipping & Features:</label>
+            <div class="shipping-options" style="margin-top: 5px;">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <label style="display: flex; align-items: center; gap: 5px; margin: 0;">
+                  <input type="checkbox" ${product.shippingEligible ? 'checked' : ''} 
+                         onchange="adminInterface.updateProduct(${index}, 'shippingEligible', this.checked)">
+                  Shipping Eligible
+                </label>
+                <label style="display: flex; align-items: center; gap: 5px; margin: 0;">
+                  <input type="checkbox" ${product.featured ? 'checked' : ''} 
+                         onchange="adminInterface.updateProduct(${index}, 'featured', this.checked)">
+                  Featured Product
+                </label>
+              </div>
+              
+              ${product.shippingEligible ? `
+                <div class="shipping-details" style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 8px;">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px;">
+                    <div>
+                      <label style="font-size: 0.85rem; margin-bottom: 3px; display: block;">Base Shipping Cost:</label>
+                      <div style="display: flex; align-items: center; gap: 3px;">
+                        <span>$</span>
+                        <input type="number" step="0.01" value="${product.baseShippingCost || 5}" 
+                               style="width: 60px;" 
+                               onchange="adminInterface.updateProduct(${index}, 'baseShippingCost', parseFloat(this.value))">
+                      </div>
+                    </div>
+                    <div>
+                      <label style="font-size: 0.85rem; margin-bottom: 3px; display: block;">Per Pound Rate:</label>
+                      <div style="display: flex; align-items: center; gap: 3px;">
+                        <span>$</span>
+                        <input type="number" step="0.01" value="${product.perPoundRate || 2}" 
+                               style="width: 60px;" 
+                               onchange="adminInterface.updateProduct(${index}, 'perPoundRate', parseFloat(this.value))">
+                        <small style="color: #666;">/lb</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="font-size: 0.85rem; color: #666; font-style: italic;">
+                    💡 Shipping = Base Cost + (Weight × Per Pound Rate)
+                  </div>
+                </div>
+              ` : ''}
             </div>
           </div>
         </div>
@@ -507,9 +667,20 @@ window.SHIPPING_ZONES = SHIPPING_ZONES;`;
       dietary: {
         glutenFree: product.glutenFree || false,
         sugarFree: product.sugarFree || false,
-        vegan: false
+        vegan: product.vegan || false
       },
-      shippable: product.shippingEligible || false
+      dietaryPricing: {
+        glutenFree: product.glutenFreePrice || 3,
+        sugarFree: product.sugarFreePrice || 3,
+        vegan: product.veganPrice || 2
+      },
+      shippable: product.shippingEligible || false,
+      ...(product.shippingEligible && {
+        shipping: {
+          baseShippingCost: product.baseShippingCost || 5,
+          perPoundRate: product.perPoundRate || 2
+        }
+      })
     };
   }
 
@@ -579,9 +750,37 @@ window.SHIPPING_ZONES = SHIPPING_ZONES;`;
     document.getElementById(`photo-input-${index}`).click();
   }
   
-  handlePhotoSelect(event, index) {
+  // Trigger photo library access (iOS specific)
+  triggerPhotoLibrary(index) {
+    const input = document.getElementById(`photo-input-library-${index}`);
+    if (input) {
+      input.value = '';
+      input.click();
+    }
+  }
+  
+  // Trigger camera directly
+  triggerCamera(index) {
+    const input = document.getElementById(`photo-input-camera-${index}`);
+    if (input) {
+      input.value = '';
+      input.click();
+    }
+  }
+  
+  // Trigger general file picker
+  triggerFiles(index) {
+    const input = document.getElementById(`photo-input-files-${index}`);
+    if (input) {
+      input.value = '';
+      input.click();
+    }
+  }
+  
+  handlePhotoSelect(event, index, inputType = 'library') {
     const file = event.target.files[0];
     if (file) {
+      this.showMessage(`📷 Photo selected from ${inputType}`, 'info');
       this.processPhoto(file, index);
     }
   }
