@@ -12,9 +12,9 @@ class AdminInterface {
   }
 
   init() {
-    this.loadProducts();
     this.setupEventListeners();
     this.checkAuthentication();
+    // Load products after authentication check
   }
 
   // Security: Simple but effective authentication
@@ -44,7 +44,13 @@ class AdminInterface {
   showAdminPanel() {
     document.getElementById('login-form').style.display = 'none';
     document.getElementById('admin-panel').style.display = 'block';
-    this.renderProductList();
+    
+    // Load products when admin panel is shown
+    this.loadProducts().then(() => {
+      this.renderProductList();
+    }).catch(() => {
+      this.renderProductList(); // Render with fallback data
+    });
   }
 
   // Authentication handler
@@ -66,19 +72,49 @@ class AdminInterface {
   // Load current products from the main site
   async loadProducts() {
     try {
-      // In a real deployment, this would fetch from the server
-      // For now, we'll load the local products-data.js
-      const response = await fetch('../products-data.js');
-      const jsContent = await response.text();
+      // Load the products-data.js file and execute it to get PRODUCTS array
+      const script = document.createElement('script');
+      script.src = '../products-data.js';
       
-      // Extract the PRODUCTS array from the JS file
-      const productsMatch = jsContent.match(/const PRODUCTS = (\[[\s\S]*?\]);/);
-      if (productsMatch) {
-        this.products = JSON.parse(productsMatch[1]);
-        this.backupData = JSON.stringify(this.products, null, 2);
-      }
+      // Wait for script to load and execute
+      await new Promise((resolve, reject) => {
+        script.onload = () => {
+          // PRODUCTS should now be available globally
+          if (typeof PRODUCTS !== 'undefined') {
+            this.products = JSON.parse(JSON.stringify(PRODUCTS)); // Deep clone
+            this.backupData = JSON.stringify(this.products, null, 2);
+            resolve();
+          } else {
+            reject(new Error('PRODUCTS array not found in products-data.js'));
+          }
+        };
+        script.onerror = () => reject(new Error('Failed to load products-data.js'));
+        document.head.appendChild(script);
+      });
+      
+      this.showMessage(`Loaded ${this.products.length} products successfully`, 'success');
+      
     } catch (error) {
       this.showMessage('Error loading products: ' + error.message, 'error');
+      
+      // Fallback: create some default products if loading fails
+      this.products = [
+        {
+          id: 'sample-cookies',
+          name: 'Sample Cookies',
+          price: 20,
+          unit: 'dozen',
+          category: 'cookies',
+          description: 'Sample product - edit or delete this',
+          image: 'sample-cookies.jpg',
+          glutenFree: true,
+          sugarFree: true,
+          shippingEligible: false,
+          featured: false
+        }
+      ];
+      
+      this.showMessage('Created sample product. Add your real products below.', 'info');
     }
   }
 
