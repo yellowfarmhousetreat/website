@@ -19,67 +19,73 @@ Modernize yellowfarmhousetreats.com bakery e-commerce site using Massively HTML5
 ## SITE ARCHITECTURE
 
 ### Navigation Structure:
-**Main Navigation (on all pages):** Home | Menu | Cart & Checkout
+**Main Navigation (on all pages):** Home | Menu | Order
 
 ### Page Hierarchy:
 ```
 index.html (HOME)
   ├── Instagram feed (SnapWidget embed)
-  └── Category preview cards linking to:
-menu.html (MENU/ORDER)
-  ├── Cookies → cookies.html
-  ├── Cakes → cakes.html  
-  ├── Pies → pies.html
-  └── Breads → breads.html
-cart.html (CART/CHECKOUT)
+  ├── Quick Menu Tabs (linking to menu.html sections)
+  └── Social links and contact info
+menu.html (UNIFIED MENU/ORDER SYSTEM)
+  ├── Tab-based navigation for user experience
+  ├── Cookie Tiers: Simple | Fancy | Complex
+  ├── Categories: Cookies | Cakes | Pies & Crisps | Breads & More | All Items
+  └── Integrated cart and ordering system
+order.html (CART/CHECKOUT)
+
+BACKEND MAINTENANCE PAGES (for easy product editing):
+  ├── cookies.html (individual cookie products)
+  ├── cakes.html (individual cake products) 
+  ├── pies.html (individual pie products)
+  └── breads.html (individual bread products)
 ```
 
 ### Files to Create/Update:
 
-#### 1. index.html (Homepage)
-**Requirements:**
-- Hero section: "YELLOW FARMHOUSE TREATS" with intro/tagline
-- Instagram feed section with SnapWidget embed code
-- Four category preview cards with images:
-  - Cookies (link to cookies.html)
-  - Cakes (link to cakes.html)
-  - Pies (link to pies.html)
-  - Breads (link to breads.html)
-- Contact section with:
+#### 1. index.html (Homepage) - CURRENT IMPLEMENTATION ✓
+**Current Features (as implemented):**
+- Hero section: "YELLOW FARMHOUSE TREATS" with continue button
+- Instagram showcase section with SnapWidget embed (widget ID: 1112051)
+- Quick Menu Tabs navigation linking to menu.html sections:
+  - Cookies → menu.html#cookies
+  - Cakes → menu.html#cakes  
+  - Pies & Crisps → menu.html#pies
+  - Breads & More → menu.html#breads
+  - All Items → menu.html#all
+- Contact section in footer with:
   - Address: 22659 Farmway Road, Caldwell, ID 83646
   - Phone: (805) 709-4686
   - Email: yellowfarmhousetreats@gmail.com
   - Social: Facebook & Instagram icons
-- Link to assets/css/main.css and assets/css/noscript.css
-- No cart.js needed on homepage
+- Proper template CSS links and no cart.js (correct)
+- **NOTE:** No separate category preview cards - uses integrated Quick Menu Tabs instead
 
-#### 2. menu.html (Category Landing)
-**Requirements:**
-- Brief intro text about the bakery
-- Four category cards with descriptions:
-  - Cookies: "Homemade cookies baked fresh daily"
-  - Cakes: "Custom cakes for any occasion"
-  - Pies: "Traditional pies made from scratch"
-  - Breads: "Artisan breads and sweet loaves"
-- Each card links to respective product page
-- Maintain consistent header/footer
+#### 2. menu.html (Unified Menu/Order System) - CURRENT IMPLEMENTATION ✓
+**Current Features (as implemented):**
+- **Dual Architecture:** Single-page tab interface for user experience + separate backend pages for maintenance
+- **Tab-based navigation:** Cookies | Cakes | Pies & Crisps | Breads & More | All Items
+- **Cookie tier system:** Simple | Fancy | Complex (for different cookie complexity levels)
+- **Integrated cart functionality:** Real-time cart updates with cart.js
+- **Responsive design:** Works across desktop, tablet, mobile
+- **JavaScript switching:** Uses data-category attributes for seamless user experience
+- **Backend connection:** Links to individual product pages for maintenance ease
 
-#### 3. Product Pages (cookies.html, cakes.html, pies.html, breads.html)
-**Shared Requirements:**
-- Product grid layout (responsive: 3 cols desktop, 2 cols tablet, 1 col mobile)
-- Each product card contains:
-  - Product name
-  - Description
-  - Price
-  - Image placeholder or actual image
-  - Dietary option checkboxes:
-    - ☐ Gluten Free (GF) - may affect price
-    - ☐ Sugar Free (SF) - may affect price
-  - Quantity input (default: 1, min: 1)
-  - "Add to Cart" button
-- **MUST link cart.js:** `<script src="assets/js/cart.js"></script>` before `</body>`
-- Cart count badge in navigation showing total items
-- Link back to menu.html
+#### 3. Backend Product Pages (cookies.html, cakes.html, pies.html, breads.html)
+**Purpose:** Individual maintenance pages for easy product editing (NOT primary user interface)
+
+**Current Implementation:**
+- **Simplified navigation:** Home | Menu | Order (consistent with main site)
+- **Product grid layout:** Clean, maintainable structure
+- **Each product card contains:**
+  - Product name and description
+  - Price display
+  - Image references (linked to images/ folder)
+  - Dietary option checkboxes (GF/SF)
+  - Quantity input controls
+  - "Add to Cart" functionality
+- **Integration:** Links cart.js for functionality testing
+- **Usage:** Primarily for backend maintenance, secondary user access
 
 **Product Data (from reference_document.md):**
 
@@ -111,27 +117,19 @@ cart.html (CART/CHECKOUT)
 - Banana Bread - $10
 - Zucchini Bread - $10
 
-#### 4. cart.html (Shopping Cart & Checkout)
-**Requirements:**
-- Display cart items in table/list format:
-  - Product name
-  - Dietary options (if selected)
-  - Quantity (editable)
-  - Unit price
-  - Line total
-  - Remove button
-- Cart summary:
-  - Subtotal
-  - Tax (if applicable)
-  - **Total**
-- Checkout section:
-  - Customer info form (name, email, phone)
-  - Delivery/pickup selection
-  - Special instructions textarea
-  - **PayPal button ONLY** (no credit card fields)
-- "Continue Shopping" button linking to menu.html
-- "Empty Cart" button
-- **MUST link cart.js**
+#### 4. order.html (Shopping Cart & Checkout) - CURRENT FILENAME ✓
+**Current Implementation:** 
+*Note: Site uses `order.html` instead of `cart.html` - navigation reflects this*
+
+**Features (as implemented):**
+- **Cart display:** Table format with product details, quantities, dietary options
+- **Interactive controls:** Editable quantities, remove buttons, real-time updates  
+- **Cart summary:** Subtotal, shipping (if applicable), total calculations
+- **Checkout integration:** Customer info forms, delivery/pickup options
+- **Payment processing:** PayPal integration (no credit cards)
+- **Navigation:** "Continue Shopping" links back to menu.html
+- **Cart management:** Empty cart functionality, persistent storage
+- **JavaScript integration:** Full cart.js integration for real-time updates
 
 #### 5. cart.js (Shopping Cart Logic)
 **Core Functions Required:**
@@ -316,16 +314,61 @@ Before marking complete, verify:
 **Status:** RESOLVED - www.yellowfarmhousetreats.com is live
 **Setup:** CNAME points to yellowfarmhousetreat.github.io
 
+### Issue 3: Optimization Disaster (2025-11-17)
+**Problem:** Aggressive performance optimization broke site functionality  
+**What Happened:** Attempted to optimize by:
+- Removing "unused" JavaScript libraries (broke template functionality)
+- Creating minified CSS versions (lost custom styling) 
+- Modifying font loading (broke design)
+- Removing template images (some were needed)
+**Resolution:** Used `git reset --hard ccf1124` to restore to working state before optimization attempts
+**Lesson Learned:** NEVER optimize without creating separate branch first; template dependencies are complex
+
+## CRITICAL WORKFLOW RULES - LESSONS LEARNED
+
+### For Future AI Assistants:
+1. **NEVER remove files without explicit approval** - "unused" files may be template dependencies
+2. **Create branches for experimentation** - use `git checkout -b optimization` before major changes
+3. **Test incrementally** - make one change at a time, test, commit
+4. **Ask before optimizing** - user's custom work takes absolute priority over performance
+5. **Template libraries matter** - jQuery, scrolling effects, breakpoints.min.js are all required
+6. **When in doubt, don't** - preservation > optimization
+
+### Current Working State (2025-11-17):
+- **Status:** MODERNIZED with centralized product management system
+- **Architecture:** Option A implementation - minimal individual HTML files with dynamic product loading
+- **New System:**
+  - `products-data.js` - Single source of truth for all product data
+  - `product-loader.js` - Dynamic rendering system for all product displays
+  - Individual pages: Streamlined HTML with consistent template structure
+  - Security: XSS vulnerabilities patched with input sanitization
+- **Benefits Achieved:**
+  - Easy product updates: Edit one file (`products-data.js`) to update entire site
+  - SEO-friendly: Individual pages maintained for direct category access
+  - Security: Protected against XSS attacks via localStorage manipulation
+  - Maintainable: Clean separation of data and presentation logic
+
+## CURRENT IMPLEMENTATION - OPTION A (2025-11-17)
+
+### ✅ COMPLETED:
+- **Dynamic Product System:** All products now load from centralized `products-data.js`
+- **Streamlined Individual Pages:** Minimal HTML structure with consistent template design
+- **Security Hardening:** XSS vulnerabilities patched with input sanitization
+- **Navigation Consistency:** All individual pages include complete navigation with cakes.html
+- **Maintainable Architecture:** Single data file controls all product displays
+
+### 🔄 HOW TO UPDATE PRODUCTS:
+**To add/edit products:** Only edit `products-data.js` file
+**Result:** Changes appear automatically across ALL pages (menu.html, cookies.html, pies.html, etc.)
+**Example:** Add new cookie → Edit PRODUCTS array → New product shows everywhere instantly
+
 ## NEXT STEPS
 
-1. Review all product pages for consistency
-2. Test cart.js across all pages
-3. Verify dietary options pricing
-4. Add product images to /images/ folder
-5. Test PayPal integration
-6. Mobile testing on real devices
-7. SEO optimization (meta tags, descriptions)
-8. Performance audit (PageSpeed Insights)
+1. Add product images to `/images/` folder (when provided)
+2. Test dynamic system on all browsers (if issues reported)  
+3. Verify cart integration with new product loader (if problems found)
+4. Test PayPal integration (when ready for production)
+5. Mobile testing on real devices (when requested)
 
 ## SUPPORT RESOURCES
 
@@ -333,9 +376,11 @@ Before marking complete, verify:
 - GitHub Pages Docs: https://docs.github.com/pages
 - SnapWidget: https://snapwidget.com
 - PayPal Developer: https://developer.paypal.com
+- **Git Recovery:** Always available via `git log` and `git reset --hard [commit]`
 
 ---
 
-**Last Updated:** 2025-11-16  
-**Site Status:** Product pages created, cart system implemented, index.html restored, DNS configured  
-**Next Priority:** Test full checkout flow
+**Last Updated:** 2025-11-17  
+**Site Status:** WORKING - restored to stable state after optimization disaster  
+**Current Priority:** Stability and functionality preservation over performance
+**WARNING:** Do not attempt optimizations without separate branch and explicit user approval

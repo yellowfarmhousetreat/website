@@ -3,78 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookies | Yellow Farmhouse Stand</title>
+    <title>Cookies - Yellow Farmhouse Treats</title>
+    <meta name="description" content="Freshly baked cookies made with love and the finest ingredients. Shop our selection of delicious homemade cookies.">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="styles-products.css">
 </head>
-<body>
-    <header id="header">
-        <nav>
-            <ul>
+<body class="is-preload">
+    <div id="wrapper">
+        <header id="header">
+            <a href="index.html" class="logo">Yellow Farmhouse Treats</a>
+        </header>
+        <nav id="nav">
+            <ul class="links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="order.html">Order <span id="cart-count" class="cart-count">0</span></a></li>
+                <li><a href="menu.html">Full Menu</a></li>
+                <li class="active"><a href="cookies.html">Cookies</a></li>
+                <li><a href="pies.html">Pies</a></li>
+                <li><a href="cakes.html">Cakes</a></li>
+                <li><a href="breads.html">Breads</a></li>
+                <li><a href="order.html">Order</a></li>
             </ul>
         </nav>
-        <h1>Cookies</h1>
-    </header>
-    <main id="main" class="product-catalog">
-        <section class="products-grid">
-            <!-- Chocolate Chip Cookies -->
-            <div class="product-card">
-                <img src="images/cookies-chocolate-chip.jpg" alt="Chocolate Chip Cookies" class="product-img">
-                <h2>Chocolate Chip Cookies</h2>
-                <p>Classic cookies loaded with chocolate chips. Soft and chewy.</p>
-                <div class="product-details">
-                    <span class="product-price">$20/dozen</span>
-                    <label><input type="checkbox" id="cc-gf"> Gluten Free</label>
-                    <label><input type="checkbox" id="cc-sf"> Sugar Free</label>
-                    <input type="number" id="cc-qty" min="1" value="1" class="qty-input">
-                    <button onclick="addToCart('Chocolate Chip Cookies', 20, 'cc-gf', 'cc-sf', 'cc-qty')">Add to Cart</button>
-                </div>
-            </div>
-            <!-- Peanut Butter Cookies -->
-            <div class="product-card">
-                <img src="images/cookies-peanut-butter.jpg" alt="Peanut Butter Cookies" class="product-img">
-                <h2>Peanut Butter Cookies</h2>
-                <p>Rich peanut butter flavor, soft and crumbly. A classic favorite.</p>
-                <div class="product-details">
-                    <span class="product-price">$20/dozen</span>
-                    <label><input type="checkbox" id="pb-gf"> Gluten Free</label>
-                    <label><input type="checkbox" id="pb-sf"> Sugar Free</label>
-                    <input type="number" id="pb-qty" min="1" value="1" class="qty-input">
-                    <button onclick="addToCart('Peanut Butter Cookies', 20, 'pb-gf', 'pb-sf', 'pb-qty')">Add to Cart</button>
-                </div>
-            </div>
-            <!-- Sugar Cookies -->
-            <div class="product-card">
-                <img src="images/cookies-sugar.jpg" alt="Sugar Cookies" class="product-img">
-                <h2>Sugar Cookies</h2>
-                <p>Sweet, buttery cookies with a soft texture. Perfect for any occasion.</p>
-                <div class="product-details">
-                    <span class="product-price">$20/dozen</span>
-                    <label><input type="checkbox" id="sc-gf"> Gluten Free</label>
-                    <label><input type="checkbox" id="sc-sf"> Sugar Free</label>
-                    <input type="number" id="sc-qty" min="1" value="1" class="qty-input">
-                    <button onclick="addToCart('Sugar Cookies', 20, 'sc-gf', 'sc-sf', 'sc-qty')">Add to Cart</button>
-                </div>
-            </div>
-            <!-- Oatmeal Raisin Cookies -->
-            <div class="product-card">
-                <img src="images/cookies-oatmeal-raisin.jpg" alt="Oatmeal Raisin Cookies" class="product-img">
-                <h2>Oatmeal Raisin Cookies</h2>
-                <p>Hearty oatmeal cookies with plump raisins. Chewy and satisfying.</p>
-                <div class="product-details">
-                    <span class="product-price">$20/dozen</span>
-                    <label><input type="checkbox" id="or-gf"> Gluten Free</label>
-                    <label><input type="checkbox" id="or-sf"> Sugar Free</label>
-                    <input type="number" id="or-qty" min="1" value="1" class="qty-input">
-                    <button onclick="addToCart('Oatmeal Raisin Cookies', 20, 'or-gf', 'or-sf', 'or-qty')">Add to Cart</button>
-                </div>
-            </div>
-        </section>
-    </main>
-    <script src="products.js"></script>
+        <div id="main">
+            <section class="post">
+                <header class="major">
+                    <h1>Our Delicious Cookies</h1>
+                    <p>Freshly baked cookies made with love and the finest ingredients</p>
+                </header>
+                <div id="products-container" data-category="cookies"></div>
+            </section>
+        </div>
+        <footer id="footer">
+            <section class="split contact">
+                <section>
+                    <h3>Phone</h3>
+                    <p><a href="tel:000-000-0000">(000) 000-0000</a></p>
+                </section>
+                <section>
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@yellowfarmhousetreat.com">info@yellowfarmhousetreat.com</a></p>
+                </section>
+            </section>
+        </footer>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="products-data.js"></script>
+    <script src="product-loader.js"></script>
     <script src="cart.js"></script>
 </body>
 </html>

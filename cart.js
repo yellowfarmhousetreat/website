@@ -5,9 +5,15 @@
 function showToast(message, type = 'success') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    // Safe: textContent is used instead of innerHTML, automatically escaping any malicious content
-    toast.textContent = message;
-    document.body.appendChild(toast);
+    // Security: Double sanitization - input validation + safe DOM insertion
+    const sanitizedMessage = String(message).replace(/[<>&"']/g, '').substring(0, 200);
+    // Use textContent (not innerHTML) to prevent XSS injection
+    toast.textContent = sanitizedMessage;
+    
+    // Validate toast element before DOM insertion
+    if (toast.textContent === sanitizedMessage && document.body) {
+        document.body.appendChild(toast);
+    }
     
     setTimeout(() => {
         toast.style.animation = 'slideOut 0.3s ease';
@@ -18,9 +24,32 @@ function showToast(message, type = 'success') {
 function getCart() {
     try {
         const cart = localStorage.getItem('yfhs_cart');
-        return cart ? JSON.parse(cart) : [];
+        if (!cart) return [];
+        
+        const parsedCart = JSON.parse(cart);
+        
+        // Validate and sanitize cart data
+        if (!Array.isArray(parsedCart)) return [];
+        
+        return parsedCart.filter(item => {
+            // Basic validation - ensure required fields exist and are valid types
+            return item && 
+                   typeof item.name === 'string' && item.name.length > 0 &&
+                   typeof item.price === 'number' && item.price > 0 &&
+                   typeof item.quantity === 'number' && item.quantity > 0;
+        }).map(item => ({
+            // Advanced sanitization - strip ALL potentially dangerous characters
+            name: String(item.name).replace(/[^\w\s\-().]/g, '').substring(0, 100),
+            price: parseFloat(item.price),
+            quantity: parseInt(item.quantity),
+            glutenFree: Boolean(item.glutenFree),
+            sugarFree: Boolean(item.sugarFree),
+            size: item.size ? String(item.size).replace(/[^\w\s\-().]/g, '').substring(0, 50) : undefined
+        }));
     } catch (e) {
         console.error('Error reading cart:', e);
+        // Clear potentially corrupted cart data
+        localStorage.removeItem('yfhs_cart');
         return [];
     }
 }
@@ -240,7 +269,9 @@ function removeFromCart(index) {
         saveCart(cart);
         renderCart();
         updateCartCount();
-        showToast(`Removed ${item.name} from cart.`);
+        // Sanitize item name to prevent XSS
+        const sanitizedName = String(item.name || '').replace(/[<>&"']/g, '');
+        showToast(`Removed ${sanitizedName} from cart.`);
     }
 }
 

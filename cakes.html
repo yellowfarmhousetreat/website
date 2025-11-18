@@ -3,63 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cakes | Yellow Farmhouse Stand</title>
+    <title>Cakes - Yellow Farmhouse Treats</title>
+    <meta name="description" content="Delicious homemade cakes baked fresh daily. Shop our selection of moist, flavorful cakes.">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="styles-products.css">
 </head>
-<body>
-    <header id="header">
-        <nav>
-            <ul>
+<body class="is-preload">
+    <div id="wrapper">
+        <header id="header">
+            <a href="index.html" class="logo">Yellow Farmhouse Treats</a>
+        </header>
+        <nav id="nav">
+            <ul class="links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="order.html">Order <span id="cart-count" class="cart-count">0</span></a></li>
+                <li><a href="menu.html">Full Menu</a></li>
+                <li><a href="cookies.html">Cookies</a></li>
+                <li><a href="pies.html">Pies</a></li>
+                <li class="active"><a href="cakes.html">Cakes</a></li>
+                <li><a href="breads.html">Breads</a></li>
+                <li><a href="order.html">Order</a></li>
             </ul>
         </nav>
-        <h1>Cakes</h1>
-    </header>
-    <main id="main" class="product-catalog">
-        <section class="products-grid">
-            <!-- Example Cake Product -->
-            <div class="product-card">
-                <img src="images/cake-chocolate.jpg" alt="Chocolate Cake" class="product-img">
-                <h2>Chocolate Cake</h2>
-                <p>Rich, moist chocolate cake with creamy frosting.</p>
-                <div class="product-details">
-                    <span class="product-price">$30</span>
-                    <label><input type="checkbox" id="choc-gf"> Gluten Free</label>
-                    <label><input type="checkbox" id="choc-sf"> Sugar Free</label>
-                    <input type="number" id="choc-qty" min="1" value="1" class="qty-input">
-                    <button onclick="addToCart('Chocolate Cake', 30, 'choc-gf', 'choc-sf', 'choc-qty')">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="images/cake-vanilla.jpg" alt="Vanilla Cake" class="product-img">
-                <h2>Vanilla Cake</h2>
-                <p>Classic vanilla cake with a light, fluffy texture.</p>
-                <div class="product-details">
-                    <span class="product-price">$30</span>
-                    <label><input type="checkbox" id="van-gf"> Gluten Free</label>
-                    <label><input type="checkbox" id="van-sf"> Sugar Free</label>
-                    <input type="number" id="van-qty" min="1" value="1" class="qty-input">
-                    <button onclick="addToCart('Vanilla Cake', 30, 'van-gf', 'van-sf', 'van-qty')">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="images/cake-carrot.jpg" alt="Carrot Cake" class="product-img">
-                <h2>Carrot Cake</h2>
-                <p>Moist carrot cake with cream cheese frosting.</p>
-                <div class="product-details">
-                    <span class="product-price">$32</span>
-                    <label><input type="checkbox" id="carrot-gf"> Gluten Free</label>
-                    <label><input type="checkbox" id="carrot-sf"> Sugar Free</label>
-                    <input type="number" id="carrot-qty" min="1" value="1" class="qty-input">
-                    <button onclick="addToCart('Carrot Cake', 32, 'carrot-gf', 'carrot-sf', 'carrot-qty')">Add to Cart</button>
-                </div>
-            </div>
-        </section>
-    </main>
-    <script src="products.js"></script>
+        <div id="main">
+            <section class="post">
+                <header class="major">
+                    <h1>Our Delicious Cakes</h1>
+                    <p>Handcrafted cakes made with premium ingredients and lots of love</p>
+                </header>
+                <div id="products-container" data-category="cakes"></div>
+            </section>
+        </div>
+        <footer id="footer">
+            <section class="split contact">
+                <section>
+                    <h3>Phone</h3>
+                    <p><a href="tel:000-000-0000">(000) 000-0000</a></p>
+                </section>
+                <section>
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@yellowfarmhousetreat.com">info@yellowfarmhousetreat.com</a></p>
+                </section>
+            </section>
+        </footer>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="products-data.js"></script>
+    <script src="product-loader.js"></script>
     <script src="cart.js"></script>
 </body>
 </html>

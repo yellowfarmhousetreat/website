@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Admin Panel - Yellow Farmhouse Treats</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <style>
+        /* Admin Panel Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Login Form Styles */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            min-width: 400px;
+        }
+
+        .login-form h1 {
+            margin-bottom: 2rem;
+            color: #f4d03f;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #f4d03f;
+            box-shadow: 0 0 10px rgba(244, 208, 63, 0.3);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #f4d03f;
+            color: #1a1a2e;
+        }
+
+        .btn-primary:hover {
+            background: #f1c40f;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: #ffffff;
+        }
+
+        .btn-success:hover {
+            background: #2ecc71;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        /* Admin Panel Styles */
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .admin-product-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .admin-product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .product-header h3 {
+            color: #f4d03f;
+            margin: 0;
+        }
+
+        /* Messages */
+        #admin-messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 400px;
+        }
+
+        .message {
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: 500;
+            animation: slideIn 0.3s ease;
+        }
+
+        .message-success { background: #27ae60; }
+        .message-error { background: #e74c3c; }
+        .message-warning { background: #f39c12; }
+        .message-info { background: #3498db; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-actions {
+                flex-direction: column;
+            }
+            
+            .login-form {
+                min-width: auto;
+                margin: 1rem;
+                padding: 2rem;
+            }
+        }
+
+        /* Security notice */
+        .security-notice {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid rgba(231, 76, 60, 0.5);
+            color: #ffffff;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Security Notice -->
+        <div class="security-notice">
+            <strong>⚠️ Admin Access Only</strong> - This page is for authorized personnel only. 
+            All actions are logged and monitored.
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="login-container">
+            <div class="login-form">
+                <h1>🏡 Farmhouse Admin</h1>
+                <p style="margin-bottom: 2rem; opacity: 0.8;">Enter your admin password to manage products</p>
+                
+                <div class="form-group">
+                    <label for="admin-password">Admin Password:</label>
+                    <input type="password" id="admin-password" placeholder="Enter admin password" 
+                           onkeypress="if(event.key==='Enter') handleLogin()">
+                </div>
+                
+                <button onclick="handleLogin()" class="btn btn-primary" style="width: 100%;">
+                    Login to Admin Panel
+                </button>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="admin-panel" style="display: none;">
+            <div class="admin-header">
+                <h1>🏡 Yellow Farmhouse Treats - Product Management</h1>
+                <button onclick="logout()" class="btn btn-secondary">Logout</button>
+            </div>
+            
+            <div id="product-list">
+                <!-- Product management interface loads here -->
+            </div>
+        </div>
+
+        <!-- Messages Area -->
+        <div id="admin-messages"></div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

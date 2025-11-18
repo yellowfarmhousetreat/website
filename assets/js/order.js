@@ -20,44 +20,129 @@
         let orderSummaryText = '';
         let subtotal = 0;
 
+        // Create container for cart items using safe DOM methods
+        const cartContainer = document.createElement('div');
+        cartContainer.className = 'cart-items-list';
+
         cart.forEach((item, index) => {
-            const itemTotal = item.price * item.quantity;
+            // Validate and sanitize item data
+            const sanitizedItem = {
+                name: String(item.name || '').replace(/[<>&"']/g, ''),
+                size: String(item.size || '').replace(/[<>&"']/g, ''),
+                price: parseFloat(item.price) || 0,
+                quantity: parseInt(item.quantity) || 0,
+                isGF: Boolean(item.isGF),
+                isSF: Boolean(item.isSF)
+            };
+
+            if (sanitizedItem.quantity <= 0 || sanitizedItem.price <= 0) {
+                return; // Skip invalid items
+            }
+
+            const itemTotal = sanitizedItem.price * sanitizedItem.quantity;
             subtotal += itemTotal;
 
-            // Build display HTML
-            itemsHTML += `
-                <div class="cart-item" data-index="${index}">
-                    <div class="cart-item-details">
-                        <strong>${item.name}</strong>
-                        ${item.size ? `<span class="item-size">${item.size}</span>` : ''}
-                        ${item.isGF ? '<span class="dietary-badge">GF</span>' : ''}
-                        ${item.isSF ? '<span class="dietary-badge">SF</span>' : ''}
-                        <div class="item-price-line">$${item.price.toFixed(2)} each</div>
-                    </div>
-                    <div class="cart-item-controls">
-                        <div class="quantity-controls">
-                            <button type="button" class="qty-btn qty-decrease" onclick="updateCartQuantity(${index}, -1)" aria-label="Decrease quantity">−</button>
-                            <span class="qty-display">${item.quantity}</span>
-                            <button type="button" class="qty-btn qty-increase" onclick="updateCartQuantity(${index}, 1)" aria-label="Increase quantity">+</button>
-                        </div>
-                        <div class="item-total">$${itemTotal.toFixed(2)}</div>
-                        <button type="button" class="remove-item-subtle" onclick="removeCartItem(${index})" aria-label="Remove item" title="Remove from cart">
-                            <span class="remove-icon">✕</span>
-                        </button>
-                    </div>
-                </div>
-            `;
+            // Create cart item using safe DOM methods
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.dataset.index = index;
 
-            // Build text for form submission
-            const dietary = [item.isGF ? 'GF' : '', item.isSF ? 'SF' : ''].filter(Boolean).join(', ');
-            orderSummaryText += `${item.quantity}x ${item.name}`;
-            if (item.size) orderSummaryText += ` (${item.size})`;
+            const itemDetails = document.createElement('div');
+            itemDetails.className = 'cart-item-details';
+
+            const itemName = document.createElement('strong');
+            itemName.textContent = sanitizedItem.name;
+            itemDetails.appendChild(itemName);
+
+            if (sanitizedItem.size) {
+                const sizeSpan = document.createElement('span');
+                sizeSpan.className = 'item-size';
+                sizeSpan.textContent = sanitizedItem.size;
+                itemDetails.appendChild(sizeSpan);
+            }
+
+            if (sanitizedItem.isGF) {
+                const gfBadge = document.createElement('span');
+                gfBadge.className = 'dietary-badge';
+                gfBadge.textContent = 'GF';
+                itemDetails.appendChild(gfBadge);
+            }
+
+            if (sanitizedItem.isSF) {
+                const sfBadge = document.createElement('span');
+                sfBadge.className = 'dietary-badge';
+                sfBadge.textContent = 'SF';
+                itemDetails.appendChild(sfBadge);
+            }
+
+            const priceLine = document.createElement('div');
+            priceLine.className = 'item-price-line';
+            priceLine.textContent = `$${sanitizedItem.price.toFixed(2)} each`;
+            itemDetails.appendChild(priceLine);
+
+            const itemControls = document.createElement('div');
+            itemControls.className = 'cart-item-controls';
+
+            // Quantity controls
+            const qtyControls = document.createElement('div');
+            qtyControls.className = 'quantity-controls';
+
+            const decreaseBtn = document.createElement('button');
+            decreaseBtn.type = 'button';
+            decreaseBtn.className = 'qty-btn qty-decrease';
+            decreaseBtn.setAttribute('aria-label', 'Decrease quantity');
+            decreaseBtn.textContent = '−';
+            decreaseBtn.onclick = () => updateCartQuantity(index, -1);
+
+            const qtyDisplay = document.createElement('span');
+            qtyDisplay.className = 'qty-display';
+            qtyDisplay.textContent = sanitizedItem.quantity;
+
+            const increaseBtn = document.createElement('button');
+            increaseBtn.type = 'button';
+            increaseBtn.className = 'qty-btn qty-increase';
+            increaseBtn.setAttribute('aria-label', 'Increase quantity');
+            increaseBtn.textContent = '+';
+            increaseBtn.onclick = () => updateCartQuantity(index, 1);
+
+            qtyControls.appendChild(decreaseBtn);
+            qtyControls.appendChild(qtyDisplay);
+            qtyControls.appendChild(increaseBtn);
+
+            const totalDiv = document.createElement('div');
+            totalDiv.className = 'item-total';
+            totalDiv.textContent = `$${itemTotal.toFixed(2)}`;
+
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'remove-item-subtle';
+            removeBtn.setAttribute('aria-label', 'Remove item');
+            removeBtn.setAttribute('title', 'Remove from cart');
+            removeBtn.onclick = () => removeCartItem(index);
+            const removeIcon = document.createElement('span');
+            removeIcon.className = 'remove-icon';
+            removeIcon.textContent = '✕';
+            removeBtn.appendChild(removeIcon);
+
+            itemControls.appendChild(qtyControls);
+            itemControls.appendChild(totalDiv);
+            itemControls.appendChild(removeBtn);
+
+            cartItem.appendChild(itemDetails);
+            cartItem.appendChild(itemControls);
+            cartContainer.appendChild(cartItem);
+
+            // Build text for form submission (already sanitized)
+            const dietary = [sanitizedItem.isGF ? 'GF' : '', sanitizedItem.isSF ? 'SF' : ''].filter(Boolean).join(', ');
+            orderSummaryText += `${sanitizedItem.quantity}x ${sanitizedItem.name}`;
+            if (sanitizedItem.size) orderSummaryText += ` (${sanitizedItem.size})`;
             if (dietary) orderSummaryText += ` [${dietary}]`;
             orderSummaryText += ` - $${itemTotal.toFixed(2)}\n`;
         });
 
-        itemsHTML += '</div>';
-        orderItemsDiv.innerHTML = itemsHTML;
+        // Clear and append safe content
+        orderItemsDiv.innerHTML = '';
+        orderItemsDiv.appendChild(cartContainer);
         orderSummaryInput.value = orderSummaryText;
 
         // Update order summary totals
