@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "github.copilot",
+    "github.copilot-chat",
+    "ritwickdey.liveserver",
+    "christian-kohler.path-intellisense",
+    "formulahendry.auto-rename-tag",
+    "zignd.html-css-class-completion",
+    "pranaygp.vscode-css-peek"
+  ],
+  "unwantedRecommendations": [
+    "sonarsource.sonarlint-vscode",
+    "ms-azuretools.vscode-docker",
+    "snyk-security.snyk-vulnerability-scanner"
+  ]
+}
