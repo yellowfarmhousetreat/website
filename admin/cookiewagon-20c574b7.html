@@ -1183,20 +1183,20 @@ window.PAYMENT_METHODS = PAYMENT_METHODS;`;
             // Site Config Persistence Methods
             saveAdminState() {
                 try {
-                    // Use SiteConfig system for site-wide persistence
-                    if (typeof SiteConfig !== 'undefined') {
+                    // Use siteConfig system for site-wide persistence
+                    if (window.siteConfig) {
                         // Save orders paused state
-                        SiteConfig.pauseOrders(this.pauseOrders);
+                        window.siteConfig.pauseOrders(this.pauseOrders);
                         
                         // Save sold out products by ID
                         this.products.forEach(product => {
-                            SiteConfig.setSoldOut(product.id, product.soldOut || false);
+                            window.siteConfig.setSoldOut(product.id, product.soldOut || false);
                         });
                         
                         this.showMessage('✅ Admin state saved site-wide', 'success');
-                        console.log('Admin state saved via SiteConfig system');
+                        console.log('Admin state saved via siteConfig system');
                     } else {
-                        throw new Error('SiteConfig system not available');
+                        throw new Error('siteConfig system not available');
                     }
                 } catch (error) {
                     this.showMessage('❌ Failed to save admin state', 'error');
@@ -1206,16 +1206,16 @@ window.PAYMENT_METHODS = PAYMENT_METHODS;`;
             
             loadAdminState() {
                 try {
-                    // Use SiteConfig system for site-wide persistence
-                    if (typeof SiteConfig !== 'undefined') {
-                        const config = SiteConfig.getSiteConfig();
+                    // Use siteConfig system for site-wide persistence
+                    if (window.siteConfig) {
+                        const config = window.siteConfig.get();
                         
                         // Load orders paused state
                         this.pauseOrders = config.ordersPaused;
                         
                         // Apply sold out states to loaded products
                         this.products.forEach(product => {
-                            if (config.soldOut[product.id]) {
+                            if (config.soldOutProducts && config.soldOutProducts.includes(product.id)) {
                                 product.soldOut = true;
                             }
                         });
@@ -1225,9 +1225,9 @@ window.PAYMENT_METHODS = PAYMENT_METHODS;`;
                             this.showMessage(`📋 Admin state loaded (last updated: ${savedDate})`, 'info');
                         }
                         
-                        console.log('Admin state loaded via SiteConfig system', config);
+                        console.log('Admin state loaded via siteConfig system', config);
                     } else {
-                        console.warn('SiteConfig system not available - using defaults');
+                        console.warn('siteConfig system not available - using defaults');
                     }
                 } catch (error) {
                     this.showMessage('⚠️ Failed to load saved admin state', 'warning');
@@ -1238,14 +1238,14 @@ window.PAYMENT_METHODS = PAYMENT_METHODS;`;
             resetAdminState() {
                 if (confirm('⚠️ Reset all admin customizations?\n\nThis will clear:\n• All "Sold Out" flags\n• Orders paused status\n• Return to original products-data.js state\n\nContinue?')) {
                     try {
-                        // Use SiteConfig system to reset site-wide state
-                        if (typeof SiteConfig !== 'undefined') {
+                        // Use siteConfig system to reset site-wide state
+                        if (window.siteConfig) {
                             // Reset orders paused
-                            SiteConfig.pauseOrders(false);
+                            window.siteConfig.pauseOrders(false);
                             
                             // Reset all sold out flags
                             this.products.forEach(product => {
-                                SiteConfig.setSoldOut(product.id, false);
+                                window.siteConfig.setSoldOut(product.id, false);
                             });
                         }
                         
@@ -1260,7 +1260,7 @@ window.PAYMENT_METHODS = PAYMENT_METHODS;`;
                         this.renderProducts();
                         
                         this.showMessage('🔄 Admin state reset to defaults site-wide', 'success');
-                        console.log('Admin state reset via SiteConfig system');
+                        console.log('Admin state reset via siteConfig system');
                     } catch (error) {
                         this.showMessage('❌ Failed to reset admin state', 'error');
                         console.error('Site config reset error:', error);

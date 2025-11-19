@@ -415,8 +415,8 @@
             <script>
                 // Check if orders are paused when page loads
                 document.addEventListener('DOMContentLoaded', function() {
-                    if (typeof SiteConfig !== 'undefined') {
-                        const config = SiteConfig.getSiteConfig();
+                    if (window.siteConfig) {
+                        const config = window.siteConfig.get();
                         const ordersPausedAlert = document.getElementById('ordersPausedAlert');
                         const orderFormContainer = document.getElementById('orderFormContainer');
                         
