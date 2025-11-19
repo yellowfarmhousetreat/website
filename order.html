@@ -42,18 +42,67 @@
                         <a href="index.html" class="logo">Yellow Farmhouse Treats</a>
                     </header>
 
-                <!-- Nav -->
-                    <nav id="nav">
-                        <ul class="links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="menu.html">Menu</a></li>
-                        <li class="active"><a href="order.html">Order <span id="cart-count" class="cart-count">0</span></a></li>
-                        </ul>
-                        <ul class="icons">
-                            <li><a href="https://www.facebook.com/YellowFarmhouseGirl/" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                            <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                        </ul>
-                    </nav>
+                <!-- Overlay Navigator -->
+                    <div class="overlay-menu" aria-label="Site navigation">
+                        <button class="overlay-menu__toggle" id="overlay-menu-open" type="button" aria-expanded="false" aria-controls="overlay-menu">
+                            <span class="overlay-menu__label">Open site navigator</span>
+                            <span class="overlay-menu__cart-pill">Cart <span id="cart-count" class="cart-count">0</span></span>
+                        </button>
+                        <aside class="overlay-menu__sidebar" id="overlay-menu" aria-hidden="true">
+                            <button class="overlay-menu__close" id="overlay-menu-close" type="button">
+                                Close <span aria-hidden="true">✕</span>
+                            </button>
+                            <div class="overlay-accordion" role="navigation" aria-label="Site quick links">
+                                <div class="overlay-accordion__item">
+                                    <button class="overlay-accordion__trigger" type="button" aria-expanded="false" aria-controls="overlay-group-pages">
+                                        Site Pages
+                                    </button>
+                                    <div class="overlay-accordion__panel" id="overlay-group-pages">
+                                        <a href="index.html">Home</a>
+                                        <a href="menu.html">Full Menu</a>
+                                        <a href="order.html">Start an Order</a>
+                                    </div>
+                                </div>
+                                <div class="overlay-accordion__item">
+                                    <button class="overlay-accordion__trigger" type="button" aria-expanded="false" aria-controls="overlay-group-products">
+                                        Menu Shortcuts
+                                    </button>
+                                    <div class="overlay-accordion__panel" id="overlay-group-products">
+                                        <a href="menu.html#menu-top" data-scroll-target="menu-top">Overview</a>
+                                        <a href="menu.html#cookies" data-scroll-target="cookies">Cookies</a>
+                                        <div class="overlay-accordion__subgroup" role="group" aria-label="Cookie styles">
+                                            <a href="menu.html#cookies-simple" data-scroll-target="cookies-simple">Simple Cookies</a>
+                                            <a href="menu.html#cookies-fancy" data-scroll-target="cookies-fancy">Fancy Cookies</a>
+                                            <a href="menu.html#cookies-complex" data-scroll-target="cookies-complex">Complex Cookies</a>
+                                        </div>
+                                        <a href="menu.html#cakes" data-scroll-target="cakes">Cakes &amp; Cupcakes</a>
+                                        <a href="menu.html#pies" data-scroll-target="pies">Pies &amp; Crisps</a>
+                                        <a href="menu.html#breads" data-scroll-target="breads">Breads &amp; Market Treats</a>
+                                    </div>
+                                </div>
+                                <div class="overlay-accordion__item">
+                                    <button class="overlay-accordion__trigger" type="button" aria-expanded="false" aria-controls="overlay-group-order">
+                                        Order &amp; Info
+                                    </button>
+                                    <div class="overlay-accordion__panel" id="overlay-group-order">
+                                        <a href="order.html">Start an Order</a>
+                                        <a href="menu.html#pickup-notes" data-scroll-target="pickup-notes">Deposits &amp; Pickup</a>
+                                        <a href="menu.html#shipping-notes" data-scroll-target="shipping-notes">Shipping Details</a>
+                                    </div>
+                                </div>
+                                <div class="overlay-accordion__item">
+                                    <button class="overlay-accordion__trigger" type="button" aria-expanded="false" aria-controls="overlay-group-visit">
+                                        Visit &amp; Connect
+                                    </button>
+                                    <div class="overlay-accordion__panel" id="overlay-group-visit">
+                                        <a href="#footer" data-scroll-target="footer">Contact &amp; Location</a>
+                                        <a href="https://www.facebook.com/YellowFarmhouseGirl/" target="_blank" rel="noopener">Facebook</a>
+                                        <a href="https://instagram.com/yellowfarmhousestand" target="_blank" rel="noopener">Instagram</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
 
                 <!-- Main -->
                     <div id="main">
@@ -360,6 +409,7 @@
             <script src="cart.js" defer></script>
             <script src="assets/js/order.js" defer></script>
             <!-- End imported order form scripts -->
+            <script src="assets/js/overlay-menu.js" defer></script>
             
             <!-- Orders Paused Check -->
             <script>
