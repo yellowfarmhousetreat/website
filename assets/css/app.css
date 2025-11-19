@@ -254,6 +254,69 @@ a:hover {
   color: var(--color-accent);
   background: rgba(255, 216, 111, 0.1);
 }
+/* Cookie Tier Tabs */
+.cookie-tier-tabs {
+  position: sticky;
+  top: calc(var(--nav-height) + 56px);
+  z-index: 85;
+  background: rgba(18, 20, 32, 0.92);
+  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(12px);
+  display: none;
+  padding: 0 1rem;
+}
+
+.cookie-tier-tabs.active {
+  display: block;
+}
+
+.cookie-tier-tabs ul {
+  list-style: none;
+  display: flex;
+  padding: 0.5rem 0;
+  margin: 0;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.cookie-tier-tabs .cookie-tier-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1.15rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.cookie-tier-tabs .cookie-tier-link:hover,
+.cookie-tier-tabs .cookie-tier-link:focus-visible {
+  color: var(--color-accent);
+  background: rgba(255, 216, 111, 0.08);
+}
+
+.cookie-tier-tabs .cookie-tier-link.active {
+  color: var(--color-accent);
+  background: rgba(255, 216, 111, 0.12);
+}
+
+.cookie-tier-panel {
+  display: none;
+}
+
+.cookie-tier-panel.active {
+  display: block;
+}
+
+.tier-header {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--color-highlight);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
 #main {
   max-width: 1200px;
