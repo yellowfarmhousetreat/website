@@ -594,3 +594,26 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePayPalButton();
 });
 
+// Expose required cart helpers for inline event handlers and legacy scripts
+const publicCartApi = {
+    addToCart,
+    addCookiesToCart,
+    addSizedProductToCart,
+    addSimpleProductToCart,
+    addPieToCart,
+    addCrispToCart,
+    addBrowniesToCart,
+    addCupcakesToCart
+};
+
+Object.entries(publicCartApi).forEach(([name, fn]) => {
+    window[name] = fn;
+});
+
+window.updateCartCount = updateCartCount;
+window.renderCart = renderCart;
+window.clearCart = clearCart;
+window.removeFromCart = removeFromCart;
+
+export {};
+

@@ -550,19 +550,19 @@
     <div class="container">
         <!-- Security Banners -->
         <div class="security-banner">
-            🚨 DEVELOPMENT TOOL - NO REAL SECURITY 🚨<br>
-            <small>This interface can be bypassed by anyone • Use only on trusted networks • Password visible in source code</small>
+            DEVELOPMENT TOOL - NO REAL SECURITY<br>
+            <small>This interface can be bypassed by anyone - Use only on trusted networks - Password visible in source code</small>
         </div>
 
         <div class="security-notice">
-            <strong>⚠️ Admin Access Only</strong> - This page is for authorized personnel only. 
+            <strong>Admin Access Only</strong> - This page is for authorized personnel only. 
             All actions are logged and monitored.
         </div>
 
         <!-- Login Form -->
         <div id="login-form" class="login-container">
             <div class="login-form">
-                <h1>🏡 Farmhouse Admin</h1>
+                <h1>Farmhouse Admin</h1>
                 <p>Enter your admin password to manage products</p>
                 
                 <div class="form-group">
@@ -572,7 +572,7 @@
                 </div>
                 
                 <button onclick="handleLogin()" class="btn btn-primary" style="width: 100%;">
-                    🔓 Login to Admin Panel
+                    Login to Admin Panel
                 </button>
             </div>
         </div>
@@ -581,29 +581,11 @@
         <div id="admin-panel" class="hidden">
             <div class="admin-header">
                 <div class="admin-title-section">
-                    <h1>🏡 Yellow Farmhouse Treats</h1>
+                    <h1>Yellow Farmhouse Treats</h1>
                     <div class="persistence-notice">
-                        💾 Changes saved locally - Use Reset to clear customizations
+                        Changes saved locally - Use Reset to clear customizations
                     </div>
                 </div>
-                <div class="admin-controls">
-                    <div class="order-status-control">
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="pause-orders-toggle" onchange="adminInterface.toggleOrderPause()">
-                            <span class="toggle-slider"></span>
-                            <span class="toggle-label">Orders Paused</span>
-                        </label>
-                        <div id="pause-status" class="status-indicator">Orders: <span class="status-text">Active</span></div>
-                    </div>
-                </div>
-                <div class="admin-actions">
-                    <button onclick="adminInterface.addNewProduct()" class="btn btn-primary">+ Add Product</button>
-                    <button onclick="adminInterface.exportAll()" class="btn btn-secondary">📊 Export All</button>
-                    <button onclick="adminInterface.resetAdminState()" class="btn btn-secondary" title="Reset all customizations to defaults">🔄 Reset</button>
-                    <button onclick="adminInterface.logout()" class="btn btn-secondary">🚪 Logout</button>
-                </div>
-            </div>
-            
             <div id="product-list">
                 <!-- Products will be loaded here -->
             </div>
@@ -614,7 +596,7 @@
     </div>
 
     <!-- Site Configuration System -->
-    <script src="../site-config.js"></script>
+    <script type="module" src="/src/entries/cookiewagon-shell.js"></script>
     
     <script>
         // Admin Interface Class
@@ -705,40 +687,20 @@
             // Product Loading
             async loadProducts() {
                 try {
-                    const response = await fetch('../products-data.js');
-                    const jsCode = await response.text();
-                    
-                    // Safely extract products array without eval
-                    const productsMatch = jsCode.match(/const\s+PRODUCTS\s*=\s*(\[[\s\S]*?\]);/);
-                    if (!productsMatch) {
-                        throw new Error('Invalid products data format');
+                    const response = await fetch('../data/products-data.json?' + Date.now(), { cache: 'no-store' });
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch products-data.json');
                     }
-                    
-                    // Additional validation: check if content looks like valid JSON array
-                    if (!productsMatch[1].trim().startsWith('[') || !productsMatch[1].trim().endsWith(']')) {
-                        throw new Error('Invalid JSON structure detected');
-                    }
-                    
-                    // Parse the extracted JSON array with validation
-                    let PRODUCTS;
-                    try {
-                        PRODUCTS = JSON.parse(productsMatch[1]);
-                        if (!Array.isArray(PRODUCTS)) {
-                            throw new Error('Products data must be an array');
-                        }
-                    } catch (parseError) {
-                        throw new Error('Failed to parse products data: ' + parseError.message);
-                    }
-                    
-                    if (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) {
-                        this.products = PRODUCTS.map(p => this.convertProduct(p));
-                        this.loadAdminState(); // Load saved state after products loaded
-                        this.updateOrderStatusUI(); // Initialize order status UI
-                        this.renderProducts();
-                        this.showMessage(`Loaded ${this.products.length} products successfully`, 'success');
-                    } else {
-                        throw new Error('No PRODUCTS found');
-                    }
+
+                    const payload = await response.json();
+                    const catalog = Array.isArray(payload.products) ? payload.products : [];
+                    this.products = catalog.map(p => this.convertProduct(p));
+                    this.dietaryPricing = payload.dietaryPricing || { glutenFree: 3, sugarFree: 3, vegan: 2 };
+                    this.shippingZones = payload.shippingZones || {};
+                    this.loadAdminState();
+                    this.updateOrderStatusUI();
+                    this.renderProducts();
+                    this.showMessage(`Loaded ${this.products.length} products successfully`, 'success');
                 } catch (error) {
                     console.error('Failed to load products:', error);
                     this.createSampleProducts();
@@ -813,7 +775,7 @@
                             <div class="product-title-section">
                                 <h3>${this.escapeHtml(product.name)}</h3>
                                 <div class="sold-out-badge" style="display: ${product.soldOut ? 'block' : 'none'};">
-                                    🚫 SOLD OUT
+                                    SOLD OUT
                                 </div>
                             </div>
                             <div class="product-controls">
@@ -822,14 +784,17 @@
                                            onchange="adminInterface.toggleProductSoldOut(${index})">
                                     <span class="sold-out-label">Sold Out</span>
                                 </label>
-                                <div style="display: flex; gap: 0.5rem;">
-                                    <button onclick="adminInterface.saveProduct(${index})" class="btn btn-success btn-small">
-                                        💾 Save
-                                    </button>
-                                    <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small">
-                                        🗑️ Delete
-                                    </button>
-                                </div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button onclick="adminInterface.saveProduct(${index})" class="btn btn-success btn-small">
+                                            Save
+                                        </button>
+                                        <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small">
+                                            Delete
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-small" 
+                                                onclick="adminInterface.removeSize(${productIndex}, ${sizeIndex})"
+                                                ${sizes.length <= 1 ? 'disabled' : ''}>×</button>
+                                    </div>
                             </div>
                         </div>
                         
@@ -901,12 +866,12 @@
                             <label>Product Photo:</label>
                             <div class="photo-upload">
                                 <div class="photo-buttons">
-                                    <button type="button" class="btn btn-secondary btn-small" 
-                                            onclick="adminInterface.triggerPhoto(${index}, 'library')">📱 Photos</button>
-                                    <button type="button" class="btn btn-secondary btn-small" 
-                                            onclick="adminInterface.triggerPhoto(${index}, 'camera')">📸 Camera</button>
-                                    <button type="button" class="btn btn-secondary btn-small" 
-                                            onclick="adminInterface.triggerPhoto(${index}, 'files')">📁 Files</button>
+                                        <button type="button" class="btn btn-secondary btn-small" 
+                                            onclick="adminInterface.triggerPhoto(${index}, 'library')">Photos</button>
+                                        <button type="button" class="btn btn-secondary btn-small" 
+                                            onclick="adminInterface.triggerPhoto(${index}, 'camera')">Camera</button>
+                                        <button type="button" class="btn btn-secondary btn-small" 
+                                            onclick="adminInterface.triggerPhoto(${index}, 'files')">Files</button>
                                 </div>
                                 <input type="file" id="photo-library-${index}" class="file-input" 
                                        accept="image/*" 
@@ -1094,7 +1059,7 @@
                 const exportProducts = this.products.map(p => this.convertToExportFormat(p));
                 const jsContent = this.generateFullJS(exportProducts);
                 
-                this.downloadFile(jsContent, 'products-data.js');
+                this.downloadFile(jsContent, 'products-data.json');
                 this.showMessage('Exported all products', 'success');
             }
 
@@ -1131,7 +1096,7 @@ const UPDATED_PRODUCT = ${JSON.stringify(product, null, 4)};
 
 /* 
 TO UPDATE YOUR MAIN FILE:
-1. Open products-data.js
+1. Open data/products-data.json
 2. Find the product with id: '${product.id}'
 3. Replace it with the UPDATED_PRODUCT object above
 4. Save the file
@@ -1139,32 +1104,30 @@ TO UPDATE YOUR MAIN FILE:
             }
 
             generateFullJS(products) {
-                return `// products-data.js
-// Generated by Yellow Farmhouse Admin Tool
-// ${new Date().toLocaleString()}
-
-const PRODUCTS = ${JSON.stringify(products, null, 4)};
-
-// Dietary pricing adjustments
-const DIETARY_PRICING = {
-    glutenFree: 3,
-    sugarFree: 3,
-    vegan: 2
-};
-
-// Payment methods
-const PAYMENT_METHODS = {
-    cash: { name: 'Cash', instructions: 'Payment due at pickup' },
-    cashapp: { name: 'Cash App', instructions: 'Send payment to $YellowFarmhouse' },
-    venmo: { name: 'Venmo', instructions: 'Send payment to @YellowFarmhouse' },
-    paypal: { name: 'PayPal', instructions: 'Send payment to yellowfarmhouse@email.com' },
-    zelle: { name: 'Zelle', instructions: 'Send payment to (555) 123-4567' }
-};
-
-// Make data available globally
-window.PRODUCTS = PRODUCTS;
-window.DIETARY_PRICING = DIETARY_PRICING;
-window.PAYMENT_METHODS = PAYMENT_METHODS;`;
+                return `${JSON.stringify({
+                    schemaVersion: 'yellowfarmhouse.products.v1',
+                    version: new Date().toISOString(),
+                    products: products,
+                    dietaryPricing: { glutenFree: 3, sugarFree: 3, vegan: 2 },
+                    paymentMethods: {
+                        cash: { name: 'Cash', instructions: 'Payment due at pickup' },
+                        cashapp: { name: 'Cash App', instructions: 'Send payment to $YellowFarmhouse' },
+                        venmo: { name: 'Venmo', instructions: 'Send payment to @YellowFarmhouse' },
+                        paypal: { name: 'PayPal', instructions: 'Send payment to yellowfarmhouse@email.com' },
+                        zelle: { name: 'Zelle', instructions: 'Send payment to (555) 123-4567' }
+                    },
+                    shippingZones: {
+                        '12345': 5.00,
+                        '12346': 5.00,
+                        '12347': 7.50,
+                        '12348': 7.50,
+                        '12349': 10.00
+                    },
+                    metadata: {
+                        generatedBy: 'cookiewagon-admin',
+                        updatedAt: new Date().toISOString()
+                    }
+                }, null, 2)}`;
             }
 
             // Utility Functions
@@ -1236,7 +1199,7 @@ window.PAYMENT_METHODS = PAYMENT_METHODS;`;
             }
             
             resetAdminState() {
-                if (confirm('⚠️ Reset all admin customizations?\n\nThis will clear:\n• All "Sold Out" flags\n• Orders paused status\n• Return to original products-data.js state\n\nContinue?')) {
+                if (confirm('Reset all admin customizations?\n\nThis will clear:\n• All "Sold Out" flags\n• Orders paused status\n• Return to original products-data.json state\n\nContinue?')) {
                     try {
                         // Use siteConfig system to reset site-wide state
                         if (window.siteConfig) {

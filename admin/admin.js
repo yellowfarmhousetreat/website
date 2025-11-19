@@ -3,16 +3,43 @@
  * Allows remote product editing through web interface
  */
 
+const DEFAULT_DIETARY_PRICING = {
+  glutenFree: 3,
+  sugarFree: 3,
+  vegan: 2
+};
+
+const DEFAULT_PAYMENT_METHODS = {
+  cash: { name: 'Cash', instructions: 'Payment due at pickup' },
+  cashapp: { name: 'Cash App', instructions: 'Send payment to $YellowFarmhouse' },
+  venmo: { name: 'Venmo', instructions: 'Send payment to @YellowFarmhouse' },
+  paypal: { name: 'PayPal', instructions: 'Send payment to yellowfarmhouse@email.com' },
+  zelle: { name: 'Zelle', instructions: 'Send payment to (555) 123-4567' }
+};
+
+const DEFAULT_SHIPPING_ZONES = {
+  '12345': 5.00,
+  '12346': 5.00,
+  '12347': 7.50,
+  '12348': 7.50,
+  '12349': 10.00
+};
+
 class AdminInterface {
   constructor() {
     this.isAuthenticated = false;
     this.products = [];
     this.backupData = null;
+    this.dietaryPricing = { ...DEFAULT_DIETARY_PRICING };
+    this.paymentMethods = { ...DEFAULT_PAYMENT_METHODS };
+    this.shippingZones = { ...DEFAULT_SHIPPING_ZONES };
+    this.catalogVersion = '';
     this.init();
   }
 
   init() {
-    this.displaySecurityWarning();
+window.adminInterface = null;
+let adminInterface;
     this.setupEventListeners();
     this.checkAuthentication();
     // Load products after authentication check
@@ -20,11 +47,11 @@ class AdminInterface {
 
   // Display security warning
   displaySecurityWarning() {
-    console.warn('🚨 SECURITY WARNING: This admin interface provides NO REAL SECURITY!');
-    console.warn('⚠️  Client-side authentication can be bypassed by anyone with basic web knowledge');
-    console.warn('🔓 Password is visible in source code: View Source → Search for "FarmhouseBaker"');
-    console.warn('💻 Use ONLY on trusted devices and networks - NEVER in production!');
-    console.warn('🛡️  For real security, edit products-data.js directly and use Git for deployment');
+    console.warn('SECURITY WARNING: This admin interface provides NO REAL SECURITY!');
+    console.warn('Client-side authentication can be bypassed by anyone with basic web knowledge');
+    console.warn('Password is visible in source code: View Source -> Search for "FarmhouseBaker"');
+    console.warn('Use ONLY on trusted devices and networks - NEVER in production!');
+    console.warn('For real security, edit data/products-data.json directly and use Git for deployment');
     
     // Show warning banner
     this.showSecurityBanner();
@@ -47,9 +74,9 @@ class AdminInterface {
         top: 0;
         z-index: 9999;
       ">
-        🚨 DEVELOPMENT TOOL - NO REAL SECURITY 🚨<br>
+        DEVELOPMENT TOOL - NO REAL SECURITY<br>
         <small style="font-weight: normal; opacity: 0.9;">
-          This interface can be bypassed by anyone • Use only on trusted networks • Password visible in source code
+          This interface can be bypassed by anyone - Use only on trusted networks - Password visible in source code
         </small>
       </div>
     `;
@@ -95,11 +122,11 @@ class AdminInterface {
           font-size: 0.85rem;
           line-height: 1.4;
         ">
-          <strong>⚠️ SECURITY NOTICE:</strong><br>
+          <strong>SECURITY NOTICE:</strong><br>
           This admin interface provides <strong>NO REAL SECURITY</strong>. The password is visible in the source code 
           and can be bypassed using browser developer tools. Use only on trusted devices and networks.
           <br><br>
-          <strong>For production:</strong> Edit products-data.js directly and deploy via Git.
+          <strong>For production:</strong> Edit data/products-data.json directly and deploy via Git.
         </div>
       `;
       loginContainer.insertBefore(disclaimer, loginContainer.firstChild);
@@ -134,109 +161,49 @@ class AdminInterface {
     }
   }
 
-  // Load current products from the main site
+  // Load current products from the main site (JSON catalog)
   async loadProducts() {
     try {
-      // Method 1: Try direct script loading
-      await this.loadProductsViaScript();
+      await this.loadProductsFromJson();
       this.showMessage(`Loaded ${this.products.length} products successfully`, 'success');
-      
     } catch (error) {
-      console.log('Script method failed, trying fetch method...', error.message);
-      
-      try {
-        // Method 2: Try fetch and eval (fallback)
-        await this.loadProductsViaFetch();
-        this.showMessage(`Loaded ${this.products.length} products successfully (via fetch)`, 'success');
-        
-      } catch (fetchError) {
-        console.error('Both loading methods failed:', fetchError.message);
-        this.showMessage('Error loading products: ' + fetchError.message, 'error');
-        
-        // Fallback: create some default products if loading fails
-        this.products = [
-          {
-            id: 'sample-cookies',
-            name: 'Sample Cookies',
-            price: 20,
-            unit: 'dozen',
-            category: 'cookies',
-            description: 'Sample product - edit or delete this',
-            ingredients: 'Flour, Sugar, Butter, Eggs, Vanilla Extract, Salt, Baking Soda',
-            allergens: ['wheat', 'eggs', 'milk'],
-            image: 'sample-cookies.jpg',
-            glutenFree: true,
-            sugarFree: true,
-            shippingEligible: false,
-            featured: false
-          }
-        ];
-        
-        this.showMessage('Created sample product. Add your real products below.', 'info');
-      }
+      console.error('Product catalog load failed:', error);
+      this.showMessage('Error loading products: ' + error.message, 'error');
+      this.products = [
+        {
+          id: 'sample-cookies',
+          name: 'Sample Cookies',
+          price: 20,
+          unit: 'dozen',
+          category: 'cookies',
+          description: 'Sample product - edit or delete this',
+          ingredients: 'Flour, Sugar, Butter, Eggs, Vanilla Extract, Salt, Baking Soda',
+          allergens: ['wheat', 'eggs', 'milk'],
+          image: 'sample-cookies.jpg',
+          glutenFree: true,
+          sugarFree: true,
+          shippingEligible: false,
+          featured: false
+        }
+      ];
+      this.showMessage('Created sample product. Add your real products below.', 'info');
     }
   }
 
-  // Method 1: Load via script tag
-  async loadProductsViaScript() {
-    const script = document.createElement('script');
-    script.src = '../products-data.js?' + Date.now(); // Cache busting
-    
-    await new Promise((resolve, reject) => {
-      script.onload = () => {
-        setTimeout(() => {
-          console.log('Checking for PRODUCTS...', typeof window.PRODUCTS, window.PRODUCTS);
-          
-          if (typeof window.PRODUCTS !== 'undefined' && Array.isArray(window.PRODUCTS)) {
-            try {
-              console.log('Original PRODUCTS data (first product):', window.PRODUCTS[0]);
-              this.products = window.PRODUCTS.map(product => this.convertToAdminFormat(product));
-              console.log('Converted admin products (first product):', this.products[0]);
-              this.backupData = JSON.stringify(this.products, null, 2);
-              console.log('Successfully converted products:', this.products.length);
-              resolve();
-            } catch (conversionError) {
-              console.error('Error converting products:', conversionError);
-              reject(new Error('Error converting products: ' + conversionError.message));
-            }
-          } else {
-            reject(new Error('PRODUCTS array not found after script load'));
-          }
-        }, 100);
-      };
-      script.onerror = () => reject(new Error('Failed to load products-data.js script'));
-      document.head.appendChild(script);
-    });
-  }
-
-  // Method 2: Load via fetch and eval
-  async loadProductsViaFetch() {
-    const response = await fetch('../products-data.js?' + Date.now());
+  async loadProductsFromJson() {
+    const response = await fetch('../data/products-data.json?' + Date.now(), { cache: 'no-store' });
     if (!response.ok) {
-      throw new Error('Failed to fetch products-data.js');
+      throw new Error('Failed to fetch products-data.json');
     }
-    
-    const jsCode = await response.text();
-    
-    // Create a temporary global scope to execute the code
-    const originalProducts = window.PRODUCTS;
-    
-    try {
-      // Execute the JavaScript code
-      eval(jsCode);
-      
-      if (typeof window.PRODUCTS !== 'undefined' && Array.isArray(window.PRODUCTS)) {
-        this.products = window.PRODUCTS.map(product => this.convertToAdminFormat(product));
-        this.backupData = JSON.stringify(this.products, null, 2);
-        console.log('Successfully loaded via fetch:', this.products.length);
-      } else {
-        throw new Error('PRODUCTS array not available after eval');
-      }
-    } catch (evalError) {
-      // Restore original PRODUCTS if it existed
-      if (originalProducts) window.PRODUCTS = originalProducts;
-      throw new Error('Error executing products script: ' + evalError.message);
-    }
+
+    const payload = await response.json();
+    const rawProducts = Array.isArray(payload.products) ? payload.products : [];
+    this.products = rawProducts.map(product => this.convertToAdminFormat(product));
+    this.backupData = JSON.stringify(this.products, null, 2);
+    this.dietaryPricing = payload.dietaryPricing || { glutenFree: 3, sugarFree: 3, vegan: 2 };
+    this.paymentMethods = payload.paymentMethods || {};
+    this.shippingZones = payload.shippingZones || {};
+    this.catalogVersion = payload.version || '';
   }
 
   // Convert complex product format to simple admin format
@@ -326,7 +293,7 @@ class AdminInterface {
           </div>
           <button type="button" class="btn btn-small btn-danger" 
                   onclick="adminInterface.removeSize(${productIndex}, ${sizeIndex})"
-                  ${sizes.length <= 1 ? 'disabled' : ''}>×</button>
+                  ${sizes.length <= 1 ? 'disabled' : ''}>&times;</button>
         </div>
       `;
     }).join('');
@@ -418,13 +385,13 @@ class AdminInterface {
         <h2>Product Management <span style="font-size: 0.6em; color: #ff6b6b; font-weight: normal;">(Development Tool)</span></h2>
         <div class="admin-actions">
           <button onclick="adminInterface.addNewProduct()" class="btn btn-primary">+ Add New Product</button>
-          <button onclick="adminInterface.exportData()" class="btn btn-secondary">📊 Export All Data</button>
-          <button onclick="adminInterface.saveChangesWithPhotos()" class="btn btn-success">💾 Save All Products</button>
+             <button onclick="adminInterface.exportData()" class="btn btn-secondary">Export All Data</button>
+             <button onclick="adminInterface.saveChangesWithPhotos()" class="btn btn-success">Save All Products</button>
         </div>
         <div class="save-instructions">
           <small style="color: rgba(255, 255, 255, 0.7); font-style: italic;">
-            💡 Tip: Use individual "Save" buttons on each product for quick updates, or "Save All" for bulk changes<br>
-            🔓 Remember: This interface has no real security - files download to your device for manual upload to production
+               Tip: Use individual "Save" buttons on each product for quick updates, or "Save All" for bulk changes<br>
+               Reminder: This interface has no real security - files download to your device for manual upload to production
           </small>
         </div>
       </div>
@@ -445,11 +412,11 @@ class AdminInterface {
         <div class="product-header">
           <h3>${this.sanitizeText(product.name)}</h3>
           <div class="product-actions">
-            <button onclick="adminInterface.saveIndividualProduct(${index})" class="btn btn-success btn-small" title="Save this product">
-              💾 Save
+               <button onclick="adminInterface.saveIndividualProduct(${index})" class="btn btn-success btn-small" title="Save this product">
+                 Save
             </button>
-            <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small" title="Delete this product">
-              🗑️ Delete
+               <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small" title="Delete this product">
+                 Delete
             </button>
           </div>
         </div>
@@ -552,12 +519,12 @@ class AdminInterface {
               
               <div class="photo-upload-section">
                 <div class="upload-buttons">
-                  <button type="button" class="btn btn-primary btn-photo-library" 
-                          onclick="adminInterface.triggerPhotoLibrary(${index})">📱 Photos</button>
-                  <button type="button" class="btn btn-secondary btn-camera" 
-                          onclick="adminInterface.triggerCamera(${index})">📸 Camera</button>
-                  <button type="button" class="btn btn-secondary btn-files" 
-                          onclick="adminInterface.triggerFiles(${index})">📁 Files</button>
+                     <button type="button" class="btn btn-primary btn-photo-library" 
+                             onclick="adminInterface.triggerPhotoLibrary(${index})">Photos</button>
+                     <button type="button" class="btn btn-secondary btn-camera" 
+                             onclick="adminInterface.triggerCamera(${index})">Camera</button>
+                     <button type="button" class="btn btn-secondary btn-files" 
+                             onclick="adminInterface.triggerFiles(${index})">Files</button>
                 </div>
                 <div class="upload-hint">Select from Photos app, take new photo, or browse files</div>
               </div>
@@ -664,7 +631,7 @@ class AdminInterface {
                     </div>
                   </div>
                   <div style="font-size: 0.85rem; color: #666; font-style: italic;">
-                    💡 Shipping = Base Cost + (Weight × Per Pound Rate)
+                    Shipping = Base Cost + (Weight x Per Pound Rate)
                   </div>
                 </div>
               ` : ''}
@@ -767,7 +734,7 @@ class AdminInterface {
         this.downloadPhotoFile(photoData, index);
       }
       
-      this.showMessage(`✅ Saved ${productName} individually!`, 'success');
+      this.showMessage(`Saved ${productName} individually!`, 'success');
       
     } catch (error) {
       this.showMessage(`Error saving ${productName}: ${error.message}`, 'error');
@@ -784,49 +751,24 @@ class AdminInterface {
     }
   }
 
-  // Generate updated products-data.js content
-  generateProductsJS() {
-    // Convert admin format back to complex format
+  // Generate updated products-data.json content
+  generateProductsJson() {
     const exportProducts = this.products.map(product => this.convertFromAdminFormat(product));
-    
-    const jsContent = `// products-data.js
-// Centralized product database for Yellow Farmhouse Treats
-// This is the single source of truth for all product information
 
-const PRODUCTS = ${JSON.stringify(exportProducts, null, 4)};
+    const payload = {
+      schemaVersion: 'yellowfarmhouse.products.v1',
+      version: new Date().toISOString(),
+      products: exportProducts,
+      dietaryPricing: this.dietaryPricing || { ...DEFAULT_DIETARY_PRICING },
+      paymentMethods: this.paymentMethods || { ...DEFAULT_PAYMENT_METHODS },
+      shippingZones: this.shippingZones || { ...DEFAULT_SHIPPING_ZONES },
+      metadata: {
+        generatedBy: 'cookiewagon-admin',
+        updatedAt: new Date().toISOString()
+      }
+    };
 
-// Dietary pricing adjustments
-const DIETARY_PRICING = {
-    glutenFree: 3,
-    sugarFree: 3,
-    vegan: 2
-};
-
-// Payment methods
-const PAYMENT_METHODS = {
-    cash: { name: 'Cash', instructions: 'Payment due at pickup' },
-    cashapp: { name: 'Cash App', instructions: 'Send payment to $YellowFarmhouse' },
-    venmo: { name: 'Venmo', instructions: 'Send payment to @YellowFarmhouse' },
-    paypal: { name: 'PayPal', instructions: 'Send payment to yellowfarmhouse@email.com' },
-    zelle: { name: 'Zelle', instructions: 'Send payment to (555) 123-4567' }
-};
-
-// Shipping ZIP codes and costs
-const SHIPPING_ZONES = {
-    '12345': 5.00,
-    '12346': 5.00,
-    '12347': 7.50,
-    '12348': 7.50,
-    '12349': 10.00
-};
-
-// Make data available globally
-window.PRODUCTS = PRODUCTS;
-window.DIETARY_PRICING = DIETARY_PRICING;
-window.PAYMENT_METHODS = PAYMENT_METHODS;
-window.SHIPPING_ZONES = SHIPPING_ZONES;`;
-    
-    return jsContent;
+    return JSON.stringify(payload, null, 2);
   }
 
   // Convert admin format back to complex format for export
@@ -904,9 +846,9 @@ window.SHIPPING_ZONES = SHIPPING_ZONES;`;
  * 
  * Instructions:
  * 1. Copy the product object below
- * 2. Find this product in your main products-data.js file
+ * 2. Find this product in your main data/products-data.json file
  * 3. Replace the existing product with this updated version
- * 4. Save the main file
+ * 4. Save the file and redeploy
  */
 
 // Updated product data:
@@ -917,7 +859,7 @@ const UPDATED_PRODUCT = ${JSON.stringify(product, null, 4)};
 
 /* 
 TO UPDATE YOUR MAIN FILE:
-1. Open products-data.js
+1. Open data/products-data.json
 2. Find the product with id: '${product.id}'
 3. Replace it with the UPDATED_PRODUCT object above
 4. Save the file
@@ -948,15 +890,14 @@ TO UPDATE YOUR MAIN FILE:
 
   // Save changes (download new file)
   saveChanges() {
-    const updatedJS = this.generateProductsJS();
+    const updatedJson = this.generateProductsJson();
     
-    // Create downloadable file
-    const blob = new Blob([updatedJS], { type: 'text/javascript' });
+    const blob = new Blob([updatedJson], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'products-data.js';
+    a.download = 'products-data.json';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1023,7 +964,7 @@ TO UPDATE YOUR MAIN FILE:
   handlePhotoSelect(event, index, inputType = 'library') {
     const file = event.target.files[0];
     if (file) {
-      this.showMessage(`📷 Photo selected from ${inputType}`, 'info');
+      this.showMessage(`Photo selected from ${inputType}`, 'info');
       this.processPhoto(file, index);
     }
   }
@@ -1071,7 +1012,7 @@ TO UPDATE YOUR MAIN FILE:
     // iOS Photos app integration feedback
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     if (isIOS) {
-      this.showMessage('📸 Processing photo from iOS Photos...', 'info');
+      this.showMessage('Processing photo from iOS Photos...', 'info');
     }
     
     // Generate filename based on product name
@@ -1086,7 +1027,7 @@ TO UPDATE YOUR MAIN FILE:
     
     // iOS-specific: Handle HEIC format note
     if (file.type === 'image/heic' || file.name.toLowerCase().endsWith('.heic')) {
-      this.showMessage('📱 HEIC format detected. Converting for web use...', 'info');
+      this.showMessage('HEIC format detected. Converting for web use...', 'info');
     }
     
     // Create preview
@@ -1105,7 +1046,7 @@ TO UPDATE YOUR MAIN FILE:
       
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       const message = isIOS ? 
-        `📱 Photo added from iOS Photos: ${filename}` : 
+        `Photo added from iOS Photos: ${filename}` : 
         `Photo added: ${filename}`;
       this.showMessage(message, 'success');
     };
@@ -1158,14 +1099,14 @@ TO UPDATE YOUR MAIN FILE:
   
   // Enhanced save with photo export
   saveChangesWithPhotos() {
-    const updatedJS = this.generateProductsJS();
+    const updatedJson = this.generateProductsJson();
     
     // Create ZIP file with products data and photos
     if (this.photoFiles && Object.keys(this.photoFiles).length > 0) {
-      this.createZipWithPhotos(updatedJS);
+      this.createZipWithPhotos(updatedJson);
     } else {
-      // No photos, just download JS file
-      this.downloadFile(updatedJS, 'products-data.js', 'text/javascript');
+      // No photos, just download JSON file
+      this.downloadFile(updatedJson, 'products-data.json', 'application/json');
       this.showMessage('Products file downloaded!', 'success');
     }
   }
@@ -1182,12 +1123,12 @@ TO UPDATE YOUR MAIN FILE:
     URL.revokeObjectURL(url);
   }
   
-  createZipWithPhotos(jsContent) {
+  createZipWithPhotos(jsonContent) {
     // Simple ZIP creation message (in a real app, you'd use JSZip library)
     this.showMessage('Creating download package with photos and data...', 'info');
     
     // Download the JS file
-    this.downloadFile(jsContent, 'products-data.js', 'text/javascript');
+    this.downloadFile(jsonContent, 'products-data.json', 'application/json');
     
     // Download each photo individually (simple approach)
     if (this.photoFiles) {
@@ -1243,14 +1184,22 @@ TO UPDATE YOUR MAIN FILE:
 let adminInterface;
 document.addEventListener('DOMContentLoaded', function() {
   adminInterface = new AdminInterface();
+  window.adminInterface = adminInterface;
 });
 
 // Login form handler
 function handleLogin() {
-  adminInterface.handleLogin();
+  if (adminInterface) {
+    adminInterface.handleLogin();
+  }
 }
 
 // Logout handler
 function logout() {
-  adminInterface.logout();
+  if (adminInterface) {
+    adminInterface.logout();
+  }
 }
+
+window.handleLogin = handleLogin;
+window.logout = logout;

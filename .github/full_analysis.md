@@ -39,7 +39,7 @@ Make order forms, cart modals, and dialogs fully thumb-driven (larger tap target
 
 4. Product Data Management
 
-products-data.js is a great idea, but:
+data/products-data.json keeps products centralized:
 
 Store products and categories as JSON, load via fetch (even on static site). This means easier dynamic product/category changes and better scalability.
 

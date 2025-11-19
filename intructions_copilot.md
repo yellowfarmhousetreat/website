@@ -338,12 +338,12 @@ Before marking complete, verify:
 - **Status:** MODERNIZED with centralized product management system
 - **Architecture:** Option A implementation - minimal individual HTML files with dynamic product loading
 - **New System:**
-  - `products-data.js` - Single source of truth for all product data
+  - `data/products-data.json` - Single source of truth for all product data
   - `product-loader.js` - Dynamic rendering system for all product displays
   - Individual pages: Streamlined HTML with consistent template structure
   - Security: XSS vulnerabilities patched with input sanitization
 - **Benefits Achieved:**
-  - Easy product updates: Edit one file (`products-data.js`) to update entire site
+  - Easy product updates: Edit one file (`data/products-data.json`) to update the entire site
   - SEO-friendly: Individual pages maintained for direct category access
   - Security: Protected against XSS attacks via localStorage manipulation
   - Maintainable: Clean separation of data and presentation logic
@@ -351,14 +351,14 @@ Before marking complete, verify:
 ## CURRENT IMPLEMENTATION - OPTION A (2025-11-17)
 
 ### ✅ COMPLETED:
-- **Dynamic Product System:** All products now load from centralized `products-data.js`
+- **Dynamic Product System:** All products now load from centralized `data/products-data.json`
 - **Streamlined Individual Pages:** Minimal HTML structure with consistent template design
 - **Security Hardening:** XSS vulnerabilities patched with input sanitization
 - **Navigation Consistency:** All individual pages include complete navigation with cakes.html
 - **Maintainable Architecture:** Single data file controls all product displays
 
 ### 🔄 HOW TO UPDATE PRODUCTS:
-**To add/edit products:** Only edit `products-data.js` file
+**To add/edit products:** Only edit `data/products-data.json`
 **Result:** Changes appear automatically across ALL pages (menu.html, cookies.html, pies.html, etc.)
 **Example:** Add new cookie → Edit PRODUCTS array → New product shows everywhere instantly
 

@@ -1,0 +1,398 @@
+{
+  "schemaVersion": "yellowfarmhouse.products.v1",
+  "version": "2025-11-19T22:26:55.743Z",
+  "generatedBy": "automation",
+  "products": [
+    {
+      "id": "chocolate-chip-cookies",
+      "name": "Chocolate Chip Cookies",
+      "tier": "Regular",
+      "category": "cookies",
+      "description": "Classic cookies loaded with chocolate chips. Soft and chewy.",
+      "image": "images/cookies-chocolate-chip.jpg",
+      "sizes": [
+        {
+          "name": "1/2 dozen",
+          "price": 12
+        },
+        {
+          "name": "dozen",
+          "price": 20
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "peanut-butter-cookies",
+      "name": "Peanut Butter Cookies",
+      "tier": "Regular",
+      "category": "cookies",
+      "description": "Rich peanut butter flavor, soft and crumbly. A classic favorite.",
+      "image": "images/cookies-peanut-butter.jpg",
+      "sizes": [
+        {
+          "name": "1/2 dozen",
+          "price": 12
+        },
+        {
+          "name": "dozen",
+          "price": 20
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "sugar-cookies",
+      "name": "Sugar Cookies",
+      "tier": "Regular",
+      "category": "cookies",
+      "description": "Sweet, buttery cookies with a soft texture. Perfect for any occasion.",
+      "image": "images/cookies-sugar.jpg",
+      "sizes": [
+        {
+          "name": "1/2 dozen",
+          "price": 12
+        },
+        {
+          "name": "dozen",
+          "price": 20
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "oatmeal-raisin-cookies",
+      "name": "Oatmeal Raisin Cookies",
+      "tier": "Regular",
+      "category": "cookies",
+      "description": "Hearty oatmeal cookies with plump raisins. Chewy and satisfying.",
+      "image": "images/cookies-oatmeal-raisin.jpg",
+      "sizes": [
+        {
+          "name": "1/2 dozen",
+          "price": 12
+        },
+        {
+          "name": "dozen",
+          "price": 20
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "mint-fudge-cookies",
+      "name": "Mint Fudge Cookies",
+      "tier": "Fancy",
+      "category": "cookies",
+      "description": "Rich mint and fudge combination. Decadent and elegant.",
+      "image": "images/cookies-mint-fudge.jpg",
+      "sizes": [
+        {
+          "name": "1/2 dozen",
+          "price": 15
+        },
+        {
+          "name": "dozen",
+          "price": 26
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "salted-caramel-swirl-cookies",
+      "name": "Salted Caramel Swirl Cookies",
+      "tier": "Fancy",
+      "category": "cookies",
+      "description": "Buttery cookies with sweet and salty caramel swirl.",
+      "image": "images/cookies-salted-caramel.jpg",
+      "sizes": [
+        {
+          "name": "1/2 dozen",
+          "price": 15
+        },
+        {
+          "name": "dozen",
+          "price": 26
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "strawberry-bliss-cookies",
+      "name": "Strawberry Bliss Cookies",
+      "tier": "Fancy",
+      "category": "cookies",
+      "description": "Fresh strawberry filling with white chocolate chunks.",
+      "image": "images/cookies-strawberry-bliss.jpg",
+      "sizes": [
+        {
+          "name": "1/2 dozen",
+          "price": 15
+        },
+        {
+          "name": "dozen",
+          "price": 26
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "matcha-cheesecake-cookies",
+      "name": "Matcha Cheesecake Cookies",
+      "tier": "Complex",
+      "category": "cookies",
+      "description": "Sophisticated matcha with creamy cheesecake center.",
+      "image": "images/cookies-matcha-cheesecake.jpg",
+      "sizes": [
+        {
+          "name": "1/2 dozen",
+          "price": 18
+        },
+        {
+          "name": "dozen",
+          "price": 32
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "lavender-blueberry-cookies",
+      "name": "Lavender Blueberry Cookies",
+      "tier": "Complex",
+      "category": "cookies",
+      "description": "Delicate lavender with tart blueberries.",
+      "image": "images/cookies-lavender-blueberry.jpg",
+      "sizes": [
+        {
+          "name": "1/2 dozen",
+          "price": 18
+        },
+        {
+          "name": "dozen",
+          "price": 32
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "triple-layer-cookies",
+      "name": "Triple Layer Cookies",
+      "tier": "Complex",
+      "category": "cookies",
+      "description": "Three distinct layers of flavor and texture.",
+      "image": "images/cookies-triple-layer.jpg",
+      "sizes": [
+        {
+          "name": "1/2 dozen",
+          "price": 18
+        },
+        {
+          "name": "dozen",
+          "price": 32
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "pecan-english-toffee",
+      "name": "Pecan English Toffee",
+      "category": "cookies",
+      "description": "Buttery toffee with crunchy pecans, covered in rich chocolate.",
+      "image": "images/toffee-pecan.jpg",
+      "sizes": [
+        {
+          "name": "1/2 lb",
+          "price": 15
+        },
+        {
+          "name": "1 lb",
+          "price": 28
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": false,
+        "vegan": false
+      },
+      "shippable": true,
+      "soldOut": false
+    },
+    {
+      "id": "apple-pie",
+      "name": "Apple Pie",
+      "category": "pies",
+      "description": "Classic apple pie with a flaky crust and cinnamon apples.",
+      "image": "images/pie-apple.jpg",
+      "sizes": [
+        {
+          "name": "9 inch pie",
+          "price": 25
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "pumpkin-pie",
+      "name": "Pumpkin Pie",
+      "category": "pies",
+      "description": "Spiced pumpkin filling in a buttery crust. A holiday favorite.",
+      "image": "images/pie-pumpkin.jpg",
+      "sizes": [
+        {
+          "name": "9 inch pie",
+          "price": 25
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "peach-pie",
+      "name": "Peach Pie",
+      "category": "pies",
+      "description": "Sweet peaches baked in a golden crust.",
+      "image": "images/pie-peach.jpg",
+      "sizes": [
+        {
+          "name": "9 inch pie",
+          "price": 25
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": true,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    },
+    {
+      "id": "milk-bread",
+      "name": "Milk Bread",
+      "category": "breads",
+      "description": "Soft, fluffy bread made with fresh milk. Perfect for sandwiches.",
+      "image": "images/bread-milk.jpg",
+      "sizes": [
+        {
+          "name": "loaf",
+          "price": 12
+        }
+      ],
+      "dietary": {
+        "glutenFree": true,
+        "sugarFree": false,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
+    }
+  ],
+  "dietaryPricing": {
+    "glutenFree": 3,
+    "sugarFree": 3,
+    "vegan": 2
+  },
+  "paymentMethods": {
+    "cash": {
+      "name": "Cash",
+      "instructions": "Payment due at pickup"
+    },
+    "cashapp": {
+      "name": "Cash App",
+      "instructions": "Send payment to $YellowFarmhouse"
+    },
+    "venmo": {
+      "name": "Venmo",
+      "instructions": "Send payment to @YellowFarmhouse"
+    },
+    "paypal": {
+      "name": "PayPal",
+      "instructions": "Send payment to yellowfarmhouse@email.com"
+    },
+    "zelle": {
+      "name": "Zelle",
+      "instructions": "Send payment to (555) 123-4567"
+    }
+  },
+  "shippingZones": {
+    "12345": 5,
+    "12346": 5,
+    "12347": 7.5,
+    "12348": 7.5,
+    "12349": 10
+  },
+  "metadata": {
+    "notes": "Auto-generated catalog exported from cookiewagon admin"
+  }
+}

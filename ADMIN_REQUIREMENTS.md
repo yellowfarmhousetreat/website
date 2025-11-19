@@ -3,7 +3,7 @@
 ## Core Functionality (What was working)
 
 - ✅ Login with password `FarmhouseBaker2024!`
-- ✅ Load existing products from products-data.js (15 products)
+- ✅ Load existing products from data/products-data.json (15 products)
 - ✅ Edit product details (name, description, prices, categories)
 - ✅ **Ingredients text box** - Large textarea for listing ingredients in order of quantity
 - ✅ **Size/order management** - Multiple size options per product (1/2 dozen, dozen, etc.) with individual pricing
@@ -11,7 +11,7 @@
 - ✅ **Photo upload with iOS integration** - Direct access to iPhone Photos app, camera, and file system
 - ✅ Manage product sizes and pricing tiers (Regular/Fancy/Complex cookie tiers)
 - ✅ Save individual products or all products at once
-- ✅ Export/download updated products-data.js file
+- ✅ Export/download updated data/products-data.json file
 - ✅ Allergen management (wheat, eggs, milk, nuts, peanuts, soy checkboxes)
 - ✅ Shipping eligibility settings with cost calculations
 - ✅ Dietary options (Gluten Free, Sugar Free, Vegan) with custom pricing adjustments
@@ -28,7 +28,7 @@
 - ⚠️ **iPhone 6 ready** - All controls must work properly on 375px width screens
 
 ## Technical Requirements
-- Must use existing products-data.js structure
+- Must use existing data/products-data.json structure
 - Must maintain compatibility with existing product loader
 - Security warnings about client-side authentication
 - Download mechanism for updated files

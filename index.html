@@ -22,6 +22,91 @@
 		<meta property="og:image:height" content="630">
 		<meta property="og:locale" content="en_US">
 		<meta property="og:site_name" content="Yellow Farmhouse Treats">
+		<script type="application/ld+json">
+{
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": [
+				"Bakery",
+				"FoodEstablishment"
+			],
+			"@id": "https://www.yellowfarmhousetreats.com/#bakery",
+			"name": "Yellow Farmhouse Treats",
+			"url": "https://www.yellowfarmhousetreats.com/",
+			"telephone": "+1-805-709-4686",
+			"email": "yellowfarmhousetreats@gmail.com",
+			"priceRange": "$$",
+			"address": {
+				"@type": "PostalAddress",
+				"streetAddress": "22659 Farmway Road",
+				"addressLocality": "Caldwell",
+				"addressRegion": "ID",
+				"postalCode": "83646",
+				"addressCountry": "US"
+			},
+			"sameAs": [
+				"https://www.facebook.com/YellowFarmhouseGirl/",
+				"https://instagram.com/yellowfarmhousestand"
+			],
+			"hasMenu": "https://www.yellowfarmhousetreats.com/menu.html",
+			"servesCuisine": [
+				"Bakery",
+				"Dessert"
+			]
+		},
+		{
+			"@type": "OfferCatalog",
+			"@id": "https://www.yellowfarmhousetreats.com/#menu",
+			"name": "Signature Bakes",
+			"url": "https://www.yellowfarmhousetreats.com/menu.html",
+			"itemListElement": [
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Product",
+						"name": "Chocolate Chip Cookies",
+						"description": "Classic cookies loaded with chocolate chips. Soft and chewy.",
+						"image": "https://www.yellowfarmhousetreats.com/images/cookies-chocolate-chip.jpg"
+					},
+					"priceCurrency": "USD",
+					"priceSpecification": {
+						"@type": "PriceSpecification",
+						"minPrice": 12,
+						"maxPrice": 20,
+						"priceCurrency": "USD"
+					},
+					"availability": "https://schema.org/InStock"
+				},
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Product",
+						"name": "Apple Pie",
+						"description": "Classic apple pie with a flaky crust and cinnamon apples.",
+						"image": "https://www.yellowfarmhousetreats.com/images/pie-apple.jpg"
+					},
+					"priceCurrency": "USD",
+					"price": 25,
+					"availability": "https://schema.org/InStock"
+				},
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Product",
+						"name": "Milk Bread",
+						"description": "Soft, fluffy bread made with fresh milk. Perfect for sandwiches.",
+						"image": "https://www.yellowfarmhousetreats.com/images/bread-milk.jpg"
+					},
+					"priceCurrency": "USD",
+					"price": 12,
+					"availability": "https://schema.org/InStock"
+				}
+			]
+		}
+	]
+}
+		</script>
 		
 		<!-- Additional Facebook optimization -->
 		<meta property="fb:app_id" content="YOUR_FB_APP_ID"> <!-- Optional: only if you create a Facebook App -->
@@ -190,16 +275,7 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/perf.js" defer></script>
-			<script src="assets/js/jquery.min.js" defer></script>
-			<script src="assets/js/jquery.scrollex.min.js" defer></script>
-			<script src="assets/js/jquery.scrolly.min.js" defer></script>
-			<script src="assets/js/browser.min.js" defer></script>
-			<script src="assets/js/breakpoints.min.js" defer></script>
-			<script src="assets/js/util.js" defer></script>
-			<script src="assets/js/main.js" defer></script>
-			<script src="cart.js" defer></script>
-			<script src="assets/js/overlay-menu.js" defer></script>
+			<script type="module" src="/src/entries/site-shell.js"></script>
 
 	</body>
 </html>

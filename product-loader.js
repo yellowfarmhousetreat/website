@@ -1,73 +1,200 @@
 // product-loader.js
-// Dynamic product loading system for Yellow Farmhouse Treats
-// Loads products from products-data.js and renders them based on category
+// Fetches structured product data (JSON), renders cards, and syncs with cart logic
 
 class ProductLoader {
-    constructor() {
-        this.products = window.PRODUCTS || [];
-        this.dietaryPricing = window.DIETARY_PRICING || {};
+    constructor(options = {}) {
+        this.dataUrl = options.dataUrl || 'data/products-data.json';
+        this.cacheKey = options.cacheKey || 'yfhs_product_payload';
+        this.cacheMetaKey = `${this.cacheKey}_meta`;
+        this.cacheTtlMs = options.cacheTtlMs || (1000 * 60 * 30); // 30 minutes
+        this.products = [];
+        this.dietaryPricing = {};
+        this.metadata = {};
+        this.ordersPaused = false;
+        this.dataPromise = null;
     }
 
-    // Load products for a specific category
-    loadProducts(category = 'all') {
+    async ready(forceRefresh = false) {
+        if (!this.dataPromise || forceRefresh) {
+            this.dataPromise = this.loadData(forceRefresh);
+        }
+        return this.dataPromise;
+    }
+
+    async loadData(forceRefresh = false) {
+        if (!forceRefresh) {
+            const cached = this.getCachedData();
+            if (cached) {
+                this.applyData(cached);
+                return cached;
+            }
+        }
+
+        const response = await fetch(this.dataUrl, { cache: 'no-store' });
+        if (!response.ok) {
+            throw new Error('Failed to load product catalog.');
+        }
+
+        const payload = await response.json();
+        this.applySiteConfig(payload);
+        this.applyData(payload);
+        this.setCachedData(payload);
+        return payload;
+    }
+
+    applySiteConfig(payload) {
+        if (!window.siteConfig || typeof window.siteConfig.get !== 'function') {
+            this.ordersPaused = false;
+            return;
+        }
+
+        const config = window.siteConfig.get();
+        this.ordersPaused = Boolean(config.ordersPaused);
+        const soldOutIds = Array.isArray(config.soldOutProducts) ? config.soldOutProducts : [];
+
+        if (Array.isArray(payload.products)) {
+            payload.products = payload.products.map(product => ({
+                ...product,
+                soldOut: soldOutIds.includes(product.id)
+            }));
+        }
+    }
+
+    applyData(payload) {
+        this.products = Array.isArray(payload.products) ? payload.products : [];
+        this.dietaryPricing = payload.dietaryPricing || {};
+        this.metadata = payload.metadata || {};
+
+        // Maintain backwards compatibility for scripts that relied on globals
+        window.PRODUCTS = this.products;
+        window.DIETARY_PRICING = this.dietaryPricing;
+        window.PRODUCTS_VERSION = payload.version || null;
+    }
+
+    getCachedData() {
+        try {
+            const rawMeta = localStorage.getItem(this.cacheMetaKey);
+            const rawPayload = localStorage.getItem(this.cacheKey);
+            if (!rawMeta || !rawPayload) return null;
+
+            const meta = JSON.parse(rawMeta);
+            if (!meta || !meta.cachedAt || (Date.now() - meta.cachedAt) > this.cacheTtlMs) {
+                this.clearCache();
+                return null;
+            }
+
+            return JSON.parse(rawPayload);
+        } catch (error) {
+            console.warn('Product data cache unavailable:', error);
+            return null;
+        }
+    }
+
+    setCachedData(payload) {
+        try {
+            localStorage.setItem(this.cacheKey, JSON.stringify(payload));
+            localStorage.setItem(this.cacheMetaKey, JSON.stringify({ cachedAt: Date.now() }));
+        } catch (error) {
+            console.warn('Unable to cache product data:', error);
+            this.clearCache();
+        }
+    }
+
+    clearCache() {
+        try {
+            localStorage.removeItem(this.cacheKey);
+            localStorage.removeItem(this.cacheMetaKey);
+        } catch (error) {
+            console.warn('Unable to clear product cache:', error);
+        }
+    }
+
+    async loadProducts(category = 'all') {
+        await this.ready();
+
         const container = document.getElementById('products-container');
         if (!container) {
             console.error('Products container not found');
             return;
         }
 
-        // Get category from data attribute if not provided
         if (category === 'all' && container.dataset.category) {
             category = container.dataset.category;
         }
 
-        // Filter products by category
-        let filteredProducts = this.products;
-        if (category !== 'all') {
-            filteredProducts = this.products.filter(product => product.category === category);
-        }
+        const products = category === 'all'
+            ? this.products
+            : this.products.filter(product => product.category === category);
 
-        // Clear container
         container.innerHTML = '';
 
-        // Add products grid wrapper
+        if (this.ordersPaused) {
+            const pausedBanner = document.createElement('div');
+            pausedBanner.className = 'orders-paused-banner';
+            pausedBanner.textContent = 'Ordering is temporarily paused. Please check back soon.';
+            container.appendChild(pausedBanner);
+        }
+
+        if (!products.length) {
+            const emptyState = document.createElement('p');
+            emptyState.className = 'empty-products';
+            emptyState.textContent = 'No products available in this category yet.';
+            container.appendChild(emptyState);
+            return;
+        }
+
         const gridWrapper = document.createElement('div');
         gridWrapper.className = 'products-grid';
 
-        // Render products
-        filteredProducts.forEach(product => {
-            const productCard = this.generateProductCard(product);
-            gridWrapper.appendChild(productCard);
+        products.forEach(product => {
+            const card = this.generateProductCard(product);
+            gridWrapper.appendChild(card);
         });
 
         container.appendChild(gridWrapper);
-
-        // Initialize event listeners
         this.initializeEventListeners();
     }
 
-    // Generate HTML for a single product card
     generateProductCard(product) {
         const card = document.createElement('div');
         card.className = 'product-card';
         card.dataset.productId = product.id;
 
-        const sizeOptions = product.sizes.map((size, index) => 
+        const sizeOptions = (product.sizes || []).map((size, index) =>
             `<option value="${index}" data-price="${size.price}">${size.name} - $${size.price}</option>`
         ).join('');
 
         const dietaryOptions = this.generateDietaryOptions(product);
+        const shippingBadge = product.shippable
+            ? '<div class="shipping-badge"><span class="icon solid fa-truck"></span> Ships Nationwide</div>'
+            : '';
+
+        const shippingDetails = product.shippable
+            ? '<div class="shipping-info"><span class="icon solid fa-truck"></span>Ships to select ZIP codes within 2-5 days.</div>'
+            : '';
+
+        const unavailable = this.ordersPaused || product.soldOut;
+        const buttonLabel = product.soldOut
+            ? 'Sold Out'
+            : this.ordersPaused
+                ? 'Orders Paused'
+                : 'Add to Cart';
+
+        const availabilityNote = product.soldOut
+            ? '<p class="product-status">Currently sold out.</p>'
+            : '';
 
         card.innerHTML = `
-            ${product.shippable ? '<div class="shipping-badge"><span class="icon">🚚</span>We Ship!</div>' : ''}
+            ${shippingBadge}
             <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='images/placeholder.jpg'">
             <div class="product-info">
-                <h3>${product.name} ${product.emoji || ''}</h3>
-                <p>${product.description}</p>
+                <h3>${product.name}</h3>
+                <p>${product.description || ''}</p>
                 ${product.ingredients ? `<div class="ingredients-info"><strong>Ingredients:</strong> ${product.ingredients}</div>` : ''}
-                ${product.allergens && product.allergens.length > 0 ? `<div class="allergen-info"><strong>Contains:</strong> ${product.allergens.join(', ')}</div>` : ''}
-                ${product.shippable ? '<div class="shipping-info"><span>🚚</span>Ships to 48 US states • 2-5 days • Fresh arrival guaranteed</div>' : ''}
+                ${product.allergens && product.allergens.length ? `<div class="allergen-info"><strong>Contains:</strong> ${product.allergens.join(', ')}</div>` : ''}
+                ${shippingDetails}
                 <div class="legal-disclaimer"><small><strong>Idaho Home Kitchen:</strong> This product was produced in a home kitchen not subject to public health inspection that may also process common food allergens.</small></div>
+                ${availabilityNote}
                 <div class="product-details">
                     <div class="size-price-selector">
                         <label for="${product.id}-size">Size & Price:</label>
@@ -80,8 +207,8 @@ class ProductLoader {
                         <label for="${product.id}-qty">Quantity:</label>
                         <input type="number" id="${product.id}-qty" class="qty-input" min="1" max="10" value="1">
                     </div>
-                    <button class="add-to-cart-btn" onclick="productLoader.addToCart('${product.id}')">
-                        Add to Cart
+                    <button class="add-to-cart-btn" ${unavailable ? 'disabled' : ''} data-product-id="${product.id}">
+                        ${buttonLabel}
                     </button>
                 </div>
             </div>
@@ -90,12 +217,11 @@ class ProductLoader {
         return card;
     }
 
-    // Generate dietary options HTML
     generateDietaryOptions(product) {
         if (!product.dietary) return '';
 
         let optionsHTML = '<div class="dietary-options">';
-        
+
         if (product.dietary.glutenFree) {
             optionsHTML += `
                 <label class="dietary-option">
@@ -104,7 +230,7 @@ class ProductLoader {
                 </label>
             `;
         }
-        
+
         if (product.dietary.sugarFree) {
             optionsHTML += `
                 <label class="dietary-option">
@@ -113,7 +239,7 @@ class ProductLoader {
                 </label>
             `;
         }
-        
+
         if (product.dietary.vegan) {
             optionsHTML += `
                 <label class="dietary-option">
@@ -127,51 +253,63 @@ class ProductLoader {
         return optionsHTML;
     }
 
-    // Initialize event listeners
     initializeEventListeners() {
-        // Update price when size changes
         document.querySelectorAll('.size-selector').forEach(selector => {
-            selector.addEventListener('change', (e) => {
-                this.updateDisplayPrice(e.target);
+            selector.addEventListener('change', (event) => {
+                this.updateDisplayPrice(event.target);
             });
         });
 
-        // Update price when dietary options change
         document.querySelectorAll('.dietary-options input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', (e) => {
-                const sizeSelector = e.target.closest('.product-card').querySelector('.size-selector');
+            checkbox.addEventListener('change', (event) => {
+                const sizeSelector = event.target.closest('.product-card').querySelector('.size-selector');
                 this.updateDisplayPrice(sizeSelector);
             });
         });
+
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const productId = button.dataset.productId;
+                this.addToCart(productId);
+            });
+        });
     }
 
-    // Update displayed price based on selections
     updateDisplayPrice(sizeSelector) {
+        if (!sizeSelector) return;
         const productCard = sizeSelector.closest('.product-card');
         const selectedOption = sizeSelector.selectedOptions[0];
+        if (!selectedOption) return;
+
         const basePrice = parseFloat(selectedOption.dataset.price);
-        
-        // Calculate dietary additions
         let dietaryTotal = 0;
         productCard.querySelectorAll('.dietary-options input[type="checkbox"]:checked').forEach(checkbox => {
-            dietaryTotal += parseFloat(checkbox.dataset.price);
+            dietaryTotal += parseFloat(checkbox.dataset.price || '0');
         });
 
-        // Update price display (you can add a price display element if needed)
         const totalPrice = basePrice + dietaryTotal;
-        
-        // You could add a price display element here
-        // const priceDisplay = productCard.querySelector('.current-price');
-        // if (priceDisplay) {
-        //     priceDisplay.textContent = `$${totalPrice.toFixed(2)}`;
-        // }
+        const priceTarget = productCard.querySelector('.current-price');
+        if (priceTarget) {
+            priceTarget.textContent = `$${totalPrice.toFixed(2)}`;
+        }
     }
 
-    // Add product to cart
-    addToCart(productId) {
-        const product = this.products.find(p => p.id === productId);
+    async addToCart(productId) {
+        if (this.ordersPaused) {
+            this.showMessage('Ordering is paused. Please check back soon.', 'error');
+            return;
+        }
+
+        await this.ready();
+
+        const product = this.products.find(item => item.id === productId);
         if (!product) {
-            console.error('Product not found:', productId);
+            this.showMessage('Product not found.', 'error');
+            return;
+        }
+
+        if (product.soldOut) {
+            this.showMessage('This product is currently sold out.', 'error');
             return;
         }
 
@@ -183,9 +321,9 @@ class ProductLoader {
 
         const sizeSelector = productCard.querySelector('.size-selector');
         const qtyInput = productCard.querySelector('.qty-input');
-        
         const selectedSizeIndex = parseInt(sizeSelector.value, 10);
         const selectedSize = product.sizes[selectedSizeIndex];
+
         if (!selectedSize) {
             this.showMessage('Please choose a size option.', 'error');
             return;
@@ -258,9 +396,7 @@ class ProductLoader {
         }
     }
 
-    // Show success/error messages
     showMessage(message, type = 'success') {
-        // Create toast notification
         const toast = document.createElement('div');
         toast.className = `toast toast-${type}`;
         toast.textContent = message;
@@ -278,28 +414,22 @@ class ProductLoader {
         `;
 
         document.body.appendChild(toast);
-        
-        // Animate in
-        setTimeout(() => toast.style.opacity = '1', 100);
-        
-        // Remove after 3 seconds
+        setTimeout(() => (toast.style.opacity = '1'), 100);
         setTimeout(() => {
             toast.style.opacity = '0';
-            setTimeout(() => document.body.removeChild(toast), 300);
+            setTimeout(() => toast.remove(), 300);
         }, 3000);
     }
 }
 
-// Initialize product loader when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     window.productLoader = new ProductLoader();
-    
-    // Auto-load products if products container exists
     const container = document.getElementById('products-container');
+
     if (container) {
-        window.productLoader.loadProducts();
+        window.productLoader.loadProducts().catch(error => {
+            console.error('Unable to load products:', error);
+            container.innerHTML = '<p class="error">Unable to load products right now. Please refresh the page.</p>';
+        });
     }
 });
-
-// Make ProductLoader available globally
-window.ProductLoader = ProductLoader;
