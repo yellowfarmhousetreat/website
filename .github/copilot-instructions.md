@@ -2,11 +2,11 @@
 
 ## Project Overview
 
-This is a static HTML/CSS/JS website for the Yellow Farmhouse Treats, built on the "Massively" template by HTML5 UP. The site is text-heavy, article-oriented, and features a large background image with parallax and scroll effects. The main user-facing feature is a multi-step order form for baked goods, with dynamic product selection, dietary options, and payment instructions.
+This is a static HTML/CSS/JS website for the Yellow Farmhouse Treats, The main user-facing feature is a multi-step order form for baked goods, with dynamic product selection, dietary options, and payment instructions.
 
 ## Key Files & Structure
 
-- **HTML Pages:** `index.html`, `cart.html`, `order.html`, `menu.html`
+- **HTML Pages:** `index.html`, `cart.html`, `order.html`, `menu.html`, 'cookies.html', 'pies.html', 'cakes.html', 'breads.html', 'candy.html'  
 - **Order Form Logic:** Embedded in `reference_document.md` (used for new template and order flow)
 - **Assets:** 
   - CSS: `assets/css/app.css` (global custom styles) and `assets/css/fontawesome-all.min.css` for icons
