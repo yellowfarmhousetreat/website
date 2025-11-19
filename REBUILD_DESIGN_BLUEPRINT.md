@@ -157,7 +157,7 @@ INTERNAL
 - **Static only**: no server ensures all “authentication” is advisory. Keep prominent warnings in admin per `SECURITY_ANALYSIS.md` and `README-SECURITY.md`.
 - **Password handling:** client-side SHA-256 hash with salt `salt2024` (per `ARCHITECTURE_BLUEPRINT.md`) plus jitter and a 3-attempt lockout. Provide an in-app password change that rewrites the stored hash in a single JS config module.
 - **Honeytrap removal:** new build can omit `/admin/index.html`, but document that previous behavior existed. If you retain it, label clearly as decoy.
-- **Security tooling:** keep Snyk + CodeQL workflows (per `.github/instructions/snyk_rules.instructions.md` and security docs). Any new JS must be scanned via `snyk_code_scan` before commit.
+- **Security tooling:** rely on CodeQL workflows and manual reviews documented in the security files.
 - **Client validation:** sanitize all user-entered strings (cart notes, dietary instructions) before rendering to prevent DOM XSS (matches previous fixes).
 
 ---
@@ -205,6 +205,6 @@ Derived from `CSS-ARCHITECTURE.md` and `FRAGILITY-ANALYSIS.md` but re-expressed 
 - Admin behaviors from `ADMIN_REQUIREMENTS.md` and `New_instructions_temp.md`.
 - Architecture/security posture from `ARCHITECTURE_BLUEPRINT.md`, `SECURITY_IMPLEMENTATION.md`, `README-SECURITY.md`, `SECURITY_ANALYSIS.md`, `SECURITY.md`.
 - Styling/friction notes from `CSS-ARCHITECTURE.md`, `FRAGILITY-ANALYSIS.md`, `assets/css/app.css`.
-- Process requirements from `.github/copilot-instructions.md` and `.github/instructions/snyk_rules.instructions.md`.
+- Process requirements from `.github/copilot-instructions.md`.
 
 This document replaces the scattered markdown instructions so you can confidently wipe the template-driven codebase and rebuild a lean version that still respects every original requirement.

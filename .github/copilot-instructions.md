@@ -62,7 +62,7 @@ This is a static HTML/CSS/JS website for the Yellow Farmhouse Treats, built on t
 ## Security
 
 - No backend code; security concerns are limited to client-side validation and safe use of external services.
-- Follow Snyk security scanning for any new JS code.
+- Use ESLint for code quality checks only. No security scanners needed for static site.
 
 ---
 

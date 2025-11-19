@@ -150,7 +150,6 @@ COMPONENT HIERARCHY:
 ### **External Services**
 - **Formspree**: Order form submissions
 - **GitHub**: Version control + automated security
-- **Snyk**: Security scanning + vulnerability management
 - **SnapWidget**: Instagram feed integration
 
 ### **Development Workflow**
@@ -158,9 +157,8 @@ COMPONENT HIERARCHY:
 DEVELOPMENT PIPELINE:
 1. Local Development → Python HTTP server (testing)
 2. Git Version Control → Automated commits with descriptive messages
-3. Security Scanning → Snyk integration for vulnerability detection
-4. GitHub Actions → CodeQL security analysis + Dependabot updates
-5. Production Deploy → Static hosting ready
+3. Security Scanning → CodeQL + Dependabot automated checks
+4. Production Deploy → Static hosting ready
 ```
 
 ---

@@ -29,7 +29,6 @@ If you discover a security vulnerability in our website, please report it respon
 
 - ✅ **Input Sanitization:** All user inputs are sanitized to prevent XSS
 - ✅ **CodeQL Security Scanning:** Automated security analysis on all code changes
-- ✅ **Snyk Security Scanning:** Regular dependency and code vulnerability scanning
 - ✅ **Content Security Policy:** Implemented via meta tags and headers
 - ✅ **Secure Admin Interface:** Password-protected with session management
 - ✅ **Client-Side Only:** No server-side vulnerabilities (static site)
