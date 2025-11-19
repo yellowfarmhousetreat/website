@@ -5,8 +5,8 @@
   --color-surface: #212931;
   --color-panel: #262f3a;
   --color-border: rgba(255, 255, 255, 0.15);
-  --color-accent: #e74c3c;
-  --color-highlight: #ffd86f;
+  --color-accent: #ffd86f;
+  --color-highlight: #e74c3c;
   --color-text: #f5f5f5;
   --color-text-muted: #a0a0a0;
   --color-btn-primary: #e74c3c;
@@ -45,17 +45,17 @@ img {
 }
 
 a {
-  color: var(--color-highlight);
+  color: var(--color-accent);
   text-decoration: none;
   transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 a:hover {
-  color: var(--color-accent);
+  color: var(--color-highlight);
 }
 
 ::selection {
-  background: var(--color-highlight);
+  background: var(--color-accent);
   color: #1a1a1a;
 }
 
@@ -120,7 +120,7 @@ a:hover {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  background: var(--color-highlight);
+  background: var(--color-accent);
   color: #1a1a1a !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -184,7 +184,7 @@ a:hover {
 
 #nav .links li.active a,
 #nav .links a:hover {
-  color: var(--color-highlight);
+  color: var(--color-accent);
   background: rgba(255, 216, 111, 0.12);
 }
 
@@ -251,7 +251,7 @@ a:hover {
 
 .submenu-tabs .tab-link:hover,
 .submenu-tabs .tab-link:focus-visible {
-  color: var(--color-highlight);
+  color: var(--color-accent);
   background: rgba(255, 216, 111, 0.1);
 }
 
@@ -323,7 +323,7 @@ a:hover {
 .product-price {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-highlight);
+  color: var(--color-accent);
 }
 
 .badge {
@@ -337,12 +337,12 @@ a:hover {
 
 .badge--shipping {
   border-color: rgba(255, 216, 111, 0.4);
-  color: var(--color-highlight);
+  color: var(--color-accent);
 }
 
 .badge--dietary {
   border-color: rgba(231, 76, 60, 0.45);
-  color: var(--color-accent);
+  color: var(--color-highlight);
 }
 
 .order-form,
@@ -390,7 +390,7 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--color-highlight);
+  border-color: var(--color-accent);
   box-shadow: 0 0 0 2px rgba(255, 216, 111, 0.25);
 }
 
@@ -470,9 +470,9 @@ textarea {
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-.btn-secondary:hover,
+btn-secondary:hover,
 .safe-btn-secondary:hover {
-  border-color: var(--color-highlight);
+  border-color: var(--color-accent);
 }
 
 .instagram-showcase {
