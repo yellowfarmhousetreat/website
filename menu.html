@@ -26,9 +26,8 @@
     <meta property="fb:app_id" content="YOUR_FB_APP_ID"> <!-- Optional: only if you create a Facebook App -->
     <link rel="preconnect" href="https://snapwidget.com" crossorigin>
     <link rel="dns-prefetch" href="//snapwidget.com">
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
     <link rel="stylesheet" href="assets/css/app.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
   </head>
   <body class="is-preload" data-page="menu">
 
@@ -56,11 +55,11 @@
       <!-- Sub-Menu Tabs -->
       <nav class="submenu-tabs" aria-label="Menu category tabs">
         <ul>
-          <li><a href="#" class="tab-link active" data-category="cookies">Cookies</a></li>
-          <li><a href="#" class="tab-link" data-category="cakes">Cakes</a></li>
-          <li><a href="#" class="tab-link" data-category="pies">Pies & Crisps</a></li>
-          <li><a href="#" class="tab-link" data-category="breads">Breads & More</a></li>
-          <li><a href="#" class="tab-link" data-category="all">All Items</a></li>
+          <li><a href="#submenu-cookies" class="tab-link active" data-category="cookies">Cookies</a></li>
+          <li><a href="#submenu-cakes" class="tab-link" data-category="cakes">Cakes</a></li>
+          <li><a href="#submenu-pies" class="tab-link" data-category="pies">Pies & Crisps</a></li>
+          <li><a href="#submenu-breads" class="tab-link" data-category="breads">Breads & More</a></li>
+          <li><a href="#submenu-all" class="tab-link" data-category="all">All Items</a></li>
         </ul>
       </nav>
 
@@ -952,113 +951,119 @@
 
       <!-- Copyright -->
       <div id="copyright">
-        <ul><li>&copy; Yellow Farmhouse Treats</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+        <ul><li>&copy; Yellow Farmhouse Treats</li></ul>
       </div>
 
     </div>
 
       <!-- Add-to-cart handlers moved to cart.js for consistency across pages -->
 
-    
-<!-- Scripts -->
-		<script src="assets/js/perf.js" defer></script>
-		<script src="assets/js/jquery.min.js" defer></script>
-		<script src="assets/js/jquery.scrollex.min.js" defer></script>
-		<script src="assets/js/jquery.scrolly.min.js" defer></script>
-		<script src="assets/js/browser.min.js" defer></script>
-		<script src="assets/js/breakpoints.min.js" defer></script>
-		<script src="assets/js/util.js" defer></script>
-		<script src="assets/js/main.js" defer></script>
-		<script src="site-config.js"></script>
-		<script src="products.js" defer></script>
-		<script src="cart.js" defer></script>
+    <!-- Scripts -->
+    <script src="assets/js/perf.js" defer></script>
+    <script src="assets/js/jquery.min.js" defer></script>
+    <script src="assets/js/jquery.scrollex.min.js" defer></script>
+    <script src="assets/js/jquery.scrolly.min.js" defer></script>
+    <script src="assets/js/browser.min.js" defer></script>
+    <script src="assets/js/breakpoints.min.js" defer></script>
+    <script src="assets/js/util.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+    <script src="site-config.js"></script>
+    <script src="products.js" defer></script>
+    <script src="cart.js" defer></script>
 
-		<!-- Sub-Menu Tab Switching -->
-		<script>
-			document.addEventListener('DOMContentLoaded', function() {
-				const tabLinks = document.querySelectorAll('.tab-link');
-				const panels = document.querySelectorAll('.submenu-panel');
-				const cookieTierTabs = document.querySelector('.cookie-tier-tabs');
+    <!-- Sub-Menu Tab Switching -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const panels = document.querySelectorAll('.submenu-panel');
+        const cookieTierTabs = document.querySelector('.cookie-tier-tabs');
 
-				// Default to cookies tier visible
-				cookieTierTabs.classList.add('active');
+        // Default to cookies tier visible
+        cookieTierTabs.classList.add('active');
 
-				// If a hash is present (e.g., #cakes), activate that tab
-				(function activateFromHash() {
-					const hash = (window.location.hash || '').replace('#', '').toLowerCase();
-					const valid = ['cookies','cakes','pies','breads','all'];
-					if (!hash || !valid.includes(hash)) return;
+        // If a hash is present (e.g., #cakes), activate that tab
+        (function activateFromHash() {
+          let hash = (window.location.hash || '').replace('#', '').toLowerCase();
+          if (hash.startsWith('submenu-')) {
+            hash = hash.replace('submenu-', '');
+          }
+          const valid = ['cookies','cakes','pies','breads','all'];
+          if (!hash || !valid.includes(hash)) return;
 
-					// Clear current active states
-					tabLinks.forEach(l => l.classList.remove('active'));
-					panels.forEach(p => p.classList.remove('active'));
+          // Clear current active states
+          tabLinks.forEach(l => l.classList.remove('active'));
+          panels.forEach(p => p.classList.remove('active'));
 
-					// Activate matching tab and panel
-					const match = document.querySelector(`.tab-link[data-category="${hash}"]`);
-					const panelId = 'submenu-' + hash;
-					if (match) match.classList.add('active');
-					const panel = document.getElementById(panelId);
-					if (panel) panel.classList.add('active');
+          // Activate matching tab and panel
+          const match = document.querySelector(`.tab-link[data-category="${hash}"]`);
+          const panelId = 'submenu-' + hash;
+          if (match) match.classList.add('active');
+          const panel = document.getElementById(panelId);
+          if (panel) panel.classList.add('active');
 
-					// Toggle cookie tier tabs
-					if (hash === 'cookies') cookieTierTabs.classList.add('active');
-					else cookieTierTabs.classList.remove('active');
-				})();
+          // Toggle cookie tier tabs
+          if (hash === 'cookies') cookieTierTabs.classList.add('active');
+          else cookieTierTabs.classList.remove('active');
+        })();
 
-				tabLinks.forEach(link => {
-					link.addEventListener('click', function(e) {
-						e.preventDefault();
+        tabLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
 						
-						// Get the category from data attribute
-						const category = this.getAttribute('data-category');
+            // Get the category from data attribute
+            const category = this.getAttribute('data-category');
 						
-						// Remove active class from all links and panels
-						tabLinks.forEach(l => l.classList.remove('active'));
-						panels.forEach(p => p.classList.remove('active'));
+            // Remove active class from all links and panels
+            tabLinks.forEach(l => l.classList.remove('active'));
+            panels.forEach(p => p.classList.remove('active'));
 						
-						// Add active class to clicked link and corresponding panel
-						this.classList.add('active');
-						const panelId = 'submenu-' + category;
-						const activePanel = document.getElementById(panelId);
-						if (activePanel) {
-							activePanel.classList.add('active');
-						}
-						
-						// Show/hide cookie tier tabs based on category
-						if (category === 'cookies') {
-							cookieTierTabs.classList.add('active');
-						} else {
-							cookieTierTabs.classList.remove('active');
-						}
-					});
-				});
+            // Add active class to clicked link and corresponding panel
+            this.classList.add('active');
+            const panelId = 'submenu-' + category;
+            const activePanel = document.getElementById(panelId);
+            if (activePanel) {
+              activePanel.classList.add('active');
+              activePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
 
-				// Cookie tier tab switching
-				const cookieTierLinks = document.querySelectorAll('.cookie-tier-link');
-				const cookieTierPanels = document.querySelectorAll('.cookie-tier-panel');
+            // Update hash to reflect visible panel
+            window.history.replaceState(null, '', '#' + panelId);
+						
+            // Show/hide cookie tier tabs based on category
+            if (category === 'cookies') {
+              cookieTierTabs.classList.add('active');
+            } else {
+              cookieTierTabs.classList.remove('active');
+            }
+          });
+        });
 
-				cookieTierLinks.forEach(link => {
-					link.addEventListener('click', function(e) {
-						e.preventDefault();
-						
-						// Get the tier from data attribute
-						const tier = this.getAttribute('data-tier');
-						
-						// Remove active class from all links and panels
-						cookieTierLinks.forEach(l => l.classList.remove('active'));
-						cookieTierPanels.forEach(p => p.classList.remove('active'));
-						
-						// Add active class to clicked link and corresponding panel
-						this.classList.add('active');
-						const panelId = 'tier-' + tier;
-						const activePanel = document.getElementById(panelId);
-						if (activePanel) {
-							activePanel.classList.add('active');
-						}
-					});
-				});
-			});
-		</script>
+        // Cookie tier tab switching
+        const cookieTierLinks = document.querySelectorAll('.cookie-tier-link');
+        const cookieTierPanels = document.querySelectorAll('.cookie-tier-panel');
 
-	</body>
+        cookieTierLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+						
+            // Get the tier from data attribute
+            const tier = this.getAttribute('data-tier');
+						
+            // Remove active class from all links and panels
+            cookieTierLinks.forEach(l => l.classList.remove('active'));
+            cookieTierPanels.forEach(p => p.classList.remove('active'));
+						
+            // Add active class to clicked link and corresponding panel
+            this.classList.add('active');
+            const panelId = 'tier-' + tier;
+            const activePanel = document.getElementById(panelId);
+            if (activePanel) {
+              activePanel.classList.add('active');
+            }
+          });
+        });
+      });
+    </script>
+
+  </body>
 </html>

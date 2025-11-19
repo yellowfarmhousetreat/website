@@ -4,7 +4,7 @@ Last updated: November 18, 2025Last updated: November 19, 2025
 
 **CURRENT PHASE: v3-liberation CSS replacement**
 
-This branch keeps all working HTML structure and JavaScript from the 36-hour build documented in `reference_document.md`. The ONLY change is replacing template CSS (main.css, noscript.css) with a custom dark-mode design in `assets/css/app.css`.195
+This branch keeps all working HTML structure and JavaScript from the 36-hour build documented in `reference_document.md`. The ONLY change is consolidating styling into the custom dark-mode design in `assets/css/app.css`.195
 
 ---
 
@@ -13,7 +13,7 @@ This branch keeps all working HTML structure and JavaScript from the 36-hour bui
 ### Current State
 - HTML structure is FINAL (keep all existing #wrapper, #intro, #header, #nav, #main, #footer)
 - JavaScript is WORKING (cart.js, products.js, all features functional)
-- Template CSS removed (main.css, noscript.css deleted)
+- Template CSS removed so `assets/css/app.css` is now the sole stylesheet
 - Current app.css exists but needs complete visual overhaul
 
 ### Your Mission

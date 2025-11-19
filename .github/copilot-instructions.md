@@ -9,7 +9,7 @@ This is a static HTML/CSS/JS website for the Yellow Farmhouse Treats, built on t
 - **HTML Pages:** `index.html`, `cart.html`, `order.html`, `menu.html`
 - **Order Form Logic:** Embedded in `reference_document.md` (used for new template and order flow)
 - **Assets:** 
-  - CSS: `assets/css/main.css` (template styles), `noscript.css`
+  - CSS: `assets/css/app.css` (global custom styles) and `assets/css/fontawesome-all.min.css` for icons
   - JS: `assets/js/main.js` (template logic), `reference_document.md` (order form logic)
   - SASS: `assets/sass/` (organized by base, components, layout, libs)
   - Images: `images/`

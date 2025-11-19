@@ -174,8 +174,8 @@ BACKEND MAINTENANCE PAGES (for easy product editing):
 - **Fast loading:** Optimize images, minimize JS
 
 ### CSS Framework:
-- Use existing Massively template CSS: `assets/css/main.css`
-- Add custom overrides in `<style>` tags if needed
+- Use the custom dark-mode stylesheet `assets/css/app.css` as the single source of truth
+- Avoid adding inline `<style>` overrides or new CSS files; consolidate everything into `app.css`
 - Responsive breakpoints:
   - Mobile: < 768px
   - Tablet: 768px - 1024px
@@ -256,8 +256,8 @@ website/
 ├── cart.html               (Shopping cart & checkout)
 ├── assets/
 │   ├── css/
-│   │   ├── main.css
-│   │   └── noscript.css
+│   │   ├── app.css
+│   │   └── fontawesome-all.min.css
 │   └── js/
 │       └── cart.js         (Shopping cart logic)
 ├── images/                 (Product photos)
