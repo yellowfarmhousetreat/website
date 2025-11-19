@@ -392,5 +392,344 @@ text
 
 ## 8. Build & Migration Plan
 
-###
 
+### 8.1 Scaffold New Repo (Phase 1: Structure)
+
+**Step 1: Create directory structure**
+yellowfarmhousetreats-rebuild/
+├── index.html
+├── menu.html
+├── cookies.html
+├── cakes.html
+├── pies.html
+├── breads.html
+├── order.html
+├── cookiewagon.html // Admin panel (obscured filename)
+├── /assets/
+│ ├── /js/
+│ │ ├── products-data.js
+│ │ ├── site-config.js
+│ │ ├── cart.js
+│ │ ├── product-loader.js
+│ │ └── order-logic.js
+│ └── /css/
+│ ├── base.css
+│ └── components.css
+├── /images/
+│ └── /products/
+├── REBUILD_DESIGN_BLUEPRINT.md // This file
+└── reference_document.md // Farmhousestand.com working code
+
+text
+
+**Step 2: Initialize base files**
+- Copy design tokens from Section 7.2 into `/assets/css/base.css`
+- Copy component patterns from Section 7.3 into `/assets/css/components.css`
+- Create empty product data array in `products-data.js`
+- Create site config object in `site-config.js`
+
+---
+
+### 8.2 Port Data (Phase 2: Content Migration)
+
+**Migrate products from current site:**
+1. Open existing yellowfarmhousetreats.com `products-data.js`
+2. For each product, validate against schema (Section 5)
+3. Ensure all IDs are unique and lowercase-hyphenated
+4. Verify category matches one of: cookies, cakes, pies, breads
+5. Test product loader renders cards correctly
+
+**Migrate site config:**
+1. Extract current `ordersPaused` status
+2. Extract current `soldOutItems` array
+3. Update Formspree endpoint (use existing or create new)
+4. Add PayPal client ID from current integration
+
+**Image assets:**
+1. Download all product images from current site
+2. Optimize for web (max 500KB per image, 800x800px recommended)
+3. Upload to `/images/products/` with consistent naming: `product-id.jpg`
+
+---
+
+### 8.3 Build HTML Pages (Phase 3: Structure)
+
+**Shared components ALL pages need:**
+
+<!-- Navigation (top of every page) --> <header class="site-header"> <div class="container"> <a href="index.html" class="logo">Yellow Farmhouse Treats</a> <nav class="main-nav"> <a href="menu.html">Menu</a> <a href="order.html">Cart <span class="cart-badge" id="cart-count">0</span></a> </nav> </div> </header> <!-- Footer (bottom of every page) --> <footer class="site-footer"> <div class="container"> <div class="footer-social"> <a href="https://instagram.com/yellowfarmhousetreats" target="_blank">Instagram</a> <a href="https://facebook.com/YellowFarmhouseTreats" target="_blank">Facebook</a> </div> <p>&copy; 2025 Yellow Farmhouse Treats. All rights reserved.</p> </div> </footer> <!-- Scripts (end of body on every page) --> <script src="/assets/js/site-config.js"></script> <script src="/assets/js/products-data.js"></script> <script src="/assets/js/cart.js"></script>
+text
+
+**index.html specific:**
+<main> <section class="hero"> <div class="container"> <h1>State Fair Winner in Baked Treats</h1> <p>Custom orders for pickup or nationwide shipping (select items)</p> <div class="hero-cta"> <a href="order.html" class="btn btn-primary">Order Now</a> <a href="menu.html" class="btn btn-secondary">Browse Menu</a> </div> </div> </section> <section class="instagram-feed"> <div class="container"> <h2>Check Out Our Latest Creations</h2> <!-- SnapWidget embed from existing site --> <script src="https://snapwidget.com/js/snapwidget.js"></script> <iframe src="YOUR_SNAPWIDGET_EMBED_URL" class="snapwidget-widget"></iframe> </div> </section> </main> ```
+menu.html specific:
+
+text
+<main>
+  <div class="container">
+    <h1>Our Menu</h1>
+    
+    <!-- Tabs -->
+    <div class="menu-tabs">
+      <button class="tab-btn active" data-category="cookies">Cookies</button>
+      <button class="tab-btn" data-category="cakes">Cakes</button>
+      <button class="tab-btn" data-category="pies">Pies</button>
+      <button class="tab-btn" data-category="breads">Breads</button>
+    </div>
+
+    <!-- Product grid (populated by product-loader.js) -->
+    <div id="product-grid" class="grid grid-3"></div>
+  </div>
+</main>
+
+<script src="/assets/js/product-loader.js"></script>
+<script>
+  // Tab switching logic
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const category = btn.dataset.category;
+      loadProductsByCategory(category); // Function from product-loader.js
+    });
+  });
+
+  // Load cookies by default
+  loadProductsByCategory('cookies');
+</script>
+Category pages (cookies.html, cakes.html, pies.html, breads.html):
+
+text
+<main>
+  <div class="container">
+    <h1>Cookies</h1> <!-- Change per page -->
+    <div id="product-grid" class="grid grid-3"></div>
+  </div>
+</main>
+
+<script src="/assets/js/product-loader.js"></script>
+<script>
+  loadProductsByCategory('cookies'); // Change per page: 'cakes', 'pies', 'breads'
+</script>
+order.html (multi-step form):
+
+text
+<main>
+  <div class="container">
+    <h1>Your Order</h1>
+
+    <!-- Step indicator -->
+    <div class="order-steps">
+      <div class="step active" data-step="1">Cart</div>
+      <div class="step" data-step="2">Fulfillment</div>
+      <div class="step" data-step="3">Details</div>
+      <div class="step" data-step="4">Payment</div>
+    </div>
+
+    <!-- Step 1: Cart Review -->
+    <div id="step-1" class="order-step active">
+      <div id="cart-items"></div>
+      <div class="cart-total">
+        <strong>Subtotal:</strong> <span id="cart-subtotal">$0.00</span>
+      </div>
+      <button class="btn btn-primary" onclick="goToStep(2)">Proceed to Fulfillment</button>
+    </div>
+
+    <!-- Step 2: Fulfillment -->
+    <div id="step-2" class="order-step">
+      <div class="form-group">
+        <label class="form-label">Fulfillment Method</label>
+        <label><input type="radio" name="fulfillment" value="pickup" checked> Pickup</label>
+        <label><input type="radio" name="fulfillment" value="shipping" id="shipping-radio"> Shipping</label>
+      </div>
+
+      <div id="shipping-fields" class="hidden">
+        <div class="form-group">
+          <label class="form-label">ZIP Code</label>
+          <input type="text" class="form-input" id="shipping-zip" placeholder="12345">
+        </div>
+        <div id="shipping-cost-display"></div>
+      </div>
+
+      <button class="btn btn-secondary" onclick="goToStep(1)">Back</button>
+      <button class="btn btn-primary" onclick="goToStep(3)">Continue</button>
+    </div>
+
+    <!-- Step 3: Details -->
+    <div id="step-3" class="order-step">
+      <div class="form-group">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-input" id="customer-name" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" id="customer-email" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Phone</label>
+        <input type="tel" class="form-input" id="customer-phone" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Requested Pickup Date/Time</label>
+        <input type="datetime-local" class="form-input" id="pickup-datetime" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Special Instructions</label>
+        <textarea class="form-textarea" id="special-instructions" maxlength="500"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">How did you hear about us?</label>
+        <select class="form-select" id="referral-source">
+          <option value="">Select...</option>
+          <option value="social">Social Media</option>
+          <option value="friend">Friend/Family</option>
+          <option value="search">Search Engine</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <button class="btn btn-secondary" onclick="goToStep(2)">Back</button>
+      <button class="btn btn-primary" onclick="goToStep(4)">Continue to Payment</button>
+    </div>
+
+    <!-- Step 4: Payment -->
+    <div id="step-4" class="order-step">
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+        <div id="final-cart-review"></div>
+        <div class="summary-line">
+          <span>Subtotal:</span>
+          <span id="final-subtotal">$0.00</span>
+        </div>
+        <div class="summary-line" id="shipping-line" class="hidden">
+          <span>Shipping:</span>
+          <span id="final-shipping">$0.00</span>
+        </div>
+        <div class="summary-line total">
+          <strong>Total:</strong>
+          <strong id="final-total">$0.00</strong>
+        </div>
+        <div class="summary-line deposit">
+          <strong>50% Deposit Required:</strong>
+          <strong id="deposit-amount">$0.00</strong>
+        </div>
+      </div>
+
+      <div class="payment-instructions">
+        <h3>Payment Methods</h3>
+        <p><strong>Cash:</strong> Pay deposit at pickup</p>
+        <p><strong>Cash App:</strong> $YourCashAppHandle</p>
+        <p><strong>Venmo:</strong> @YourVenmoHandle</p>
+        <p><strong>PayPal:</strong> Use button below</p>
+        <div id="paypal-button-container"></div>
+        <p><strong>Zelle:</strong> your-email@example.com</p>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" id="deposit-agreement" required>
+          I agree to pay the 50% deposit before pickup/shipping
+        </label>
+      </div>
+
+      <button class="btn btn-secondary" onclick="goToStep(3)">Back</button>
+      <button class="btn btn-primary" id="submit-order-btn" disabled>Submit Order</button>
+    </div>
+  </div>
+</main>
+
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
+<script src="/assets/js/order-logic.js"></script>
+8.4 Build JavaScript Logic (Phase 4: Functionality)
+cart.js (localStorage management):
+
+text
+// Initialize cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function addToCart(product) {
+  const existingItem = cart.find(item => item.id === product.id);
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+  saveCart();
+  updateBadge();
+  showToast(`Added ${product.name} to cart`);
+}
+
+function removeFromCart(productId) {
+  cart = cart.filter(item => item.id !== productId);
+  saveCart();
+  updateBadge();
+}
+
+function updateQuantity(productId, newQuantity) {
+  const item = cart.find(item => item.id === productId);
+  if (item) {
+    item.quantity = Math.max(1, newQuantity);
+    saveCart();
+    updateBadge();
+  }
+}
+
+function getCart() {
+  return cart;
+}
+
+function clearCart() {
+  cart = [];
+  saveCart();
+  updateBadge();
+}
+
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function updateBadge() {
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const badge = document.getElementById('cart-count');
+  if (badge) {
+    badge.textContent = totalItems;
+    badge.style.display = totalItems > 0 ? 'inline' : 'none';
+  }
+}
+
+function calculateSubtotal() {
+  return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+}
+
+// Initialize badge on page load
+updateBadge();
+product-loader.js (render product cards):
+
+text
+function loadProductsByCategory(category) {
+  const grid = document.getElementById('product-grid');
+  if (!grid) return;
+
+  // Filter products by category
+  const filteredProducts = productsData.filter(p => p.category === category);
+
+  // Check if orders are paused
+  if (siteConfig.ordersPaused) {
+    grid.innerHTML = '<p class="orders-paused-message">Orders are currently paused. Check back soon!</p>';
+    return;
+  }
+
+  // Render product cards
+  grid.innerHTML = filteredProducts.map(product => {
+    const isSoldOut = siteConfig.soldOutItems.includes(product.id);
+    const shippingBadge = product.shipsNationwide ? '<span class="product-card__badge">Ships Nationwide</span>' : '';
+    const soldOutOverlay = isSoldOut ? '<div class="sold-out-overlay">Sold Out</div>' : '';
+
+    return `
+      <div class="product-card" data-product-id="${product.id}">
+        ${soldOutOverlay}
+        <img src="${product.imageUrl}" alt="${product.name}" class="product
