@@ -79,9 +79,43 @@ List behavior expected for navigation, modal, cart, order pages.
 
 10. Admin / Security
 
-Make /admin/ folder protected behind login or moved outside of public root if possible.
+/admin serves two purposes:
+
+It is a decoy honeypot (with fake login pages, dummy panels, etc.) intended to waste attacker time and deflect attention from real site logic.
+
+It also contains one real admin tool: cookiewagon-20c574b7.html.
+This file provides genuine admin/product features and must be protected accordingly.
+
+Guidelines:
+
+Do NOT remove /admin—its presence is intentional for defense purposes.
+
+All honeypot code/pages in /admin should have no connection to live data, production endpoints, or sensitive logic.
+Their only job is to lure and occupy attackers.
+
+cookiewagon-20c574b7.html is the ONLY file with real admin features. It must be:
+
+Kept isolated (no links from main site or honeypot pages)
+
+Secured/hidden in production (move, password-protect, or gate as appropriate for your deploy target)
+
+Documented as operational admin, not part of the honeypot system.
+
+For any developer:
+
+Never wire production features into honeypot pages.
+
+When deploying or auditing, verify /admin contains only one real tool (cookiewagon-20c574b7.html); everything else is non-functional decoy.
+
+If you need to improve security—for example, moving cookiewagon-20c574b7.html out of /admin for production, always document the change and confirm no honeypot logic is affected.
 
 Block any direct access to sensitive scripts/data (especially for future scaling).
+
+Extra:
+
+Document this structure/intent in your README and site docs.
+
+Periodically audit /admin to confirm only the designated files have real site logic.
 
 Optional but Strategic Upgrades
 
