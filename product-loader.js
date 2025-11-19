@@ -176,45 +176,85 @@ class ProductLoader {
         }
 
         const productCard = document.querySelector(`[data-product-id="${productId}"]`);
+        if (!productCard) {
+            console.error('Product card not found for', productId);
+            return;
+        }
+
         const sizeSelector = productCard.querySelector('.size-selector');
         const qtyInput = productCard.querySelector('.qty-input');
         
-        // Get selected size and price
-        const selectedSizeIndex = parseInt(sizeSelector.value);
+        const selectedSizeIndex = parseInt(sizeSelector.value, 10);
         const selectedSize = product.sizes[selectedSizeIndex];
-        let totalPrice = selectedSize.price;
+        if (!selectedSize) {
+            this.showMessage('Please choose a size option.', 'error');
+            return;
+        }
 
-        // Get dietary options
+        let unitPrice = selectedSize.price;
         const dietaryOptions = [];
         productCard.querySelectorAll('.dietary-options input[type="checkbox"]:checked').forEach(checkbox => {
             const optionName = checkbox.id.split('-').pop();
             dietaryOptions.push(optionName);
-            totalPrice += parseFloat(checkbox.dataset.price);
+            unitPrice += parseFloat(checkbox.dataset.price || '0');
         });
 
-        // Get quantity
-        const quantity = parseInt(qtyInput.value) || 1;
+        let quantity = parseInt(qtyInput.value, 10);
+        if (isNaN(quantity) || quantity < 1) {
+            quantity = 1;
+            qtyInput.value = '1';
+        }
 
-        // Create cart item
-        const cartItem = {
-            id: productId,
-            name: product.name,
-            size: selectedSize.name,
-            price: totalPrice,
-            quantity: quantity,
-            dietary: dietaryOptions,
-            totalPrice: totalPrice * quantity
+        const flags = {
+            glutenFree: dietaryOptions.includes('gf'),
+            sugarFree: dietaryOptions.includes('sf'),
+            vegan: dietaryOptions.includes('vegan')
         };
 
-        // Add to cart using existing cart system
-        if (typeof addItemToCart === 'function') {
-            addItemToCart(cartItem);
-        } else if (typeof window.cart !== 'undefined' && typeof window.cart.add === 'function') {
-            window.cart.add(cartItem);
-        } else {
-            console.log('Cart item to add:', cartItem);
-            // Fallback: show success message
-            this.showMessage(`Added ${quantity} ${product.name} to cart!`);
+        const cartItem = {
+            id: productId,
+            name: `${product.name} (${selectedSize.name})`,
+            baseName: product.name,
+            size: selectedSize.name,
+            price: unitPrice,
+            quantity,
+            glutenFree: flags.glutenFree,
+            sugarFree: flags.sugarFree,
+            vegan: flags.vegan,
+            isGF: flags.glutenFree,
+            isSF: flags.sugarFree,
+            isVegan: flags.vegan
+        };
+
+        this.saveCartItem(cartItem);
+    }
+
+    saveCartItem(cartItem) {
+        try {
+            const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
+            const matchIndex = cart.findIndex(item =>
+                item &&
+                item.name === cartItem.name &&
+                Boolean(item.glutenFree) === cartItem.glutenFree &&
+                Boolean(item.sugarFree) === cartItem.sugarFree
+            );
+
+            if (matchIndex > -1) {
+                cart[matchIndex].quantity += cartItem.quantity;
+            } else {
+                cart.push(cartItem);
+            }
+
+            localStorage.setItem('yfhs_cart', JSON.stringify(cart));
+
+            if (typeof updateCartCount === 'function') {
+                updateCartCount();
+            }
+
+            this.showMessage(`Added ${cartItem.quantity} ${cartItem.name} to cart!`);
+        } catch (error) {
+            console.error('Failed to update cart', error);
+            this.showMessage('Could not add item to cart. Please try again.', 'error');
         }
     }
 
