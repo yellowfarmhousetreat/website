@@ -25,7 +25,7 @@
     <link rel="dns-prefetch" href="//snapwidget.com">
     <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
     <link rel="stylesheet" href="assets/css/app.css" />
-            <link rel="stylesheet" href="assets/css/product-cards.css" />
+    <link rel="stylesheet" href="assets/css/product-cards.css" />
   </head>
   <body class="is-preload" data-page="menu">
     <!-- Wrapper -->
@@ -108,7 +108,7 @@
         </section>
         
         <!-- Products Container - Dynamic Content -->
-        <div id="products-container"></div>
+        <div id="products-grid" class="products-grid"></div>
 
         <section class="menu-notes" id="pickup-notes">
           <h2>Order Details & Helpful Notes</h2>
@@ -205,9 +205,10 @@
     <script>
       // Initialize all products
       window.addEventListener('DOMContentLoaded', () => {
-        renderProducts('products-container');
+        renderProducts('products-grid');
       });
     </script>
   </body>
+  <script type="module" src="/src/entries/site-shell.js"></script>
 </html>
 

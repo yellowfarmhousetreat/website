@@ -12,13 +12,6 @@
  */
 
 // Import third-party dependencies
-import '../../assets/js/perf.js';
-import '../../assets/js/jquery.min.js';
-import '../../assets/js/jquery.scrollex.min.js';
-import '../../assets/js/jquery.scrolly.min.js';
-import '../../assets/js/browser.min.js';
-import '../../assets/js/breakpoints.min.js';
-import '../../assets/js/util.js';
 
 // Import core functionality (ISOLATED - won't break from other changes)
 import '../../assets/js/overlay-menu.js';
