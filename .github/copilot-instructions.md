@@ -35,19 +35,20 @@ All products are defined in `/data/products-data.json` and validated against `/d
 #### HTML Pages (Public-Facing)
 - `index.html` - Homepage  
 - `menu.html` - Full dynamic product menu (uses `render-products.js`)
-- `cookies.html`, `pies.html`, `cakes.html`, `breads.html` - Category-specific pages
+- `cookies.html`, `pies.html`, `cakes.html`, `breads.html`, `candy.html` - Category-specific pages
 - `order.html` - Order/cart page
 - `cart.js` - Cart management (root level)
 
 #### Admin Interface (`/admin/`)
-- `product-form.html` - **PRIMARY PRODUCT MANAGEMENT INTERFACE**
+- `product-form.html` is a prototype for `cookiewagon-20c574b7.html` - **PRIMARY PRODUCT MANAGEMENT INTERFACE**
   - Schema-driven form with visual validation
   - Non-technical friendly field labels and help text
   - Real-time validation with clear error messages
+  - Photo uploader from `cookiewagon-20c574b7.html` needs to name the photo what the rest of the code expects it to be and store it in /images
   - JSON export (copy-paste workflow for now)
 - `product-manager.js` - Form logic, schema loading, validation
-- `admin.js` - Admin utilities
-
+- `admin.js` - Admin utilities (needs to be correctly linked to `/data/products-data.json`
+  
 #### Data Layer (`/data/`)
 - `products-data.json` - **SINGLE SOURCE OF TRUTH** for all products
 - `product-schema.json` - JSON Schema defining product structure and validation rules
@@ -55,12 +56,13 @@ All products are defined in `/data/products-data.json` and validated against `/d
 #### Assets (`/assets/`)
 
 **CSS:**
-- `css/app.css` - **PRIMARY STYLESHEET** 
-  - Contains recipe card/tarot card styles
+- `css/app.css` - **PRIMARY STYLESHEET**
   - Responsive grid layouts
   - Product card flip animations
   - Dark theme variables
-- `css/fontawesome-all.min.css` - Icon fonts
+- `css/product_cards.css` -needs created in order to keep primary stylesheet from exceeding 1500 lines
+  - Contains recipe card/tarot card styles
+- `css/fontawesome-all.min.css` - Icon fonts (not sure this is absolutely necessary, willing to compromise)
 
 **JavaScript (Core Rendering):**
 - `js/render-products.js` - **MAIN PRODUCT RENDERER**
@@ -68,6 +70,7 @@ All products are defined in `/data/products-data.json` and validated against `/d
   - Renders flip cards dynamically
   - Handles size selection, quantity, add-to-cart
   - NO hardcoded product HTML
+  - Incorporates card fliping feature, Photo and commerce features on one side, Ingredients and Allergy Info on the other. 
 - `js/product-card-info.js` - Product card interactivity
 - `js/main.js` - Template/site-shell logic
 - `js/overlay-menu.js` - Mobile navigation
@@ -113,7 +116,7 @@ All products are defined in `/data/products-data.json` and validated against `/d
 - **Add to Cart:** Brown button matching card aesthetic
 
 **Accessibility:**
-- Touch targets minimum 44-48px
+- Touch targets minimum 44-48px (with small circle i icon only, transparent background, no visible border)
 - Keyboard navigation support
 - ARIA labels on interactive elements
 - High contrast text
@@ -121,6 +124,8 @@ All products are defined in `/data/products-data.json` and validated against `/d
 ## Data Flow & Product Rendering
 
 ```
+admin panel can (upload photos from iPhotos for all products) edit/add/delete/and pause order taking when backlogged
+    ↓
 products-data.json
        ↓
    (validated against product-schema.json)
