@@ -14,7 +14,7 @@
 // Import third-party dependencies
 
 // Import core functionality (ISOLATED - won't break from other changes)
-import '../../assets/js/overlay-menu.js';
+import '../../assets/js/overlay-menu-simple.js';
 
 // Import page-specific modules
 import '../../assets/js/main.js';
@@ -25,13 +25,13 @@ import '../../site-config.js';
 
 // Import cart and product loaders (if they exist)
 try {
-  await import('../../products.js');
+  await import('../../assets/js/products.js');
 } catch (e) {
   console.log('products.js not found, skipping');
 }
 
 try {
-  await import('../../cart.js');
+  await import('../../assets/js/cart.js');
 } catch (e) {
   console.log('cart.js not found, skipping');
 }
