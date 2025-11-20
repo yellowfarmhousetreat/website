@@ -27,15 +27,12 @@
     <link rel="stylesheet" href="assets/css/app.css" />
   </head>
   <body class="is-preload" data-page="menu">
-
     <!-- Wrapper -->
     <div id="wrapper">
-
       <!-- Header -->
       <header id="header">
         <a href="index.html" class="logo">Yellow Farmhouse Treats</a>
       </header>
-
       <!-- Overlay Navigator -->
       <div class="overlay-menu" aria-label="Site navigation">
         <button class="overlay-menu__toggle" id="overlay-menu-open" type="button" aria-expanded="false" aria-controls="overlay-menu">
@@ -69,27 +66,27 @@
                   <a href="menu.html#cookies-fancy" data-scroll-target="cookies-fancy">Fancy Cookies</a>
                   <a href="menu.html#cookies-complex" data-scroll-target="cookies-complex">Complex Cookies</a>
                 </div>
-                <a href="menu.html#cakes" data-scroll-target="cakes">Cakes &amp; Cupcakes</a>
-                <a href="menu.html#pies" data-scroll-target="pies">Pies &amp; Crisps</a>
-                <a href="menu.html#breads" data-scroll-target="breads">Breads &amp; Market Treats</a>
+                <a href="menu.html#cakes" data-scroll-target="cakes">Cakes & Cupcakes</a>
+                <a href="menu.html#pies" data-scroll-target="pies">Pies & Crisps</a>
+                <a href="menu.html#breads" data-scroll-target="breads">Breads & Market Treats</a>
               </div>
             </div>
             <div class="overlay-accordion__item">
               <button class="overlay-accordion__trigger" type="button" aria-expanded="false" aria-controls="overlay-group-order">
-                Order &amp; Info
+                Order & Info
               </button>
               <div class="overlay-accordion__panel" id="overlay-group-order">
                 <a href="order.html">Start an Order</a>
-                <a href="menu.html#pickup-notes" data-scroll-target="pickup-notes">Deposits &amp; Pickup</a>
+                <a href="menu.html#pickup-notes" data-scroll-target="pickup-notes">Deposits & Pickup</a>
                 <a href="menu.html#shipping-notes" data-scroll-target="shipping-notes">Shipping Details</a>
               </div>
             </div>
             <div class="overlay-accordion__item">
               <button class="overlay-accordion__trigger" type="button" aria-expanded="false" aria-controls="overlay-group-visit">
-                Visit &amp; Connect
+                Visit & Connect
               </button>
               <div class="overlay-accordion__panel" id="overlay-group-visit">
-                <a href="#footer" data-scroll-target="footer">Contact &amp; Location</a>
+                <a href="#footer" data-scroll-target="footer">Contact & Location</a>
                 <a href="https://www.facebook.com/YellowFarmhouseGirl/" target="_blank" rel="noopener">Facebook</a>
                 <a href="https://instagram.com/yellowfarmhousestand" target="_blank" rel="noopener">Instagram</a>
               </div>
@@ -97,7 +94,6 @@
           </div>
         </aside>
       </div>
-
       <!-- Main -->
       <div id="main">
         <section class="menu-hero" id="menu-top">
@@ -109,495 +105,19 @@
             <a class="button button--ghost" href="order.html">View Cart</a>
           </div>
         </section>
-
-        <section class="menu-category" id="cookies">
-          <div class="menu-category__header">
-            <p class="eyebrow">Signature Classics</p>
-            <h2>Cookies</h2>
-            <p>Choose from simple family favorites, decadent fancy varieties, or complex stuffed creations.</p>
-          </div>
-
-          <article class="menu-subsection" id="cookies-simple">
-            <header>
-              <h3>Simple Cookies</h3>
-              <p>Everyday staples that showcase high-quality ingredients.</p>
-            </header>
-            <section class="products-grid">
-              <div class="product-card">
-                <img src="images/cookies-peanut-butter.jpg" alt="Peanut Butter Cookies" class="product-img">
-                <h4 class="product-title">Peanut Butter Cookies</h4>
-                <p>Rich peanut butter flavor, soft and crumbly. A classic favorite.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="pb-size" value="12" data-price="12"> 1/2 dozen - $12</label>
-                    <label><input type="radio" name="pb-size" value="20" data-price="20" checked> Dozen - $20</label>
-                  </div>
-              <p>Playful combinations with fillings, frostings, and premium toppings.</p>
-            </header>
-            <section class="products-grid">
-              <div class="product-card">
-                <img src="images/cookies-biscoff.jpg" alt="Biscoff Cookies" class="product-img">
-                <h4 class="product-title">Biscoff Cookies</h4>
-                <p>Cookie butter-stuffed cookies with that signature Biscoff flavor.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="biscoff-size" value="20" data-price="20"> 1/2 dozen - $20</label>
-                    <label><input type="radio" name="biscoff-size" value="32" data-price="32" checked> Dozen - $32</label>
-                  </div>
-                  <input type="number" id="biscoff-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Biscoff Cookies', 'biscoff-size', null, null, 'biscoff-qty')" aria-label="Add Biscoff Cookies to cart">Add to Cart</button>
-                </div>
-              </div>
-              <div class="product-card">
-                <img src="images/cookies-oreo.jpg" alt="Oreo Cookies" class="product-img">
-                <h4 class="product-title">Oreo Cookies</h4>
-                <p>Cookies and cream perfection with real Oreo pieces.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="oreo-size" value="20" data-price="20"> 1/2 dozen - $20</label>
-                    <label><input type="radio" name="oreo-size" value="32" data-price="32" checked> Dozen - $32</label>
-                  </div>
-                  <input type="number" id="oreo-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Oreo Cookies', 'oreo-size', null, null, 'oreo-qty')" aria-label="Add Oreo Cookies to cart">Add to Cart</button>
-                </div>
-              </div>
-              <div class="product-card">
-                <img src="images/cookies-twix.jpg" alt="Twix Cookies" class="product-img">
-                <h4 class="product-title">Twix Cookies</h4>
-                <p>Caramel, chocolate, and cookie layers. Pure indulgence.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="twix-size" value="20" data-price="20"> 1/2 dozen - $20</label>
-                    <label><input type="radio" name="twix-size" value="32" data-price="32" checked> Dozen - $32</label>
-                  </div>
-                  <input type="number" id="twix-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Twix Cookies', 'twix-size', null, null, 'twix-qty')" aria-label="Add Twix Cookies to cart">Add to Cart</button>
-                </div>
-              </div>
-              <div class="product-card">
-                <img src="images/cookies-red-velvet.jpg" alt="Red Velvet Cookies" class="product-img">
-                <h4 class="product-title">Red Velvet Cookies</h4>
-                <p>Classic red velvet with cream cheese filling.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="rv-size" value="20" data-price="20"> 1/2 dozen - $20</label>
-                    <label><input type="radio" name="rv-size" value="32" data-price="32" checked> Dozen - $32</label>
-                  </div>
-                  <input type="number" id="rv-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Red Velvet Cookies', 'rv-size', null, null, 'rv-qty')" aria-label="Add Red Velvet Cookies to cart">Add to Cart</button>
-                </div>
-              </div>
-              <div class="product-card">
-                <img src="images/cookies-chocolate-chip.jpg" alt="Chocolate Chip Cookies" class="product-img">
-                <h4 class="product-title">Chocolate Chip Cookies</h4>
-                <p>Premium chocolate chips in a buttery cookie base.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="fcc-size" value="20" data-price="20"> 1/2 dozen - $20</label>
-                    <label><input type="radio" name="fcc-size" value="32" data-price="32" checked> Dozen - $32</label>
-                  </div>
-                  <input type="number" id="fcc-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Chocolate Chip Cookies (Fancy)', 'fcc-size', null, null, 'fcc-qty')" aria-label="Add Chocolate Chip Cookies (Fancy) to cart">Add to Cart</button>
-                </div>
-              </div>
-              <div class="product-card">
-                <img src="images/cookies-espresso.jpg" alt="Espresso Cookies" class="product-img">
-                <h4 class="product-title">Espresso Cookies</h4>
-                <p>Rich coffee flavor with chocolate chips.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="esp-size" value="20" data-price="20"> 1/2 dozen - $20</label>
-                    <label><input type="radio" name="esp-size" value="32" data-price="32" checked> Dozen - $32</label>
-                  </div>
-                  <input type="number" id="esp-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Espresso Cookies', 'esp-size', null, null, 'esp-qty')" aria-label="Add Espresso Cookies to cart">Add to Cart</button>
-                </div>
-              </div>
-              <div class="product-card">
-                <img src="images/cookies-cinnamon-roll.jpg" alt="Cinnamon Roll Cookies" class="product-img">
-                <h4 class="product-title">Cinnamon Roll Cookies</h4>
-                <p>All the flavor of a cinnamon roll in cookie form.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="cr-size" value="20" data-price="20"> 1/2 dozen - $20</label>
-                    <label><input type="radio" name="cr-size" value="32" data-price="32" checked> Dozen - $32</label>
-                  </div>
-                  <input type="number" id="cr-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Cinnamon Roll Cookies', 'cr-size', null, null, 'cr-qty')" aria-label="Add Cinnamon Roll Cookies to cart">Add to Cart</button>
-                </div>
-              </div>
-              <div class="product-card">
-                <img src="images/cookies-pumpkin.jpg" alt="Pumpkin Cookies" class="product-img">
-                <h4 class="product-title">Pumpkin Cookies</h4>
-                <p>Seasonal pumpkin spice with cream cheese frosting.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="pump-size" value="20" data-price="20"> 1/2 dozen - $20</label>
-                    <label><input type="radio" name="pump-size" value="32" data-price="32" checked> Dozen - $32</label>
-                  </div>
-                  <input type="number" id="pump-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Pumpkin Cookies', 'pump-size', null, null, 'pump-qty')" aria-label="Add Pumpkin Cookies to cart">Add to Cart</button>
-                </div>
-              </div>
-              <div class="product-card">
-                <img src="images/cookies-holiday.jpg" alt="Holiday Specials Cookies" class="product-img">
-                <h4 class="product-title">Holiday Specials</h4>
-                <p>Seasonal cookies available during holidays - ask for current offerings!</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="hol-size" value="20" data-price="20"> 1/2 dozen - $20</label>
-                    <label><input type="radio" name="hol-size" value="32" data-price="32" checked> Dozen - $32</label>
-                  </div>
-                  <input type="number" id="hol-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Holiday Specials', 'hol-size', null, null, 'hol-qty')" aria-label="Add Holiday Specials to cart">Add to Cart</button>
-                </div>
-              </div>
-            </section>
-          </article>
-
-          <article class="menu-subsection" id="cookies-complex">
-            <header>
-              <h3>Complex Cookies</h3>
-              <p>Over-the-top bakes stuffed with candy bars, caramel, and layered fillings.</p>
-            </header>
-            <section class="products-grid">
-              <div class="product-card">
-                <img src="images/cookies-smore.jpg" alt="S'more Cookies" class="product-img">
-                <h4 class="product-title">S'more Cookies</h4>
-                <p>Graham cracker base, marshmallow, and chocolate. Campfire magic!</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="smore-size" value="25" data-price="25"> 1/2 dozen - $25</label>
-                    <label><input type="radio" name="smore-size" value="45" data-price="45" checked> Dozen - $45</label>
-                  </div>
-                  <input type="number" id="smore-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('S\'more Cookies', 'smore-size', null, null, 'smore-qty')" aria-label="Add S'more Cookies to cart">Add to Cart</button>
-                </div>
-              </div>
-              <div class="product-card">
-                <img src="images/cookies-monster.jpg" alt="Monster Cookies" class="product-img">
-                <h4 class="product-title">Monster Cookies</h4>
-                <p>Loaded with peanut butter, M&amp;Ms, oats, and chocolate chips.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="monster-size" value="25" data-price="25"> 1/2 dozen - $25</label>
-                    <label><input type="radio" name="monster-size" value="45" data-price="45" checked> Dozen - $45</label>
-                  </div>
-                  <input type="number" id="monster-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Monster Cookies', 'monster-size', null, null, 'monster-qty')" aria-label="Add Monster Cookies to cart">Add to Cart</button>
-                </div>
-              </div>
-              <div class="product-card">
-                <img src="images/cookies-pb-cup.jpg" alt="Peanut Butter Cup Stuffed Cookies" class="product-img">
-                <h4 class="product-title">Peanut Butter Cup Stuffed</h4>
-                <p>Peanut butter cookie with a Reese's cup baked inside.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="pbcup-size" value="25" data-price="25"> 1/2 dozen - $25</label>
-                    <label><input type="radio" name="pbcup-size" value="45" data-price="45" checked> Dozen - $45</label>
-                  </div>
-                  <input type="number" id="pbcup-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Peanut Butter Cup Stuffed', 'pbcup-size', null, null, 'pbcup-qty')" aria-label="Add Peanut Butter Cup Stuffed to cart">Add to Cart</button>
-                </div>
-              </div>
-              <div class="product-card">
-                <img src="images/cookies-caramel-apple-pie.jpg" alt="Caramel Apple Pie Cookies" class="product-img">
-                <h4 class="product-title">Caramel Apple Pie</h4>
-                <p>Spiced apple pie filling with caramel drizzle in cookie form.</p>
-                <div class="product-details">
-                  <div class="quantity-selector">
-                    <label><input type="radio" name="cap-size" value="25" data-price="25"> 1/2 dozen - $25</label>
-                    <label><input type="radio" name="cap-size" value="45" data-price="45" checked> Dozen - $45</label>
-                  </div>
-                  <input type="number" id="cap-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Caramel Apple Pie', 'cap-size', null, null, 'cap-qty')" aria-label="Add Caramel Apple Pie to cart">Add to Cart</button>
-                </div>
-              </div>
-            </section>
-          </article>
-        </section>
-
-        <section class="menu-category" id="cakes">
-          <div class="menu-category__header">
-            <p class="eyebrow">Celebration ready</p>
-            <h2>Cakes &amp; Cupcakes</h2>
-            <p>Individual mini cakes and filled cupcakes perfect for showers, birthdays, and pop-up parties.</p>
-          </div>
-          <section class="products-grid">
-            <div class="product-card">
-              <img src="images/mini-cakes.jpg" alt="Mini Cakes" class="product-img">
-              <h4 class="product-title">Mini Cakes (Cream Cheese Frosting)</h4>
-              <p>Individual mini cakes with rich cream cheese frosting.</p>
-              <div class="product-details">
-                <div class="quantity-selector">
-                  <label><input type="radio" name="minicake-size" value="6" data-price="6"> Single - $6</label>
-                  <label><input type="radio" name="minicake-size" value="30" data-price="30"> Half Dozen - $30</label>
-                  <label><input type="radio" name="minicake-size" value="50" data-price="50" checked> Dozen - $50</label>
-                </div>
-                <input type="number" id="minicake-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSizedProductToCart('Mini Cakes', 'minicake-size', 'minicake-qty')" aria-label="Add Mini Cakes to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/cupcake-chocolate-lava.jpg" alt="Chocolate Lava Cupcakes" class="product-img">
-              <h4 class="product-title">Chocolate Lava Cupcakes</h4>
-              <p>Rich chocolate cupcakes with a molten center.</p>
-              <div class="product-details">
-                <div class="quantity-selector">
-                  <label><input type="radio" name="choclava-size" value="15" data-price="15"> Half Dozen - $15</label>
-                  <label><input type="radio" name="choclava-size" value="28" data-price="28" checked> Dozen - $28</label>
-                </div>
-                <label><input type="checkbox" id="choclava-gf"> Gluten Free</label>
-                <label><input type="checkbox" id="choclava-sf"> Sugar Free</label>
-                <input type="number" id="choclava-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addCupcakesToCart('Chocolate Lava Cupcakes', 'choclava-size', 'choclava-gf', 'choclava-sf', 'choclava-qty')" aria-label="Add Chocolate Lava Cupcakes to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/cupcake-ding-dong.jpg" alt="Ding Dong Cupcakes" class="product-img">
-              <h4 class="product-title">Ding Dong Cupcakes</h4>
-              <p>Chocolate cupcakes with creamy filling, inspired by the classic treat.</p>
-              <div class="product-details">
-                <div class="quantity-selector">
-                  <label><input type="radio" name="dingdong-size" value="15" data-price="15"> Half Dozen - $15</label>
-                  <label><input type="radio" name="dingdong-size" value="28" data-price="28" checked> Dozen - $28</label>
-                </div>
-                <input type="number" id="dingdong-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSizedProductToCart('Ding Dong Cupcakes', 'dingdong-size', 'dingdong-qty')" aria-label="Add Ding Dong Cupcakes to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/cupcake-holiday.jpg" alt="Holiday Special Cupcakes" class="product-img">
-              <h4 class="product-title">Holiday Special Cupcakes</h4>
-              <p>Seasonal cupcakes - ask for current holiday offerings!</p>
-              <div class="product-details">
-                <div class="quantity-selector">
-                  <label><input type="radio" name="holcup-size" value="15" data-price="15"> Half Dozen - $15</label>
-                  <label><input type="radio" name="holcup-size" value="28" data-price="28" checked> Dozen - $28</label>
-                </div>
-                <input type="number" id="holcup-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSizedProductToCart('Holiday Special Cupcakes', 'holcup-size', 'holcup-qty')" aria-label="Add Holiday Special Cupcakes to cart">Add to Cart</button>
-              </div>
-            </div>
-          </section>
-        </section>
-
-        <section class="menu-category" id="pies">
-          <div class="menu-category__header">
-            <p class="eyebrow">Farmhouse pies &amp; crisps</p>
-            <h2>Pies &amp; Crisps</h2>
-            <p>Buttery crusts, seasonal fillings, and warm-spiced crisps made the same day you pick up.</p>
-          </div>
-          <p class="category-note">🥧 <strong>$5 deposit required for all pies &amp; crisps.</strong></p>
-          <section class="products-grid">
-            <div class="product-card">
-              <img src="images/pie-apple.jpg" alt="Apple Pie" class="product-img">
-              <h4 class="product-title">Apple Pie</h4>
-              <p>Classic apple pie with flaky crust and cinnamon apples.</p>
-              <div class="product-details">
-                <input type="number" id="applepie-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addPieToCart('Apple Pie', 25, 'applepie-qty')" aria-label="Add Apple Pie to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/pie-pumpkin.jpg" alt="Pumpkin Pie" class="product-img">
-              <h4 class="product-title">Pumpkin Pie</h4>
-              <p>Spiced pumpkin filling in buttery crust. A holiday favorite.</p>
-              <div class="product-details">
-                <input type="number" id="pumpkinpie-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addPieToCart('Pumpkin Pie', 25, 'pumpkinpie-qty')" aria-label="Add Pumpkin Pie to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/pie-peach.jpg" alt="Peach Pie" class="product-img">
-              <h4 class="product-title">Peach Pie</h4>
-              <p>Sweet peaches baked in a golden crust.</p>
-              <div class="product-details">
-                <input type="number" id="peachpie-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addPieToCart('Peach Pie', 25, 'peachpie-qty')" aria-label="Add Peach Pie to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/pie-lemon.jpg" alt="Lemon Meringue Pie" class="product-img">
-              <h4 class="product-title">Lemon Meringue Pie</h4>
-              <p>Tangy lemon filling topped with fluffy meringue.</p>
-              <div class="product-details">
-                <input type="number" id="lemonpie-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addPieToCart('Lemon Meringue Pie', 25, 'lemonpie-qty')" aria-label="Add Lemon Meringue Pie to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/crisp-apple.jpg" alt="Apple Crisp" class="product-img">
-              <h4 class="product-title">Apple Crisp</h4>
-              <p>Warm spiced apples with crunchy oat topping.</p>
-              <div class="product-details">
-                <label><input type="checkbox" id="applecrisp-gf"> Gluten Free</label>
-                <label><input type="checkbox" id="applecrisp-sf"> Sugar Free</label>
-                <input type="number" id="applecrisp-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addCrispToCart('Apple Crisp', 25, 'applecrisp-gf', 'applecrisp-sf', 'applecrisp-qty')" aria-label="Add Apple Crisp to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/crisp-pumpkin.jpg" alt="Pumpkin Crisp" class="product-img">
-              <h4 class="product-title">Pumpkin Crisp</h4>
-              <p>Creamy pumpkin layer with buttery crisp topping.</p>
-              <div class="product-details">
-                <label><input type="checkbox" id="pumpkincrisp-gf"> Gluten Free</label>
-                <label><input type="checkbox" id="pumpkincrisp-sf"> Sugar Free</label>
-                <input type="number" id="pumpkincrisp-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addCrispToCart('Pumpkin Crisp', 25, 'pumpkincrisp-gf', 'pumpkincrisp-sf', 'pumpkincrisp-qty')" aria-label="Add Pumpkin Crisp to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/cobbler-peach.jpg" alt="Peach Cobbler" class="product-img">
-              <h4 class="product-title">Peach Cobbler</h4>
-              <p>Juicy peaches with tender biscuit topping.</p>
-              <div class="product-details">
-                <input type="number" id="peachcobbler-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addPieToCart('Peach Cobbler', 30, 'peachcobbler-qty')" aria-label="Add Peach Cobbler to cart">Add to Cart</button>
-              </div>
-            </div>
-          </section>
-        </section>
-
-        <section class="menu-category" id="breads">
-          <div class="menu-category__header">
-            <p class="eyebrow">Morning market favorites</p>
-            <h2>Breads &amp; Market Treats</h2>
-            <p>Perfect for brunch tables, teacher gifts, or stocking the freezer with crowd-pleasers.</p>
-          </div>
-          <section class="products-grid">
-            <div class="product-card">
-              <img src="images/bread-milk.jpg" alt="Milk Bread" class="product-img">
-              <h4 class="product-title">Milk Bread</h4>
-              <p>Soft, fluffy bread made with fresh milk. Perfect for sandwiches.</p>
-              <div class="product-details">
-                <input type="number" id="milk-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSimpleProductToCart('Milk Bread', 12, 'milk-qty')" aria-label="Add Milk Bread to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/bread-pumpkin.jpg" alt="Pumpkin Bread" class="product-img">
-              <h4 class="product-title">Pumpkin Bread</h4>
-              <p>Moist pumpkin bread with warm spices. A fall favorite.</p>
-              <div class="product-details">
-                <input type="number" id="pumpkinbread-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSimpleProductToCart('Pumpkin Bread', 12, 'pumpkinbread-qty')" aria-label="Add Pumpkin Bread to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/cinnamon-rolls.jpg" alt="Cinnamon Rolls" class="product-img">
-              <h4 class="product-title">Cinnamon Rolls</h4>
-              <p>Fresh-baked cinnamon rolls with cream cheese icing.</p>
-              <div class="product-details">
-                <div class="quantity-selector">
-                  <label><input type="radio" name="cinroll-size" value="15" data-price="15"> Half Dozen - $15</label>
-                  <label><input type="radio" name="cinroll-size" value="28" data-price="28" checked> Dozen - $28</label>
-                </div>
-                <input type="number" id="cinroll-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSizedProductToCart('Cinnamon Rolls', 'cinroll-size', 'cinroll-qty')" aria-label="Add Cinnamon Rolls to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/muffin-pumpkin.jpg" alt="Pumpkin Muffins" class="product-img">
-              <h4 class="product-title">Pumpkin Muffins</h4>
-              <p>Moist pumpkin muffins with autumn spices.</p>
-              <div class="product-details">
-                <div class="quantity-selector">
-                  <label><input type="radio" name="pumpmuf-size" value="15" data-price="15"> Half Dozen - $15</label>
-                  <label><input type="radio" name="pumpmuf-size" value="28" data-price="28" checked> Dozen - $28</label>
-                </div>
-                <input type="number" id="pumpmuf-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSizedProductToCart('Pumpkin Muffins', 'pumpmuf-size', 'pumpmuf-qty')" aria-label="Add Pumpkin Muffins to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/muffin-oatmeal.jpg" alt="Oatmeal Muffins" class="product-img">
-              <h4 class="product-title">Oatmeal Muffins</h4>
-              <p>Hearty oatmeal muffins - a wholesome treat.</p>
-              <div class="product-details">
-                <div class="quantity-selector">
-                  <label><input type="radio" name="oatmuf-size" value="15" data-price="15"> Half Dozen - $15</label>
-                  <label><input type="radio" name="oatmuf-size" value="28" data-price="28" checked> Dozen - $28</label>
-                </div>
-                <input type="number" id="oatmuf-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSizedProductToCart('Oatmeal Muffins', 'oatmuf-size', 'oatmuf-qty')" aria-label="Add Oatmeal Muffins to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/pretzel-chocolate.jpg" alt="Chocolate Dipped Pretzel Rods" class="product-img">
-              <h4 class="product-title">Chocolate Dipped Pretzel Rods</h4>
-              <p>Crunchy pretzel rods dipped in smooth chocolate.</p>
-              <div class="product-details">
-                <div class="quantity-selector">
-                  <label><input type="radio" name="pretzel-choc-size" value="10" data-price="10"> Half Dozen - $10</label>
-                  <label><input type="radio" name="pretzel-choc-size" value="18" data-price="18" checked> Dozen - $18</label>
-                </div>
-                <input type="number" id="pretzel-choc-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSizedProductToCart('Chocolate Dipped Pretzel Rods', 'pretzel-choc-size', 'pretzel-choc-qty')" aria-label="Add Chocolate Dipped Pretzel Rods to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/pretzel-vanilla.jpg" alt="Vanilla Dipped Pretzel Rods" class="product-img">
-              <h4 class="product-title">Vanilla Dipped Pretzel Rods</h4>
-              <p>Crunchy pretzel rods dipped in creamy white chocolate.</p>
-              <div class="product-details">
-                <div class="quantity-selector">
-                  <label><input type="radio" name="pretzel-van-size" value="10" data-price="10"> Half Dozen - $10</label>
-                  <label><input type="radio" name="pretzel-van-size" value="18" data-price="18" checked> Dozen - $18</label>
-                </div>
-                <input type="number" id="pretzel-van-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSizedProductToCart('Vanilla Dipped Pretzel Rods', 'pretzel-van-size', 'pretzel-van-qty')" aria-label="Add Vanilla Dipped Pretzel Rods to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/pretzel-candy.jpg" alt="Candy Dipped Pretzel Rods" class="product-img">
-              <h4 class="product-title">Candy Dipped Pretzel Rods</h4>
-              <p>Pretzel rods dipped in chocolate and topped with candy pieces.</p>
-              <div class="product-details">
-                <div class="quantity-selector">
-                  <label><input type="radio" name="pretzel-candy-size" value="10" data-price="10"> Half Dozen - $10</label>
-                  <label><input type="radio" name="pretzel-candy-size" value="18" data-price="18" checked> Dozen - $18</label>
-                </div>
-                <input type="number" id="pretzel-candy-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSizedProductToCart('Candy Dipped Pretzel Rods', 'pretzel-candy-size', 'pretzel-candy-qty')" aria-label="Add Candy Dipped Pretzel Rods to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/brownies.jpg" alt="Brownies - Large" class="product-img">
-              <h4 class="product-title">Brownies - Large</h4>
-              <p>Rich, fudgy brownies.</p>
-              <div class="product-details">
-                <label><input type="checkbox" id="brownie-gf"> Gluten Free</label>
-                <input type="number" id="brownie-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addBrowniesToCart('Brownies - Large', 18, 'brownie-gf', 'brownie-qty')" aria-label="Add Brownies - Large to cart">Add to Cart</button>
-              </div>
-            </div>
-            <div class="product-card">
-              <img src="images/toffee.jpg" alt="Pecan English Toffee" class="product-img">
-              <h4 class="product-title">Pecan English Toffee</h4>
-              <p>Buttery toffee with pecans. <strong>⚠️ Can be shipped!</strong></p>
-              <div class="product-details">
-                <div class="quantity-selector">
-                  <label><input type="radio" name="toffee-size" value="30" data-price="30"> 1 Pound (Regular Box) - $30</label>
-                  <label><input type="radio" name="toffee-size" value="35" data-price="35" checked> 1 Pound (Mason Jar Gift) - $35</label>
-                </div>
-                <input type="number" id="toffee-qty" min="1" value="1" class="qty-input" title="Quantity">
-                <button onclick="addSizedProductToCart('Pecan English Toffee', 'toffee-size', 'toffee-qty')" aria-label="Add Pecan English Toffee to cart">Add to Cart</button>
-              </div>
-            </div>
-          </section>
-        </section>
+        
+        <!-- Products Container - Dynamic Content -->
+        <div id="products-container"></div>
 
         <section class="menu-notes" id="pickup-notes">
-          <h2>Order Details &amp; Helpful Notes</h2>
+          <h2>Order Details & Helpful Notes</h2>
           <div class="menu-notes__grid">
             <article>
               <h3>Deposits</h3>
               <p>A 50% deposit is required to lock in your bake date. Remaining balances are due at pickup.</p>
             </article>
             <article>
-              <h3>Pickup &amp; Delivery</h3>
+              <h3>Pickup & Delivery</h3>
               <p>Pickups are scheduled from our Caldwell farmhouse. Limited local delivery may be available—include the request on your order form.</p>
             </article>
             <article id="shipping-notes">
@@ -611,21 +131,19 @@
           </div>
         </section>
       </div>
-
-        <!-- FDA Disclaimer -->
-        <section class="fda-disclaimer">
-            <h3>⚖️ Cottage Food Operation</h3>
-            <p>
-                <strong>Yellow Farmhouse Treats</strong> is a cottage food operation that is not subject to Idaho food safety regulations or inspections. Our products are made in a home kitchen that may also process common food allergens.
-            </p>
-            <p>
-                These products have not been evaluated by the Food and Drug Administration (FDA). These products are not intended to diagnose, treat, cure, or prevent any disease.
-            </p>
-            <small>
-                Idaho Cottage Food Law permits the sale of certain low-risk food products prepared in home kitchens. For questions about food safety or allergens, please contact us directly.
-            </small>
-        </section>
-
+      <!-- FDA Disclaimer -->
+      <section class="fda-disclaimer">
+        <h3>⚖️ Cottage Food Operation</h3>
+        <p>
+          <strong>Yellow Farmhouse Treats</strong> is a cottage food operation that is not subject to Idaho food safety regulations or inspections. Our products are made in a home kitchen that may also process common food allergens.
+        </p>
+        <p>
+          These products have not been evaluated by the Food and Drug Administration (FDA). These products are not intended to diagnose, treat, cure, or prevent any disease.
+        </p>
+        <small>
+          Idaho Cottage Food Law permits the sale of certain low-risk food products prepared in home kitchens. For questions about food safety or allergens, please contact us directly.
+        </small>
+      </section>
       <!-- Footer -->
       <footer id="footer">
         <section>
@@ -643,57 +161,52 @@
                 <label for="message">Message</label>
                 <textarea name="message" id="message" rows="3" placeholder="Questions about custom orders or special dietary needs? Get in touch!" required></textarea>
               </div>
+              <ul class="actions">
+                <li><input type="submit" value="Send Message"></li>
+              </ul>
             </div>
-            <ul class="actions">
-              <li><input type="submit" value="Send Message" /></li>
-            </ul>
           </form>
         </section>
-        <section class="split contact">
-          <section class="alt">
-            <h3>Address</h3>
-            <p>22659 Farmway Road<br />Caldwell, ID 83646</p>
-          </section>
-          <section>
-            <h3>Phone</h3>
-            <p><a href="tel:+18057094686">(805) 709-4686</a></p>
-          </section>
-          <section>
-            <h3>Email</h3>
-            <p><a href="mailto:yellowfarmhousetreats@gmail.com">yellowfarmhousetreats@gmail.com</a></p>
-          </section>
-          <section>
-            <h3>Social</h3>
-            <ul class="icons alt">
-              <li><a href="https://www.facebook.com/YellowFarmhouseGirl/" target="_blank" rel="noopener" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-              <li><a href="https://instagram.com/yellowfarmhousestand" target="_blank" rel="noopener" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-            </ul>
-          </section>
+        <section>
+          <div class="split contact">
+            <div>
+              <h3>Address</h3>
+              <p>22659 Farmway Road<br />
+              Caldwell, ID 83646</p>
+            </div>
+            <div>
+              <h3>Phone</h3>
+              <p><a href="tel:+18057094686">(805) 709-4686</a></p>
+            </div>
+          </div>
         </section>
+        <section>
+          <div class="split contact">
+            <div>
+              <h3>Email</h3>
+              <p><a href="mailto:yellowfarmhousetreats@gmail.com">yellowfarmhousetreats@gmail.com</a></p>
+            </div>
+            <div>
+              <h3>Social</h3>
+              <ul class="icons">
+                <li><a href="https://www.facebook.com/YellowFarmhouseGirl/" class="icon brands fa-facebook-f" target="_blank" rel="noopener"><span class="label">Facebook</span></a></li>
+                <li><a href="https://instagram.com/yellowfarmhousestand" class="icon brands fa-instagram" target="_blank" rel="noopener"><span class="label">Instagram</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <div class="copyright">
+          <p>&copy; Yellow Farmhouse Treats</p>
+        </div>
       </footer>
-
-      <!-- Copyright -->
-      <div id="copyright">
-        <ul><li>&copy; Yellow Farmhouse Treats</li></ul>
-      </div>
-
     </div>
-
-    <!-- Add-to-cart handlers moved to cart.js for consistency across pages -->
-
-    <!-- Scripts -->
-    <script src="assets/js/perf.js" defer></script>
-    <script src="assets/js/jquery.min.js" defer></script>
-    <script src="assets/js/jquery.scrollex.min.js" defer></script>
-    <script src="assets/js/jquery.scrolly.min.js" defer></script>
-    <script src="assets/js/browser.min.js" defer></script>
-    <script src="assets/js/breakpoints.min.js" defer></script>
-    <script src="assets/js/util.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
-    <script src="site-config.js"></script>
-    <script src="products.js" defer></script>
-    <script src="cart.js" defer></script>
-    <script src="assets/js/overlay-menu.js" defer></script>
-
+    <script src="assets/js/render-products.js"></script>
+    <script>
+      // Initialize all products
+      window.addEventListener('DOMContentLoaded', () => {
+        renderProducts('products-container');
+      });
+    </script>
   </body>
 </html>
+
