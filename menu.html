@@ -694,6 +694,22 @@
     <script src="products.js" defer></script>
     <script src="cart.js" defer></script>
     <script src="assets/js/overlay-menu.js" defer></script>
+              
+  <!-- Product Rendering Scripts -->
+  <script src="assets/js/product-manager.js"></script>
+  <script src="assets/js/render-products.js"></script>
+  <script>
+    // Initialize product renderer for menu
+    document.addEventListener('DOMContentLoaded', async () => {
+      const manager = new ProductManager();
+      await manager.loadSchema();
+      const renderer = new FlipCardRenderer(manager);
+      const container = document.getElementById('products-container');
+      if (container) {
+        renderer.renderProducts(container);
+      }
+    });
+  </script>
 
   </body>
 </html>
