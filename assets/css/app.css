@@ -1459,6 +1459,7 @@ btn-secondary:hover,
   .actions {
     flex-direction: column;
   }
+  }
 }
 
 @media (max-width: 360px) {
