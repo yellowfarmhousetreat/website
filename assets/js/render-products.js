@@ -34,19 +34,8 @@ class SimpleProductRenderer {
   // Create a single product card
   createCard(product) {
     const card = document.createElement('div');
-    card.className = 'flip-card';
+    card.className = 'product-card';
     card.setAttribute('data-product-id', product.id);
-
-    // Price calculation
-    const prices = (product.sizes || []).map(s => s.price);
-    const minPrice = prices.length ? Math.min(...prices) : 'TBD';
-    const maxPrice = prices.length ? Math.max(...prices) : 'TBD';
-    const priceDisplay = minPrice === maxPrice ? `$${minPrice}` : `$${minPrice}-$${maxPrice}`;
-
-    // Size options
-    const sizeHtml = (product.sizes || [])
-      .map(s => `<li>${s.name}: $${s.price}</li>`)
-      .join('');
 
     // Dietary tags
     const dietaryTags = [];
@@ -57,30 +46,41 @@ class SimpleProductRenderer {
       ? `<div class="dietary-tags">${dietaryTags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`
       : '';
 
+    // Size options as clickable list items
+    const sizeHtml = (product.sizes || [])
+      .map((s, idx) => `<li data-size-index="${idx}" data-price="${s.price}">${s.name}: $${s.price}</li>`)
+      .join('');
+
     const soldOutBadge = product.soldOut ? '<div class="sold-out-badge">SOLD OUT</div>' : '';
 
     card.innerHTML = `
-      <div class="flip-card-inner">
+      <div class="product-card-inner">
         <!-- FRONT -->
-        <div class="flip-card-front">
+        <div class="product-card-front">
           ${soldOutBadge}
           <img src="${product.image}" alt="${product.name}" class="product-image">
           <div class="product-info-front">
             <h3 class="product-name">${product.name}</h3>
             ${dietaryHtml}
             <p class="product-description">${product.description}</p>
-            <div class="price-section">
-              <span class="price">${priceDisplay}</span>
-            </div>
+            
             <ul class="sizes-list">${sizeHtml}</ul>
+            
+            <div class="quantity-selector">
+              <label for="qty-${product.id}">Qty:</label>
+              <input type="number" id="qty-${product.id}" class="qty-input" value="1" min="1" max="100">
+            </div>
+            
             <button class="add-to-cart-btn" ${product.soldOut ? 'disabled' : ''}>
               ${product.soldOut ? 'Out of Stock' : 'Add to Cart'}
             </button>
-            <div class="flip-hint">Click to see ingredients</div>
+            
+            <div class="info-toggle" role="button" tabindex="0" aria-label="View ingredients"></div>
           </div>
         </div>
+
         <!-- BACK -->
-        <div class="flip-card-back">
+        <div class="product-card-back">
           <div class="back-content">
             <h4>Ingredients & Allergens</h4>
             <div class="allergen-warning">
@@ -92,16 +92,67 @@ class SimpleProductRenderer {
             <div class="allergen-info">
               <strong>Contains:</strong> ${product.allergens || 'See package for details'}
             </div>
-            <div class="flip-hint">Click to return</div>
+            <div class="info-toggle" role="button" tabindex="0" aria-label="Return to front"></div>
           </div>
         </div>
       </div>
     `;
 
-    // Flip animation
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.add-to-cart-btn')) return;
-      card.classList.toggle('flipped');
+    // Size selection handler
+    const sizeItems = card.querySelectorAll('.sizes-list li');
+    sizeItems.forEach(item => {
+      item.addEventListener('click', () => {
+        sizeItems.forEach(li => li.classList.remove('selected'));
+        item.classList.add('selected');
+        card.dataset.selectedSize = item.dataset.sizeIndex;
+        card.dataset.selectedPrice = item.dataset.price;
+      });
+    });
+
+    // Pre-select first size
+    if (sizeItems.length > 0) {
+      sizeItems[0].classList.add('selected');
+      card.dataset.selectedSize = '0';
+      card.dataset.selectedPrice = sizeItems[0].dataset.price;
+    }
+
+    // Flip animation - only flip when clicking info toggle, not the whole card
+    const infoToggles = card.querySelectorAll('.info-toggle');
+    infoToggles.forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        card.classList.toggle('flipped');
+      });
+      
+      // Keyboard accessibility
+      toggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.classList.toggle('flipped');
+        }
+      });
+    });
+
+    // Add to cart handler
+    const addBtn = card.querySelector('.add-to-cart-btn');
+    addBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (product.soldOut) return;
+      
+      const qty = parseInt(card.querySelector('.qty-input').value);
+      const sizeIndex = parseInt(card.dataset.selectedSize);
+      const selectedSize = product.sizes[sizeIndex];
+      
+      console.log('Add to cart:', {
+        product: product.name,
+        size: selectedSize.name,
+        price: selectedSize.price,
+        quantity: qty,
+        total: selectedSize.price * qty
+      });
+      
+      // TODO: Implement actual cart functionality
+      alert(`Added ${qty} × ${product.name} (${selectedSize.name}) to cart!`);
     });
 
     return card;
@@ -131,10 +182,12 @@ class SimpleProductRenderer {
 window.renderProducts = async function(containerId, category = null) {
   const renderer = new SimpleProductRenderer(containerId);
   const loaded = await renderer.load();
+  
   if (!loaded) {
     console.error('Could not initialize product renderer');
     return;
   }
+  
   if (category) {
     renderer.renderCategory(category);
   } else {
