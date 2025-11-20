@@ -17,7 +17,6 @@
 import '../../assets/js/overlay-menu-simple.js';
 
 // Import page-specific modules
-import '../../assets/js/main.js';
 import '../../assets/js/product-card-info.js';
 
 // Import site configuration
