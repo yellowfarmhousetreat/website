@@ -52,13 +52,30 @@ class SimpleProductRenderer {
       .join('');
 
     const soldOutBadge = product.soldOut ? '<div class="sold-out-badge">SOLD OUT</div>' : '';
+    
+    // Handle image path - support both old 'image' property and new 'images.primary' structure
+    const imagePath = product.images?.primary 
+      ? `/images/products/${product.images.primary}`
+      : product.image || '/images/placeholder.jpg';
+    
+    const imageAlt = product.images?.alt || product.name;
+    
+    // Handle ingredients - convert array to string if needed
+    const ingredientsText = Array.isArray(product.ingredients)
+      ? product.ingredients.join(', ')
+      : product.ingredients || 'Ingredients information not available';
+    
+    // Handle allergens - format the allergens object
+    const allergensText = product.allergens?.contains
+      ? product.allergens.contains.join(', ')
+      : product.allergens || 'See package for details';
 
     card.innerHTML = `
       <div class="product-card-inner">
         <!-- FRONT -->
         <div class="product-card-front">
           ${soldOutBadge}
-          <img src="${product.image}" alt="${product.name}" class="product-image">
+          <img src="${imagePath}" alt="${imageAlt}" class="product-image">
           <div class="product-info-front">
             <h3 class="product-name">${product.name}</h3>
             ${dietaryHtml}
@@ -87,10 +104,10 @@ class SimpleProductRenderer {
               Made in a kitchen that processes: nuts, dairy, gluten
             </div>
             <div class="ingredients-section">
-              <p class="ingredients">${product.ingredients || 'Ingredients information not available'}</p>
+              <p class="ingredients">${ingredientsText}</p>
             </div>
             <div class="allergen-info">
-              <strong>Contains:</strong> ${product.allergens || 'See package for details'}
+              <strong>Contains:</strong> ${allergensText}
             </div>
             <div class="info-toggle" role="button" tabindex="0" aria-label="Return to front"></div>
           </div>
