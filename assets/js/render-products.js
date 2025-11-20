@@ -1,56 +1,62 @@
 /**
- * Flip Card Product Renderer
- * Renders products with flip animation showing product info on front,
- * ingredients & allergens on back
+ * Simple Product Renderer
+ * Renders product flip cards directly from products-data.json
+ * No dependencies, just works.
  */
 
-class FlipCardRenderer {
-  constructor(containerId, productsDataUrl = '/data/products-data.json') {
+class SimpleProductRenderer {
+  constructor(containerId) {
     this.container = document.getElementById(containerId);
-    this.productsDataUrl = productsDataUrl;
     this.products = [];
+    this.dataUrl = '/data/products-data.json';
   }
 
-  async init() {
+  // Load products from JSON
+  async load() {
     try {
-      const response = await fetch(this.productsDataUrl);
+      const response = await fetch(this.dataUrl);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
-      this.products = data.products;
+      this.products = data.products || [];
+      console.log(`Loaded ${this.products.length} products`);
+      return true;
     } catch (error) {
-      console.error('Failed to load products data:', error);
+      console.error('Failed to load products:', error.message);
+      return false;
     }
   }
 
-  filterByCategory(category) {
+  // Filter by category
+  getByCategory(category) {
     return this.products.filter(p => p.category === category);
   }
 
-  renderCard(product) {
+  // Create a single product card
+  createCard(product) {
     const card = document.createElement('div');
     card.className = 'flip-card';
     card.setAttribute('data-product-id', product.id);
 
-    // Get min and max price from sizes
-    const prices = product.sizes.map(s => s.price);
-    const minPrice = Math.min(...prices);
-    const maxPrice = Math.max(...prices);
+    // Price calculation
+    const prices = (product.sizes || []).map(s => s.price);
+    const minPrice = prices.length ? Math.min(...prices) : 'TBD';
+    const maxPrice = prices.length ? Math.max(...prices) : 'TBD';
     const priceDisplay = minPrice === maxPrice ? `$${minPrice}` : `$${minPrice}-$${maxPrice}`;
 
-    // Build size options display
-    const sizeOptionsHtml = product.sizes
+    // Size options
+    const sizeHtml = (product.sizes || [])
       .map(s => `<li>${s.name}: $${s.price}</li>`)
       .join('');
 
-    // Build dietary tags
+    // Dietary tags
     const dietaryTags = [];
     if (product.dietary?.glutenFree) dietaryTags.push('GF');
     if (product.dietary?.sugarFree) dietaryTags.push('SF');
     if (product.dietary?.vegan) dietaryTags.push('V');
-    const dietaryHtml = dietaryTags.length > 0
+    const dietaryHtml = dietaryTags.length
       ? `<div class="dietary-tags">${dietaryTags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`
       : '';
 
-    // Sold out badge
     const soldOutBadge = product.soldOut ? '<div class="sold-out-badge">SOLD OUT</div>' : '';
 
     card.innerHTML = `
@@ -66,14 +72,13 @@ class FlipCardRenderer {
             <div class="price-section">
               <span class="price">${priceDisplay}</span>
             </div>
-            <ul class="sizes-list">${sizeOptionsHtml}</ul>
-            <button class="add-to-cart-btn" onclick="addToCart('${product.id}')" ${product.soldOut ? 'disabled' : ''}>
+            <ul class="sizes-list">${sizeHtml}</ul>
+            <button class="add-to-cart-btn" ${product.soldOut ? 'disabled' : ''}>
               ${product.soldOut ? 'Out of Stock' : 'Add to Cart'}
             </button>
             <div class="flip-hint">Click to see ingredients</div>
           </div>
         </div>
-
         <!-- BACK -->
         <div class="flip-card-back">
           <div class="back-content">
@@ -93,34 +98,46 @@ class FlipCardRenderer {
       </div>
     `;
 
-    // Add flip animation listener
+    // Flip animation
     card.addEventListener('click', (e) => {
-      if (e.target.closest('.add-to-cart-btn')) return; // Don't flip on button click
+      if (e.target.closest('.add-to-cart-btn')) return;
       card.classList.toggle('flipped');
     });
 
     return card;
   }
 
-  renderProducts(products) {
-    this.container.innerHTML = '';
-    products.forEach(product => {
-      const card = this.renderCard(product);
-      this.container.appendChild(card);
-    });
-  }
-
-  renderByCategory(category) {
-    const filteredProducts = this.filterByCategory(category);
-    this.renderProducts(filteredProducts);
-  }
-
+  // Render all products
   renderAll() {
-    this.renderProducts(this.products);
+    this.container.innerHTML = '';
+    this.products.forEach(product => {
+      this.container.appendChild(this.createCard(product));
+    });
+    console.log(`Rendered ${this.products.length} products`);
+  }
+
+  // Render specific category
+  renderCategory(category) {
+    const filtered = this.getByCategory(category);
+    this.container.innerHTML = '';
+    filtered.forEach(product => {
+      this.container.appendChild(this.createCard(product));
+    });
+    console.log(`Rendered ${filtered.length} products in category: ${category}`);
   }
 }
 
-// Export for use
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = FlipCardRenderer;
-}
+// Global initialization
+window.renderProducts = async function(containerId, category = null) {
+  const renderer = new SimpleProductRenderer(containerId);
+  const loaded = await renderer.load();
+  if (!loaded) {
+    console.error('Could not initialize product renderer');
+    return;
+  }
+  if (category) {
+    renderer.renderCategory(category);
+  } else {
+    renderer.renderAll();
+  }
+};
