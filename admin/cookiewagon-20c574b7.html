@@ -561,20 +561,19 @@
 
         <!-- Login Form -->
         <div id="login-form" class="login-container">
-            <div class="login-form">
-                <h1>Farmhouse Admin</h1>
-                <p>Enter your admin password to manage products</p>
-                
-                <div class="form-group">
-                    <label for="admin-password">Admin Password:</label>
-                    <input type="password" id="admin-password" placeholder="Enter admin password" 
-                           onkeypress="if(event.key==='Enter') handleLogin()">
-                </div>
-                
-                <button onclick="handleLogin()" class="btn btn-primary" style="width: 100%;">
-                    Login to Admin Panel
-                </button>
-            </div>
+                        <div class="login-form">
+                                <form id="admin-login-form" onsubmit="event.preventDefault(); handleLogin();">
+                                    <h1>Farmhouse Admin</h1>
+                                    <p>Enter your admin password to manage products</p>
+                                    <div class="form-group">
+                                        <label for="admin-password">Admin Password</label>
+                                        <input type="password" id="admin-password" placeholder="Enter password" autocomplete="current-password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                        Login to Admin Panel
+                                    </button>
+                                </form>
+                        </div>
         </div>
 
         <!-- Admin Panel -->
@@ -596,7 +595,7 @@
     </div>
 
     <!-- Site Configuration System -->
-    <script type="module" src="/src/entries/cookiewagon-shell.js"></script>
+    <script src="./admin.js"></script>
     
     <script>
         // Admin Interface Class
@@ -1308,9 +1307,27 @@ TO UPDATE YOUR MAIN FILE:
 
         document.addEventListener('DOMContentLoaded', function() {
             adminInterface = new SimpleAdminInterface();
+            window.adminInterface = adminInterface;
+            console.log('[Admin] adminInterface initialized:', !!adminInterface);
         });
 
         function handleLogin() {
+            if (!adminInterface) {
+                // Show visible error message in the login form
+                var loginForm = document.querySelector('.login-form');
+                if (loginForm) {
+                    var errorDiv = document.createElement('div');
+                    errorDiv.style.background = '#e74c3c';
+                    errorDiv.style.color = '#fff';
+                    errorDiv.style.padding = '1rem';
+                    errorDiv.style.marginBottom = '1rem';
+                    errorDiv.style.borderRadius = '8px';
+                    errorDiv.style.fontWeight = 'bold';
+                    errorDiv.textContent = 'Error: Admin interface not initialized. Check if admin.js is loading.';
+                    loginForm.insertBefore(errorDiv, loginForm.firstChild);
+                }
+                return;
+            }
             adminInterface.handleLogin();
         }
 

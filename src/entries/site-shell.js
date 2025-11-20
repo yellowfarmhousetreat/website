@@ -25,10 +25,12 @@ import '../../site-config.js';
 
 // Import cart and product loaders (if they exist)
 
-try {
-  await import('../../cart.js');
-} catch (e) {
-  console.log('cart.js not found, skipping');
-}
+(async () => {
+  try {
+    await import('../../assets/js/cart.js');
+  } catch (e) {
+    console.log('cart.js not found, skipping', e);
+  }
+})();
 
 console.log('✓ Site shell loaded successfully');
