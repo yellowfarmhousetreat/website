@@ -1480,8 +1480,9 @@ btn-secondary:hover,
     height: 160px;
   }
 
-  .order-form,
-  .cart-display,
-  .instagram-showcase {
-    padding: 1.5rem;
+    .order-form,
+    .cart-display,
+    .instagram-showcase {
+      padding: 1.5rem;
+    }
   }
