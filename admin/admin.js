@@ -324,7 +324,7 @@ class AdminInterface {
   }
 
   async loadProductsFromJson() {
-    const response = await fetch('../data/products-data.json?' + Date.now(), { cache: 'no-store' });
+    const response = await fetch('/data/products-data.json?' + Date.now(), { cache: 'no-store' });
     if (!response.ok) {
       throw new Error('Failed to fetch products-data.json');
     }
