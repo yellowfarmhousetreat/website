@@ -1,0 +1,21 @@
+title: Farmhouse Bakery
+email: info@yellowfarmhousetreat.com
+description: >
+  The official site for Yellow Farmhouse Treats.
+baseurl: ""
+url: "http://localhost:4000"
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+exclude:
+  - node_modules
+  - scripts
+  - assets
+  - data
+  - reports
+  - public
+  - README.txt
+  - package.json
+  - vite.config.js
+  - admin

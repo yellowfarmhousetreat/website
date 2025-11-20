@@ -32,4 +32,8 @@ import '../../site-config.js';
   }
 })();
 
+
 console.log('✓ Site shell loaded successfully');
+
+// Export a resolved promise for downstream shells
+export const siteShellReady = Promise.resolve();
