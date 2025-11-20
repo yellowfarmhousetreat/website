@@ -123,7 +123,7 @@
     rgba(139, 115, 85, 0.08) 28px,
     rgba(139, 115, 85, 0.08) 29px
   );
-  transform: rotateY(0deg) translateZ(1px);
+  transform: rotateY(0deg);
 }
 
 /* When flipped, lower the z-index of the front so the back can be seen */
@@ -454,7 +454,7 @@
    =========================== */
 
 .product-card-back {
-  transform: rotateY(180deg) translateZ(1px);
+  transform: rotateY(180deg);
   background: #ffffff !important;
   border: 3px solid #000;
   padding: 20px;
@@ -506,6 +506,29 @@
   border: 2px solid #000;
   padding: 10px;
   background: #fafafa;
+}
+
+.nutrition-section {
+  margin-bottom: 12px;
+  border: 2px solid #000;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.nutrition-section h4 {
+  font-size: 1rem;
+  margin: 0 0 6px 0;
+  border: none;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.nutrition-section p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+  color: #333;
 }
 
 .ingredients-section p {

@@ -86,6 +86,9 @@ class SimpleProductRenderer {
       : '';
     
     const facilityText = product.allergens?.facilityStatement || '';
+    
+    // Handle nutrition - use product specific or default
+    const nutritionText = product.nutrition || 'Approx. 200–350 calories per serving. Contact us for detailed macros.';
 
     card.innerHTML = `
       <div class="product-card-inner">
@@ -127,6 +130,10 @@ class SimpleProductRenderer {
               <strong>Contains:</strong> ${containsText}
               ${mayContainText ? `<br><strong>May Contain:</strong> ${mayContainText}` : ''}
               ${facilityText ? `<br><em class="facility-note">${facilityText}</em>` : ''}
+            </div>
+            <div class="nutrition-section">
+              <h4>Nutrition Notes</h4>
+              <p>${nutritionText}</p>
             </div>
             <div class="info-toggle" role="button" tabindex="0" aria-label="Return to front"></div>
           </div>
