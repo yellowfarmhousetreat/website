@@ -1,6 +1,6 @@
 {
   "schemaVersion": "yellowfarmhouse.products.v2",
-  "version": "2025-11-20T02:15:00.000Z",
+  "version": "2025-11-20T22:39:17.368Z",
   "generatedBy": "automated-migration",
   "metadata": {
     "imageBasePath": "/images/products/",
@@ -9,7 +9,7 @@
       "jpg",
       "webp"
     ],
-    "lastUpdated": "2025-11-20T02:15:00.000Z"
+    "lastUpdated": "2025-11-20T22:39:17.373Z"
   },
   "dietaryPricing": {
     "glutenFree": 3,
@@ -77,44 +77,7 @@
       "featured": false,
       "tags": [
         "cookies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Semi-Sweet Chocolate Chips (Sugar, Chocolate, Cocoa Butter, Milk Fat, Soy Lecithin, Natural Vanilla Extract)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Semi-Sweet Chocolate Chips (Sugar, Chocolate, Cocoa Butter, Milk Fat, Soy Lecithin, Natural Vanilla Extract)",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs",
-            "Soy"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "peanut-butter-cookies",
@@ -176,44 +139,7 @@
       "featured": false,
       "tags": [
         "cookies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Peanut Butter (Peanuts, Salt)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Peanut Butter (Peanuts, Salt)",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs",
-            "Peanuts"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "sugar-cookies",
@@ -273,41 +199,7 @@
       "featured": false,
       "tags": [
         "cookies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "oatmeal-raisin-cookies",
@@ -368,43 +260,7 @@
       "featured": false,
       "tags": [
         "cookies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Rolled Oats",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Rolled Oats",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "mint-fudge-cookies",
@@ -464,41 +320,7 @@
       "featured": false,
       "tags": [
         "cookies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "salted-caramel-swirl-cookies",
@@ -558,41 +380,7 @@
       "featured": false,
       "tags": [
         "cookies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "strawberry-bliss-cookies",
@@ -652,41 +440,7 @@
       "featured": false,
       "tags": [
         "cookies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "matcha-cheesecake-cookies",
@@ -746,41 +500,7 @@
       "featured": false,
       "tags": [
         "cookies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "lavender-blueberry-cookies",
@@ -840,41 +560,7 @@
       "featured": false,
       "tags": [
         "cookies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "triple-layer-cookies",
@@ -934,41 +620,7 @@
       "featured": false,
       "tags": [
         "cookies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "pecan-english-toffee",
@@ -1027,34 +679,9 @@
       "featured": false,
       "tags": [
         "cookies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
-        {
+    {
       "id": "dipped-pretzel-rods",
       "name": "Dipped Pretzel Rods",
       "category": "candy",
@@ -1138,41 +765,7 @@
       "featured": false,
       "tags": [
         "pies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "pumpkin-pie",
@@ -1232,51 +825,7 @@
       "featured": false,
       "tags": [
         "pies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Pumpkin Puree",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt",
-          "Cinnamon",
-          "Nutmeg",
-          "Ginger",
-          "Cloves"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Pumpkin Puree",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt",
-          "Cinnamon",
-          "Nutmeg",
-          "Ginger",
-          "Cloves"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "peach-pie",
@@ -1331,41 +880,7 @@
       "featured": false,
       "tags": [
         "pies"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ],
-        "sugarFree": [
-          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
-          "Butter (Cream, Salt)",
-          "Erythritol",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "milk-bread",
@@ -1421,33 +936,7 @@
       "featured": false,
       "tags": [
         "breads"
-      ],
-      "variantIngredients": {
-        "glutenFree": [
-          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
-          "Butter (Cream, Salt)",
-          "Granulated Sugar",
-          "Eggs",
-          "Vanilla Extract",
-          "Baking Powder",
-          "Salt",
-          "Yeast"
-        ]
-      },
-      "variantAllergens": {
-        "glutenFree": {
-          "contains": [
-            "Milk",
-            "Eggs"
-          ],
-          "mayContain": [
-            "Tree Nuts",
-            "Peanuts",
-            "Soy"
-          ],
-          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
-        }
-      }
+      ]
     },
     {
       "id": "smores-cookies",

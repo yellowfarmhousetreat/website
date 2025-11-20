@@ -74,10 +74,16 @@ class SimpleProductRenderer {
       ? product.ingredients.join(', ')
       : product.ingredients || 'Ingredients information not available';
     
-    // Handle allergens - format the allergens object
-    const allergensText = product.allergens?.contains
+    // Handle allergens - format all allergen information
+    const containsText = product.allergens?.contains
       ? product.allergens.contains.join(', ')
-      : product.allergens || 'See package for details';
+      : 'See package for details';
+    
+    const mayContainText = product.allergens?.mayContain
+      ? product.allergens.mayContain.join(', ')
+      : '';
+    
+    const facilityText = product.allergens?.facilityStatement || '';
 
     card.innerHTML = `
       <div class="product-card-inner">
@@ -111,14 +117,14 @@ class SimpleProductRenderer {
         <div class="product-card-back">
           <div class="back-content">
             <h4>Ingredients & Allergens</h4>
-            <div class="allergen-warning">
-              Made in a kitchen that processes: nuts, dairy, gluten
-            </div>
             <div class="ingredients-section">
+              <strong>Ingredients:</strong>
               <p class="ingredients">${ingredientsText}</p>
             </div>
             <div class="allergen-info">
-              <strong>Contains:</strong> ${allergensText}
+              <strong>Contains:</strong> ${containsText}
+              ${mayContainText ? `<br><strong>May Contain:</strong> ${mayContainText}` : ''}
+              ${facilityText ? `<br><em class="facility-note">${facilityText}</em>` : ''}
             </div>
             <div class="info-toggle" role="button" tabindex="0" aria-label="Return to front"></div>
           </div>
