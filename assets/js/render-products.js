@@ -163,7 +163,22 @@ class SimpleProductRenderer {
       card.dataset.selectedPrice = sizeItems[0].dataset.price;
     }
 
-    // Flip animation - only flip when clicking info toggle, not the whole card
+    // Flip animation - Allow clicking the whole card to flip (like the original design)
+    // but prevent flipping when interacting with controls
+    card.addEventListener('click', (e) => {
+      // Don't flip if clicking buttons, inputs, or their labels
+      if (e.target.closest('button') || 
+          e.target.closest('input') || 
+          e.target.closest('label') ||
+          e.target.closest('.add-to-cart-btn')) {
+        return;
+      }
+      
+      console.log('Card clicked, toggling flip for:', product.name);
+      card.classList.toggle('flipped');
+    });
+
+    // Info toggle specific handler (redundant but keeps the button semantic)
     const infoToggles = card.querySelectorAll('.info-toggle');
     infoToggles.forEach(toggle => {
       toggle.addEventListener('click', (e) => {
