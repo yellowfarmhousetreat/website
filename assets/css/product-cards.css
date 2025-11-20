@@ -56,6 +56,9 @@
   -webkit-backface-visibility: hidden;
   border-radius: 4px;
   box-sizing: border-box;
+  background-color: #fdfbf7;
+  /* Ensure cards are completely opaque like physical cards */
+  opacity: 1 !important;
 }
 
 /* ===========================
@@ -63,13 +66,14 @@
    =========================== */
 
 .product-card-front {
-  background: #fdfbf7;
+  background: #fdfbf7 !important;
   border: 2px solid #8b7355;
   box-shadow: inset 0 0 0 1px rgba(139, 115, 85, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   position: relative;
-  opacity: 1;
+  opacity: 1 !important;
+  z-index: 2;
   /* Subtle lined paper texture */
   background-image: repeating-linear-gradient(
     transparent,
@@ -356,23 +360,23 @@
   position: absolute;
   bottom: 16px;
   right: 16px;
-  width: 48px;
-  height: 48px;
-  background: #8b7355;
-  border: 2px solid #fff;
-  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fdfbf7;
-  font-size: 1.8rem;
-  font-weight: 700;
+  color: #8b7355;
+  font-size: 2rem;
+  font-weight: 400;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease;
   z-index: 10;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   font-family: Georgia, serif;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(139, 115, 85, 0.2);
+  padding: 0;
+  margin: 0;
 }
 
 .info-toggle::before {
@@ -380,13 +384,11 @@
 }
 
 .info-toggle:hover {
-  transform: scale(1.1);
-  background: #6f5a44;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  opacity: 0.7;
 }
 
 .info-toggle:active {
-  transform: scale(1.05);
+  opacity: 0.5;
 }
 
 /* ===========================
@@ -395,13 +397,14 @@
 
 .product-card-back {
   transform: rotateY(180deg);
-  background: #ffffff;
+  background: #ffffff !important;
   border: 3px solid #000;
   padding: 20px;
   overflow-y: auto;
   font-family: 'Courier New', monospace;
   color: #000;
-  opacity: 1;
+  opacity: 1 !important;
+  z-index: 1;
 }
 
 .back-content {
@@ -468,10 +471,10 @@
   position: absolute;
   bottom: 16px;
   right: 16px;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   background: #000;
-  border: 2px solid #fff;
+  border: none;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -480,10 +483,11 @@
   font-size: 1.6rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease;
   z-index: 10;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
+  padding: 0;
+  margin: 0;
 }
 
 .product-card-back .info-toggle::before {
@@ -491,13 +495,11 @@
 }
 
 .product-card-back .info-toggle:hover {
-  background: #333;
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  opacity: 0.8;
 }
 
 .product-card-back .info-toggle:active {
-  transform: scale(1.05);
+  opacity: 0.6;
 }
 
 /* ===========================
