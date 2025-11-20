@@ -1,0 +1,493 @@
+/**
+ * Product Cards - Recipe/Tarot Card Aesthetic
+ * Standalone stylesheet for product card components
+ * Yellow Farmhouse Treats
+ */
+
+/* ===========================
+   PRODUCTS GRID LAYOUT
+   =========================== */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  padding: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ===========================
+   PRODUCT CARD BASE STRUCTURE
+   =========================== */
+
+.product-card {
+  perspective: 1500px;
+  height: 520px;
+  max-width: 350px;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+}
+
+.product-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.product-card.flipped .product-card-inner {
+  transform: rotateY(180deg);
+}
+
+.product-card-front,
+.product-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   CARD FRONT - Recipe Card Style
+   =========================== */
+
+.product-card-front {
+  background: #fdfbf7;
+  border: 2px solid #8b7355;
+  box-shadow: inset 0 0 0 1px rgba(139, 115, 85, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* Subtle lined paper texture */
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 28px,
+    rgba(139, 115, 85, 0.08) 28px,
+    rgba(139, 115, 85, 0.08) 29px
+  );
+}
+
+/* Corner punch-hole decorations */
+.product-card-front::before,
+.product-card-front::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #d4c4b0 40%, #8b7355 100%);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+}
+
+.product-card-front::before {
+  top: 16px;
+  left: 16px;
+}
+
+.product-card-front::after {
+  top: 16px;
+  right: 16px;
+}
+
+/* Product image - Polaroid style, 1/3 of card */
+.product-card .product-image {
+  width: calc(100% - 32px);
+  height: 100px;
+  object-fit: cover;
+  margin: 48px 16px 8px;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  filter: saturate(1.1) contrast(1.05);
+}
+
+.product-info-front {
+  padding: 0 16px 60px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.product-name {
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #3d2f24;
+  text-align: center;
+  letter-spacing: 0.02em;
+  margin: 0;
+  text-transform: uppercase;
+  border-bottom: 2px solid #8b7355;
+  padding-bottom: 4px;
+}
+
+.product-description {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: #4a3f35;
+  margin: 0;
+  font-style: italic;
+}
+
+.dietary-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin: 2px 0;
+}
+
+.dietary-tags .tag {
+  display: inline-block;
+  background: #8b7355;
+  color: #fdfbf7;
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+}
+
+/* Price display - hidden (shown in size options) */
+.price-section {
+  display: none;
+}
+
+/* Size options - Compact, clickable list */
+.sizes-list {
+  list-style: none;
+  padding: 6px;
+  margin: 4px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background: #ffffff;
+  border: 2px solid #8b7355;
+  border-radius: 3px;
+}
+
+.sizes-list li {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #3d2f24;
+  padding: 5px 8px;
+  background: #f5f3ed;
+  border: 1px solid #d4c4b0;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 32px;
+}
+
+.sizes-list li:hover {
+  background: #e8e6dc;
+  border-color: #8b7355;
+}
+
+.sizes-list li:active {
+  transform: scale(0.98);
+}
+
+.sizes-list li.selected {
+  background: #8b7355;
+  color: #fdfbf7;
+  border-color: #8b7355;
+  font-weight: 700;
+}
+
+/* Quantity selector - Inline and compact */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 4px 0;
+  padding: 5px 8px;
+  background: #ffffff;
+  border: 2px solid #8b7355;
+  border-radius: 3px;
+  min-height: 32px;
+}
+
+.quantity-selector label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #3d2f24;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.quantity-selector input {
+  width: 50px;
+  padding: 4px 6px;
+  border: 1px solid #8b7355;
+  background: #fff;
+  color: #3d2f24;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 0.85rem;
+}
+
+.quantity-selector input:focus {
+  outline: none;
+  border-color: #6f5a44;
+  box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.2);
+}
+
+/* Add to cart button */
+.add-to-cart-btn {
+  background: #8b7355;
+  color: #fdfbf7;
+  border: none;
+  padding: 10px 14px;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 4px;
+  min-height: 40px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.add-to-cart-btn:hover {
+  background: #6f5a44;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.add-to-cart-btn:active {
+  transform: translateY(0);
+}
+
+.add-to-cart-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Sold out badge */
+.sold-out-badge {
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-12deg);
+  background: #e74c3c;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  font-size: 0.9rem;
+  padding: 5px 18px;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* Info toggle button - Front (ⓘ circle) */
+.info-toggle {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  background: #8b7355;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fdfbf7;
+  font-size: 1.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-family: Georgia, serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.info-toggle::before {
+  content: 'ⓘ';
+}
+
+.info-toggle:hover {
+  transform: scale(1.1);
+  background: #6f5a44;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.info-toggle:active {
+  transform: scale(1.05);
+}
+
+/* ===========================
+   CARD BACK - Ingredients Label Style
+   =========================== */
+
+.product-card-back {
+  transform: rotateY(180deg);
+  background: #ffffff;
+  border: 3px solid #000;
+  padding: 20px;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
+  color: #000;
+}
+
+.back-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 60px;
+}
+
+.back-content h4 {
+  font-size: 1.3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+  border: 3px solid #000;
+  padding: 10px;
+  background: #fff;
+  text-align: center;
+}
+
+.allergen-warning {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #856404;
+  margin-bottom: 12px;
+}
+
+.ingredients-section {
+  margin-bottom: 12px;
+  border: 2px solid #000;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.ingredients-section p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+  color: #333;
+}
+
+.allergen-info {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0 0 10px 0;
+  padding: 10px;
+  border: 2px solid #000;
+  background: #fafafa;
+}
+
+.allergen-info strong {
+  font-weight: 900;
+  color: #000;
+}
+
+/* Info toggle button - Back (↩ curved arrow) */
+.product-card-back .info-toggle {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  background: #000;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.product-card-back .info-toggle::before {
+  content: '↩';
+}
+
+.product-card-back .info-toggle:hover {
+  background: #333;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.product-card-back .info-toggle:active {
+  transform: scale(1.05);
+}
+
+/* ===========================
+   RESPONSIVE BREAKPOINTS
+   =========================== */
+
+@media (max-width: 768px) {
+  .product-card {
+    height: 500px;
+  }
+
+  .product-card .product-image {
+    height: 90px;
+  }
+  
+  .back-content h4 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .product-card {
+    height: 520px;
+    max-width: 100%;
+  }
+}
+
