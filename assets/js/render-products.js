@@ -65,9 +65,13 @@ class SimpleProductRenderer {
     const soldOutBadge = product.soldOut ? '<div class="sold-out-badge">SOLD OUT</div>' : '';
     
     // Handle image path - support both old 'image' property and new 'images.primary' structure
+    // BYPASS: Using placeholder to debug loading issues as requested
+    const imagePath = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22300%22%20height%3D%22200%22%20viewBox%3D%220%200%20300%20200%22%3E%3Crect%20fill%3D%22%23f0f0f0%22%20width%3D%22300%22%20height%3D%22200%22%2F%3E%3Ctext%20fill%3D%22%23888%22%20font-family%3D%22sans-serif%22%20font-size%3D%2224%22%20dy%3D%2210.5%22%20font-weight%3D%22bold%22%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%3EImage%20Bypass%3C%2Ftext%3E%3C%2Fsvg%3E';
+    /* 
     const imagePath = product.images?.primary 
       ? `/images/products/${product.images.primary}`
       : product.image || '/images/placeholder.jpg';
+    */
     
     const imageAlt = product.images?.alt || product.name;
     
@@ -163,6 +167,7 @@ class SimpleProductRenderer {
     const infoToggles = card.querySelectorAll('.info-toggle');
     infoToggles.forEach(toggle => {
       toggle.addEventListener('click', (e) => {
+        console.log('Flip toggle clicked for:', product.name);
         e.stopPropagation();
         card.classList.toggle('flipped');
       });
