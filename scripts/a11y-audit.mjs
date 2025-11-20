@@ -16,7 +16,8 @@ const TARGET_PAGES = [
   { id: 'cakes', label: 'Cakes', url: 'cakes.html' },
   { id: 'pies', label: 'Pies', url: 'pies.html' },
   { id: 'breads', label: 'Breads', url: 'breads.html' },
-  { id: 'cart', label: 'Cart', url: 'cart.html' }
+  { id: 'cart', label: 'Cart', url: 'cart.html' },
+  { id: 'candy', label: 'Candy', url: 'candy.html' }
 ];
 
 const waitForServer = async (probeUrl, attempts = 25, intervalMs = 400) => {

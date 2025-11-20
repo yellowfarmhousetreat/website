@@ -1,5 +1,5 @@
 {
-  "targetUrl": "http://127.0.0.1:4173/cookies.html",
+  "targetUrl": "http://127.0.0.1:4173/candy.html",
   "testEngine": {
     "name": "axe-core",
     "version": "4.11.0"
@@ -14,8 +14,8 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2025-11-20T10:59:20.261Z",
-  "url": "http://127.0.0.1:4173/cookies.html",
+  "timestamp": "2025-11-20T10:59:24.745Z",
+  "url": "http://127.0.0.1:4173/candy.html",
   "toolOptions": {
     "runOnly": {
       "type": "tag",
@@ -394,25 +394,6 @@
       "nodes": []
     },
     {
-      "id": "link-in-text-block",
-      "impact": null,
-      "tags": [
-        "cat.color",
-        "wcag2a",
-        "wcag141",
-        "TTv5",
-        "TT13.a",
-        "EN-301-549",
-        "EN-9.1.4.1",
-        "RGAAv4",
-        "RGAA-10.6.1"
-      ],
-      "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
-      "help": "Links must be distinguishable without relying on color",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-in-text-block?application=playwright",
-      "nodes": []
-    },
-    {
       "id": "marquee",
       "impact": null,
       "tags": [
@@ -768,6 +749,58 @@
           "target": [
             "#overlay-menu-open"
           ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-allowed-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attributes are used correctly for the defined role"
+            }
+          ],
+          "none": [
+            {
+              "id": "aria-unsupported-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute is supported"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-allowed-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attributes are used correctly for the defined role"
+            }
+          ],
+          "none": [
+            {
+              "id": "aria-unsupported-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute is supported"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
+          ]
         }
       ]
     },
@@ -821,6 +854,42 @@
           "html": "<button class=\"overlay-menu__toggle\" id=\"overlay-menu-open\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-menu\">",
           "target": [
             "#overlay-menu-open"
+          ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-conditional-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-conditional-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
           ]
         }
       ]
@@ -892,7 +961,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<body class=\"is-preload\">",
+          "html": "<body class=\"is-preload\" data-page=\"home\">",
           "target": [
             "body"
           ]
@@ -948,6 +1017,38 @@
           "target": [
             "span[aria-hidden=\"true\"]"
           ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "focusable-modal-open",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "No focusable elements while a modal is open"
+            },
+            {
+              "id": "focusable-disabled",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "No focusable elements contained within element"
+            },
+            {
+              "id": "focusable-not-tabbable",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "No focusable elements contained within element"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<iframe src=\"https://snapwidget.com/embed/1112051\" class=\"snapwidget-widget\" title=\"Posts from Instagram\" aria-hidden=\"true\" tabindex=\"-1\"></iframe>",
+          "target": [
+            "iframe"
+          ]
         }
       ]
     },
@@ -983,6 +1084,42 @@
           "html": "<button class=\"overlay-menu__toggle\" id=\"overlay-menu-open\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-menu\">",
           "target": [
             "#overlay-menu-open"
+          ]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "aria-prohibited-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "aria-prohibited-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
           ]
         }
       ]
@@ -1152,6 +1289,70 @@
           "target": [
             "#overlay-menu-open"
           ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-valid-attr-value",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute values are valid"
+            },
+            {
+              "id": "aria-errormessage",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-errormessage exists and references elements visible to screen readers that use a supported aria-errormessage technique"
+            },
+            {
+              "id": "aria-level",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-level values are valid"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-valid-attr-value",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute values are valid"
+            },
+            {
+              "id": "aria-errormessage",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-errormessage exists and references elements visible to screen readers that use a supported aria-errormessage technique"
+            },
+            {
+              "id": "aria-level",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-level values are valid"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
+          ]
         }
       ]
     },
@@ -1205,6 +1406,42 @@
           "html": "<button class=\"overlay-menu__toggle\" id=\"overlay-menu-open\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-menu\">",
           "target": [
             "#overlay-menu-open"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-valid-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute name is valid"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-valid-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute name is valid"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
           ]
         }
       ]
@@ -1284,7 +1521,7 @@
               "data": null,
               "relatedNodes": [
                 {
-                  "html": "<h1>Our Delicious Cookies</h1>",
+                  "html": "<h1>YELLOW FarmHOUSE&nbsp;<br>\n\t\t\t\t\t\tTreats</h1>",
                   "target": [
                     "h1"
                   ]
@@ -1367,6 +1604,56 @@
               "id": "color-contrast",
               "data": {
                 "fgColor": "#ffffff",
+                "bgColor": "#1c212c",
+                "contrastRatio": 16.11,
+                "fontSize": "62.4pt (83.2px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 16.11"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h1>YELLOW FarmHOUSE&nbsp;<br>\n\t\t\t\t\t\tTreats</h1>",
+          "target": [
+            "h1"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1a1a1a",
+                "bgColor": "#ffd86f",
+                "contrastRatio": 12.68,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 12.68"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"#header\" class=\"button icon solid solo fa-arrow-down scrolly\">Continue</a>",
+          "target": [
+            ".button"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffffff",
                 "bgColor": "#1a1a23",
                 "contrastRatio": 17.27,
                 "fontSize": "12.0pt (16px)",
@@ -1392,15 +1679,15 @@
               "id": "color-contrast",
               "data": {
                 "fgColor": "#ffffff",
-                "bgColor": "#131520",
-                "contrastRatio": 18.16,
+                "bgColor": "#131622",
+                "contrastRatio": 18.01,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 18.16"
+              "message": "Element has sufficient color contrast of 18.01"
             }
           ],
           "all": [],
@@ -1417,15 +1704,15 @@
               "id": "color-contrast",
               "data": {
                 "fgColor": "#ffffff",
-                "bgColor": "#42434d",
-                "contrastRatio": 9.8,
+                "bgColor": "#43444e",
+                "contrastRatio": 9.65,
                 "fontSize": "10.2pt (13.6px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 9.8"
+              "message": "Element has sufficient color contrast of 9.65"
             }
           ],
           "all": [],
@@ -1467,23 +1754,23 @@
               "id": "color-contrast",
               "data": {
                 "fgColor": "#ffffff",
-                "bgColor": "#1a1a23",
-                "contrastRatio": 17.27,
-                "fontSize": "24.0pt (32px)",
-                "fontWeight": "bold",
+                "bgColor": "#212931",
+                "contrastRatio": 14.72,
+                "fontSize": "22.8pt (30.4px)",
+                "fontWeight": "normal",
                 "expectedContrastRatio": "3:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 17.27"
+              "message": "Element has sufficient color contrast of 14.72"
             }
           ],
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<h1>Our Delicious Cookies</h1>",
+          "html": "<div class=\"instagram-showcase-title\">Check Out Our Latest Creations!</div>",
           "target": [
-            "h1"
+            ".instagram-showcase-title"
           ]
         },
         {
@@ -1492,23 +1779,48 @@
               "id": "color-contrast",
               "data": {
                 "fgColor": "#ffffff",
-                "bgColor": "#1a1a23",
-                "contrastRatio": 17.27,
+                "bgColor": "#212931",
+                "contrastRatio": 14.72,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 17.27"
+              "message": "Element has sufficient color contrast of 14.72"
             }
           ],
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<p>Freshly baked cookies made with love and the finest ingredients</p>",
+          "html": "<p>Follow <a href=\"https://instagram.com/yellowfarmhousestand\" target=\"_blank\" rel=\"noopener\">@yellowfarmhousestand</a> for daily updates and behind-the-scenes content!</p>",
           "target": [
-            ".major > p"
+            ".instagram-follow > p"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#9e9eff",
+                "bgColor": "#212931",
+                "contrastRatio": 6.16,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 6.16"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"https://instagram.com/yellowfarmhousestand\" target=\"_blank\" rel=\"noopener\">@yellowfarmhousestand</a>",
+          "target": [
+            "p > a[target=\"_blank\"][rel=\"noopener\"]"
           ]
         },
         {
@@ -1706,7 +2018,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<p>22659 Farmway Road<br>Caldwell, ID 83646</p>",
+          "html": "<p>22659 Farmway Road<br>\n\t\t\t\t\t\t\t\tCaldwell, ID 83646</p>",
           "target": [
             ".alt > p"
           ]
@@ -1756,9 +2068,9 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<a href=\"tel:+18057094686\">(805) 709-4686</a>",
+          "html": "<a href=\"#\">(805) 709-4686</a>",
           "target": [
-            "a[href=\"tel:+18057094686\"]"
+            "section:nth-child(2) > p > a[href=\"#\"]"
           ]
         },
         {
@@ -1806,9 +2118,9 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<a href=\"mailto:yellowfarmhousetreats@gmail.com\">yellowfarmhousetreats@gmail.com</a>",
+          "html": "<a href=\"#\">yellowfarmhousetreats@gmail.com</a>",
           "target": [
-            "section:nth-child(3) > p > a"
+            "section:nth-child(3) > p > a[href=\"#\"]"
           ]
         },
         {
@@ -1858,57 +2170,7 @@
           "impact": null,
           "html": "<li>© Yellow Farmhouse Treats</li>",
           "target": [
-            "#copyright > ul > li:nth-child(1)"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "fgColor": "#ffffff",
-                "bgColor": "#1a1a23",
-                "contrastRatio": 17.27,
-                "fontSize": "10.2pt (13.6px)",
-                "fontWeight": "normal",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has sufficient color contrast of 17.27"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<li>Design: <a href=\"https://html5up.net\">HTML5 UP</a></li>",
-          "target": [
-            "#copyright > ul > li:nth-child(2)"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "fgColor": "#9e9eff",
-                "bgColor": "#1a1a23",
-                "contrastRatio": 7.22,
-                "fontSize": "10.2pt (13.6px)",
-                "fontWeight": "normal",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has sufficient color contrast of 7.22"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<a href=\"https://html5up.net\">HTML5 UP</a>",
-          "target": [
-            "a[href$=\"html5up.net\"]"
+            "#copyright > ul > li"
           ]
         }
       ]
@@ -1999,7 +2261,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<div class=\"overlay-accordion__panel\" id=\"overlay-group-pages\">\n                            <a href=\"index.html\">Home</a>\n                            <a href=\"menu.html\">Full Menu</a>\n                            <a href=\"order.html\">Start an Order</a>\n                        </div>",
+          "html": "<div class=\"overlay-accordion__panel\" id=\"overlay-group-pages\">\n\t\t\t\t\t\t\t\t\t<a href=\"index.html\">Home</a>\n\t\t\t\t\t\t\t\t\t<a href=\"menu.html\">Full Menu</a>\n\t\t\t\t\t\t\t\t\t<a href=\"order.html\">Start an Order</a>\n\t\t\t\t\t\t\t\t</div>",
           "target": [
             "#overlay-group-pages"
           ]
@@ -2107,7 +2369,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" placeholder=\"Questions about custom orders or special dietary needs? Get in touch!\" required=\"\"></textarea>",
+          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" required=\"\"></textarea>",
           "target": [
             "#message"
           ]
@@ -2202,7 +2464,7 @@
             }
           ],
           "impact": null,
-          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" placeholder=\"Questions about custom orders or special dietary needs? Get in touch!\" required=\"\"></textarea>",
+          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" required=\"\"></textarea>",
           "target": [
             "#message"
           ]
@@ -2436,13 +2698,6 @@
               ],
               "impact": "critical",
               "message": "Element has an explicit <label>"
-            },
-            {
-              "id": "non-empty-placeholder",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has a placeholder attribute"
             }
           ],
           "all": [],
@@ -2456,7 +2711,7 @@
             }
           ],
           "impact": null,
-          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" placeholder=\"Questions about custom orders or special dietary needs? Get in touch!\" required=\"\"></textarea>",
+          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" required=\"\"></textarea>",
           "target": [
             "#message"
           ]
@@ -2464,8 +2719,53 @@
       ]
     },
     {
+      "id": "link-in-text-block",
+      "impact": null,
+      "tags": [
+        "cat.color",
+        "wcag2a",
+        "wcag141",
+        "TTv5",
+        "TT13.a",
+        "EN-301-549",
+        "EN-9.1.4.1",
+        "RGAAv4",
+        "RGAA-10.6.1"
+      ],
+      "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
+      "help": "Links must be distinguishable without relying on color",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-in-text-block?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "link-in-text-block-style",
+              "data": null,
+              "relatedNodes": [
+                {
+                  "html": "<p>Follow <a href=\"https://instagram.com/yellowfarmhousestand\" target=\"_blank\" rel=\"noopener\">@yellowfarmhousestand</a> for daily updates and behind-the-scenes content!</p>",
+                  "target": [
+                    ".instagram-follow > p"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Links can be distinguished from surrounding text by visual styling"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"https://instagram.com/yellowfarmhousestand\" target=\"_blank\" rel=\"noopener\">@yellowfarmhousestand</a>",
+          "target": [
+            "p > a[target=\"_blank\"][rel=\"noopener\"]"
+          ]
+        }
+      ]
+    },
+    {
       "id": "link-name",
-      "impact": "serious",
+      "impact": null,
       "tags": [
         "cat.name-role-value",
         "wcag2a",
@@ -2533,6 +2833,32 @@
             }
           ],
           "impact": null,
+          "html": "<a href=\"#header\" class=\"button icon solid solo fa-arrow-down scrolly\">Continue</a>",
+          "target": [
+            ".button"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "has-visible-text",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has text that is visible to screen readers"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "focusable-no-name",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element is not in tab order or has accessible text"
+            }
+          ],
+          "impact": null,
           "html": "<a href=\"index.html\" class=\"logo\">Yellow Farmhouse Treats</a>",
           "target": [
             ".logo"
@@ -2559,9 +2885,9 @@
             }
           ],
           "impact": null,
-          "html": "<a href=\"tel:+18057094686\">(805) 709-4686</a>",
+          "html": "<a href=\"https://instagram.com/yellowfarmhousestand\" target=\"_blank\" rel=\"noopener\">@yellowfarmhousestand</a>",
           "target": [
-            "a[href=\"tel:+18057094686\"]"
+            "p > a[target=\"_blank\"][rel=\"noopener\"]"
           ]
         },
         {
@@ -2585,9 +2911,9 @@
             }
           ],
           "impact": null,
-          "html": "<a href=\"mailto:yellowfarmhousetreats@gmail.com\">yellowfarmhousetreats@gmail.com</a>",
+          "html": "<a href=\"#\">(805) 709-4686</a>",
           "target": [
-            "section:nth-child(3) > p > a"
+            "section:nth-child(2) > p > a[href=\"#\"]"
           ]
         },
         {
@@ -2611,9 +2937,87 @@
             }
           ],
           "impact": null,
-          "html": "<a href=\"https://html5up.net\">HTML5 UP</a>",
+          "html": "<a href=\"#\">yellowfarmhousetreats@gmail.com</a>",
           "target": [
-            "a[href$=\"html5up.net\"]"
+            "section:nth-child(3) > p > a[href=\"#\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-label",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "aria-label attribute exists and is not empty"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "focusable-no-name",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element is not in tab order or has accessible text"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-label",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "aria-label attribute exists and is not empty"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "focusable-no-name",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element is not in tab order or has accessible text"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "has-visible-text",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has text that is visible to screen readers"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "focusable-no-name",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element is not in tab order or has accessible text"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"admin/\">•</a>",
+          "target": [
+            "a[href$=\"admin/\"]"
           ]
         }
       ]
@@ -2647,9 +3051,27 @@
             }
           ],
           "impact": null,
-          "html": "<ul class=\"actions\">\n                    <li><input type=\"submit\" value=\"Send Message\"></li>\n                </ul>",
+          "html": "<ul class=\"actions\">\n\t\t\t\t\t\t  <li><a href=\"#header\" class=\"button icon solid solo fa-arrow-down scrolly\">Continue</a></li>\n\t\t\t\t\t\t</ul>",
           "target": [
-            ".actions"
+            "#intro > .actions"
+          ]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "only-listitems",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "List element only has direct children that are allowed inside <li> elements"
+            }
+          ],
+          "impact": null,
+          "html": "<ul class=\"actions\">\n\t\t\t\t\t\t\t\t\t<li><input type=\"submit\" value=\"Send Message\"></li>\n\t\t\t\t\t\t\t\t</ul>",
+          "target": [
+            "form > .actions"
           ]
         },
         {
@@ -2683,7 +3105,7 @@
             }
           ],
           "impact": null,
-          "html": "<ul><li>© Yellow Farmhouse Treats</li><li>Design: <a href=\"https://html5up.net\">HTML5 UP</a></li></ul>",
+          "html": "<ul><li>© Yellow Farmhouse Treats</li></ul>",
           "target": [
             "#copyright > ul"
           ]
@@ -2719,9 +3141,9 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><input type=\"submit\" value=\"Send Message\"></li>",
+          "html": "<li><a href=\"#header\" class=\"button icon solid solo fa-arrow-down scrolly\">Continue</a></li>",
           "target": [
-            ".actions > li"
+            "#intro > .actions > li"
           ]
         },
         {
@@ -2737,7 +3159,25 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\"><span class=\"label\">Facebook</span></a></li>",
+          "html": "<li><input type=\"submit\" value=\"Send Message\"></li>",
+          "target": [
+            "form > .actions > li"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "listitem",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<li><a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a></li>",
           "target": [
             ".icons > li:nth-child(1)"
           ]
@@ -2755,9 +3195,9 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"https://instagram.com/yellowfarmhousestand\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-instagram\"><span class=\"label\">Instagram</span></a></li>",
+          "html": "<li><a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a></li>",
           "target": [
-            ".icons > li:nth-child(2)"
+            "li:nth-child(2)"
           ]
         },
         {
@@ -2775,25 +3215,7 @@
           "impact": null,
           "html": "<li>© Yellow Farmhouse Treats</li>",
           "target": [
-            "#copyright > ul > li:nth-child(1)"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "listitem",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<li>Design: <a href=\"https://html5up.net\">HTML5 UP</a></li>",
-          "target": [
-            "#copyright > ul > li:nth-child(2)"
+            "#copyright > ul > li"
           ]
         }
       ]
@@ -2828,7 +3250,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+          "html": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
           "target": [
             "meta[name=\"viewport\"]"
           ]
@@ -2969,7 +3391,7 @@
               },
               "relatedNodes": [
                 {
-                  "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" placeholder=\"Questions about custom orders or special dietary needs? Get in touch!\" required=\"\"></textarea>",
+                  "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" required=\"\"></textarea>",
                   "target": [
                     "#message"
                   ]
@@ -2982,7 +3404,7 @@
           "all": [],
           "none": [],
           "impact": "serious",
-          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" placeholder=\"Questions about custom orders or special dietary needs? Get in touch!\" required=\"\"></textarea>",
+          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" required=\"\"></textarea>",
           "target": [
             "#message"
           ],
@@ -2991,131 +3413,5 @@
       ]
     }
   ],
-  "violations": [
-    {
-      "id": "link-name",
-      "impact": "serious",
-      "tags": [
-        "cat.name-role-value",
-        "wcag2a",
-        "wcag244",
-        "wcag412",
-        "section508",
-        "section508.22.a",
-        "TTv5",
-        "TT6.a",
-        "EN-301-549",
-        "EN-9.2.4.4",
-        "EN-9.4.1.2",
-        "ACT",
-        "RGAAv4",
-        "RGAA-6.2.1"
-      ],
-      "description": "Ensure links have discernible text",
-      "help": "Links must have discernible text",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
-      "nodes": [
-        {
-          "any": [
-            {
-              "id": "has-visible-text",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element does not have text that is visible to screen readers"
-            },
-            {
-              "id": "aria-label",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "aria-label attribute does not exist or is empty"
-            },
-            {
-              "id": "aria-labelledby",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
-            },
-            {
-              "id": "non-empty-title",
-              "data": {
-                "messageKey": "noAttr"
-              },
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has no title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is in tab order and does not have accessible text"
-            }
-          ],
-          "impact": "serious",
-          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\"><span class=\"label\">Facebook</span></a>",
-          "target": [
-            ".fa-facebook-f"
-          ],
-          "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
-        },
-        {
-          "any": [
-            {
-              "id": "has-visible-text",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element does not have text that is visible to screen readers"
-            },
-            {
-              "id": "aria-label",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "aria-label attribute does not exist or is empty"
-            },
-            {
-              "id": "aria-labelledby",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
-            },
-            {
-              "id": "non-empty-title",
-              "data": {
-                "messageKey": "noAttr"
-              },
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has no title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is in tab order and does not have accessible text"
-            }
-          ],
-          "impact": "serious",
-          "html": "<a href=\"https://instagram.com/yellowfarmhousestand\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-instagram\"><span class=\"label\">Instagram</span></a>",
-          "target": [
-            ".fa-instagram"
-          ],
-          "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
-        }
-      ]
-    }
-  ]
+  "violations": []
 }

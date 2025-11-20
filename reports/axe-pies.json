@@ -14,7 +14,7 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2025-11-20T01:32:04.889Z",
+  "timestamp": "2025-11-20T10:59:21.841Z",
   "url": "http://127.0.0.1:4173/pies.html",
   "toolOptions": {
     "runOnly": {
@@ -1457,16 +1457,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#1a1a23",
-                "contrastRatio": 15.84,
+                "contrastRatio": 17.27,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 15.84"
+              "message": "Element has sufficient color contrast of 17.27"
             }
           ],
           "all": [],
@@ -1482,16 +1482,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#131520",
-                "contrastRatio": 16.66,
+                "contrastRatio": 18.16,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 16.66"
+              "message": "Element has sufficient color contrast of 18.16"
             }
           ],
           "all": [],
@@ -1507,16 +1507,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#42434d",
-                "contrastRatio": 8.99,
+                "contrastRatio": 9.8,
                 "fontSize": "10.2pt (13.6px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 8.99"
+              "message": "Element has sufficient color contrast of 9.8"
             }
           ],
           "all": [],
@@ -1557,16 +1557,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#1a1a23",
-                "contrastRatio": 15.84,
+                "contrastRatio": 17.27,
                 "fontSize": "24.0pt (32px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "3:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 15.84"
+              "message": "Element has sufficient color contrast of 17.27"
             }
           ],
           "all": [],
@@ -1582,16 +1582,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#1a1a23",
-                "contrastRatio": 15.84,
+                "contrastRatio": 17.27,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 15.84"
+              "message": "Element has sufficient color contrast of 17.27"
             }
           ],
           "all": [],
@@ -1607,16 +1607,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#a0a0a0",
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 6.77,
+                "contrastRatio": 17.71,
                 "fontSize": "10.8pt (14.4px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 6.77"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],
@@ -1632,16 +1632,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 16.24,
+                "contrastRatio": 17.71,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 16.24"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],
@@ -1657,16 +1657,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#a0a0a0",
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 6.77,
+                "contrastRatio": 17.71,
                 "fontSize": "10.8pt (14.4px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 6.77"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],
@@ -1682,16 +1682,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 16.24,
+                "contrastRatio": 17.71,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 16.24"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],
@@ -1707,16 +1707,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#a0a0a0",
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 6.77,
+                "contrastRatio": 17.71,
                 "fontSize": "10.8pt (14.4px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 6.77"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],
@@ -1732,16 +1732,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 16.24,
+                "contrastRatio": 17.71,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 16.24"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],

@@ -14,7 +14,7 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2025-11-20T01:32:04.118Z",
+  "timestamp": "2025-11-20T10:59:21.052Z",
   "url": "http://127.0.0.1:4173/cakes.html",
   "toolOptions": {
     "runOnly": {
@@ -270,25 +270,6 @@
       "nodes": []
     },
     {
-      "id": "form-field-multiple-labels",
-      "impact": null,
-      "tags": [
-        "cat.forms",
-        "wcag2a",
-        "wcag332",
-        "TTv5",
-        "TT5.c",
-        "EN-301-549",
-        "EN-9.3.3.2",
-        "RGAAv4",
-        "RGAA-11.2.1"
-      ],
-      "description": "Ensure form field does not have multiple label elements",
-      "help": "Form field must not have multiple label elements",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/form-field-multiple-labels?application=playwright",
-      "nodes": []
-    },
-    {
       "id": "frame-focusable-content",
       "impact": null,
       "tags": [
@@ -389,28 +370,6 @@
       "nodes": []
     },
     {
-      "id": "input-button-name",
-      "impact": null,
-      "tags": [
-        "cat.name-role-value",
-        "wcag2a",
-        "wcag412",
-        "section508",
-        "section508.22.a",
-        "TTv5",
-        "TT5.c",
-        "EN-301-549",
-        "EN-9.4.1.2",
-        "ACT",
-        "RGAAv4",
-        "RGAA-11.9.1"
-      ],
-      "description": "Ensure input buttons have discernible text",
-      "help": "Input buttons must have discernible text",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-button-name?application=playwright",
-      "nodes": []
-    },
-    {
       "id": "input-image-alt",
       "impact": null,
       "tags": [
@@ -435,28 +394,6 @@
       "nodes": []
     },
     {
-      "id": "label",
-      "impact": null,
-      "tags": [
-        "cat.forms",
-        "wcag2a",
-        "wcag412",
-        "section508",
-        "section508.22.n",
-        "TTv5",
-        "TT5.c",
-        "EN-301-549",
-        "EN-9.4.1.2",
-        "ACT",
-        "RGAAv4",
-        "RGAA-11.1.1"
-      ],
-      "description": "Ensure every form element has a label",
-      "help": "Form elements must have labels",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=playwright",
-      "nodes": []
-    },
-    {
       "id": "link-in-text-block",
       "impact": null,
       "tags": [
@@ -473,40 +410,6 @@
       "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
       "help": "Links must be distinguishable without relying on color",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-in-text-block?application=playwright",
-      "nodes": []
-    },
-    {
-      "id": "list",
-      "impact": null,
-      "tags": [
-        "cat.structure",
-        "wcag2a",
-        "wcag131",
-        "EN-301-549",
-        "EN-9.1.3.1",
-        "RGAAv4",
-        "RGAA-9.3.1"
-      ],
-      "description": "Ensure that lists are structured correctly",
-      "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/list?application=playwright",
-      "nodes": []
-    },
-    {
-      "id": "listitem",
-      "impact": null,
-      "tags": [
-        "cat.structure",
-        "wcag2a",
-        "wcag131",
-        "EN-301-549",
-        "EN-9.1.3.1",
-        "RGAAv4",
-        "RGAA-9.3.1"
-      ],
-      "description": "Ensure <li> elements are used semantically",
-      "help": "<li> elements must be contained in a <ul> or <ol>",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/listitem?application=playwright",
       "nodes": []
     },
     {
@@ -1389,7 +1292,7 @@
                 {
                   "html": "<h3>Address</h3>",
                   "target": [
-                    "section:nth-child(1) > h3"
+                    ".alt > h3"
                   ]
                 },
                 {
@@ -1402,6 +1305,12 @@
                   "html": "<h3>Email</h3>",
                   "target": [
                     "section:nth-child(3) > h3"
+                  ]
+                },
+                {
+                  "html": "<h3>Social</h3>",
+                  "target": [
+                    "section:nth-child(4) > h3"
                   ]
                 }
               ],
@@ -1435,7 +1344,7 @@
     },
     {
       "id": "color-contrast",
-      "impact": null,
+      "impact": "serious",
       "tags": [
         "cat.color",
         "wcag2aa",
@@ -1457,16 +1366,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#1a1a23",
-                "contrastRatio": 15.84,
+                "contrastRatio": 17.27,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 15.84"
+              "message": "Element has sufficient color contrast of 17.27"
             }
           ],
           "all": [],
@@ -1482,16 +1391,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#131520",
-                "contrastRatio": 16.66,
+                "contrastRatio": 18.16,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 16.66"
+              "message": "Element has sufficient color contrast of 18.16"
             }
           ],
           "all": [],
@@ -1507,16 +1416,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#42434d",
-                "contrastRatio": 8.99,
+                "contrastRatio": 9.8,
                 "fontSize": "10.2pt (13.6px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 8.99"
+              "message": "Element has sufficient color contrast of 9.8"
             }
           ],
           "all": [],
@@ -1557,16 +1466,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#1a1a23",
-                "contrastRatio": 15.84,
+                "contrastRatio": 17.27,
                 "fontSize": "24.0pt (32px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "3:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 15.84"
+              "message": "Element has sufficient color contrast of 17.27"
             }
           ],
           "all": [],
@@ -1582,16 +1491,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#1a1a23",
-                "contrastRatio": 15.84,
+                "contrastRatio": 17.27,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 15.84"
+              "message": "Element has sufficient color contrast of 17.27"
             }
           ],
           "all": [],
@@ -1607,16 +1516,166 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#a0a0a0",
+                "fgColor": "#ffffff",
+                "bgColor": "#1f262f",
+                "contrastRatio": 15.25,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 15.25"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<label for=\"name\">Name</label>",
+          "target": [
+            "label[for=\"name\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffffff",
+                "bgColor": "#171c25",
+                "contrastRatio": 17.08,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 17.08"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<input type=\"text\" name=\"name\" id=\"name\" required=\"\">",
+          "target": [
+            "#name"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffffff",
+                "bgColor": "#1f262f",
+                "contrastRatio": 15.25,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 15.25"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<label for=\"email\">Email</label>",
+          "target": [
+            "label[for=\"email\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffffff",
+                "bgColor": "#171c25",
+                "contrastRatio": 17.08,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 17.08"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<input type=\"email\" name=\"email\" id=\"email\" required=\"\">",
+          "target": [
+            "#email"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffffff",
+                "bgColor": "#1f262f",
+                "contrastRatio": 15.25,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 15.25"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<label for=\"message\">Message</label>",
+          "target": [
+            "label[for=\"message\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffffff",
+                "bgColor": "#171c25",
+                "contrastRatio": 17.08,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 17.08"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<input type=\"submit\" value=\"Send Message\">",
+          "target": [
+            "input[type=\"submit\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 6.77,
+                "contrastRatio": 17.71,
                 "fontSize": "10.8pt (14.4px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 6.77"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],
@@ -1624,7 +1683,7 @@
           "impact": null,
           "html": "<h3>Address</h3>",
           "target": [
-            "section:nth-child(1) > h3"
+            ".alt > h3"
           ]
         },
         {
@@ -1632,16 +1691,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 16.24,
+                "contrastRatio": 17.71,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 16.24"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],
@@ -1649,7 +1708,7 @@
           "impact": null,
           "html": "<p>22659 Farmway Road<br>Caldwell, ID 83646</p>",
           "target": [
-            "section:nth-child(1) > p"
+            ".alt > p"
           ]
         },
         {
@@ -1657,16 +1716,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#a0a0a0",
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 6.77,
+                "contrastRatio": 17.71,
                 "fontSize": "10.8pt (14.4px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 6.77"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],
@@ -1682,16 +1741,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 16.24,
+                "contrastRatio": 17.71,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 16.24"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],
@@ -1707,16 +1766,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#a0a0a0",
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 6.77,
+                "contrastRatio": 17.71,
                 "fontSize": "10.8pt (14.4px)",
                 "fontWeight": "bold",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 6.77"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],
@@ -1732,16 +1791,16 @@
             {
               "id": "color-contrast",
               "data": {
-                "fgColor": "#f5f5f5",
+                "fgColor": "#ffffff",
                 "bgColor": "#151822",
-                "contrastRatio": 16.24,
+                "contrastRatio": 17.71,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "normal",
                 "expectedContrastRatio": "4.5:1"
               },
               "relatedNodes": [],
               "impact": "serious",
-              "message": "Element has sufficient color contrast of 16.24"
+              "message": "Element has sufficient color contrast of 17.71"
             }
           ],
           "all": [],
@@ -1750,6 +1809,106 @@
           "html": "<a href=\"mailto:yellowfarmhousetreats@gmail.com\">yellowfarmhousetreats@gmail.com</a>",
           "target": [
             "section:nth-child(3) > p > a"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffffff",
+                "bgColor": "#151822",
+                "contrastRatio": 17.71,
+                "fontSize": "10.8pt (14.4px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 17.71"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h3>Social</h3>",
+          "target": [
+            "section:nth-child(4) > h3"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffffff",
+                "bgColor": "#1a1a23",
+                "contrastRatio": 17.27,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 17.27"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<li>© Yellow Farmhouse Treats</li>",
+          "target": [
+            "#copyright > ul > li:nth-child(1)"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffffff",
+                "bgColor": "#1a1a23",
+                "contrastRatio": 17.27,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 17.27"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<li>Design: <a href=\"https://html5up.net\">HTML5 UP</a></li>",
+          "target": [
+            "#copyright > ul > li:nth-child(2)"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#9e9eff",
+                "bgColor": "#1a1a23",
+                "contrastRatio": 7.22,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 7.22"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"https://html5up.net\">HTML5 UP</a>",
+          "target": [
+            "a[href$=\"html5up.net\"]"
           ]
         }
       ]
@@ -1898,6 +2057,155 @@
           "target": [
             "#overlay-group-visit"
           ]
+        },
+        {
+          "any": [
+            {
+              "id": "duplicate-id-aria",
+              "data": "name",
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "Document has no elements referenced with ARIA or labels that share the same id attribute"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<input type=\"text\" name=\"name\" id=\"name\" required=\"\">",
+          "target": [
+            "#name"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "duplicate-id-aria",
+              "data": "email",
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "Document has no elements referenced with ARIA or labels that share the same id attribute"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<input type=\"email\" name=\"email\" id=\"email\" required=\"\">",
+          "target": [
+            "#email"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "duplicate-id-aria",
+              "data": "message",
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "Document has no elements referenced with ARIA or labels that share the same id attribute"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" placeholder=\"Questions about custom orders or special dietary needs? Get in touch!\" required=\"\"></textarea>",
+          "target": [
+            "#message"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "form-field-multiple-labels",
+      "impact": null,
+      "tags": [
+        "cat.forms",
+        "wcag2a",
+        "wcag332",
+        "TTv5",
+        "TT5.c",
+        "EN-301-549",
+        "EN-9.3.3.2",
+        "RGAAv4",
+        "RGAA-11.2.1"
+      ],
+      "description": "Ensure form field does not have multiple label elements",
+      "help": "Form field must not have multiple label elements",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/form-field-multiple-labels?application=playwright",
+      "nodes": [
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "multiple-label",
+              "data": null,
+              "relatedNodes": [
+                {
+                  "html": "<label for=\"name\">Name</label>",
+                  "target": [
+                    "label[for=\"name\"]"
+                  ]
+                }
+              ],
+              "impact": "moderate",
+              "message": "Form field does not have multiple label elements"
+            }
+          ],
+          "impact": null,
+          "html": "<input type=\"text\" name=\"name\" id=\"name\" required=\"\">",
+          "target": [
+            "#name"
+          ]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "multiple-label",
+              "data": null,
+              "relatedNodes": [
+                {
+                  "html": "<label for=\"email\">Email</label>",
+                  "target": [
+                    "label[for=\"email\"]"
+                  ]
+                }
+              ],
+              "impact": "moderate",
+              "message": "Form field does not have multiple label elements"
+            }
+          ],
+          "impact": null,
+          "html": "<input type=\"email\" name=\"email\" id=\"email\" required=\"\">",
+          "target": [
+            "#email"
+          ]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "multiple-label",
+              "data": null,
+              "relatedNodes": [
+                {
+                  "html": "<label for=\"message\">Message</label>",
+                  "target": [
+                    "label[for=\"message\"]"
+                  ]
+                }
+              ],
+              "impact": "moderate",
+              "message": "Form field does not have multiple label elements"
+            }
+          ],
+          "impact": null,
+          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" placeholder=\"Questions about custom orders or special dietary needs? Get in touch!\" required=\"\"></textarea>",
+          "target": [
+            "#message"
+          ]
         }
       ]
     },
@@ -1980,8 +2288,184 @@
       ]
     },
     {
-      "id": "link-name",
+      "id": "input-button-name",
       "impact": null,
+      "tags": [
+        "cat.name-role-value",
+        "wcag2a",
+        "wcag412",
+        "section508",
+        "section508.22.a",
+        "TTv5",
+        "TT5.c",
+        "EN-301-549",
+        "EN-9.4.1.2",
+        "ACT",
+        "RGAAv4",
+        "RGAA-11.9.1"
+      ],
+      "description": "Ensure input buttons have discernible text",
+      "help": "Input buttons must have discernible text",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-button-name?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "non-empty-value",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "Element has a non-empty value attribute"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<input type=\"submit\" value=\"Send Message\">",
+          "target": [
+            "input[type=\"submit\"]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "label",
+      "impact": null,
+      "tags": [
+        "cat.forms",
+        "wcag2a",
+        "wcag412",
+        "section508",
+        "section508.22.n",
+        "TTv5",
+        "TT5.c",
+        "EN-301-549",
+        "EN-9.4.1.2",
+        "ACT",
+        "RGAAv4",
+        "RGAA-11.1.1"
+      ],
+      "description": "Ensure every form element has a label",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "explicit-label",
+              "data": {
+                "explicitLabel": "Name"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<label for=\"name\">Name</label>",
+                  "target": [
+                    "label[for=\"name\"]"
+                  ]
+                }
+              ],
+              "impact": "critical",
+              "message": "Element has an explicit <label>"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "hidden-explicit-label",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "Form element has a visible explicit <label>"
+            }
+          ],
+          "impact": null,
+          "html": "<input type=\"text\" name=\"name\" id=\"name\" required=\"\">",
+          "target": [
+            "#name"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "explicit-label",
+              "data": {
+                "explicitLabel": "Email"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<label for=\"email\">Email</label>",
+                  "target": [
+                    "label[for=\"email\"]"
+                  ]
+                }
+              ],
+              "impact": "critical",
+              "message": "Element has an explicit <label>"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "hidden-explicit-label",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "Form element has a visible explicit <label>"
+            }
+          ],
+          "impact": null,
+          "html": "<input type=\"email\" name=\"email\" id=\"email\" required=\"\">",
+          "target": [
+            "#email"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "explicit-label",
+              "data": {
+                "explicitLabel": "Message"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<label for=\"message\">Message</label>",
+                  "target": [
+                    "label[for=\"message\"]"
+                  ]
+                }
+              ],
+              "impact": "critical",
+              "message": "Element has an explicit <label>"
+            },
+            {
+              "id": "non-empty-placeholder",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "Element has a placeholder attribute"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "hidden-explicit-label",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "Form element has a visible explicit <label>"
+            }
+          ],
+          "impact": null,
+          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" placeholder=\"Questions about custom orders or special dietary needs? Get in touch!\" required=\"\"></textarea>",
+          "target": [
+            "#message"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "link-name",
+      "impact": "serious",
       "tags": [
         "cat.name-role-value",
         "wcag2a",
@@ -2105,6 +2589,212 @@
           "target": [
             "section:nth-child(3) > p > a"
           ]
+        },
+        {
+          "any": [
+            {
+              "id": "has-visible-text",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has text that is visible to screen readers"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "focusable-no-name",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element is not in tab order or has accessible text"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"https://html5up.net\">HTML5 UP</a>",
+          "target": [
+            "a[href$=\"html5up.net\"]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "list",
+      "impact": null,
+      "tags": [
+        "cat.structure",
+        "wcag2a",
+        "wcag131",
+        "EN-301-549",
+        "EN-9.1.3.1",
+        "RGAAv4",
+        "RGAA-9.3.1"
+      ],
+      "description": "Ensure that lists are structured correctly",
+      "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/list?application=playwright",
+      "nodes": [
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "only-listitems",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "List element only has direct children that are allowed inside <li> elements"
+            }
+          ],
+          "impact": null,
+          "html": "<ul class=\"actions\">\n                    <li><input type=\"submit\" value=\"Send Message\"></li>\n                </ul>",
+          "target": [
+            ".actions"
+          ]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "only-listitems",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "List element only has direct children that are allowed inside <li> elements"
+            }
+          ],
+          "impact": null,
+          "html": "<ul class=\"icons alt\">",
+          "target": [
+            ".icons"
+          ]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "only-listitems",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "List element only has direct children that are allowed inside <li> elements"
+            }
+          ],
+          "impact": null,
+          "html": "<ul><li>© Yellow Farmhouse Treats</li><li>Design: <a href=\"https://html5up.net\">HTML5 UP</a></li></ul>",
+          "target": [
+            "#copyright > ul"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "listitem",
+      "impact": null,
+      "tags": [
+        "cat.structure",
+        "wcag2a",
+        "wcag131",
+        "EN-301-549",
+        "EN-9.1.3.1",
+        "RGAAv4",
+        "RGAA-9.3.1"
+      ],
+      "description": "Ensure <li> elements are used semantically",
+      "help": "<li> elements must be contained in a <ul> or <ol>",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/listitem?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "listitem",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<li><input type=\"submit\" value=\"Send Message\"></li>",
+          "target": [
+            ".actions > li"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "listitem",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<li><a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\"><span class=\"label\">Facebook</span></a></li>",
+          "target": [
+            ".icons > li:nth-child(1)"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "listitem",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<li><a href=\"https://instagram.com/yellowfarmhousestand\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-instagram\"><span class=\"label\">Instagram</span></a></li>",
+          "target": [
+            ".icons > li:nth-child(2)"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "listitem",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<li>© Yellow Farmhouse Treats</li>",
+          "target": [
+            "#copyright > ul > li:nth-child(1)"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "listitem",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<li>Design: <a href=\"https://html5up.net\">HTML5 UP</a></li>",
+          "target": [
+            "#copyright > ul > li:nth-child(2)"
+          ]
         }
       ]
     },
@@ -2180,6 +2870,24 @@
           "target": [
             "#overlay-menu-open"
           ]
+        },
+        {
+          "any": [
+            {
+              "id": "no-focusable-content",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element does not have focusable descendants"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<input type=\"submit\" value=\"Send Message\">",
+          "target": [
+            "input[type=\"submit\"]"
+          ]
         }
       ]
     }
@@ -2228,7 +2936,186 @@
           "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute."
         }
       ]
+    },
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "tags": [
+        "cat.color",
+        "wcag2aa",
+        "wcag143",
+        "TTv5",
+        "TT13.c",
+        "EN-301-549",
+        "EN-9.1.4.3",
+        "ACT",
+        "RGAAv4",
+        "RGAA-3.2.1"
+      ],
+      "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "messageKey": "elmPartiallyObscured",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" placeholder=\"Questions about custom orders or special dietary needs? Get in touch!\" required=\"\"></textarea>",
+                  "target": [
+                    "#message"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "serious",
+          "html": "<textarea name=\"message\" id=\"message\" rows=\"3\" placeholder=\"Questions about custom orders or special dietary needs? Get in touch!\" required=\"\"></textarea>",
+          "target": [
+            "#message"
+          ],
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+        }
+      ]
     }
   ],
-  "violations": []
+  "violations": [
+    {
+      "id": "link-name",
+      "impact": "serious",
+      "tags": [
+        "cat.name-role-value",
+        "wcag2a",
+        "wcag244",
+        "wcag412",
+        "section508",
+        "section508.22.a",
+        "TTv5",
+        "TT6.a",
+        "EN-301-549",
+        "EN-9.2.4.4",
+        "EN-9.4.1.2",
+        "ACT",
+        "RGAAv4",
+        "RGAA-6.2.1"
+      ],
+      "description": "Ensure links have discernible text",
+      "help": "Links must have discernible text",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "has-visible-text",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element does not have text that is visible to screen readers"
+            },
+            {
+              "id": "aria-label",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "aria-label attribute does not exist or is empty"
+            },
+            {
+              "id": "aria-labelledby",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+            },
+            {
+              "id": "non-empty-title",
+              "data": {
+                "messageKey": "noAttr"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has no title attribute"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "focusable-no-name",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element is in tab order and does not have accessible text"
+            }
+          ],
+          "impact": "serious",
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ],
+          "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+        },
+        {
+          "any": [
+            {
+              "id": "has-visible-text",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element does not have text that is visible to screen readers"
+            },
+            {
+              "id": "aria-label",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "aria-label attribute does not exist or is empty"
+            },
+            {
+              "id": "aria-labelledby",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+            },
+            {
+              "id": "non-empty-title",
+              "data": {
+                "messageKey": "noAttr"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has no title attribute"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "focusable-no-name",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element is in tab order and does not have accessible text"
+            }
+          ],
+          "impact": "serious",
+          "html": "<a href=\"https://instagram.com/yellowfarmhousestand\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
+          ],
+          "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+        }
+      ]
+    }
+  ]
 }
