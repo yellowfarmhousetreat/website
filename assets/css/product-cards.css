@@ -215,6 +215,42 @@
   font-weight: 700;
 }
 
+/* Dietary options - Checkboxes for GF/SF */
+.dietary-options {
+  background: #ffffff;
+  border: 2px solid #8b7355;
+  border-radius: 3px;
+  padding: 6px 8px;
+  margin: 4px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dietary-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #3d2f24;
+  cursor: pointer;
+  user-select: none;
+  padding: 2px 0;
+}
+
+.dietary-checkbox input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #8b7355;
+}
+
+.dietary-checkbox:hover {
+  color: #6f5a44;
+}
+
 /* Quantity selector - Inline and compact */
 .quantity-selector {
   display: flex;

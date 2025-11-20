@@ -37,14 +37,18 @@ class SimpleProductRenderer {
     card.className = 'product-card';
     card.setAttribute('data-product-id', product.id);
 
-    // Dietary tags
-    const dietaryTags = [];
-    if (product.dietary?.glutenFree) dietaryTags.push('GF');
-    if (product.dietary?.sugarFree) dietaryTags.push('SF');
-    if (product.dietary?.vegan) dietaryTags.push('V');
-    const dietaryHtml = dietaryTags.length
-      ? `<div class="dietary-tags">${dietaryTags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`
-      : '';
+    // Dietary options as checkboxes (default unchecked - opt-in)
+    let dietaryHtml = '';
+    if (product.dietary?.glutenFree || product.dietary?.sugarFree) {
+      dietaryHtml = '<div class="dietary-options">';
+      if (product.dietary?.glutenFree) {
+        dietaryHtml += `<label class="dietary-checkbox"><input type="checkbox" class="gf-checkbox"> Gluten-Free (+$3)</label>`;
+      }
+      if (product.dietary?.sugarFree) {
+        dietaryHtml += `<label class="dietary-checkbox"><input type="checkbox" class="sf-checkbox"> Sugar-Free (+$3)</label>`;
+      }
+      dietaryHtml += '</div>';
+    }
 
     // Size options as clickable list items
     const sizeHtml = (product.sizes || [])
@@ -160,19 +164,25 @@ class SimpleProductRenderer {
       const sizeIndex = parseInt(card.dataset.selectedSize);
       const selectedSize = product.sizes[sizeIndex];
       
+      // Check dietary checkboxes (default to both checked)
+      const gfCheckbox = card.querySelector('.gf-checkbox');
+      const sfCheckbox = card.querySelector('.sf-checkbox');
+      const isGF = gfCheckbox?.checked || false;
+      const isSF = sfCheckbox?.checked || false;
+      
       // Add to cart using the cart.js API
       if (typeof window.addSimpleProductToCart === 'function') {
         const itemName = `${product.name} (${selectedSize.name})`;
         const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
         
-        // Check for dietary modifications
+        // Calculate price with dietary modifications
         let finalPrice = selectedSize.price;
         const dietaryModifiers = [];
-        if (product.dietary?.glutenFree) {
+        if (isGF && product.dietary?.glutenFree) {
           dietaryModifiers.push('GF');
           finalPrice += 3;
         }
-        if (product.dietary?.sugarFree) {
+        if (isSF && product.dietary?.sugarFree) {
           dietaryModifiers.push('SF');
           finalPrice += 3;
         }
@@ -181,18 +191,24 @@ class SimpleProductRenderer {
           ? `${itemName} [${dietaryModifiers.join(', ')}]`
           : itemName;
         
-        // Find existing item
-        const existingIndex = cart.findIndex(item => item.name === displayName);
+        // Find existing item with same options
+        const existingIndex = cart.findIndex(item => 
+          item.name === product.name && 
+          item.size === selectedSize.name &&
+          item.isGF === isGF &&
+          item.isSF === isSF
+        );
         
         if (existingIndex > -1) {
           cart[existingIndex].quantity += qty;
         } else {
           cart.push({
-            name: displayName,
+            name: product.name,
+            size: selectedSize.name,
             price: finalPrice,
             quantity: qty,
-            glutenFree: product.dietary?.glutenFree || false,
-            sugarFree: product.dietary?.sugarFree || false
+            isGF: isGF,
+            isSF: isSF
           });
         }
         
