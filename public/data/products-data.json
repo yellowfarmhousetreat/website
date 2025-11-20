@@ -337,7 +337,7 @@
       ],
       "dietary": {
         "glutenFree": false,
-        "sugarFree": false,
+        "sugarFree": true,
         "vegan": false
       },
       "ingredients": [
@@ -1107,8 +1107,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": false,
-        "sugarFree": false,
+        "glutenFree": true,
+        "sugarFree": true,
         "vegan": false
       },
       "ingredients": [
@@ -1196,8 +1196,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": false,
-        "sugarFree": false,
+        "glutenFree": true,
+        "sugarFree": true,
         "vegan": false
       },
       "ingredients": [
@@ -1540,8 +1540,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": false,
-        "sugarFree": false,
+        "glutenFree": true,
+        "sugarFree": true,
         "vegan": false
       },
       "ingredients": [

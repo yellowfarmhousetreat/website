@@ -37,18 +37,22 @@ class SimpleProductRenderer {
     card.className = 'product-card';
     card.setAttribute('data-product-id', product.id);
 
-    // Dietary options as checkboxes (default unchecked - opt-in)
-    // Show checkboxes if dietary object exists (regardless of true/false values)
+    // Dietary options as checkboxes (only show if product CAN be made that way)
     let dietaryHtml = '';
-    if (product.dietary && (product.dietary.hasOwnProperty('glutenFree') || product.dietary.hasOwnProperty('sugarFree'))) {
-      dietaryHtml = '<div class="dietary-options">';
-      if (product.dietary.hasOwnProperty('glutenFree')) {
-        dietaryHtml += `<label class="dietary-checkbox"><input type="checkbox" class="gf-checkbox"> Gluten-Free (+$3)</label>`;
+    if (product.dietary) {
+      const canBeGF = product.dietary.glutenFree === true;
+      const canBeSF = product.dietary.sugarFree === true;
+      
+      if (canBeGF || canBeSF) {
+        dietaryHtml = '<div class="dietary-options">';
+        if (canBeGF) {
+          dietaryHtml += `<label class="dietary-checkbox"><input type="checkbox" class="gf-checkbox"> Gluten-Free</label>`;
+        }
+        if (canBeSF) {
+          dietaryHtml += `<label class="dietary-checkbox"><input type="checkbox" class="sf-checkbox"> Sugar-Free</label>`;
+        }
+        dietaryHtml += '</div>';
       }
-      if (product.dietary.hasOwnProperty('sugarFree')) {
-        dietaryHtml += `<label class="dietary-checkbox"><input type="checkbox" class="sf-checkbox"> Sugar-Free (+$3)</label>`;
-      }
-      dietaryHtml += '</div>';
     }
 
     // Size options as clickable list items
@@ -178,17 +182,11 @@ class SimpleProductRenderer {
         const itemName = `${product.name} (${selectedSize.name})`;
         const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
         
-        // Calculate price with dietary modifications (only if product supports it)
-        let finalPrice = selectedSize.price;
+        // No price modifications - dietary options are free
+        const finalPrice = selectedSize.price;
         const dietaryModifiers = [];
-        if (isGF && product.dietary?.hasOwnProperty('glutenFree')) {
-          dietaryModifiers.push('GF');
-          finalPrice += 3;
-        }
-        if (isSF && product.dietary?.hasOwnProperty('sugarFree')) {
-          dietaryModifiers.push('SF');
-          finalPrice += 3;
-        }
+        if (isGF) dietaryModifiers.push('GF');
+        if (isSF) dietaryModifiers.push('SF');
         
         const displayName = dietaryModifiers.length > 0 
           ? `${itemName} [${dietaryModifiers.join(', ')}]`
@@ -207,6 +205,7 @@ class SimpleProductRenderer {
         } else {
           cart.push({
             name: product.name,
+            category: product.category,
             size: selectedSize.name,
             price: finalPrice,
             quantity: qty,

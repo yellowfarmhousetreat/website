@@ -143,6 +143,42 @@
         // Clear and append safe content
         orderItemsDiv.innerHTML = '';
         orderItemsDiv.appendChild(cartContainer);
+        
+        // Check if cart contains any pies and add pan deposit as visible line item
+        const hasPies = cart.some(item => item.category === 'pies');
+        if (hasPies) {
+            const depositItem = document.createElement('div');
+            depositItem.className = 'cart-item pie-deposit-item';
+            depositItem.style.cssText = 'border-top: 2px solid #e0e0e0; margin-top: 10px; padding-top: 10px; background: rgba(255, 215, 0, 0.1);';
+            
+            const depositDetails = document.createElement('div');
+            depositDetails.className = 'cart-item-details';
+            
+            const depositName = document.createElement('strong');
+            depositName.textContent = 'Refundable Pie Pan Deposit';
+            depositDetails.appendChild(depositName);
+            
+            const depositNote = document.createElement('div');
+            depositNote.style.cssText = 'font-size: 0.85em; color: #666; margin-top: 4px;';
+            depositNote.textContent = 'Refunded when pan is returned';
+            depositDetails.appendChild(depositNote);
+            
+            const depositControls = document.createElement('div');
+            depositControls.className = 'cart-item-controls';
+            
+            const depositTotal = document.createElement('div');
+            depositTotal.className = 'item-total';
+            depositTotal.textContent = '$5.00';
+            depositControls.appendChild(depositTotal);
+            
+            depositItem.appendChild(depositDetails);
+            depositItem.appendChild(depositControls);
+            orderItemsDiv.appendChild(depositItem);
+            
+            orderSummaryText += '\nRefundable Pie Pan Deposit - $5.00\n';
+            subtotal += 5;
+        }
+        
         orderSummaryInput.value = orderSummaryText;
 
         // Update order summary totals
