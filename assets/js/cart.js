@@ -614,6 +614,7 @@ window.updateCartCount = updateCartCount;
 window.renderCart = renderCart;
 window.clearCart = clearCart;
 window.removeFromCart = removeFromCart;
+window.showToast = showToast;
 
 export {};
 

@@ -160,16 +160,55 @@ class SimpleProductRenderer {
       const sizeIndex = parseInt(card.dataset.selectedSize);
       const selectedSize = product.sizes[sizeIndex];
       
-      console.log('Add to cart:', {
-        product: product.name,
-        size: selectedSize.name,
-        price: selectedSize.price,
-        quantity: qty,
-        total: selectedSize.price * qty
-      });
-      
-      // TODO: Implement actual cart functionality
-      alert(`Added ${qty} × ${product.name} (${selectedSize.name}) to cart!`);
+      // Add to cart using the cart.js API
+      if (typeof window.addSimpleProductToCart === 'function') {
+        const itemName = `${product.name} (${selectedSize.name})`;
+        const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
+        
+        // Check for dietary modifications
+        let finalPrice = selectedSize.price;
+        const dietaryModifiers = [];
+        if (product.dietary?.glutenFree) {
+          dietaryModifiers.push('GF');
+          finalPrice += 3;
+        }
+        if (product.dietary?.sugarFree) {
+          dietaryModifiers.push('SF');
+          finalPrice += 3;
+        }
+        
+        const displayName = dietaryModifiers.length > 0 
+          ? `${itemName} [${dietaryModifiers.join(', ')}]`
+          : itemName;
+        
+        // Find existing item
+        const existingIndex = cart.findIndex(item => item.name === displayName);
+        
+        if (existingIndex > -1) {
+          cart[existingIndex].quantity += qty;
+        } else {
+          cart.push({
+            name: displayName,
+            price: finalPrice,
+            quantity: qty,
+            glutenFree: product.dietary?.glutenFree || false,
+            sugarFree: product.dietary?.sugarFree || false
+          });
+        }
+        
+        localStorage.setItem('yfhs_cart', JSON.stringify(cart));
+        
+        // Update cart count and show toast
+        if (typeof window.updateCartCount === 'function') {
+          window.updateCartCount();
+        }
+        
+        if (typeof window.showToast === 'function') {
+          window.showToast(`Added ${qty}x ${displayName} to cart!`, 'success');
+        } else {
+          alert(`Added ${qty} × ${displayName} to cart!`);
+        }
+      }
     });
 
     return card;
