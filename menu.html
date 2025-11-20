@@ -28,8 +28,6 @@
   </head>
   <body class="is-preload" data-page="menu">
 
-    <a class="skip-link" href="#main">Skip to main content</a>
-
     <!-- Wrapper -->
     <div id="wrapper">
 
@@ -44,7 +42,7 @@
           <span class="overlay-menu__label">Open site navigator</span>
           <span class="overlay-menu__cart-pill">Cart <span id="cart-count" class="cart-count">0</span></span>
         </button>
-        <aside class="overlay-menu__sidebar" id="overlay-menu" hidden>
+        <aside class="overlay-menu__sidebar" id="overlay-menu" aria-hidden="true">
           <button class="overlay-menu__close" id="overlay-menu-close" type="button">
             Close <span aria-hidden="true">✕</span>
           </button>
@@ -101,7 +99,7 @@
       </div>
 
       <!-- Main -->
-      <main id="main" role="main" tabindex="-1">
+      <div id="main">
         <section class="menu-hero" id="menu-top">
           <p class="eyebrow">Made from scratch in Caldwell, ID</p>
           <h1>Menu</h1>
@@ -134,10 +132,9 @@
                     <label><input type="radio" name="pb-size" value="12" data-price="12"> 1/2 dozen - $12</label>
                     <label><input type="radio" name="pb-size" value="20" data-price="20" checked> Dozen - $20</label>
                   </div>
-                  <input type="number" id="pb-qty" min="1" value="1" class="qty-input" title="Quantity">
-                  <button onclick="addCookiesToCart('Peanut Butter Cookies', 'pb-size', null, null, 'pb-qty')" aria-label="Add Peanut Butter Cookies to cart">Add to Cart</button>
-                </div>
-              </div>
+              <p>Playful combinations with fillings, frostings, and premium toppings.</p>
+            </header>
+            <section class="products-grid">
               <div class="product-card">
                 <img src="images/cookies-biscoff.jpg" alt="Biscoff Cookies" class="product-img">
                 <h4 class="product-title">Biscoff Cookies</h4>
@@ -613,7 +610,7 @@
             </article>
           </div>
         </section>
-      </main>
+      </div>
 
       <!-- Footer -->
       <footer id="footer">
@@ -653,9 +650,9 @@
           </section>
           <section>
             <h3>Social</h3>
-                <ul class="icons alt">
-                  <li><a href="https://www.facebook.com/YellowFarmhouseGirl/" target="_blank" rel="noopener" class="icon brands alt fa-facebook-f" aria-label="Facebook"><span class="label">Facebook</span></a></li>
-                  <li><a href="https://instagram.com/yellowfarmhousestand" target="_blank" rel="noopener" class="icon brands alt fa-instagram" aria-label="Instagram"><span class="label">Instagram</span></a></li>
+            <ul class="icons alt">
+              <li><a href="https://www.facebook.com/YellowFarmhouseGirl/" target="_blank" rel="noopener" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+              <li><a href="https://instagram.com/yellowfarmhousestand" target="_blank" rel="noopener" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
             </ul>
           </section>
         </section>
@@ -668,7 +665,21 @@
 
     </div>
 
-    <script type="module" src="/src/entries/site-shell.js"></script>
+    <!-- Add-to-cart handlers moved to cart.js for consistency across pages -->
+
+    <!-- Scripts -->
+    <script src="assets/js/perf.js" defer></script>
+    <script src="assets/js/jquery.min.js" defer></script>
+    <script src="assets/js/jquery.scrollex.min.js" defer></script>
+    <script src="assets/js/jquery.scrolly.min.js" defer></script>
+    <script src="assets/js/browser.min.js" defer></script>
+    <script src="assets/js/breakpoints.min.js" defer></script>
+    <script src="assets/js/util.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+    <script src="site-config.js"></script>
+    <script src="products.js" defer></script>
+    <script src="cart.js" defer></script>
+    <script src="assets/js/overlay-menu.js" defer></script>
 
   </body>
 </html>
