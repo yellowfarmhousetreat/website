@@ -82,19 +82,21 @@ class SimpleProductRenderer {
           <img src="${imagePath}" alt="${imageAlt}" class="product-image">
           <div class="product-info-front">
             <h3 class="product-name">${product.name}</h3>
+            
             ${dietaryHtml}
-            <p class="product-description">${product.description}</p>
             
             <ul class="sizes-list">${sizeHtml}</ul>
+            
+            <button class="add-to-cart-btn" ${product.soldOut ? 'disabled' : ''}>
+              ${product.soldOut ? 'Out of Stock' : 'Add to Cart'}
+            </button>
             
             <div class="quantity-selector">
               <label for="qty-${product.id}">Qty:</label>
               <input type="number" id="qty-${product.id}" class="qty-input" value="1" min="1" max="100">
             </div>
             
-            <button class="add-to-cart-btn" ${product.soldOut ? 'disabled' : ''}>
-              ${product.soldOut ? 'Out of Stock' : 'Add to Cart'}
-            </button>
+            <p class="product-description">${product.description}</p>
             
             <div class="info-toggle" role="button" tabindex="0" aria-label="View ingredients"></div>
           </div>

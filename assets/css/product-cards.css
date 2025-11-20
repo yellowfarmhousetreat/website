@@ -128,7 +128,7 @@
 
 .product-name {
   font-family: 'Courier New', 'Courier', monospace;
-  font-size: 1.2rem;
+  font-size: clamp(0.85rem, 2.5vw, 1.2rem);
   font-weight: 700;
   color: #3d2f24;
   text-align: center;
@@ -137,6 +137,10 @@
   text-transform: uppercase;
   border-bottom: 2px solid #8b7355;
   padding-bottom: 4px;
+  line-height: 1.1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .product-description {
@@ -221,40 +225,42 @@
   font-weight: 700;
 }
 
-/* Dietary options - Checkboxes for GF/SF */
+/* Dietary options - Minimal compressed checkboxes */
 .dietary-options {
-  background: #ffffff;
-  border: 2px solid #8b7355;
-  border-radius: 3px;
-  padding: 4px 6px;
-  margin: 2px 0;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 1px 0;
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  flex-direction: row;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .dietary-checkbox {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 3px;
   font-family: 'Courier New', monospace;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #3d2f24;
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: #6b5844;
   cursor: pointer;
   user-select: none;
-  padding: 2px 0;
+  padding: 0;
+  line-height: 1;
 }
 
 .dietary-checkbox input[type='checkbox'] {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   cursor: pointer;
   accent-color: #8b7355;
+  margin: 0;
 }
 
 .dietary-checkbox:hover {
-  color: #6f5a44;
+  color: #8b7355;
 }
 
 /* Quantity selector - Inline and compact */
@@ -356,7 +362,7 @@
 }
 
 /* Info toggle button - Front (ⓘ circle) */
-.info-toggle {
+.product-card-front .info-toggle {
   position: absolute;
   bottom: 16px;
   right: 16px;
@@ -379,15 +385,15 @@
   margin: 0;
 }
 
-.info-toggle::before {
+.product-card-front .info-toggle::before {
   content: 'ⓘ';
 }
 
-.info-toggle:hover {
+.product-card-front .info-toggle:hover {
   opacity: 0.7;
 }
 
-.info-toggle:active {
+.product-card-front .info-toggle:active {
   opacity: 0.5;
 }
 
