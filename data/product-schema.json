@@ -2,14 +2,34 @@
   "fields": {
     "id": { "required": true, "type": "string", "description": "URL-safe product ID" },
     "name": { "required": true, "type": "string", "description": "Product display name" },
-    "tier": { "required": false, "type": "string", "enum": ["Regular", "Fancy", "Complex"], "default": "Regular" },
-    "category": { "required": true, "type": "string", "enum": ["cookies", "cakes", "pies", "breads"], "description": "Product category" },
+    "tier": { "required": false, "type": "string", "enum": ["Regular", "Fancy", "Complex"], "default": "Regular", "description": "Only for cookies" },
+    "category": { "required": true, "type": "string", "enum": ["cookies", "cakes", "pies", "breads", "candy"], "description": "Product category" },
     "description": { "required": true, "type": "string", "description": "Short product description" },
     "image": { "required": true, "type": "string", "description": "Image path relative to root" },
-    "sizes": { "required": true, "type": "array", "description": "Array of size/price objects" },
-    "dietary": { "required": true, "type": "object", "description": "Dietary info object" },
+    "sizes": { 
+      "required": true, 
+      "type": "array", 
+      "description": "Array of size/price objects",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "required": true },
+          "price": { "type": "number", "required": true }
+        }
+      }
+    },
+    "dietary": { 
+      "required": true, 
+      "type": "object", 
+      "description": "Dietary info object",
+      "properties": {
+        "glutenFree": { "type": "boolean", "required": true },
+        "sugarFree": { "type": "boolean", "required": true },
+        "vegan": { "type": "boolean", "required": true }
+      }
+    },
     "ingredients": { "required": false, "type": "string", "default": "See package for details" },
-    "allergens": { "required": false, "type": "string", "default": "See package for details" },
+    "allergens": { "required": false, "type": "array", "items": { "type": "string" }, "default": [] },
     "shippable": { "required": false, "type": "boolean", "default": false },
     "soldOut": { "required": false, "type": "boolean", "default": false }
   }

@@ -973,7 +973,6 @@
     {
       "id": "pecan-english-toffee",
       "name": "Pecan English Toffee",
-      "tier": "Regular",
       "category": "cookies",
       "description": "Buttery toffee with crunchy pecans, covered in rich chocolate.",
       "images": {
@@ -1054,6 +1053,30 @@
           "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
         }
       }
+    },
+        {
+      "id": "dipped-pretzel-rods",
+      "name": "Dipped Pretzel Rods",
+      "category": "candy",
+      "description": "Crunchy pretzel rods dipped in chocolate or vanilla coating.",
+      "image": "images/pretzel-dipped.jpg",
+      "sizes": [
+        {
+          "name": "half dozen",
+          "price": 10
+        },
+        {
+          "name": "dozen",
+          "price": 18
+        }
+      ],
+      "dietary": {
+        "glutenFree": false,
+        "sugarFree": false,
+        "vegan": false
+      },
+      "shippable": false,
+      "soldOut": false
     },
     {
       "id": "apple-pie",
