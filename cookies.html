@@ -153,19 +153,13 @@
         <ul><li>&copy; Yellow Farmhouse Treats</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
     </div>
         
-  <!-- Product Rendering Scripts -->
-  <script src="assets/js/product-manager.js"></script>
+<!-- Product Rendering -->
   <script src="assets/js/render-products.js"></script>
   <script>
-    // Initialize product renderer for cookies
-    document.addEventListener('DOMContentLoaded', async () => {
-      const manager = new ProductManager();
-      await manager.loadSchema();
-      const renderer = new FlipCardRenderer(manager);
-      const container = document.getElementById('products-container');
-      renderer.renderProducts(container, 'cookies');
+    // Initialize product rendering
+    window.addEventListener('DOMContentLoaded', () => {
+      renderProducts('products-container', 'cookies');
     });
   </script>
-
 </body>
 </html>
