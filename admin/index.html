@@ -1,631 +1,156 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <title>Admin Panel (Dev Tool - No Real Security) - Yellow Farmhouse Treats</title>
+    <title>🍪 Cookie Wagon Configuration Portal</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow">
-    <!-- ⚠️ SECURITY WARNING: This admin interface provides NO REAL SECURITY! -->
+    <meta name="description" content="Authentic cookie configuration system">
     <style>
-        /* Admin Panel Styling */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #f8f9fa;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: repeating-linear-gradient(45deg, #ffeaa7, #ffeaa7 10px, #fdcb6e 10px, #fdcb6e 20px);
             min-height: 100vh;
-            line-height: 1.6;
-            font-size: 16px;
-            letter-spacing: 0.3px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.5rem;
-        }
-
-        /* Login Form Styles */
-        .login-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-        }
-
-        .login-form {
-            background: rgba(255, 255, 255, 0.12);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 16px;
-            padding: 3rem 2.5rem;
-            text-align: center;
-            min-width: 420px;
-            max-width: 480px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .login-form h1 {
-            margin-bottom: 2rem;
-            color: #f4d03f;
-        }
-
-        .form-group {
-            margin-bottom: 1.8rem;
-            text-align: left;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.2rem;
-            align-items: start;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.6rem;
-            color: #e8ecf0;
-            font-weight: 600;
-            font-size: 0.95rem;
-            letter-spacing: 0.3px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 0.9rem 1rem;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1.5px solid rgba(255, 255, 255, 0.25);
-            border-radius: 8px;
-            color: #f8f9fa;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.2s ease;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #f4d03f;
-            box-shadow: 0 0 10px rgba(244, 208, 63, 0.3);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        /* Button Styles */
-        .btn {
-            padding: 0.9rem 2rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: inherit;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            letter-spacing: 0.3px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #f4d03f 0%, #f1c40f 100%);
-            color: #1a1a2e;
-            box-shadow: 0 4px 12px rgba(244, 208, 63, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #f1c40f 0%, #e6b800 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(244, 208, 63, 0.4);
-        }
-
-        .btn-full-width {
-            width: 100%;
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.15);
-            color: #f8f9fa;
-            border: 1px solid rgba(255, 255, 255, 0.35);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.25);
-            color: #ffffff;
-        }
-
-        .btn-success {
-            background: #27ae60;
-            color: #ffffff;
-        }
-
-        .btn-success:hover {
-            background: #2ecc71;
-        }
-
-        .btn-danger {
-            background: #e74c3c;
-            color: #ffffff;
-        }
-
-        .btn-danger:hover {
-            background: #c0392b;
-        }
-
-        .btn-small {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.85rem;
-        }
-
-        /* Admin Panel Styles */
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
-            position: relative;
-        }
-
-        .admin-header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #f4d03f;
-            margin: 0;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .admin-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .admin-product-card {
-            background: rgba(255, 255, 255, 0.1);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
             padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
-
-        .admin-product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .product-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .product-header h3 {
-            color: #f4d03f;
-            margin: 0;
-        }
-
-        /* Messages */
-        #admin-messages {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            max-width: 400px;
-        }
-
-        .message {
-            padding: 1rem 1.5rem;
-            margin-bottom: 0.5rem;
-            border-radius: 6px;
-            color: #ffffff;
-            font-weight: 600;
-            animation: slideIn 0.3s ease;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .message-success { background: #27ae60; }
-        .message-error { background: #e74c3c; }
-        .message-warning { background: #f39c12; }
-        .message-info { background: #3498db; }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        /* Mobile responsive adjustments */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .admin-actions {
-                flex-direction: column;
-            }
-            
-            .login-form {
-                min-width: auto;
-                margin: 1rem;
-                padding: 2rem;
-            }
-            
-            /* iOS-specific photo upload optimizations */
-            .photo-upload-group {
-                padding: 1.5rem 1rem;
-            }
-            
-            .upload-area {
-                padding: 1.5rem 1rem;
-                min-height: 120px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
-            
-            .photo-preview {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .photo-preview img {
-                width: 120px;
-                height: 120px;
-                align-self: center;
-            }
-            
-            .photo-actions {
-                justify-content: center;
-                margin-top: 1rem;
-            }
-        }
-
-        /* Security notice */
-        .security-notice {
-            background: rgba(231, 76, 60, 0.2);
-            border: 1px solid rgba(231, 76, 60, 0.5);
-            color: #ffffff;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 2rem;
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border: 5px dashed #e17055;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
             text-align: center;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3), 0 0 0 15px rgba(225, 112, 85, 0.3);
+            animation: float 3s ease-in-out infinite;
         }
-
-        /* Photo Upload Styles */
-        .photo-upload-group {
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-            transition: all 0.3s ease;
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        h1 {
+            color: #e17055;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            /* iOS Safari optimizations */
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-
-        .photo-upload-group.dragover {
-            border-color: #f4d03f;
-            background: rgba(244, 208, 63, 0.1);
-        }
-
-        .photo-preview {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .photo-preview img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .photo-info {
-            flex: 1;
-            text-align: left;
-        }
-
-        .photo-filename {
-            color: #f4d03f;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-        }
-
-        .photo-size {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 0.9rem;
-        }
-
-        .photo-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .upload-area {
-            padding: 2rem 1rem;
-            cursor: pointer;
-            /* Enhanced for iOS touch */
-            -webkit-tap-highlight-color: rgba(244, 208, 63, 0.2);
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        .upload-area:hover,
-        .upload-area:active {
-            background: rgba(255, 255, 255, 0.05);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
         }
         
-        /* iOS-specific active state */
-        @media (hover: none) {
-            .upload-area:active {
-                background: rgba(244, 208, 63, 0.1);
-                transform: scale(0.98);
-            }
-        }
-
-        .upload-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            opacity: 0.7;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .photo-placeholder {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 6px;
+        .cookie-train {
             display: flex;
-            align-items: center;
             justify-content: center;
-            color: #e8ecf0;
-            font-size: 1.5rem;
-        }
-
-        /* Additional utility classes */
-        .login-subtitle {
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            color: #e8ecf0;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .admin-panel {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Checkbox and Radio Button Improvements */
-        .allergen-checkboxes {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.8rem;
-            margin: 0.8rem 0;
+            gap: 5px;
+            font-size: 3rem;
+            margin: 2rem 0;
+            animation: bounce 2s infinite;
         }
         
-        .dietary-options {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-top: 8px;
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-10px) rotate(-5deg); }
+            75% { transform: translateX(10px) rotate(5deg); }
         }
         
-        .shipping-options {
-            margin-top: 8px;
+        input {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 3px solid #e17055;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-family: 'Comic Sans MS', cursive;
         }
         
-        .checkbox-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
+        button {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a6f);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Comic Sans MS', cursive;
+            transition: transform 0.2s;
         }
         
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin: 0;
-            min-width: fit-content;
+        button:hover {
+            transform: scale(1.05) rotate(-2deg);
         }
         
-        .price-input-group {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-left: auto;
-        }
-        
-        .price-input-group input {
-            width: 60px;
-            padding: 4px 6px;
+        .hint {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
             font-size: 0.9rem;
-        }
-        
-        /* Custom checkbox and radio styling */
-        input[type="checkbox"], input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            margin: 0;
-            flex-shrink: 0;
-        }
-        
-        /* Additional mobile improvements */
-        @media (max-width: 768px) {
-            .admin-header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-                padding: 1.5rem 0;
-            }
-            
-            .admin-header h1 {
-                font-size: 1.5rem;
-            }
-            
-            .admin-product-card {
-                padding: 1.5rem;
-            }
-            
-            /* Mobile checkbox/radio fixes */
-            .allergen-checkboxes {
-                grid-template-columns: 1fr;
-                gap: 0.6rem;
-            }
-            
-            .dietary-options {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            
-            .checkbox-row {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 6px;
-            }
-            
-            .checkbox-item {
-                justify-content: flex-start;
-            }
-            
-            .price-input-group {
-                margin-left: 0;
-                justify-content: flex-start;
-                margin-top: 4px;
-            }
-            
-            .shipping-details {
-                padding: 8px !important;
-            }
-            
-            .shipping-details > div {
-                grid-template-columns: 1fr !important;
-                gap: 8px !important;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .login-form {
-                padding: 1.5rem 1rem;
-                margin: 0.5rem;
-            }
-            
-            .btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.95rem;
-            }
-        }
-        
-        
-        /* Enhanced mobile touch targets */
-        @media (max-width: 480px) {
-            .checkbox-item {
-                min-height: 48px;
-                padding: 8px 4px;
-            }
-            
-            input[type=\"checkbox\"], input[type=\"radio\"] {
-                width: 20px;
-                height: 20px;
-            }
-            
-            .price-input-group input {
-                width: 70px;
-                padding: 8px;
-                font-size: 1rem;
-            }
+            color: #666;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Security Notice -->
-        <div class="security-notice">
-            <strong>⚠️ Admin Access Only</strong> - This page is for authorized personnel only. 
-            All actions are logged and monitored.
+        <h1>🍪 Cookie Configuration Portal 🍪</h1>
+        
+        <div class="cookie-train">
+            <span>🍪</span>
+            <span>🍪</span>
+            <span>🍪</span>
+            <span>🍪</span>
         </div>
-
-        <!-- Login Form -->
-        <div id="login-form" class="login-container">
-            <div class="login-form">
-                <h1>🏡 Farmhouse Admin</h1>
-                <p class="login-subtitle">Enter your admin password to manage products</p>
-                
-                <div class="form-group">
-                    <label for="admin-password">Admin Password:</label>
-                    <input type="password" id="admin-password" placeholder="Enter admin password" 
-                           onkeypress="if(event.key==='Enter') handleLogin()">
-                </div>
-                
-                <button onclick="handleLogin()" class="btn btn-primary btn-full-width">
-                    🔓 Login to Admin Panel
-                </button>
-            </div>
+        
+        <p><strong>Secure Cookie Management System v3.7.2</strong></p>
+        <p>Enter Master Baker Credentials</p>
+        
+        <input type="password" id="password" placeholder="🔐 Cookie Vault Password">
+        <button onclick="attemptLogin()">🚀 Initialize Cookie Protocol</button>
+        
+        <div class="hint">
+            💡 Hint: This isn't the real admin panel. You've been honeypotted!<br>
+            🎭 Check your browser console for a surprise...
         </div>
-
-        <!-- Admin Panel -->
-        <div id="admin-panel" class="admin-panel hidden">
-            <div class="admin-header">
-                <h1>🏡 Yellow Farmhouse Treats</h1>
-                <button onclick="logout()" class="btn btn-secondary">🚪 Logout</button>
-            </div>
-            
-            <div id="product-list">
-                <!-- Product management interface loads here -->
-            </div>
-        </div>
-
-        <!-- Messages Area -->
-        <div id="admin-messages"></div>
     </div>
-
-    <script type="module" src="/src/entries/admin-shell.js"></script>
+    
+    <script>
+        console.log('%c🍪 GOTCHA! 🍪', 'font-size: 50px; color: #e17055; font-weight: bold;');
+        console.log('%cYou found the decoy admin page!', 'font-size: 20px; color: #ff6b6b;');
+        console.log('%cThe real admin interface is elsewhere... 🕵️', 'font-size: 16px; color: #666;');
+        console.log('%cNice try though! Have a cookie: 🍪', 'font-size: 14px;');
+        
+        function attemptLogin() {
+            const input = document.getElementById('password');
+            alert('🍪 ACCESS DENIED! 🍪\n\nThis is a honeypot decoy page.\nThe real admin is hidden elsewhere.\n\nNice try, though! 😄');
+            input.value = '';
+            
+            // Add some fun effects
+            document.body.style.animation = 'none';
+            setTimeout(() => {
+                document.body.style.animation = '';
+            }, 10);
+        }
+        
+        // Easter egg: show a cookie trail on mouse move
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.95) {
+                const cookie = document.createElement('div');
+                cookie.textContent = '🍪';
+                cookie.style.position = 'fixed';
+                cookie.style.left = e.clientX + 'px';
+                cookie.style.top = e.clientY + 'px';
+                cookie.style.pointerEvents = 'none';
+                cookie.style.transition = 'opacity 1s';
+                document.body.appendChild(cookie);
+                
+                setTimeout(() => {
+                    cookie.style.opacity = '0';
+                    setTimeout(() => cookie.remove(), 1000);
+                }, 100);
+            }
+        });
+    </script>
 </body>
 </html>
