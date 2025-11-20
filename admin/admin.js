@@ -5,8 +5,7 @@
 
 const DEFAULT_DIETARY_PRICING = {
   glutenFree: 3,
-  sugarFree: 3,
-  vegan: 2
+  sugarFree: 3
 };
 
 const DEFAULT_PAYMENT_METHODS = {
@@ -26,6 +25,41 @@ const DEFAULT_SHIPPING_ZONES = {
 };
 
 class AdminInterface {
+    getPassword() {
+      // Get password from localStorage or use default
+      return localStorage.getItem('admin_password') || 'FarmhouseBaker2024!';
+    }
+
+    setPassword(newPassword) {
+      localStorage.setItem('admin_password', newPassword);
+      this.showMessage('Admin password updated!', 'success');
+    }
+
+    renderPasswordForm() {
+      let pwForm = document.getElementById('admin-password-form');
+      if (!pwForm) {
+        pwForm = document.createElement('form');
+        pwForm.id = 'admin-password-form';
+        pwForm.innerHTML = `
+          <div style="margin:1.5rem 0;padding:1rem;background:#f9f9f9;border-radius:8px;max-width:400px;">
+            <h3 style="margin-bottom:0.5rem;color:#1976d2;">Change Admin Password</h3>
+            <input type="password" id="new-admin-password" placeholder="New password" style="width:100%;margin-bottom:0.5rem;padding:0.5rem;">
+            <button type="submit" style="padding:0.5rem 1rem;">Update Password</button>
+          </div>
+        `;
+        pwForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const newPw = document.getElementById('new-admin-password').value;
+          if (newPw && newPw.length >= 8) {
+            this.setPassword(newPw);
+            document.getElementById('new-admin-password').value = '';
+          } else {
+            this.showMessage('Password must be at least 8 characters.', 'error');
+          }
+        });
+        document.getElementById('admin-panel').prepend(pwForm);
+      }
+    }
   constructor() {
     this.isAuthenticated = false;
     this.products = [];
@@ -34,6 +68,8 @@ class AdminInterface {
     this.paymentMethods = { ...DEFAULT_PAYMENT_METHODS };
     this.shippingZones = { ...DEFAULT_SHIPPING_ZONES };
     this.catalogVersion = '';
+    this.soldOutProducts = [];
+    this.pauseOrders = false;
     this.init();
   }
 
@@ -43,6 +79,7 @@ let adminInterface;
     this.setupEventListeners();
     this.checkAuthentication();
     // Load products after authentication check
+    this.displaySecurityWarning();
   }
 
   // Display security warning
@@ -94,16 +131,14 @@ let adminInterface;
     } else {
       this.showLoginForm();
     }
-  }
-
   // Generate secure token (you should change this password)
   generateToken() {
-    const password = 'FarmhouseBaker2024!'; // Change this to your secure password
+    const password = this.getPassword();
     return btoa(password + new Date().toDateString());
   }
-
-  showLoginForm() {
-    document.getElementById('admin-panel').style.display = 'none';
+  }
+  // Update product data
+  updateProduct(index, field, value) {
     document.getElementById('login-form').style.display = 'block';
     
     // Add security disclaimer to login form if not already present
@@ -136,12 +171,14 @@ let adminInterface;
   showAdminPanel() {
     document.getElementById('login-form').style.display = 'none';
     document.getElementById('admin-panel').style.display = 'block';
-    
+    this.renderPasswordForm();
     // Load products when admin panel is shown
     this.loadProducts().then(() => {
       this.renderProductList();
+      this.renderOrderPauseToggle();
     }).catch(() => {
       this.renderProductList(); // Render with fallback data
+      this.renderOrderPauseToggle();
     });
   }
 
@@ -200,7 +237,7 @@ let adminInterface;
     const rawProducts = Array.isArray(payload.products) ? payload.products : [];
     this.products = rawProducts.map(product => this.convertToAdminFormat(product));
     this.backupData = JSON.stringify(this.products, null, 2);
-    this.dietaryPricing = payload.dietaryPricing || { glutenFree: 3, sugarFree: 3, vegan: 2 };
+    this.dietaryPricing = payload.dietaryPricing || { glutenFree: 3, sugarFree: 3 };
     this.paymentMethods = payload.paymentMethods || {};
     this.shippingZones = payload.shippingZones || {};
     this.catalogVersion = payload.version || '';
@@ -228,10 +265,10 @@ let adminInterface;
       image: product.image || '',
       glutenFree: product.dietary ? product.dietary.glutenFree || false : false,
       sugarFree: product.dietary ? product.dietary.sugarFree || false : false,
-      vegan: product.dietary ? product.dietary.vegan || false : false,
+      // vegan removed
       glutenFreePrice: product.glutenFreePrice || 3,
       sugarFreePrice: product.sugarFreePrice || 3,
-      veganPrice: product.veganPrice || 2,
+      // veganPrice removed
       shippingEligible: product.shippable || false,
       baseShippingCost: product.baseShippingCost || 5,
       perPoundRate: product.perPoundRate || 2,
@@ -379,29 +416,26 @@ let adminInterface;
   // Render the product management interface
   renderProductList() {
     const container = document.getElementById('product-list');
-    
     container.innerHTML = `
       <div class="admin-header">
         <h2>Product Management <span style="font-size: 0.6em; color: #ff6b6b; font-weight: normal;">(Development Tool)</span></h2>
         <div class="admin-actions">
           <button onclick="adminInterface.addNewProduct()" class="btn btn-primary">+ Add New Product</button>
-             <button onclick="adminInterface.exportData()" class="btn btn-secondary">Export All Data</button>
-             <button onclick="adminInterface.saveChangesWithPhotos()" class="btn btn-success">Save All Products</button>
+          <button onclick="adminInterface.exportData()" class="btn btn-secondary">Export All Data</button>
+          <button onclick="adminInterface.saveChangesWithPhotos()" class="btn btn-success">Save All Products</button>
         </div>
         <div class="save-instructions">
           <small style="color: rgba(255, 255, 255, 0.7); font-style: italic;">
-               Tip: Use individual "Save" buttons on each product for quick updates, or "Save All" for bulk changes<br>
-               Reminder: This interface has no real security - files download to your device for manual upload to production
+            Tip: Use individual "Save" buttons on each product for quick updates, or "Save All" for bulk changes<br>
+            Reminder: This interface has no real security - files download to your device for manual upload to production
           </small>
         </div>
+        <div id="order-pause-toggle"></div>
       </div>
-      
       <div class="products-grid">
         ${this.products.map((product, index) => this.renderProductCard(product, index)).join('')}
       </div>
     `;
-    
-    // Adjust UI for mobile devices after rendering
     setTimeout(() => this.adjustUploadUIForMobile(), 100);
   }
 
@@ -412,32 +446,24 @@ let adminInterface;
         <div class="product-header">
           <h3>${this.sanitizeText(product.name)}</h3>
           <div class="product-actions">
-               <button onclick="adminInterface.saveIndividualProduct(${index})" class="btn btn-success btn-small" title="Save this product">
-                 Save
-            </button>
-               <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small" title="Delete this product">
-                 Delete
-            </button>
+            <label class="sold-out-toggle">
+              <input type="checkbox" ${product.soldOut ? 'checked' : ''} onchange="adminInterface.toggleProductSoldOut(${index})">
+              <span class="sold-out-label">Sold Out</span>
+            </label>
+            <button onclick="adminInterface.saveIndividualProduct(${index})" class="btn btn-success btn-small" title="Save this product">Save</button>
+            <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small" title="Delete this product">Delete</button>
           </div>
         </div>
-        
         <div class="product-form">
           <div class="form-group">
             <label>Product Name:</label>
-            <input type="text" value="${this.sanitizeText(product.name)}" 
-                   onchange="adminInterface.updateProduct(${index}, 'name', this.value)">
+            <input type="text" value="${this.sanitizeText(product.name)}" onchange="adminInterface.updateProduct(${index}, 'name', this.value)">
           </div>
-          
           <div class="form-group">
             <label>Sizes & Pricing:</label>
-            <div class="sizes-container" id="sizes-${index}">
-              ${this.renderSizesEditor(product, index)}
-            </div>
-            <button type="button" class="btn btn-small btn-secondary" 
-                    onclick="adminInterface.addSize(${index})" 
-                    style="margin-top: 5px;">+ Add Size</button>
+            <div class="sizes-container" id="sizes-${index}">${this.renderSizesEditor(product, index)}</div>
+            <button type="button" class="btn btn-small btn-secondary" onclick="adminInterface.addSize(${index})" style="margin-top: 5px;">+ Add Size</button>
           </div>
-          
           <div class="form-group">
             <label>Category:</label>
             <select onchange="adminInterface.updateProduct(${index}, 'category', this.value)">
@@ -445,64 +471,32 @@ let adminInterface;
               <option value="cakes" ${product.category === 'cakes' ? 'selected' : ''}>Cakes</option>
               <option value="pies" ${product.category === 'pies' ? 'selected' : ''}>Pies</option>
               <option value="breads" ${product.category === 'breads' ? 'selected' : ''}>Breads</option>
+              <option value="candy" ${product.category === 'candy' ? 'selected' : ''}>Candy</option>
             </select>
           </div>
-          
           <div class="form-group">
             <label>Description:</label>
             <textarea onchange="adminInterface.updateProduct(${index}, 'description', this.value)">${this.sanitizeText(product.description || '')}</textarea>
           </div>
-          
           <div class="form-group">
             <label>Ingredients (in order of quantity):</label>
-            <textarea placeholder="e.g., Flour, Sugar, Butter, Eggs, Vanilla Extract, Salt, Baking Soda" 
-                      onchange="adminInterface.updateProduct(${index}, 'ingredients', this.value)">${this.sanitizeText(product.ingredients || '')}</textarea>
+            <textarea placeholder="e.g., Flour, Sugar, Butter, Eggs, Vanilla Extract, Salt, Baking Soda" onchange="adminInterface.updateProduct(${index}, 'ingredients', this.value)">${this.sanitizeText(product.ingredients || '')}</textarea>
             <small style="color: rgba(255, 255, 255, 0.6); font-style: italic;">List all ingredients in descending order by weight/volume</small>
           </div>
-          
           <div class="form-group">
             <label>Allergen Information:</label>
             <div class="allergen-checkboxes">
-              <label class="checkbox-item">
-                <input type="checkbox" ${product.allergens?.includes('wheat') ? 'checked' : ''} 
-                       onchange="adminInterface.updateAllergen(${index}, 'wheat', this.checked)">
-                Contains Wheat
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" ${product.allergens?.includes('eggs') ? 'checked' : ''} 
-                       onchange="adminInterface.updateAllergen(${index}, 'eggs', this.checked)">
-                Contains Eggs
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" ${product.allergens?.includes('milk') ? 'checked' : ''} 
-                       onchange="adminInterface.updateAllergen(${index}, 'milk', this.checked)">
-                Contains Milk/Dairy
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" ${product.allergens?.includes('nuts') ? 'checked' : ''} 
-                       onchange="adminInterface.updateAllergen(${index}, 'nuts', this.checked)">
-                Contains Tree Nuts
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" ${product.allergens?.includes('peanuts') ? 'checked' : ''} 
-                       onchange="adminInterface.updateAllergen(${index}, 'peanuts', this.checked)">
-                Contains Peanuts
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" ${product.allergens?.includes('soy') ? 'checked' : ''} 
-                       onchange="adminInterface.updateAllergen(${index}, 'soy', this.checked)">
-                Contains Soy
-              </label>
+              ${['wheat','eggs','milk','nuts','peanuts','soy'].map(allergen => `
+                <label class="checkbox-item">
+                  <input type="checkbox" ${product.allergens?.includes(allergen) ? 'checked' : ''} onchange="adminInterface.updateAllergen(${index}, '${allergen}', this.checked)">
+                  Contains ${allergen.charAt(0).toUpperCase() + allergen.slice(1)}
+                </label>
+              `).join('')}
             </div>
           </div>
-          
           <div class="form-group">
             <label>Product Photo:</label>
-            <div class="photo-upload-group" 
-                 ondrop="adminInterface.handlePhotoDrop(event, ${index})" 
-                 ondragover="adminInterface.handleDragOver(event)"
-                 ondragleave="adminInterface.handleDragLeave(event)">
-              
+            <div class="photo-upload-group" ondrop="adminInterface.handlePhotoDrop(event, ${index})" ondragover="adminInterface.handleDragOver(event)" ondragleave="adminInterface.handleDragLeave(event)">
               <div class="photo-preview" id="photo-preview-${index}" style="display: none;">
                 <img id="photo-img-${index}" src="" alt="Product photo">
                 <div class="photo-info">
@@ -510,103 +504,65 @@ let adminInterface;
                   <div class="photo-size" id="photo-size-${index}"></div>
                 </div>
                 <div class="photo-actions">
-                  <button type="button" class="btn btn-small btn-secondary" 
-                          onclick="adminInterface.changePhoto(${index})">Change</button>
-                  <button type="button" class="btn btn-small btn-danger" 
-                          onclick="adminInterface.removePhoto(${index})">Remove</button>
+                  <button type="button" class="btn btn-small btn-secondary" onclick="adminInterface.changePhoto(${index})">Change</button>
+                  <button type="button" class="btn btn-small btn-danger" onclick="adminInterface.removePhoto(${index})">Remove</button>
                 </div>
               </div>
-              
               <div class="photo-upload-section">
                 <div class="upload-buttons">
-                     <button type="button" class="btn btn-primary btn-photo-library" 
-                             onclick="adminInterface.triggerPhotoLibrary(${index})">Photos</button>
-                     <button type="button" class="btn btn-secondary btn-camera" 
-                             onclick="adminInterface.triggerCamera(${index})">Camera</button>
-                     <button type="button" class="btn btn-secondary btn-files" 
-                             onclick="adminInterface.triggerFiles(${index})">Files</button>
+                  <button type="button" class="btn btn-primary btn-photo-library" onclick="adminInterface.triggerPhotoLibrary(${index})">Photos</button>
+                  <button type="button" class="btn btn-secondary btn-camera" onclick="adminInterface.triggerCamera(${index})">Camera</button>
+                  <button type="button" class="btn btn-secondary btn-files" onclick="adminInterface.triggerFiles(${index})">Files</button>
                 </div>
                 <div class="upload-hint">Select from Photos app, take new photo, or browse files</div>
               </div>
-              
-              <input type="file" id="photo-input-library-${index}" class="file-input" 
-                     accept="image/*" 
-                     onchange="adminInterface.handlePhotoSelect(event, ${index}, 'library')" style="display: none;">
-              <input type="file" id="photo-input-camera-${index}" class="file-input" 
-                     accept="image/*" capture="environment"
-                     onchange="adminInterface.handlePhotoSelect(event, ${index}, 'camera')" style="display: none;">
-              <input type="file" id="photo-input-files-${index}" class="file-input" 
-                     accept="image/*,image/heic,image/jpeg,image/png,image/gif,image/webp" 
-                     onchange="adminInterface.handlePhotoSelect(event, ${index}, 'files')" style="display: none;">
+              <input type="file" id="photo-input-library-${index}" class="file-input" accept="image/*" onchange="adminInterface.handlePhotoSelect(event, ${index}, 'library')" style="display: none;">
+              <input type="file" id="photo-input-camera-${index}" class="file-input" accept="image/*" capture="environment" onchange="adminInterface.handlePhotoSelect(event, ${index}, 'camera')" style="display: none;">
+              <input type="file" id="photo-input-files-${index}" class="file-input" accept="image/*,image/heic,image/jpeg,image/png,image/gif,image/webp" onchange="adminInterface.handlePhotoSelect(event, ${index}, 'files')" style="display: none;">
             </div>
-            
-            <!-- Fallback filename input -->
             <div style="margin-top: 0.5rem;">
               <label style="font-size: 0.85rem; opacity: 0.8;">Or enter filename manually:</label>
-              <input type="text" value="${this.sanitizeText(product.image)}" 
-                     onchange="adminInterface.updateProduct(${index}, 'image', this.value)"
-                     placeholder="e.g., cookies-chocolate-chip.jpg">
+              <input type="text" value="${this.sanitizeText(product.image)}" onchange="adminInterface.updateProduct(${index}, 'image', this.value)" placeholder="e.g., cookies-chocolate-chip.jpg">
             </div>
           </div>
-          
           <div class="form-group">
             <label>Dietary Options & Pricing:</label>
             <div class="dietary-options">
               <div class="checkbox-row">
                 <label class="checkbox-item">
-                  <input type="checkbox" id="gf-${index}" ${product.glutenFree ? 'checked' : ''} 
-                         onchange="adminInterface.updateProduct(${index}, 'glutenFree', this.checked)">
+                  <input type="checkbox" id="gf-${index}" ${product.glutenFree ? 'checked' : ''} onchange="adminInterface.updateProduct(${index}, 'glutenFree', this.checked)">
                   Gluten Free
                 </label>
                 <div class="price-input-group">
                   <span>+$</span>
-                  <input type="number" step="0.01" value="${product.glutenFreePrice || 3}" 
-                         onchange="adminInterface.updateProduct(${index}, 'glutenFreePrice', parseFloat(this.value))">
+                  <input type="number" step="0.01" value="${product.glutenFreePrice || 3}" onchange="adminInterface.updateProduct(${index}, 'glutenFreePrice', parseFloat(this.value))">
                 </div>
               </div>
               <div class="checkbox-row">
                 <label class="checkbox-item">
-                  <input type="checkbox" id="sf-${index}" ${product.sugarFree ? 'checked' : ''} 
-                         onchange="adminInterface.updateProduct(${index}, 'sugarFree', this.checked)">
+                  <input type="checkbox" id="sf-${index}" ${product.sugarFree ? 'checked' : ''} onchange="adminInterface.updateProduct(${index}, 'sugarFree', this.checked)">
                   Sugar Free
                 </label>
                 <div class="price-input-group">
                   <span>+$</span>
-                  <input type="number" step="0.01" value="${product.sugarFreePrice || 3}" 
-                         onchange="adminInterface.updateProduct(${index}, 'sugarFreePrice', parseFloat(this.value))">
-                </div>
-              </div>
-              <div class="checkbox-row">
-                <label class="checkbox-item">
-                  <input type="checkbox" id="vegan-${index}" ${product.vegan ? 'checked' : ''} 
-                         onchange="adminInterface.updateProduct(${index}, 'vegan', this.checked)">
-                  Vegan
-                </label>
-                <div class="price-input-group">
-                  <span>+$</span>
-                  <input type="number" step="0.01" value="${product.veganPrice || 2}" 
-                         onchange="adminInterface.updateProduct(${index}, 'veganPrice', parseFloat(this.value))">
+                  <input type="number" step="0.01" value="${product.sugarFreePrice || 3}" onchange="adminInterface.updateProduct(${index}, 'sugarFreePrice', parseFloat(this.value))">
                 </div>
               </div>
             </div>
           </div>
-          
           <div class="form-group">
             <label>Shipping & Features:</label>
             <div class="shipping-options">
               <div class="checkbox-row">
                 <label class="checkbox-item">
-                  <input type="checkbox" ${product.shippingEligible ? 'checked' : ''} 
-                         onchange="adminInterface.updateProduct(${index}, 'shippingEligible', this.checked)">
+                  <input type="checkbox" ${product.shippingEligible ? 'checked' : ''} onchange="adminInterface.updateProduct(${index}, 'shippingEligible', this.checked)">
                   Shipping Eligible
                 </label>
                 <label class="checkbox-item">
-                  <input type="checkbox" ${product.featured ? 'checked' : ''} 
-                         onchange="adminInterface.updateProduct(${index}, 'featured', this.checked)">
+                  <input type="checkbox" ${product.featured ? 'checked' : ''} onchange="adminInterface.updateProduct(${index}, 'featured', this.checked)">
                   Featured Product
                 </label>
               </div>
-              
               ${product.shippingEligible ? `
                 <div class="shipping-details" style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 8px;">
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px;">
@@ -614,25 +570,19 @@ let adminInterface;
                       <label style="font-size: 0.85rem; margin-bottom: 3px; display: block;">Base Shipping Cost:</label>
                       <div style="display: flex; align-items: center; gap: 3px;">
                         <span>$</span>
-                        <input type="number" step="0.01" value="${product.baseShippingCost || 5}" 
-                               style="width: 60px;" 
-                               onchange="adminInterface.updateProduct(${index}, 'baseShippingCost', parseFloat(this.value))">
+                        <input type="number" step="0.01" value="${product.baseShippingCost || 5}" style="width: 60px;" onchange="adminInterface.updateProduct(${index}, 'baseShippingCost', parseFloat(this.value))">
                       </div>
                     </div>
                     <div>
                       <label style="font-size: 0.85rem; margin-bottom: 3px; display: block;">Per Pound Rate:</label>
                       <div style="display: flex; align-items: center; gap: 3px;">
                         <span>$</span>
-                        <input type="number" step="0.01" value="${product.perPoundRate || 2}" 
-                               style="width: 60px;" 
-                               onchange="adminInterface.updateProduct(${index}, 'perPoundRate', parseFloat(this.value))">
+                        <input type="number" step="0.01" value="${product.perPoundRate || 2}" style="width: 60px;" onchange="adminInterface.updateProduct(${index}, 'perPoundRate', parseFloat(this.value))">
                         <small style="color: #666;">/lb</small>
                       </div>
                     </div>
                   </div>
-                  <div style="font-size: 0.85rem; color: #666; font-style: italic;">
-                    Shipping = Base Cost + (Weight x Per Pound Rate)
-                  </div>
+                  <div style="font-size: 0.85rem; color: #666; font-style: italic;">Shipping = Base Cost + (Weight x Per Pound Rate)</div>
                 </div>
               ` : ''}
             </div>
@@ -640,30 +590,36 @@ let adminInterface;
         </div>
       </div>
     `;
-  }
-
-  // Security: Sanitize text input
-  sanitizeText(text) {
-    if (typeof text !== 'string') return '';
-    return text.replace(/[<>&"']/g, function(match) {
-      const escapeMap = {
-        '<': '&lt;',
-        '>': '&gt;',
-        '&': '&amp;',
-        '"': '&quot;',
-        "'": '&#39;'
-      };
-      return escapeMap[match];
-    });
-  }
-
-  // Update product data
-  updateProduct(index, field, value) {
-    if (index >= 0 && index < this.products.length) {
-      this.products[index][field] = value;
-      this.showMessage(`Updated ${field} for ${this.products[index].name}`, 'info');
+    renderOrderPauseToggle() {
+      const container = document.getElementById('order-pause-toggle');
+      if (!container) return;
+      container.innerHTML = `
+        <div class="order-status-control">
+          <label class="toggle-switch">
+            <input type="checkbox" id="order-pause-checkbox" ${this.pauseOrders ? 'checked' : ''} onchange="adminInterface.toggleOrderPause()">
+            <span class="toggle-slider"></span>
+            <span class="toggle-label">Pause Orders</span>
+          </label>
+          <div id="pause-status" class="status-indicator ${this.pauseOrders ? 'paused' : 'active'}">
+            <span class="status-text">${this.pauseOrders ? 'Paused' : 'Active'}</span>
+          </div>
+        </div>
+      `;
     }
-  }
+    toggleOrderPause() {
+      this.pauseOrders = !this.pauseOrders;
+      this.renderOrderPauseToggle();
+      this.showMessage(`Orders ${this.pauseOrders ? 'paused' : 'active'}`, this.pauseOrders ? 'warning' : 'success');
+      // TODO: Sync with siteConfig system if available
+    }
+    toggleProductSoldOut(index) {
+      if (index >= 0 && index < this.products.length) {
+        this.products[index].soldOut = !this.products[index].soldOut;
+        this.renderProductList();
+        this.showMessage(`${this.products[index].name} marked as ${this.products[index].soldOut ? 'SOLD OUT' : 'available'}`, this.products[index].soldOut ? 'warning' : 'success');
+        // TODO: Sync with siteConfig system if available
+      }
+    }
 
   // Update allergen data
   updateAllergen(index, allergen, isChecked) {
@@ -800,12 +756,12 @@ let adminInterface;
       dietary: {
         glutenFree: product.glutenFree || false,
         sugarFree: product.sugarFree || false,
-        vegan: product.vegan || false
+        // vegan removed
       },
       dietaryPricing: {
         glutenFree: product.glutenFreePrice || 3,
         sugarFree: product.sugarFreePrice || 3,
-        vegan: product.veganPrice || 2
+        // veganPrice removed
       },
       shippable: product.shippingEligible || false,
       ...(product.shippingEligible && {
