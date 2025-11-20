@@ -134,9 +134,10 @@
                     <label><input type="radio" name="pb-size" value="12" data-price="12"> 1/2 dozen - $12</label>
                     <label><input type="radio" name="pb-size" value="20" data-price="20" checked> Dozen - $20</label>
                   </div>
-              <p>Playful combinations with fillings, frostings, and premium toppings.</p>
-            </header>
-            <section class="products-grid">
+                  <input type="number" id="pb-qty" min="1" value="1" class="qty-input" title="Quantity">
+                  <button onclick="addCookiesToCart('Peanut Butter Cookies', 'pb-size', null, null, 'pb-qty')" aria-label="Add Peanut Butter Cookies to cart">Add to Cart</button>
+                </div>
+              </div>
               <div class="product-card">
                 <img src="images/cookies-biscoff.jpg" alt="Biscoff Cookies" class="product-img">
                 <h4 class="product-title">Biscoff Cookies</h4>

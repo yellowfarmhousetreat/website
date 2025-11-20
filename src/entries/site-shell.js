@@ -7,7 +7,8 @@ const legacyScripts = [
 	'assets/js/breakpoints.min.js',
 	'assets/js/util.js',
 	'assets/js/main.js',
-	'assets/js/overlay-menu.js'
+	'assets/js/overlay-menu.js',
+	'assets/js/product-card-info.js'
 ];
 
 const defaultScriptAttributes = {

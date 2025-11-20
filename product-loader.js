@@ -153,6 +153,7 @@ class ProductLoader {
 
         container.appendChild(gridWrapper);
         this.initializeEventListeners();
+        this.notifyProductCardsRendered(category, products.length);
     }
 
     generateProductCard(product) {
@@ -419,6 +420,15 @@ class ProductLoader {
             toast.style.opacity = '0';
             setTimeout(() => toast.remove(), 300);
         }, 3000);
+    }
+
+    notifyProductCardsRendered(category, count) {
+        try {
+            const detail = { category, count };
+            document.dispatchEvent(new CustomEvent('yf:product-cards-rendered', { detail }));
+        } catch (error) {
+            console.warn('Unable to dispatch product card event', error);
+        }
     }
 }
 

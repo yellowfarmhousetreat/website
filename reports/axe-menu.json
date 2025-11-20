@@ -14,7 +14,7 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2025-11-20T01:12:02.251Z",
+  "timestamp": "2025-11-20T01:32:01.538Z",
   "url": "http://127.0.0.1:4173/menu.html",
   "toolOptions": {
     "runOnly": {
@@ -6501,6 +6501,181 @@
             {
               "id": "color-contrast",
               "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1a1a23",
+                "contrastRatio": 15.84,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 15.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"index.html\" class=\"logo\">Yellow Farmhouse Treats</a>",
+          "target": [
+            ".logo"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#131520",
+                "contrastRatio": 16.66,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 16.66"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<span class=\"overlay-menu__label\">Open site navigator</span>",
+          "target": [
+            ".overlay-menu__label"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#42434d",
+                "contrastRatio": 8.99,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 8.99"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<span class=\"overlay-menu__cart-pill\">Cart <span id=\"cart-count\" class=\"cart-count\">0</span></span>",
+          "target": [
+            ".overlay-menu__cart-pill"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#1a1a1a",
+                "bgColor": "#ffd86f",
+                "contrastRatio": 12.68,
+                "fontSize": "9.0pt (12px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 12.68"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<span id=\"cart-count\" class=\"cart-count\">0</span>",
+          "target": [
+            "#cart-count"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffd86f",
+                "bgColor": "#1a1a23",
+                "contrastRatio": 12.58,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 12.58"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p class=\"eyebrow\">Made from scratch in Caldwell, ID</p>",
+          "target": [
+            "#menu-top > .eyebrow"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1a1a23",
+                "contrastRatio": 15.84,
+                "fontSize": "45.0pt (60px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 15.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h1>Menu</h1>",
+          "target": [
+            "h1"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1a1a23",
+                "contrastRatio": 15.84,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 15.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p>Every cookie, pie, cake, and loaf is crafted in small batches using farm-fresh ingredients. Browse below or use the floating menu button to jump straight to your favorites.</p>",
+          "target": [
+            "#menu-top > p:nth-child(3)"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
                 "fgColor": "#1a1a1a",
                 "bgColor": "#ffd86f",
                 "contrastRatio": 12.68,
@@ -6519,6 +6694,156 @@
           "html": "<a class=\"button\" href=\"order.html\">Start an Order</a>",
           "target": [
             ".button[href$=\"order.html\"]:nth-child(1)"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1a1a23",
+                "contrastRatio": 15.84,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 15.84"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a class=\"button button--ghost\" href=\"order.html\">View Cart</a>",
+          "target": [
+            ".button--ghost"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffd86f",
+                "bgColor": "#1e222b",
+                "contrastRatio": 11.6,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 11.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p class=\"eyebrow\">Signature Classics</p>",
+          "target": [
+            "#cookies > .menu-category__header > .eyebrow"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "33.0pt (44px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h2>Cookies</h2>",
+          "target": [
+            "#cookies > .menu-category__header > h2"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p>Choose from simple family favorites, decadent fancy varieties, or complex stuffed creations.</p>",
+          "target": [
+            "#cookies > .menu-category__header > p:nth-child(3)"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "18.0pt (24px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h3>Simple Cookies</h3>",
+          "target": [
+            "#cookies-simple > header > h3"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p>Everyday staples that showcase high-quality ingredients.</p>",
+          "target": [
+            "#cookies-simple > header > p"
           ]
         },
         {
@@ -8002,6 +8327,56 @@
               "id": "color-contrast",
               "data": {
                 "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "18.0pt (24px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h3>Complex Cookies</h3>",
+          "target": [
+            "#cookies-complex > header > h3"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p>Over-the-top bakes stuffed with candy bars, caramel, and layered fillings.</p>",
+          "target": [
+            "#cookies-complex > header > p"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
                 "bgColor": "#212931",
                 "contrastRatio": 13.5,
                 "fontSize": "12.0pt (16px)",
@@ -8594,6 +8969,81 @@
           "html": "<button onclick=\"addCookiesToCart('Caramel Apple Pie', 'cap-size', null, null, 'cap-qty')\" aria-label=\"Add Caramel Apple Pie to cart\">Add to Cart</button>",
           "target": [
             "button[aria-label=\"Add Caramel Apple Pie to cart\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffd86f",
+                "bgColor": "#1e222b",
+                "contrastRatio": 11.6,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 11.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p class=\"eyebrow\">Celebration ready</p>",
+          "target": [
+            "#cakes > .menu-category__header > .eyebrow"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "33.0pt (44px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h2>Cakes &amp; Cupcakes</h2>",
+          "target": [
+            "#cakes > .menu-category__header > h2"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p>Individual mini cakes and filled cupcakes perfect for showers, birthdays, and pop-up parties.</p>",
+          "target": [
+            "#cakes > .menu-category__header > p:nth-child(3)"
           ]
         },
         {
@@ -9269,6 +9719,106 @@
           "html": "<button onclick=\"addSizedProductToCart('Holiday Special Cupcakes', 'holcup-size', 'holcup-qty')\" aria-label=\"Add Holiday Special Cupcakes to cart\">Add to Cart</button>",
           "target": [
             "#cakes > .products-grid > .product-card:nth-child(4) > .product-details > button"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffd86f",
+                "bgColor": "#1e222b",
+                "contrastRatio": 11.6,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 11.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p class=\"eyebrow\">Farmhouse pies &amp; crisps</p>",
+          "target": [
+            "#pies > .menu-category__header > .eyebrow"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "33.0pt (44px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h2>Pies &amp; Crisps</h2>",
+          "target": [
+            "#pies > .menu-category__header > h2"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p>Buttery crusts, seasonal fillings, and warm-spiced crisps made the same day you pick up.</p>",
+          "target": [
+            "#pies > .menu-category__header > p:nth-child(3)"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#a0a0a0",
+                "bgColor": "#1e222b",
+                "contrastRatio": 6.08,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 6.08"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<strong>$5 deposit required for all pies &amp; crisps.</strong>",
+          "target": [
+            ".category-note > strong"
           ]
         },
         {
@@ -10069,6 +10619,81 @@
           "html": "<button onclick=\"addPieToCart('Peach Cobbler', 30, 'peachcobbler-qty')\" aria-label=\"Add Peach Cobbler to cart\">Add to Cart</button>",
           "target": [
             "button[aria-label=\"Add Peach Cobbler to cart\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#ffd86f",
+                "bgColor": "#1e222b",
+                "contrastRatio": 11.6,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 11.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p class=\"eyebrow\">Morning market favorites</p>",
+          "target": [
+            "#breads > .menu-category__header > .eyebrow"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "33.0pt (44px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h2>Breads &amp; Market Treats</h2>",
+          "target": [
+            "#breads > .menu-category__header > h2"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1e222b",
+                "contrastRatio": 14.6,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p>Perfect for brunch tables, teacher gifts, or stocking the freezer with crowd-pleasers.</p>",
+          "target": [
+            "#breads > .menu-category__header > p:nth-child(3)"
           ]
         },
         {
@@ -11476,6 +12101,231 @@
             {
               "id": "color-contrast",
               "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#1f242c",
+                "contrastRatio": 14.3,
+                "fontSize": "18.0pt (24px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 14.3"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h2>Order Details &amp; Helpful Notes</h2>",
+          "target": [
+            "#pickup-notes > h2"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#232830",
+                "contrastRatio": 13.58,
+                "fontSize": "14.0pt (18.72px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.58"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h3>Deposits</h3>",
+          "target": [
+            "article:nth-child(1) > h3"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#232830",
+                "contrastRatio": 13.58,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.58"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p>A 50% deposit is required to lock in your bake date. Remaining balances are due at pickup.</p>",
+          "target": [
+            "article:nth-child(1) > p"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#232830",
+                "contrastRatio": 13.58,
+                "fontSize": "14.0pt (18.72px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.58"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h3>Pickup &amp; Delivery</h3>",
+          "target": [
+            "article:nth-child(2) > h3"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#232830",
+                "contrastRatio": 13.58,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.58"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p>Pickups are scheduled from our Caldwell farmhouse. Limited local delivery may be available—include the request on your order form.</p>",
+          "target": [
+            "article:nth-child(2) > p"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#232830",
+                "contrastRatio": 13.58,
+                "fontSize": "14.0pt (18.72px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.58"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h3>Shipping</h3>",
+          "target": [
+            "#shipping-notes > h3"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#232830",
+                "contrastRatio": 13.58,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.58"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p>Only Pecan English Toffee can ship nationwide. We'll calculate shipping costs by ZIP code after you submit your order.</p>",
+          "target": [
+            "#shipping-notes > p"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#232830",
+                "contrastRatio": 13.58,
+                "fontSize": "14.0pt (18.72px)",
+                "fontWeight": "bold",
+                "expectedContrastRatio": "3:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.58"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<h3>Questions?</h3>",
+          "target": [
+            "article:nth-child(4) > h3"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#f5f5f5",
+                "bgColor": "#232830",
+                "contrastRatio": 13.58,
+                "fontSize": "12.0pt (16px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 13.58"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<p>Need dietary tweaks or a custom creation? Use the contact form below and we'll plan something delicious together.</p>",
+          "target": [
+            "article:nth-child(4) > p"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
                 "fgColor": "#a0a0a0",
                 "bgColor": "#1f262f",
                 "contrastRatio": 5.83,
@@ -11794,6 +12644,31 @@
           "html": "<h3>Social</h3>",
           "target": [
             "section:nth-child(4) > h3"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "color-contrast",
+              "data": {
+                "fgColor": "#a0a0a0",
+                "bgColor": "#1a1a23",
+                "contrastRatio": 6.6,
+                "fontSize": "10.2pt (13.6px)",
+                "fontWeight": "normal",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element has sufficient color contrast of 6.6"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<li>© Yellow Farmhouse Treats</li>",
+          "target": [
+            "#copyright > ul > li"
           ]
         }
       ]
@@ -21104,1318 +21979,6 @@
               "data": {
                 "contrastRatio": 0,
                 "fontSize": "12.0pt (16px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<a href=\"index.html\" class=\"logo\">Yellow Farmhouse Treats</a>",
-          "target": [
-            ".logo"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<button class=\"overlay-menu__toggle\" id=\"overlay-menu-open\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-menu\">",
-                  "target": [
-                    "#overlay-menu-open"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<span class=\"overlay-menu__label\">Open site navigator</span>",
-          "target": [
-            ".overlay-menu__label"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "10.2pt (13.6px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<span class=\"overlay-menu__cart-pill\">Cart <span id=\"cart-count\" class=\"cart-count\">0</span></span>",
-                  "target": [
-                    ".overlay-menu__cart-pill"
-                  ]
-                },
-                {
-                  "html": "<button class=\"overlay-menu__toggle\" id=\"overlay-menu-open\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-menu\">",
-                  "target": [
-                    "#overlay-menu-open"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<span class=\"overlay-menu__cart-pill\">Cart <span id=\"cart-count\" class=\"cart-count\">0</span></span>",
-          "target": [
-            ".overlay-menu__cart-pill"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "fgColor": "#ffffff",
-                "bgColor": "#ffd86f",
-                "contrastRatio": 1.37,
-                "fontSize": "9.0pt (12px)",
-                "fontWeight": "bold",
-                "messageKey": "shortTextContent",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<span id=\"cart-count\" class=\"cart-count\">0</span>",
-                  "target": [
-                    "#cart-count"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element content is too short to determine if it is actual text content"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<span id=\"cart-count\" class=\"cart-count\">0</span>",
-          "target": [
-            "#cart-count"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "10.2pt (13.6px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p class=\"eyebrow\">Made from scratch in Caldwell, ID</p>",
-          "target": [
-            "#menu-top > .eyebrow"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "45.0pt (60px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h1>Menu</h1>",
-          "target": [
-            "h1"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p>Every cookie, pie, cake, and loaf is crafted in small batches using farm-fresh ingredients. Browse below or use the floating menu button to jump straight to your favorites.</p>",
-          "target": [
-            "#menu-top > p:nth-child(3)"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<a class=\"button button--ghost\" href=\"order.html\">View Cart</a>",
-          "target": [
-            ".button--ghost"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "10.2pt (13.6px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"cookies\">",
-                  "target": [
-                    "#cookies"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p class=\"eyebrow\">Signature Classics</p>",
-          "target": [
-            "#cookies > .menu-category__header > .eyebrow"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "33.0pt (44px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"cookies\">",
-                  "target": [
-                    "#cookies"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h2>Cookies</h2>",
-          "target": [
-            "#cookies > .menu-category__header > h2"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"cookies\">",
-                  "target": [
-                    "#cookies"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p>Choose from simple family favorites, decadent fancy varieties, or complex stuffed creations.</p>",
-          "target": [
-            "#cookies > .menu-category__header > p:nth-child(3)"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "18.0pt (24px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"cookies\">",
-                  "target": [
-                    "#cookies"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h3>Simple Cookies</h3>",
-          "target": [
-            "#cookies-simple > header > h3"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"cookies\">",
-                  "target": [
-                    "#cookies"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p>Everyday staples that showcase high-quality ingredients.</p>",
-          "target": [
-            "#cookies-simple > header > p"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "18.0pt (24px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"cookies\">",
-                  "target": [
-                    "#cookies"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h3>Complex Cookies</h3>",
-          "target": [
-            "#cookies-complex > header > h3"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"cookies\">",
-                  "target": [
-                    "#cookies"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p>Over-the-top bakes stuffed with candy bars, caramel, and layered fillings.</p>",
-          "target": [
-            "#cookies-complex > header > p"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "10.2pt (13.6px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"cakes\">",
-                  "target": [
-                    "#cakes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p class=\"eyebrow\">Celebration ready</p>",
-          "target": [
-            "#cakes > .menu-category__header > .eyebrow"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "33.0pt (44px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"cakes\">",
-                  "target": [
-                    "#cakes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h2>Cakes &amp; Cupcakes</h2>",
-          "target": [
-            "#cakes > .menu-category__header > h2"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"cakes\">",
-                  "target": [
-                    "#cakes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p>Individual mini cakes and filled cupcakes perfect for showers, birthdays, and pop-up parties.</p>",
-          "target": [
-            "#cakes > .menu-category__header > p:nth-child(3)"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "10.2pt (13.6px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"pies\">",
-                  "target": [
-                    "#pies"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p class=\"eyebrow\">Farmhouse pies &amp; crisps</p>",
-          "target": [
-            "#pies > .menu-category__header > .eyebrow"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "33.0pt (44px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"pies\">",
-                  "target": [
-                    "#pies"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h2>Pies &amp; Crisps</h2>",
-          "target": [
-            "#pies > .menu-category__header > h2"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"pies\">",
-                  "target": [
-                    "#pies"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p>Buttery crusts, seasonal fillings, and warm-spiced crisps made the same day you pick up.</p>",
-          "target": [
-            "#pies > .menu-category__header > p:nth-child(3)"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"pies\">",
-                  "target": [
-                    "#pies"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<strong>$5 deposit required for all pies &amp; crisps.</strong>",
-          "target": [
-            ".category-note > strong"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "10.2pt (13.6px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"breads\">",
-                  "target": [
-                    "#breads"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p class=\"eyebrow\">Morning market favorites</p>",
-          "target": [
-            "#breads > .menu-category__header > .eyebrow"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "33.0pt (44px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"breads\">",
-                  "target": [
-                    "#breads"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h2>Breads &amp; Market Treats</h2>",
-          "target": [
-            "#breads > .menu-category__header > h2"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-category\" id=\"breads\">",
-                  "target": [
-                    "#breads"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p>Perfect for brunch tables, teacher gifts, or stocking the freezer with crowd-pleasers.</p>",
-          "target": [
-            "#breads > .menu-category__header > p:nth-child(3)"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "18.0pt (24px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<section class=\"menu-notes\" id=\"pickup-notes\">",
-                  "target": [
-                    "#pickup-notes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h2>Order Details &amp; Helpful Notes</h2>",
-          "target": [
-            "#pickup-notes > h2"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "14.0pt (18.72px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<article>\n              <h3>Deposits</h3>\n              <p>A 50% deposit is required to lock in your bake date. Remaining balances are due at pickup.</p>\n            </article>",
-                  "target": [
-                    "article:nth-child(1)"
-                  ]
-                },
-                {
-                  "html": "<section class=\"menu-notes\" id=\"pickup-notes\">",
-                  "target": [
-                    "#pickup-notes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h3>Deposits</h3>",
-          "target": [
-            "article:nth-child(1) > h3"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<article>\n              <h3>Deposits</h3>\n              <p>A 50% deposit is required to lock in your bake date. Remaining balances are due at pickup.</p>\n            </article>",
-                  "target": [
-                    "article:nth-child(1)"
-                  ]
-                },
-                {
-                  "html": "<section class=\"menu-notes\" id=\"pickup-notes\">",
-                  "target": [
-                    "#pickup-notes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p>A 50% deposit is required to lock in your bake date. Remaining balances are due at pickup.</p>",
-          "target": [
-            "article:nth-child(1) > p"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "14.0pt (18.72px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<article>\n              <h3>Pickup &amp; Delivery</h3>\n              <p>Pickups are scheduled from our Caldwell farmhouse. Limited local delivery may be available—include the request on your order form.</p>\n            </article>",
-                  "target": [
-                    ".menu-notes__grid > article:nth-child(2)"
-                  ]
-                },
-                {
-                  "html": "<section class=\"menu-notes\" id=\"pickup-notes\">",
-                  "target": [
-                    "#pickup-notes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h3>Pickup &amp; Delivery</h3>",
-          "target": [
-            "article:nth-child(2) > h3"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<article>\n              <h3>Pickup &amp; Delivery</h3>\n              <p>Pickups are scheduled from our Caldwell farmhouse. Limited local delivery may be available—include the request on your order form.</p>\n            </article>",
-                  "target": [
-                    ".menu-notes__grid > article:nth-child(2)"
-                  ]
-                },
-                {
-                  "html": "<section class=\"menu-notes\" id=\"pickup-notes\">",
-                  "target": [
-                    "#pickup-notes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p>Pickups are scheduled from our Caldwell farmhouse. Limited local delivery may be available—include the request on your order form.</p>",
-          "target": [
-            "article:nth-child(2) > p"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "14.0pt (18.72px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<article id=\"shipping-notes\">\n              <h3>Shipping</h3>\n              <p>Only Pecan English Toffee can ship nationwide. We'll calculate shipping costs by ZIP code after you submit your order.</p>\n            </article>",
-                  "target": [
-                    "#shipping-notes"
-                  ]
-                },
-                {
-                  "html": "<section class=\"menu-notes\" id=\"pickup-notes\">",
-                  "target": [
-                    "#pickup-notes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h3>Shipping</h3>",
-          "target": [
-            "#shipping-notes > h3"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<article id=\"shipping-notes\">\n              <h3>Shipping</h3>\n              <p>Only Pecan English Toffee can ship nationwide. We'll calculate shipping costs by ZIP code after you submit your order.</p>\n            </article>",
-                  "target": [
-                    "#shipping-notes"
-                  ]
-                },
-                {
-                  "html": "<section class=\"menu-notes\" id=\"pickup-notes\">",
-                  "target": [
-                    "#pickup-notes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p>Only Pecan English Toffee can ship nationwide. We'll calculate shipping costs by ZIP code after you submit your order.</p>",
-          "target": [
-            "#shipping-notes > p"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "14.0pt (18.72px)",
-                "fontWeight": "bold",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "3:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<article>\n              <h3>Questions?</h3>\n              <p>Need dietary tweaks or a custom creation? Use the contact form below and we'll plan something delicious together.</p>\n            </article>",
-                  "target": [
-                    "article:nth-child(4)"
-                  ]
-                },
-                {
-                  "html": "<section class=\"menu-notes\" id=\"pickup-notes\">",
-                  "target": [
-                    "#pickup-notes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<h3>Questions?</h3>",
-          "target": [
-            "article:nth-child(4) > h3"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<article>\n              <h3>Questions?</h3>\n              <p>Need dietary tweaks or a custom creation? Use the contact form below and we'll plan something delicious together.</p>\n            </article>",
-                  "target": [
-                    "article:nth-child(4)"
-                  ]
-                },
-                {
-                  "html": "<section class=\"menu-notes\" id=\"pickup-notes\">",
-                  "target": [
-                    "#pickup-notes"
-                  ]
-                },
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<p>Need dietary tweaks or a custom creation? Use the contact form below and we'll plan something delicious together.</p>",
-          "target": [
-            "article:nth-child(4) > p"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "12.0pt (16px)",
                 "fontWeight": "normal",
                 "messageKey": "elmPartiallyObscured",
                 "expectedContrastRatio": "4.5:1"
@@ -22440,38 +22003,6 @@
             "#message"
           ],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "10.2pt (13.6px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<div id=\"wrapper\">",
-                  "target": [
-                    "#wrapper"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<li>© Yellow Farmhouse Treats</li>",
-          "target": [
-            "#copyright > ul > li"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         }
       ]
     }

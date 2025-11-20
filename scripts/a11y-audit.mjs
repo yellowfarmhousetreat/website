@@ -11,7 +11,12 @@ const SERVER_URL = `http://${SERVER_HOST}:${SERVER_PORT}`;
 const TARGET_PAGES = [
   { id: 'home', label: 'Home', url: 'index.html' },
   { id: 'menu', label: 'Menu', url: 'menu.html' },
-  { id: 'order', label: 'Order', url: 'order.html' }
+  { id: 'order', label: 'Order', url: 'order.html' },
+  { id: 'cookies', label: 'Cookies', url: 'cookies.html' },
+  { id: 'cakes', label: 'Cakes', url: 'cakes.html' },
+  { id: 'pies', label: 'Pies', url: 'pies.html' },
+  { id: 'breads', label: 'Breads', url: 'breads.html' },
+  { id: 'cart', label: 'Cart', url: 'cart.html' }
 ];
 
 const waitForServer = async (probeUrl, attempts = 25, intervalMs = 400) => {

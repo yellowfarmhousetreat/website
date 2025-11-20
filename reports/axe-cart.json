@@ -1,5 +1,5 @@
 {
-  "targetUrl": "http://127.0.0.1:4173/index.html",
+  "targetUrl": "http://127.0.0.1:4173/cart.html",
   "testEngine": {
     "name": "axe-core",
     "version": "4.11.0"
@@ -14,8 +14,8 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2025-11-20T01:32:00.625Z",
-  "url": "http://127.0.0.1:4173/index.html",
+  "timestamp": "2025-11-20T01:32:06.744Z",
+  "url": "http://127.0.0.1:4173/cart.html",
   "toolOptions": {
     "runOnly": {
       "type": "tag",
