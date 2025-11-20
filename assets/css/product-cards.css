@@ -125,6 +125,11 @@
   );
 }
 
+/* When flipped, lower the z-index of the front so the back can be seen */
+.product-card.flipped .product-card-front {
+  z-index: 0;
+}
+
 /* Corner punch-hole decorations */
 .product-card-front::before,
 .product-card-front::after {
@@ -457,6 +462,11 @@
   color: #000;
   opacity: 1 !important;
   z-index: 1;
+}
+
+/* When flipped, raise the z-index of the back */
+.product-card.flipped .product-card-back {
+  z-index: 3;
 }
 
 .back-content {
