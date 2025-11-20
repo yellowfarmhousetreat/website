@@ -74,8 +74,7 @@ class AdminInterface {
   }
 
   init() {
-window.adminInterface = null;
-let adminInterface;
+// ...existing code...
     this.setupEventListeners();
     this.checkAuthentication();
     // Load products after authentication check
@@ -568,10 +567,10 @@ let adminInterface;
               ${product.shippingEligible ? `
                 <div class="shipping-details" style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 8px;">
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px;">
-                    </div>
-                  `;
-                }
-                renderOrderPauseToggle() {
+                    <div>
+                      <label style="font-size: 0.85rem; margin-bottom: 3px; display: block;">Base Shipping Cost:</label>
+                      <div style="display: flex; align-items: center; gap: 3px;">
+                        <span>$</span>
                         <input type="number" step="0.01" value="${product.baseShippingCost || 5}" style="width: 60px;" onchange="adminInterface.updateProduct(${index}, 'baseShippingCost', parseFloat(this.value))">
                       </div>
                     </div>
@@ -623,8 +622,7 @@ let adminInterface;
       }
     }
 
-  // Update allergen data
-  updateAllergen(index, allergen, isChecked) {
+    updateAllergen(index, allergen, isChecked) {
     if (index >= 0 && index < this.products.length) {
       if (!this.products[index].allergens) {
         this.products[index].allergens = [];
@@ -642,8 +640,7 @@ let adminInterface;
     }
   }
 
-  // Add new product
-  addNewProduct() {
+    addNewProduct() {
     const newProduct = {
       id: `new-product-${Date.now()}`,
       name: 'New Product',
@@ -664,7 +661,7 @@ let adminInterface;
   }
 
   // Save individual product
-  saveIndividualProduct(index) {
+    saveIndividualProduct(index) {
     if (index < 0 || index >= this.products.length) {
       this.showMessage('Product not found', 'error');
       return;
@@ -700,7 +697,7 @@ let adminInterface;
   }
 
   // Delete product
-  deleteProduct(index) {
+    deleteProduct(index) {
     if (confirm('Are you sure you want to delete this product?')) {
       const productName = this.products[index].name;
       this.products.splice(index, 1);
@@ -710,7 +707,7 @@ let adminInterface;
   }
 
   // Generate updated products-data.json content
-  generateProductsJson() {
+    generateProductsJson() {
     const exportProducts = this.products.map(product => this.convertFromAdminFormat(product));
 
     const payload = {
@@ -730,7 +727,7 @@ let adminInterface;
   }
 
   // Convert admin format back to complex format for export
-  convertFromAdminFormat(product) {
+    convertFromAdminFormat(product) {
     // Generate sizes array based on unit and price
     let sizes = [];
     if (product.originalSizes && product.originalSizes.length > 0) {
@@ -777,7 +774,7 @@ let adminInterface;
   }
 
   // Generate default sizes for a product
-  generateDefaultSizes(product) {
+    generateDefaultSizes(product) {
     const basePrice = product.price || 20;
     
     switch (product.category) {
@@ -796,7 +793,7 @@ let adminInterface;
   }
 
   // Generate individual product JavaScript file
-  generateIndividualProductJS(product, index) {
+    generateIndividualProductJS(product, index) {
     return `/**
  * INDIVIDUAL PRODUCT UPDATE
  * Product: ${product.name}
@@ -825,7 +822,7 @@ TO UPDATE YOUR MAIN FILE:
   }
 
   // Download photo file for individual product
-  downloadPhotoFile(photoData, productIndex) {
+    downloadPhotoFile(photoData, productIndex) {
     if (!photoData || !photoData.dataUrl) return;
     
     // Convert data URL to blob and download
@@ -847,7 +844,7 @@ TO UPDATE YOUR MAIN FILE:
   }
 
   // Save changes (download new file)
-  saveChanges() {
+    saveChanges() {
     const updatedJson = this.generateProductsJson();
     
     const blob = new Blob([updatedJson], { type: 'application/json' });
@@ -865,7 +862,7 @@ TO UPDATE YOUR MAIN FILE:
   }
 
   // Export data as JSON
-  exportData() {
+    exportData() {
     const dataJSON = JSON.stringify({
       products: this.products,
       exportDate: new Date().toISOString(),
@@ -888,7 +885,7 @@ TO UPDATE YOUR MAIN FILE:
 
   // Photo Management Methods
   
-  triggerPhotoUpload(index) {
+    triggerPhotoUpload(index) {
     document.getElementById(`photo-input-${index}`).click();
   }
   
