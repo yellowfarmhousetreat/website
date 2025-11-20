@@ -1,7 +1,21 @@
 {
-  "schemaVersion": "yellowfarmhouse.products.v1",
-  "version": "2025-11-19T22:26:55.743Z",
-  "generatedBy": "automation",
+  "schemaVersion": "yellowfarmhouse.products.v2",
+  "version": "2025-11-20T02:15:00.000Z",
+  "generatedBy": "automated-migration",
+  "metadata": {
+    "imageBasePath": "/images/products/",
+    "thumbnailSuffix": "_thumb",
+    "imageFormats": [
+      "jpg",
+      "webp"
+    ],
+    "lastUpdated": "2025-11-20T02:15:00.000Z"
+  },
+  "dietaryPricing": {
+    "glutenFree": 3,
+    "sugarFree": 3,
+    "vegan": 2
+  },
   "products": [
     {
       "id": "chocolate-chip-cookies",
@@ -9,15 +23,24 @@
       "tier": "Regular",
       "category": "cookies",
       "description": "Classic cookies loaded with chocolate chips. Soft and chewy.",
-      "image": "images/cookies-chocolate-chip.jpg",
+      "images": {
+        "primary": "cookies-chocolate-chip.jpg",
+        "gallery": [
+          "cookies-chocolate-chip.jpg"
+        ],
+        "thumbnail": "cookies-chocolate-chip_thumb.jpg",
+        "alt": "Chocolate Chip Cookies - freshly baked"
+      },
       "sizes": [
         {
           "name": "1/2 dozen",
-          "price": 12
+          "price": 12,
+          "sku": "CHO-1/"
         },
         {
           "name": "dozen",
-          "price": 20
+          "price": 20,
+          "sku": "CHO-DO"
         }
       ],
       "dietary": {
@@ -25,8 +48,73 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Semi-Sweet Chocolate Chips (Sugar, Chocolate, Cocoa Butter, Milk Fat, Soy Lecithin, Natural Vanilla Extract)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs",
+          "Soy"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "cookies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Semi-Sweet Chocolate Chips (Sugar, Chocolate, Cocoa Butter, Milk Fat, Soy Lecithin, Natural Vanilla Extract)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Semi-Sweet Chocolate Chips (Sugar, Chocolate, Cocoa Butter, Milk Fat, Soy Lecithin, Natural Vanilla Extract)",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs",
+            "Soy"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "peanut-butter-cookies",
@@ -34,15 +122,24 @@
       "tier": "Regular",
       "category": "cookies",
       "description": "Rich peanut butter flavor, soft and crumbly. A classic favorite.",
-      "image": "images/cookies-peanut-butter.jpg",
+      "images": {
+        "primary": "cookies-peanut-butter.jpg",
+        "gallery": [
+          "cookies-peanut-butter.jpg"
+        ],
+        "thumbnail": "cookies-peanut-butter_thumb.jpg",
+        "alt": "Peanut Butter Cookies - freshly baked"
+      },
       "sizes": [
         {
           "name": "1/2 dozen",
-          "price": 12
+          "price": 12,
+          "sku": "PEA-1/"
         },
         {
           "name": "dozen",
-          "price": 20
+          "price": 20,
+          "sku": "PEA-DO"
         }
       ],
       "dietary": {
@@ -50,8 +147,73 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Peanut Butter (Peanuts, Salt)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs",
+          "Peanuts"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "cookies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Peanut Butter (Peanuts, Salt)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Peanut Butter (Peanuts, Salt)",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs",
+            "Peanuts"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "sugar-cookies",
@@ -59,15 +221,24 @@
       "tier": "Regular",
       "category": "cookies",
       "description": "Sweet, buttery cookies with a soft texture. Perfect for any occasion.",
-      "image": "images/cookies-sugar.jpg",
+      "images": {
+        "primary": "cookies-sugar.jpg",
+        "gallery": [
+          "cookies-sugar.jpg"
+        ],
+        "thumbnail": "cookies-sugar_thumb.jpg",
+        "alt": "Sugar Cookies - freshly baked"
+      },
       "sizes": [
         {
           "name": "1/2 dozen",
-          "price": 12
+          "price": 12,
+          "sku": "SUG-1/"
         },
         {
           "name": "dozen",
-          "price": 20
+          "price": 20,
+          "sku": "SUG-DO"
         }
       ],
       "dietary": {
@@ -75,8 +246,68 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "cookies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "oatmeal-raisin-cookies",
@@ -84,15 +315,24 @@
       "tier": "Regular",
       "category": "cookies",
       "description": "Hearty oatmeal cookies with plump raisins. Chewy and satisfying.",
-      "image": "images/cookies-oatmeal-raisin.jpg",
+      "images": {
+        "primary": "cookies-oatmeal-raisin.jpg",
+        "gallery": [
+          "cookies-oatmeal-raisin.jpg"
+        ],
+        "thumbnail": "cookies-oatmeal-raisin_thumb.jpg",
+        "alt": "Oatmeal Raisin Cookies - freshly baked"
+      },
       "sizes": [
         {
           "name": "1/2 dozen",
-          "price": 12
+          "price": 12,
+          "sku": "OAT-1/"
         },
         {
           "name": "dozen",
-          "price": 20
+          "price": 20,
+          "sku": "OAT-DO"
         }
       ],
       "dietary": {
@@ -100,8 +340,71 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Rolled Oats",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "cookies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Rolled Oats",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Rolled Oats",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "mint-fudge-cookies",
@@ -109,15 +412,24 @@
       "tier": "Fancy",
       "category": "cookies",
       "description": "Rich mint and fudge combination. Decadent and elegant.",
-      "image": "images/cookies-mint-fudge.jpg",
+      "images": {
+        "primary": "cookies-mint-fudge.jpg",
+        "gallery": [
+          "cookies-mint-fudge.jpg"
+        ],
+        "thumbnail": "cookies-mint-fudge_thumb.jpg",
+        "alt": "Mint Fudge Cookies - freshly baked"
+      },
       "sizes": [
         {
           "name": "1/2 dozen",
-          "price": 15
+          "price": 15,
+          "sku": "MIN-1/"
         },
         {
           "name": "dozen",
-          "price": 26
+          "price": 26,
+          "sku": "MIN-DO"
         }
       ],
       "dietary": {
@@ -125,8 +437,68 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "cookies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "salted-caramel-swirl-cookies",
@@ -134,15 +506,24 @@
       "tier": "Fancy",
       "category": "cookies",
       "description": "Buttery cookies with sweet and salty caramel swirl.",
-      "image": "images/cookies-salted-caramel.jpg",
+      "images": {
+        "primary": "cookies-salted-caramel.jpg",
+        "gallery": [
+          "cookies-salted-caramel.jpg"
+        ],
+        "thumbnail": "cookies-salted-caramel_thumb.jpg",
+        "alt": "Salted Caramel Swirl Cookies - freshly baked"
+      },
       "sizes": [
         {
           "name": "1/2 dozen",
-          "price": 15
+          "price": 15,
+          "sku": "SAL-1/"
         },
         {
           "name": "dozen",
-          "price": 26
+          "price": 26,
+          "sku": "SAL-DO"
         }
       ],
       "dietary": {
@@ -150,8 +531,68 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "cookies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "strawberry-bliss-cookies",
@@ -159,15 +600,24 @@
       "tier": "Fancy",
       "category": "cookies",
       "description": "Fresh strawberry filling with white chocolate chunks.",
-      "image": "images/cookies-strawberry-bliss.jpg",
+      "images": {
+        "primary": "cookies-strawberry-bliss.jpg",
+        "gallery": [
+          "cookies-strawberry-bliss.jpg"
+        ],
+        "thumbnail": "cookies-strawberry-bliss_thumb.jpg",
+        "alt": "Strawberry Bliss Cookies - freshly baked"
+      },
       "sizes": [
         {
           "name": "1/2 dozen",
-          "price": 15
+          "price": 15,
+          "sku": "STR-1/"
         },
         {
           "name": "dozen",
-          "price": 26
+          "price": 26,
+          "sku": "STR-DO"
         }
       ],
       "dietary": {
@@ -175,8 +625,68 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "cookies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "matcha-cheesecake-cookies",
@@ -184,15 +694,24 @@
       "tier": "Complex",
       "category": "cookies",
       "description": "Sophisticated matcha with creamy cheesecake center.",
-      "image": "images/cookies-matcha-cheesecake.jpg",
+      "images": {
+        "primary": "cookies-matcha-cheesecake.jpg",
+        "gallery": [
+          "cookies-matcha-cheesecake.jpg"
+        ],
+        "thumbnail": "cookies-matcha-cheesecake_thumb.jpg",
+        "alt": "Matcha Cheesecake Cookies - freshly baked"
+      },
       "sizes": [
         {
           "name": "1/2 dozen",
-          "price": 18
+          "price": 18,
+          "sku": "MAT-1/"
         },
         {
           "name": "dozen",
-          "price": 32
+          "price": 32,
+          "sku": "MAT-DO"
         }
       ],
       "dietary": {
@@ -200,8 +719,68 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "cookies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "lavender-blueberry-cookies",
@@ -209,15 +788,24 @@
       "tier": "Complex",
       "category": "cookies",
       "description": "Delicate lavender with tart blueberries.",
-      "image": "images/cookies-lavender-blueberry.jpg",
+      "images": {
+        "primary": "cookies-lavender-blueberry.jpg",
+        "gallery": [
+          "cookies-lavender-blueberry.jpg"
+        ],
+        "thumbnail": "cookies-lavender-blueberry_thumb.jpg",
+        "alt": "Lavender Blueberry Cookies - freshly baked"
+      },
       "sizes": [
         {
           "name": "1/2 dozen",
-          "price": 18
+          "price": 18,
+          "sku": "LAV-1/"
         },
         {
           "name": "dozen",
-          "price": 32
+          "price": 32,
+          "sku": "LAV-DO"
         }
       ],
       "dietary": {
@@ -225,8 +813,68 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "cookies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "triple-layer-cookies",
@@ -234,15 +882,24 @@
       "tier": "Complex",
       "category": "cookies",
       "description": "Three distinct layers of flavor and texture.",
-      "image": "images/cookies-triple-layer.jpg",
+      "images": {
+        "primary": "cookies-triple-layer.jpg",
+        "gallery": [
+          "cookies-triple-layer.jpg"
+        ],
+        "thumbnail": "cookies-triple-layer_thumb.jpg",
+        "alt": "Triple Layer Cookies - freshly baked"
+      },
       "sizes": [
         {
           "name": "1/2 dozen",
-          "price": 18
+          "price": 18,
+          "sku": "TRI-1/"
         },
         {
           "name": "dozen",
-          "price": 32
+          "price": 32,
+          "sku": "TRI-DO"
         }
       ],
       "dietary": {
@@ -250,23 +907,93 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "cookies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "pecan-english-toffee",
       "name": "Pecan English Toffee",
+      "tier": "Regular",
       "category": "cookies",
       "description": "Buttery toffee with crunchy pecans, covered in rich chocolate.",
-      "image": "images/toffee-pecan.jpg",
+      "images": {
+        "primary": "toffee-pecan.jpg",
+        "gallery": [
+          "toffee-pecan.jpg"
+        ],
+        "thumbnail": "toffee-pecan_thumb.jpg",
+        "alt": "Pecan English Toffee - freshly baked"
+      },
       "sizes": [
         {
           "name": "1/2 lb",
-          "price": 15
+          "price": 15,
+          "sku": "PEC-1/"
         },
         {
           "name": "1 lb",
-          "price": 28
+          "price": 28,
+          "sku": "PEC-1 "
         }
       ],
       "dietary": {
@@ -274,19 +1001,79 @@
         "sugarFree": false,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": true,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "cookies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "apple-pie",
       "name": "Apple Pie",
+      "tier": "Regular",
       "category": "pies",
       "description": "Classic apple pie with a flaky crust and cinnamon apples.",
-      "image": "images/pie-apple.jpg",
+      "images": {
+        "primary": "pie-apple.jpg",
+        "gallery": [
+          "pie-apple.jpg"
+        ],
+        "thumbnail": "pie-apple_thumb.jpg",
+        "alt": "Apple Pie - freshly baked"
+      },
       "sizes": [
         {
           "name": "9 inch pie",
-          "price": 25
+          "price": 25,
+          "sku": "APP-9 "
         }
       ],
       "dietary": {
@@ -294,19 +1081,88 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "pies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "pumpkin-pie",
       "name": "Pumpkin Pie",
+      "tier": "Regular",
       "category": "pies",
       "description": "Spiced pumpkin filling in a buttery crust. A holiday favorite.",
-      "image": "images/pie-pumpkin.jpg",
+      "images": {
+        "primary": "pie-pumpkin.jpg",
+        "gallery": [
+          "pie-pumpkin.jpg"
+        ],
+        "thumbnail": "pie-pumpkin_thumb.jpg",
+        "alt": "Pumpkin Pie - freshly baked"
+      },
       "sizes": [
         {
           "name": "9 inch pie",
-          "price": 25
+          "price": 25,
+          "sku": "PUM-9 "
         }
       ],
       "dietary": {
@@ -314,19 +1170,103 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Pumpkin Puree",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt",
+        "Cinnamon",
+        "Nutmeg",
+        "Ginger",
+        "Cloves"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "pies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Pumpkin Puree",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt",
+          "Cinnamon",
+          "Nutmeg",
+          "Ginger",
+          "Cloves"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Pumpkin Puree",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt",
+          "Cinnamon",
+          "Nutmeg",
+          "Ginger",
+          "Cloves"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "peach-pie",
       "name": "Peach Pie",
+      "tier": "Regular",
       "category": "pies",
       "description": "Sweet peaches baked in a golden crust.",
-      "image": "images/pie-peach.jpg",
+      "images": {
+        "primary": "pie-peach.jpg",
+        "gallery": [
+          "pie-peach.jpg"
+        ],
+        "thumbnail": "pie-peach_thumb.jpg",
+        "alt": "Peach Pie - freshly baked"
+      },
       "sizes": [
         {
           "name": "9 inch pie",
-          "price": 25
+          "price": 25,
+          "sku": "PEA-9 "
         }
       ],
       "dietary": {
@@ -334,19 +1274,88 @@
         "sugarFree": true,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "pies"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ],
+        "sugarFree": [
+          "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+          "Butter (Cream, Salt)",
+          "Erythritol",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     },
     {
       "id": "milk-bread",
       "name": "Milk Bread",
+      "tier": "Regular",
       "category": "breads",
       "description": "Soft, fluffy bread made with fresh milk. Perfect for sandwiches.",
-      "image": "images/bread-milk.jpg",
+      "images": {
+        "primary": "bread-milk.jpg",
+        "gallery": [
+          "bread-milk.jpg"
+        ],
+        "thumbnail": "bread-milk_thumb.jpg",
+        "alt": "Milk Bread - freshly baked"
+      },
       "sizes": [
         {
           "name": "loaf",
-          "price": 12
+          "price": 12,
+          "sku": "MIL-LO"
         }
       ],
       "dietary": {
@@ -354,45 +1363,61 @@
         "sugarFree": false,
         "vegan": false
       },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Butter (Cream, Salt)",
+        "Granulated Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt",
+        "Yeast"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts",
+          "Soy"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
       "shippable": false,
-      "soldOut": false
+      "soldOut": false,
+      "featured": false,
+      "tags": [
+        "breads"
+      ],
+      "variantIngredients": {
+        "glutenFree": [
+          "Gluten-Free Flour Blend (Rice Flour, Tapioca Starch, Potato Starch, Xanthan Gum)",
+          "Butter (Cream, Salt)",
+          "Granulated Sugar",
+          "Eggs",
+          "Vanilla Extract",
+          "Baking Powder",
+          "Salt",
+          "Yeast"
+        ]
+      },
+      "variantAllergens": {
+        "glutenFree": {
+          "contains": [
+            "Milk",
+            "Eggs"
+          ],
+          "mayContain": [
+            "Tree Nuts",
+            "Peanuts",
+            "Soy"
+          ],
+          "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+        }
+      }
     }
-  ],
-  "dietaryPricing": {
-    "glutenFree": 3,
-    "sugarFree": 3,
-    "vegan": 2
-  },
-  "paymentMethods": {
-    "cash": {
-      "name": "Cash",
-      "instructions": "Payment due at pickup"
-    },
-    "cashapp": {
-      "name": "Cash App",
-      "instructions": "Send payment to $YellowFarmhouse"
-    },
-    "venmo": {
-      "name": "Venmo",
-      "instructions": "Send payment to @YellowFarmhouse"
-    },
-    "paypal": {
-      "name": "PayPal",
-      "instructions": "Send payment to yellowfarmhouse@email.com"
-    },
-    "zelle": {
-      "name": "Zelle",
-      "instructions": "Send payment to (555) 123-4567"
-    }
-  },
-  "shippingZones": {
-    "12345": 5,
-    "12346": 5,
-    "12347": 7.5,
-    "12348": 7.5,
-    "12349": 10
-  },
-  "metadata": {
-    "notes": "Auto-generated catalog exported from cookiewagon admin"
-  }
+  ]
 }
