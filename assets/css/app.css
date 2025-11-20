@@ -1486,203 +1486,396 @@ btn-secondary:hover,
     padding: 1.5rem;
   }
 }
-/* ===========================
-   FLIP CARD STYLES
+/* =========================== 
+   RECIPE CARD / TAROT STYLE 
    =========================== */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  padding: 1rem;
+}
 
 .product-card {
-    perspective: 1000px;
-    height: 100%;
-    min-height: 450px;
+  perspective: 1500px;
+  height: 600px; /* Tall tarot/recipe card proportions */
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.product-card__inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
+.product-card:hover {
+  transform: translateY(-8px);
 }
 
-.product-card:hover .product-card__inner {
-    transform: rotateY(180deg);
+.product-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transform-style: preserve-3d;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.product-card__front,
-.product-card__back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    border-radius: 8px;
-    background: var(--color-surface, #212931);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-soft);
+.product-card.flipped .product-card-inner {
+  transform: rotateY(180deg);
 }
 
-.product-card__front {
-    display: flex;
-    flex-direction: column;
+.product-card-front,
+.product-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-.product-card__back {
-    transform: rotateY(180deg);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow-y: auto;
+/* FRONT - Recipe Card Style */
+.product-card-front {
+  background: linear-gradient(135deg, #fdfbf7 0%, #f5f3ed 100%);
+  border: 2px solid #8b7355;
+  box-shadow: 
+    inset 0 0 0 1px rgba(139, 115, 85, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  
+  /* Subtle lined paper texture */
+  background-image: 
+    repeating-linear-gradient(
+      transparent,
+      transparent 28px,
+      rgba(139, 115, 85, 0.08) 28px,
+      rgba(139, 115, 85, 0.08) 29px
+    );
 }
 
-.product-card__back h5 {
-    margin-bottom: 1rem;
-    color: var(--color-accent, #ffd86f);
-    font-size: 1.1rem;
+/* Corner decoration - recipe card punch holes */
+.product-card-front::before,
+.product-card-front::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #d4c4b0 40%, #8b7355 100%);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  z-index: 5;
 }
 
-.product-card__back ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1rem 0;
+.product-card-front::before {
+  top: 16px;
+  left: 16px;
 }
 
-.product-card__back li {
-    padding: 0.25rem 0;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
+.product-card-front::after {
+  top: 16px;
+  right: 16px;
 }
 
-.product-card__back .allergens {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.85rem;
-    color: var(--color-danger, #e74c3c);
+/* Product image - polaroid style */
+.product-card img {
+  width: calc(100% - 32px);
+  height: 240px;
+  object-fit: cover;
+  margin: 48px 16px 16px;
+  border: 3px solid #fff;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  filter: saturate(1.1) contrast(1.05);
 }
 
-/* Make sure product image doesn't overflow */
-.product-img {
-    width: 100%;
+.product-card-front__body {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.product-card-front__body h4 {
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #3d2f24;
+  text-align: center;
+  letter-spacing: 0.02em;
+  margin: 0;
+  text-transform: uppercase;
+  border-bottom: 2px solid #8b7355;
+  padding-bottom: 8px;
+}
+
+.product-card-front__body p {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4a3f35;
+  margin: 0;
+  font-style: italic;
+}
+
+.product-card-front__body .badge {
+  display: inline-block;
+  background: #8b7355;
+  color: #fdfbf7;
+  padding: 4px 12px;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+}
+
+/* Price and options section */
+.product-details {
+  margin-top: auto;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #d4c4b0;
+  border-radius: 3px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-details .quantity-selector {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.product-details .quantity-selector label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3d2f24;
+  cursor: pointer;
+}
+
+.product-details input[type='radio'] {
+  accent-color: #8b7355;
+  width: 18px;
+  height: 18px;
+}
+
+.qty-input {
+  width: 80px;
+  padding: 8px;
+  border: 2px solid #8b7355;
+  background: #fff;
+  color: #3d2f24;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.product-details button {
+  background: #8b7355;
+  color: #fdfbf7;
+  border: none;
+  padding: 12px 16px;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.product-details button:hover {
+  background: #6f5a44;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Flip trigger corner indicator */
+.info-toggle {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  background: rgba(139, 115, 85, 0.9);
+  border: 2px solid #fdfbf7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fdfbf7;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.info-toggle:hover {
+  transform: scale(1.15);
+  background: #6f5a44;
+}
+
+/* BACK - Ingredients Label Style */
+.product-card-back {
+  transform: rotateY(180deg);
+  background: #ffffff;
+  border: 3px solid #000;
+  padding: 20px;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
+  color: #000;
+}
+
+.info-label {
+  border: 3px solid #000;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: #fff;
+}
+
+.label-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px 0;
+  line-height: 1;
+}
+
+.product-name-back {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 8px solid #000;
+}
+
+.info-section {
+  margin-bottom: 16px;
+  border: 2px solid #000;
+  padding: 12px;
+  background: #fafafa;
+}
+
+.section-header {
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px 0;
+}
+
+.thick-divider {
+  border-top: 5px solid #000;
+  margin-bottom: 8px;
+}
+
+.ingredient-list {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+  color: #333;
+}
+
+.allergen-statement {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 12px 0;
+}
+
+.allergen-statement strong {
+  font-weight: 900;
+  color: #000;
+}
+
+.facility-warning {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 3px;
+  padding: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #856404;
+  margin: 0;
+}
+
+.close-info {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #000;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.close-info:hover {
+  background: #333;
+  transform: scale(1.1);
+}
+
+.legal-footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #999;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  color: #666;
+  font-style: italic;
+}
+
+.legal-footer p {
+  margin: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .product-card {
+    height: 550px;
+  }
+  
+  .product-card img {
     height: 200px;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 1rem;
+  }
+  
+  .label-title {
+    font-size: 1.6rem;
+  }
 }
 
-/* ===========================
-   FDA DISCLAIMER CARD
-   =========================== */
-
-.fda-disclaimer {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    border: 2px solid var(--color-accent, #ffd86f);
-    border-radius: 8px;
-    padding: 2rem;
-    margin: 2rem 0;
-    box-shadow: var(--shadow-soft);
-}
-
-.fda-disclaimer h3 {
-    color: var(--color-accent, #ffd86f);
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.fda-disclaimer p {
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 0.5rem;
-}
-
-.fda-disclaimer small {
-    display: block;
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
-    font-style: italic;
-}
-
-/* ===========================
-   FLIP CARD STYLES
-   =========================== */
-
-.product-card {
-    perspective: 1000px;
-    height: 100%;
-    min-height: 450px;
-}
-
-.product-card__inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-}
-
-.product-card:hover .product-card__inner {
-    transform: rotateY(180deg);
-}
-
-.product-card__front,
-.product-card__back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    border-radius: 8px;
-    background: var(--color-surface, #212931);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-soft);
-}
-
-.product-card__front {
-    display: flex;
-    flex-direction: column;
-}
-
-.product-card__back {
-    transform: rotateY(180deg);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow-y: auto;
-}
-
-.product-card__back h5 {
-    margin-bottom: 1rem;
-    color: var(--color-accent, #ffd86f);
-    font-size: 1.1rem;
-}
-
-.product-card__back ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1rem 0;
-}
-
-.product-card__back li {
-    padding: 0.25rem 0;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.product-card__back .allergens {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.85rem;
-    color: var(--color-danger, #e74c3c);
-}
-
-/* Make sure product image doesn't overflow */
-.product-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 1rem;
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .product-card {
+    height: 580px;
+  }
 }

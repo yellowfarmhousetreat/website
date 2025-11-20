@@ -6,9 +6,9 @@ This is a static HTML/CSS/JS website for the Yellow Farmhouse Treats, The main u
 
 ## Key Files & Structure
 
-- **HTML Pages:** `index.html`, `cart.html`, `order.html`, `menu.html`, 'cookies.html', 'pies.html', 'cakes.html', 'breads.html', 'candy.html'  
+- **HTML Pages:** `index.html`, `cart.html`, `order.html`, `menu.html`, 'cookies.html', 'pies.html', 'cakes.html', 'breads.html', 'candy.html'
 - **Order Form Logic:** Embedded in `reference_document.md` (used for new template and order flow)
-- **Assets:** 
+- **Assets:**
   - CSS: `assets/css/app.css` (global custom styles) and `assets/css/fontawesome-all.min.css` for icons
   - JS: `assets/js/main.js` (template logic), `reference_document.md` (order form logic)
   - SASS: `assets/sass/` (organized by base, components, layout, libs)
@@ -20,7 +20,7 @@ This is a static HTML/CSS/JS website for the Yellow Farmhouse Treats, The main u
 ## Architecture & Data Flow
 
 - **Single-page, static architecture:** No backend, all logic is client-side.
-- **Order Form:** 
+- **Order Form:**
   - Multi-step, dynamic product selection (menu items, sizes, flavors, dietary options)
   - Cart management and summary
   - Fulfillment options (pickup, shipping for specific items)
