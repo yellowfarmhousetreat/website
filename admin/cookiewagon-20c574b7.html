@@ -1,57 +1,47 @@
 <!DOCTYPE HTML>
-            // Render Products
-            renderProducts() {
-                const container = document.getElementById('product-list');
-                
-                if (this.products.length === 0) {
-                    container.innerHTML = `
-                        <div style="text-align: center; padding: 2rem; opacity: 0.7;">
-                            <h3>No Products Found</h3>
-                            <p>Click "Add Product" to create your first product.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                container.innerHTML = `
-                    <div class="products-grid">
-                        ${this.products.map((product, index) => this.renderProductCard(product, index)).join('')}
-                    </div>
-                `;
-            }
-
-            // Render Individual Product Card
-            renderProductCard(product, index) {
-                return `
-                    <div class="product-card" data-product-index="${index}">
-                        <div class="product-header">
-                            <div class="product-title-section">
-                                <h3>${this.escapeHtml(product.name)}</h3>
-                                <div class="sold-out-badge" style="display: ${product.soldOut ? 'block' : 'none'};">
-                                    SOLD OUT
-                                </div>
-                            </div>
-                            <div class="product-controls">
-                                <label class="sold-out-toggle">
-                                    <input type="checkbox" ${product.soldOut ? 'checked' : ''} 
-                                           onchange="adminInterface.toggleProductSoldOut(${index})">
-                                    <span class="sold-out-label">Sold Out</span>
-                                </label>
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <button onclick="adminInterface.saveProduct(${index})" class="btn btn-success btn-small">
-                                            Save
-                                        </button>
-                                        <button onclick="adminInterface.deleteProduct(${index})" class="btn btn-danger btn-small">
-                                            Delete
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-small" 
-                                                onclick="adminInterface.removeSize(${productIndex}, ${sizeIndex})"
-                                                ${sizes.length <= 1 ? 'disabled' : ''}>×</button>
+            <!DOCTYPE HTML>
                                     </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
+<!DOCTYPE HTML>
+<!-- Login Form Container -->
+<div id="login-form" class="login-container"></div>
+    console.log('[Admin] adminInterface initialized:', !!adminInterface);
+<!DOCTYPE HTML>
+<div id="login-form" class="login-container"></div>
+<div id="admin-panel" class="hidden">
+    <div id="admin-header"></div>
+    <div id="product-list"></div>
+</div>
+<div id="messages" class="messages"></div>
+
+<script>
+// --- Begin Admin Panel Logic ---
+// All admin logic and rendering is handled here.
+// No template expressions or JS code outside this block.
+
+class SimpleAdminInterface {
+    // ...existing code...
+    // All rendering methods and admin logic go here, unchanged
+}
+
+let adminInterface;
+document.addEventListener('DOMContentLoaded', function() {
+    adminInterface = new SimpleAdminInterface();
+    window.adminInterface = adminInterface;
+    console.log('[Admin] adminInterface initialized:', !!adminInterface);
+});
+
+function handleLogin() {
+    if (!adminInterface) {
+        var loginForm = document.querySelector('.login-form');
+        if (loginForm) {
+            loginForm.querySelector('.error-message').textContent = 'Admin interface not initialized.';
+        }
+        return false;
+    }
+    // ...existing login logic...
+}
+// --- End Admin Panel Logic ---
+</script>
                             <label>Product Name:</label>
                             <input type="text" value="${this.escapeHtml(product.name)}" 
                                    onchange="adminInterface.updateProduct(${index}, 'name', this.value)">

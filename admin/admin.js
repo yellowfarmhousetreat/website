@@ -73,6 +73,101 @@ class AdminInterface {
     this.init();
   }
 
+  // --- Site-wide state persistence using window.siteConfig ---
+  saveAdminState() {
+    try {
+      if (window.siteConfig) {
+        window.siteConfig.pauseOrders(this.pauseOrders);
+        this.products.forEach(product => {
+          window.siteConfig.setSoldOut(product.id, product.soldOut || false);
+        });
+        this.showMessage('✅ Admin state saved site-wide', 'success');
+        console.log('Admin state saved via siteConfig system');
+      } else {
+        throw new Error('siteConfig system not available');
+      }
+    } catch (error) {
+      this.showMessage('❌ Failed to save admin state', 'error');
+      console.error('Site config save error:', error);
+    }
+  }
+
+  loadAdminState() {
+    try {
+      if (window.siteConfig) {
+        const config = window.siteConfig.get();
+        this.pauseOrders = config.ordersPaused;
+        this.products.forEach(product => {
+          if (config.soldOutProducts && config.soldOutProducts.includes(product.id)) {
+            product.soldOut = true;
+          }
+        });
+        if (config.lastUpdated) {
+          const savedDate = new Date(config.lastUpdated).toLocaleString();
+          this.showMessage(`📋 Admin state loaded (last updated: ${savedDate})`, 'info');
+        }
+        console.log('Admin state loaded via siteConfig system', config);
+      } else {
+        console.warn('siteConfig system not available - using defaults');
+      }
+    } catch (error) {
+      this.showMessage('⚠️ Failed to load saved admin state', 'warning');
+      console.error('Site config load error:', error);
+    }
+  }
+
+  resetAdminState() {
+    if (confirm('Reset all admin customizations?\n\nThis will clear:\n• All "Sold Out" flags\n• Orders paused status\n• Return to original products-data.json state\n\nContinue?')) {
+      try {
+        if (window.siteConfig) {
+          window.siteConfig.pauseOrders(false);
+          this.products.forEach(product => {
+            window.siteConfig.setSoldOut(product.id, false);
+          });
+        }
+        this.pauseOrders = false;
+        this.products.forEach(product => {
+          product.soldOut = false;
+        });
+        this.updateOrderStatusUI();
+        this.renderProductList();
+        this.showMessage('🔄 Admin state reset to defaults site-wide', 'success');
+        console.log('Admin state reset via siteConfig system');
+      } catch (error) {
+        this.showMessage('❌ Failed to reset admin state', 'error');
+        console.error('Site config reset error:', error);
+      }
+    }
+  }
+
+  // --- Order pause toggle and UI update ---
+  toggleOrderPause() {
+    this.pauseOrders = !this.pauseOrders;
+    this.updateOrderStatusUI();
+    this.saveAdminState();
+    this.showMessage(`Orders ${this.pauseOrders ? 'paused' : 'resumed'}`, this.pauseOrders ? 'warning' : 'success');
+  }
+
+  updateOrderStatusUI() {
+    const statusEl = document.getElementById('pause-status');
+    if (!statusEl) return;
+    const statusText = statusEl.querySelector('.status-text');
+    if (this.pauseOrders) {
+      statusEl.className = 'status-indicator paused';
+      if (statusText) statusText.textContent = 'Paused';
+    } else {
+      statusEl.className = 'status-indicator active';
+      if (statusText) statusText.textContent = 'Active';
+    }
+  }
+
+  // --- Escape HTML utility ---
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   init() {
 // ...existing code...
     this.setupEventListeners();
