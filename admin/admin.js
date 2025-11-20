@@ -131,12 +131,14 @@ let adminInterface;
     } else {
       this.showLoginForm();
     }
+  }
+
   // Generate secure token (you should change this password)
   generateToken() {
     const password = this.getPassword();
     return btoa(password + new Date().toDateString());
   }
-  }
+
   // Update product data
   updateProduct(index, field, value) {
     document.getElementById('login-form').style.display = 'block';
@@ -566,10 +568,10 @@ let adminInterface;
               ${product.shippingEligible ? `
                 <div class="shipping-details" style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 8px;">
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px;">
-                    <div>
-                      <label style="font-size: 0.85rem; margin-bottom: 3px; display: block;">Base Shipping Cost:</label>
-                      <div style="display: flex; align-items: center; gap: 3px;">
-                        <span>$</span>
+                    </div>
+                  `;
+                }
+                renderOrderPauseToggle() {
                         <input type="number" step="0.01" value="${product.baseShippingCost || 5}" style="width: 60px;" onchange="adminInterface.updateProduct(${index}, 'baseShippingCost', parseFloat(this.value))">
                       </div>
                     </div>
