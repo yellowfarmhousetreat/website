@@ -36,6 +36,8 @@ class SimpleProductRenderer {
     const card = document.createElement('div');
     card.className = 'product-card';
     card.setAttribute('data-product-id', product.id);
+    // Mark as ready so product-card-info.js doesn't try to re-wrap it
+    card.dataset.flipReady = 'true';
 
     // Dietary options as checkboxes (only show if product CAN be made that way)
     let dietaryHtml = '';
