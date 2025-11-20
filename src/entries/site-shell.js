@@ -24,11 +24,6 @@ import '../../assets/js/product-card-info.js';
 import '../../site-config.js';
 
 // Import cart and product loaders (if they exist)
-try {
-  await import('../../assets/js/products.js');
-} catch (e) {
-  console.log('products.js not found, skipping');
-}
 
 try {
   await import('../../cart.js');
