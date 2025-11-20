@@ -31,7 +31,7 @@ try {
 }
 
 try {
-  await import('../../assets/js/cart.js');
+  await import('../../cart.js');
 } catch (e) {
   console.log('cart.js not found, skipping');
 }
