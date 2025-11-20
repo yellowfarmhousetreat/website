@@ -44,8 +44,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -143,8 +143,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -242,8 +242,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -336,8 +336,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -433,8 +433,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -527,8 +527,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -621,8 +621,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -715,8 +715,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -809,8 +809,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -903,8 +903,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -996,7 +996,7 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
+        "glutenFree": false,
         "sugarFree": false,
         "vegan": false
       },
@@ -1059,7 +1059,14 @@
       "name": "Dipped Pretzel Rods",
       "category": "candy",
       "description": "Crunchy pretzel rods dipped in chocolate or vanilla coating.",
-      "image": "images/pretzel-dipped.jpg",
+      "images": {
+        "primary": "pretzel-dipped.jpg",
+        "gallery": [
+          "pretzel-dipped.jpg"
+        ],
+        "thumbnail": "pretzel-dipped_thumb.jpg",
+        "alt": "Dipped Pretzel Rods - freshly made"
+      },
       "sizes": [
         {
           "name": "half dozen",
@@ -1100,8 +1107,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -1189,8 +1196,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -1293,8 +1300,8 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
-        "sugarFree": true,
+        "glutenFree": false,
+        "sugarFree": false,
         "vegan": false
       },
       "ingredients": [
@@ -1382,7 +1389,7 @@
         }
       ],
       "dietary": {
-        "glutenFree": true,
+        "glutenFree": false,
         "sugarFree": false,
         "vegan": false
       },
@@ -1441,6 +1448,132 @@
           "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
         }
       }
+    },
+    {
+      "id": "smores-cookies",
+      "name": "S'mores Cookies",
+      "tier": "Regular",
+      "category": "cookies",
+      "description": "Graham cracker cookies with chocolate chunks and toasted marshmallows. Campfire memories in every bite.",
+      "images": {
+        "primary": "cookies-smores.jpg",
+        "gallery": [
+          "cookies-smores.jpg"
+        ],
+        "thumbnail": "cookies-smores_thumb.jpg",
+        "alt": "S'mores Cookies - freshly baked"
+      },
+      "sizes": [
+        {
+          "name": "1/2 dozen",
+          "price": 14,
+          "sku": "SMO-1/2"
+        },
+        {
+          "name": "dozen",
+          "price": 24,
+          "sku": "SMO-DO"
+        }
+      ],
+      "dietary": {
+        "glutenFree": false,
+        "sugarFree": false,
+        "vegan": false
+      },
+      "ingredients": [
+        "Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid)",
+        "Graham Cracker Crumbs (Whole Wheat Flour, Sugar, Honey)",
+        "Semi-Sweet Chocolate Chunks (Sugar, Chocolate, Cocoa Butter, Milk Fat, Soy Lecithin, Natural Vanilla Extract)",
+        "Marshmallows (Corn Syrup, Sugar, Gelatin, Natural Vanilla Flavor)",
+        "Butter (Cream, Salt)",
+        "Brown Sugar",
+        "Eggs",
+        "Vanilla Extract",
+        "Baking Powder",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs",
+          "Soy"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
+      "shippable": false,
+      "soldOut": false,
+      "featured": true,
+      "tags": [
+        "cookies",
+        "specialty"
+      ]
+    },
+    {
+      "id": "chocolate-lava-cake",
+      "name": "Chocolate Lava Cake",
+      "tier": "Premium",
+      "category": "cakes",
+      "description": "Individual molten chocolate cake with a gooey center. Warm and decadent.",
+      "images": {
+        "primary": "cake-chocolate-lava.jpg",
+        "gallery": [
+          "cake-chocolate-lava.jpg"
+        ],
+        "thumbnail": "cake-chocolate-lava_thumb.jpg",
+        "alt": "Chocolate Lava Cake - freshly baked"
+      },
+      "sizes": [
+        {
+          "name": "single",
+          "price": 8,
+          "sku": "LAV-SIN"
+        },
+        {
+          "name": "4-pack",
+          "price": 28,
+          "sku": "LAV-4PK"
+        }
+      ],
+      "dietary": {
+        "glutenFree": false,
+        "sugarFree": false,
+        "vegan": false
+      },
+      "ingredients": [
+        "Dark Chocolate (Cocoa Mass, Sugar, Cocoa Butter, Soy Lecithin, Natural Vanilla)",
+        "Butter (Cream, Salt)",
+        "Eggs",
+        "Granulated Sugar",
+        "All-Purpose Flour",
+        "Vanilla Extract",
+        "Salt"
+      ],
+      "allergens": {
+        "contains": [
+          "Wheat",
+          "Milk",
+          "Eggs",
+          "Soy"
+        ],
+        "mayContain": [
+          "Tree Nuts",
+          "Peanuts"
+        ],
+        "facilityStatement": "Produced in a facility that also processes tree nuts, peanuts, and soy."
+      },
+      "shippable": false,
+      "soldOut": false,
+      "featured": true,
+      "tags": [
+        "cakes",
+        "specialty",
+        "chocolate"
+      ]
     }
   ]
 }

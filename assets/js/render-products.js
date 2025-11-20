@@ -38,13 +38,14 @@ class SimpleProductRenderer {
     card.setAttribute('data-product-id', product.id);
 
     // Dietary options as checkboxes (default unchecked - opt-in)
+    // Show checkboxes if dietary object exists (regardless of true/false values)
     let dietaryHtml = '';
-    if (product.dietary?.glutenFree || product.dietary?.sugarFree) {
+    if (product.dietary && (product.dietary.hasOwnProperty('glutenFree') || product.dietary.hasOwnProperty('sugarFree'))) {
       dietaryHtml = '<div class="dietary-options">';
-      if (product.dietary?.glutenFree) {
+      if (product.dietary.hasOwnProperty('glutenFree')) {
         dietaryHtml += `<label class="dietary-checkbox"><input type="checkbox" class="gf-checkbox"> Gluten-Free (+$3)</label>`;
       }
-      if (product.dietary?.sugarFree) {
+      if (product.dietary.hasOwnProperty('sugarFree')) {
         dietaryHtml += `<label class="dietary-checkbox"><input type="checkbox" class="sf-checkbox"> Sugar-Free (+$3)</label>`;
       }
       dietaryHtml += '</div>';
@@ -166,7 +167,7 @@ class SimpleProductRenderer {
       const sizeIndex = parseInt(card.dataset.selectedSize);
       const selectedSize = product.sizes[sizeIndex];
       
-      // Check dietary checkboxes (default to both checked)
+      // Check dietary checkboxes
       const gfCheckbox = card.querySelector('.gf-checkbox');
       const sfCheckbox = card.querySelector('.sf-checkbox');
       const isGF = gfCheckbox?.checked || false;
@@ -177,14 +178,14 @@ class SimpleProductRenderer {
         const itemName = `${product.name} (${selectedSize.name})`;
         const cart = JSON.parse(localStorage.getItem('yfhs_cart') || '[]');
         
-        // Calculate price with dietary modifications
+        // Calculate price with dietary modifications (only if product supports it)
         let finalPrice = selectedSize.price;
         const dietaryModifiers = [];
-        if (isGF && product.dietary?.glutenFree) {
+        if (isGF && product.dietary?.hasOwnProperty('glutenFree')) {
           dietaryModifiers.push('GF');
           finalPrice += 3;
         }
-        if (isSF && product.dietary?.sugarFree) {
+        if (isSF && product.dietary?.hasOwnProperty('sugarFree')) {
           dietaryModifiers.push('SF');
           finalPrice += 3;
         }
