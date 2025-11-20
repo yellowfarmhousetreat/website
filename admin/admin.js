@@ -591,77 +591,10 @@ class AdminInterface {
         </div>
       </div>
     `;
-    renderOrderPauseToggle() {
-      const container = document.getElementById('order-pause-toggle');
-      if (!container) return;
-      container.innerHTML = `
-        <div class="order-status-control">
-          <label class="toggle-switch">
-            <input type="checkbox" id="order-pause-checkbox" ${this.pauseOrders ? 'checked' : ''} onchange="adminInterface.toggleOrderPause()">
-            <span class="toggle-slider"></span>
-            <span class="toggle-label">Pause Orders</span>
-          </label>
-          <div id="pause-status" class="status-indicator ${this.pauseOrders ? 'paused' : 'active'}">
-            <span class="status-text">${this.pauseOrders ? 'Paused' : 'Active'}</span>
-          </div>
-        </div>
-      `;
-    }
-    toggleOrderPause() {
-      this.pauseOrders = !this.pauseOrders;
-      this.renderOrderPauseToggle();
-      this.showMessage(`Orders ${this.pauseOrders ? 'paused' : 'active'}`, this.pauseOrders ? 'warning' : 'success');
-      // TODO: Sync with siteConfig system if available
-    }
-    toggleProductSoldOut(index) {
-      if (index >= 0 && index < this.products.length) {
-        this.products[index].soldOut = !this.products[index].soldOut;
-        this.renderProductList();
-        this.showMessage(`${this.products[index].name} marked as ${this.products[index].soldOut ? 'SOLD OUT' : 'available'}`, this.products[index].soldOut ? 'warning' : 'success');
-        // TODO: Sync with siteConfig system if available
-      }
-    }
-
-    updateAllergen(index, allergen, isChecked) {
-    if (index >= 0 && index < this.products.length) {
-      if (!this.products[index].allergens) {
-        this.products[index].allergens = [];
-      }
-      
-      if (isChecked) {
-        if (!this.products[index].allergens.includes(allergen)) {
-          this.products[index].allergens.push(allergen);
-        }
-      } else {
-        this.products[index].allergens = this.products[index].allergens.filter(a => a !== allergen);
-      }
-      
-      this.showMessage(`Updated allergen info for ${this.products[index].name}`, 'info');
-    }
-  }
-
-    addNewProduct() {
-    const newProduct = {
-      id: `new-product-${Date.now()}`,
-      name: 'New Product',
-      price: 20,
-      unit: 'dozen',
-      category: 'cookies',
-      description: 'Enter product description',
-      image: 'product-image.jpg',
-      glutenFree: true,
-      sugarFree: true,
-      shippingEligible: false,
-      featured: false
-    };
-    
-    this.products.push(newProduct);
-    this.renderProductList();
-    this.showMessage('New product added. Don\'t forget to save!', 'success');
   }
 
   // Save individual product
-    saveIndividualProduct(index) {
+  saveIndividualProduct(index) {
     if (index < 0 || index >= this.products.length) {
       this.showMessage('Product not found', 'error');
       return;
@@ -697,7 +630,7 @@ class AdminInterface {
   }
 
   // Delete product
-    deleteProduct(index) {
+  deleteProduct(index) {
     if (confirm('Are you sure you want to delete this product?')) {
       const productName = this.products[index].name;
       this.products.splice(index, 1);
@@ -890,7 +823,7 @@ TO UPDATE YOUR MAIN FILE:
   }
   
   // Trigger photo library access (iOS specific)
-  triggerPhotoLibrary(index) {
+    triggerPhotoLibrary(index) {
     const input = document.getElementById(`photo-input-library-${index}`);
     if (input) {
       input.value = '';
@@ -899,7 +832,7 @@ TO UPDATE YOUR MAIN FILE:
   }
   
   // Trigger camera directly
-  triggerCamera(index) {
+    triggerCamera(index) {
     const input = document.getElementById(`photo-input-camera-${index}`);
     if (input) {
       input.value = '';
@@ -908,7 +841,7 @@ TO UPDATE YOUR MAIN FILE:
   }
   
   // Trigger general file picker
-  triggerFiles(index) {
+    triggerFiles(index) {
     const input = document.getElementById(`photo-input-files-${index}`);
     if (input) {
       input.value = '';
@@ -916,7 +849,7 @@ TO UPDATE YOUR MAIN FILE:
     }
   }
   
-  handlePhotoSelect(event, index, inputType = 'library') {
+    handlePhotoSelect(event, index, inputType = 'library') {
     const file = event.target.files[0];
     if (file) {
       this.showMessage(`Photo selected from ${inputType}`, 'info');
@@ -924,7 +857,7 @@ TO UPDATE YOUR MAIN FILE:
     }
   }
   
-  handlePhotoDrop(event, index) {
+    handlePhotoDrop(event, index) {
     event.preventDefault();
     event.stopPropagation();
     
@@ -942,17 +875,17 @@ TO UPDATE YOUR MAIN FILE:
     }
   }
   
-  handleDragOver(event) {
+    handleDragOver(event) {
     event.preventDefault();
     event.currentTarget.classList.add('dragover');
   }
   
-  handleDragLeave(event) {
+    handleDragLeave(event) {
     event.preventDefault();
     event.currentTarget.classList.remove('dragover');
   }
   
-  processPhoto(file, index) {
+    processPhoto(file, index) {
     // Validate file
     if (!file.type.startsWith('image/')) {
       this.showMessage('Please select a valid image file', 'error');
@@ -1009,7 +942,7 @@ TO UPDATE YOUR MAIN FILE:
     reader.readAsDataURL(file);
   }
   
-  updatePhotoPreview(index, imageSrc, filename, fileSize) {
+    updatePhotoPreview(index, imageSrc, filename, fileSize) {
     const preview = document.getElementById(`photo-preview-${index}`);
     const uploadArea = document.getElementById(`upload-area-${index}`);
     const img = document.getElementById(`photo-img-${index}`);
@@ -1024,11 +957,11 @@ TO UPDATE YOUR MAIN FILE:
     uploadArea.style.display = 'none';
   }
   
-  changePhoto(index) {
+    changePhoto(index) {
     this.triggerPhotoUpload(index);
   }
   
-  removePhoto(index) {
+    removePhoto(index) {
     const preview = document.getElementById(`photo-preview-${index}`);
     const uploadArea = document.getElementById(`upload-area-${index}`);
     
@@ -1044,7 +977,7 @@ TO UPDATE YOUR MAIN FILE:
     this.showMessage('Photo removed', 'info');
   }
   
-  formatFileSize(bytes) {
+    formatFileSize(bytes) {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
@@ -1053,7 +986,7 @@ TO UPDATE YOUR MAIN FILE:
   }
   
   // Enhanced save with photo export
-  saveChangesWithPhotos() {
+    saveChangesWithPhotos() {
     const updatedJson = this.generateProductsJson();
     
     // Create ZIP file with products data and photos
@@ -1066,7 +999,7 @@ TO UPDATE YOUR MAIN FILE:
     }
   }
   
-  downloadFile(content, filename, mimeType) {
+    downloadFile(content, filename, mimeType) {
     const blob = new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -1078,7 +1011,7 @@ TO UPDATE YOUR MAIN FILE:
     URL.revokeObjectURL(url);
   }
   
-  createZipWithPhotos(jsonContent) {
+    createZipWithPhotos(jsonContent) {
     // Simple ZIP creation message (in a real app, you'd use JSZip library)
     this.showMessage('Creating download package with photos and data...', 'info');
     
@@ -1107,7 +1040,7 @@ TO UPDATE YOUR MAIN FILE:
   }
 
   // Show status messages
-  showMessage(message, type = 'info') {
+    showMessage(message, type = 'info') {
     const messageDiv = document.getElementById('admin-messages');
     const messageEl = document.createElement('div');
     messageEl.className = `message message-${type}`;
@@ -1123,16 +1056,16 @@ TO UPDATE YOUR MAIN FILE:
   }
 
   // Logout
-  logout() {
+    logout() {
     sessionStorage.removeItem('admin_auth');
     this.isAuthenticated = false;
     this.showLoginForm();
     this.showMessage('Logged out successfully', 'info');
   }
 
-  setupEventListeners() {
-    // Additional event listeners can be added here
-  }
+    setupEventListeners() {
+        // Additional event listeners can be added here
+    }
 }
 
 // Initialize admin interface when page loads
