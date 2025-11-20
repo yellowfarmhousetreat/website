@@ -1,15 +1,29 @@
-document.addEventListener('DOMContentLoaded', () => {
+const initOverlayMenu = () => {
   const overlayWrapper = document.querySelector('.overlay-menu');
   const overlayMenu = document.getElementById('overlay-menu');
   const overlayOpenBtn = document.getElementById('overlay-menu-open');
   const overlayCloseBtn = document.getElementById('overlay-menu-close');
+  const focusableSelector = 'a[href], area[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  let currentFocusableItems = [];
 
   if (!overlayWrapper || !overlayMenu || !overlayOpenBtn || !overlayCloseBtn) {
     return;
   }
 
+  overlayMenu.setAttribute('role', 'dialog');
+  overlayMenu.setAttribute('aria-modal', 'false');
+
   const overlayTriggers = overlayWrapper.querySelectorAll('.overlay-accordion__trigger');
   const overlayPanels = overlayWrapper.querySelectorAll('.overlay-accordion__panel');
+
+  const refreshFocusableItems = () => {
+    currentFocusableItems = Array.from(overlayMenu.querySelectorAll(focusableSelector)).filter((el) => {
+      if (el.hasAttribute('disabled')) return false;
+      if (el.getAttribute('aria-hidden') === 'true') return false;
+      const hasVisibleBox = el.offsetWidth > 0 || el.offsetHeight > 0 || el.getClientRects().length > 0;
+      return hasVisibleBox || el === document.activeElement;
+    });
+  };
 
   const closeOverlayPanels = () => {
     overlayPanels.forEach(panel => panel.classList.remove('is-open'));
@@ -35,11 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const setOverlayState = (isOpen) => {
     overlayMenu.classList.toggle('is-open', isOpen);
     overlayMenu.setAttribute('aria-hidden', String(!isOpen));
+    overlayMenu.setAttribute('aria-modal', String(isOpen));
     overlayOpenBtn.classList.toggle('is-hidden', isOpen);
     overlayOpenBtn.setAttribute('aria-expanded', String(isOpen));
     document.body.classList.toggle('overlay-menu-open', isOpen);
     if (isOpen) {
-      overlayCloseBtn.focus();
+      refreshFocusableItems();
+      if (currentFocusableItems.length === 0) {
+        overlayCloseBtn.focus();
+      } else {
+        currentFocusableItems[0].focus();
+      }
     } else {
       closeOverlayPanels();
     }
@@ -56,9 +76,44 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && overlayMenu.classList.contains('is-open')) {
+    const isOpen = overlayMenu.classList.contains('is-open');
+    if (!isOpen) {
+      return;
+    }
+
+    if (event.key === 'Escape') {
       setOverlayState(false);
       overlayOpenBtn.focus();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      refreshFocusableItems();
+      if (!currentFocusableItems.length) {
+        event.preventDefault();
+        overlayCloseBtn.focus();
+        return;
+      }
+
+      const firstElement = currentFocusableItems[0];
+      const lastElement = currentFocusableItems[currentFocusableItems.length - 1];
+      const isShiftPressed = event.shiftKey;
+      const activeElement = document.activeElement;
+      const activeIndex = currentFocusableItems.indexOf(activeElement);
+
+      if (activeIndex === -1) {
+        event.preventDefault();
+        firstElement.focus();
+        return;
+      }
+
+      if (!isShiftPressed && activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      } else if (isShiftPressed && activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      }
     }
   });
 
@@ -121,4 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
       setOverlayState(false);
     });
   });
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initOverlayMenu);
+} else {
+  initOverlayMenu();
+}
