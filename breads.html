@@ -54,26 +54,51 @@
             </section>
         </div>
         <footer id="footer">
-            <section class="split contact">
-                <section>
-                    <h3>Phone</h3>
-                    <p><a href="tel:000-000-0000">(000) 000-0000</a></p>
-                </section>
-                <section>
-                    <h3>Email</h3>
-                    <p><a href="mailto:info@yellowfarmhousetreat.com">info@yellowfarmhousetreat.com</a></p>
-                </section>
+        <section>
+            <form method="post" action="https://formspree.io/f/manvwbvz">
+                <div class="fields">
+                    <div class="field">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" required />
+                    </div>
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" required />
+                    </div>
+                    <div class="field">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" rows="3" placeholder="Questions about custom orders or special dietary needs? Get in touch!" required></textarea>
+                    </div>
+                </div>
+                <ul class="actions">
+                    <li><input type="submit" value="Send Message" /></li>
+                </ul>
+            </form>
+        </section>
+        <section class="split contact">
+            <section class="alt">
+                <h3>Address</h3>
+                <p>22659 Farmway Road<br />Caldwell, ID 83646</p>
             </section>
-        </footer>
+            <section>
+                <h3>Phone</h3>
+                <p><a href="tel:+18057094686">(805) 709-4686</a></p>
+            </section>
+            <section>
+                <h3>Email</h3>
+                <p><a href="mailto:yellowfarmhousetreats@gmail.com">yellowfarmhousetreats@gmail.com</a></p>
+            </section>
+            <section>
+                <h3>Social</h3>
+                <ul class="icons alt">
+                    <li><a href="https://www.facebook.com/YellowFarmhouseGirl/" target="_blank" rel="noopener" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="https://instagram.com/yellowfarmhousestand" target="_blank" rel="noopener" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                </ul>
+            </section>
+        </section>
+    </footer>
+
+    <!-- Copyright -->
+    <div id="copyright">
+        <ul><li>&copy; Yellow Farmhouse Treats</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="site-config.js"></script>
-    <script src="products-data.js"></script>
-    <script src="product-loader.js"></script>
-    <script src="cart.js"></script>
-</body>
-</html>
