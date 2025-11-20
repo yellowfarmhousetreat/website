@@ -1,15 +1,218 @@
 
 <!DOCTYPE HTML>
-<div id="login-form" class="login-container"></div>
-<div id="admin-panel" class="hidden">
-    <div id="admin-header"></div>
-    <div id="product-list"></div>
-</div>
-<div id="messages" class="messages"></div>
+<html lang="en">
+<head>
+    <title>🍪 Cookie Wagon Configuration Portal</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Authentic cookie configuration system">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: repeating-linear-gradient(45deg, #ffeaa7, #ffeaa7 10px, #fdcb6e 10px, #fdcb6e 20px);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .container {
+            background: white;
+            border: 5px dashed #d63031;
+            border-radius: 50px;
+            padding: 3rem;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            animation: wiggle 0.5s ease-in-out infinite alternate;
+        }
+        @keyframes wiggle {
+            0% { transform: rotate(-1deg); }
+            100% { transform: rotate(1deg); }
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #d63031;
+            text-shadow: 3px 3px 0px #fdcb6e;
+            margin-bottom: 1rem;
+            animation: blink 1s ease-in-out infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .cookie-monster {
+            font-size: 5rem;
+            animation: bounce 2s ease-in-out infinite;
+            display: block;
+            margin: 2rem 0;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        p {
+            font-size: 1.2rem;
+            color: #2d3436;
+            line-height: 1.8;
+            margin: 1rem 0;
+        }
+        .password-box {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #ffeaa7;
+            border: 3px solid #fdcb6e;
+            border-radius: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-family: 'Comic Sans MS', cursive;
+            border: 3px solid #d63031;
+            border-radius: 15px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        button {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(214, 48, 49, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        button:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(214, 48, 49, 0.6);
+        }
+        .hint {
+            background: #74b9ff;
+            padding: 1rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border: 3px solid #0984e3;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .spinner {
+            display: none;
+            margin: 2rem auto;
+            font-size: 3rem;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .warning {
+            background: #fab1a0;
+            padding: 1.5rem;
+            border: 4px solid #d63031;
+            border-radius: 20px;
+            margin-top: 2rem;
+            font-weight: bold;
+            animation: shake 0.5s ease-in-out infinite;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍪 COOKIE WAGON 🍪</h1>
+        <span class="cookie-monster">🚂🍪🍪🍪</span>
+        
+        <p><strong>ULTRA SECURE COOKIE MANAGEMENT SYSTEM</strong></p>
+        <p>Welcome to the TOP SECRET Cookie Configuration Portal!</p>
+        
+        <div class="password-box">
+            <p><strong>🔐 MASTER PASSWORD REQUIRED 🔐</strong></p>
+            <input type="password" id="masterpass" placeholder="Enter Super Secret Password" 
+                   onkeypress="if(event.key==='Enter') attemptLogin()">
+            <button onclick="attemptLogin()">🚀 LAUNCH COOKIE WAGON</button>
+        </div>
+        
+        <div class="spinner" id="spinner">⏳</div>
+        
+        <div class="hint">
+            💡 <strong>Hint:</strong> The password is definitely NOT written on a sticky note under the keyboard
+        </div>
+        
+        <div class="warning">
+            ⚠️ WARNING: Unauthorized cookie access will result in immediate deployment of the Cookie Monster ⚠️
+        </div>
+        
+        <p style="font-size: 0.8rem; color: #636e72; margin-top: 2rem;">
+            © 2025 Cookie Wagon Enterprises™ | All Cookies Reserved<br>
+            <em>This system is protected by military-grade Comic Sans encryption</em>
+        </p>
+    </div>
 
-<script>
-// --- Begin Admin Panel Logic ---
-// All admin logic and rendering is handled here.
-// No template expressions or JS code outside this block.
-// ...existing code for SimpleAdminInterface and initialization...
-</script>
+    <script>
+        let attempts = 0;
+        const passwords = ['cookies', 'password', 'admin', 'cookie123', '12345', 'farmhouse'];
+        
+        function attemptLogin() {
+            const input = document.getElementById('masterpass').value;
+            const spinner = document.getElementById('spinner');
+            attempts++;
+            
+            // Show dramatic loading
+            spinner.style.display = 'block';
+            
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                
+                if (passwords.includes(input.toLowerCase())) {
+                    alert('🎉 CONGRATULATIONS! You found a common password!\n\n' +
+                          '...but this is just a honeypot decoy file 😏\n\n' +
+                          'Nice try though! The real admin panel is elsewhere.\n\n' +
+                          'Attempts logged: ' + attempts);
+                } else {
+                    const responses = [
+                        '❌ Incorrect! The Cookie Monster is watching... 👀',
+                        '🚫 Access Denied! Try thinking like a cookie 🍪',
+                        '⛔ Nope! Maybe try "password123"? (Just kidding)',
+                        '🙅 Wrong again! The cookies are safe from you!',
+                        '💔 So close! (Not really)',
+                        '🎭 This is getting embarrassing...'
+                    ];
+                    alert(responses[Math.min(attempts - 1, responses.length - 1)]);
+                }
+                
+                // Log attempt (in real scenario, would send to server)
+                console.log('Login attempt #' + attempts + ' at ' + new Date().toISOString());
+                console.log('Password tried: ' + input);
+                console.log('User Agent: ' + navigator.userAgent);
+                console.log('IP would be logged here in production');
+                
+                document.getElementById('masterpass').value = '';
+            }, 2000);
+        }
+        
+        // Add some "security theater"
+        console.log('%c🚨 SECURITY ALERT 🚨', 'color: red; font-size: 20px; font-weight: bold;');
+        console.log('This console is monitored. All access attempts are logged.');
+        console.log('Unauthorized access is prosecuted to the full extent of cookie law.');
+        console.log('\n🍪 Fun fact: This is a decoy! The real admin is at /admin/index.html');
+        
+        // Track page load
+        console.log('Honeypot accessed at: ' + new Date().toISOString());
+        console.log('Referrer: ' + document.referrer);
+    </script>
+</body>
+</html>

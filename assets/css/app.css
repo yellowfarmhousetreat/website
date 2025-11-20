@@ -1103,7 +1103,7 @@ textarea {
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-btn-secondary:hover,
+.btn-secondary:hover,
 .safe-btn-secondary:hover {
   border-color: var(--color-accent);
 }
@@ -1459,7 +1459,6 @@ btn-secondary:hover,
   .actions {
     flex-direction: column;
   }
-  }
 }
 
 @media (max-width: 360px) {
@@ -1481,9 +1480,9 @@ btn-secondary:hover,
     height: 160px;
   }
 
-    .order-form,
-    .cart-display,
-    .instagram-showcase {
-      padding: 1.5rem;
-    }
+  .order-form,
+  .cart-display,
+  .instagram-showcase {
+    padding: 1.5rem;
   }
+}
