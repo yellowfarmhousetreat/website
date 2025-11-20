@@ -142,7 +142,7 @@
 						<span class="overlay-menu__label">Open site navigator</span>
 						<span class="overlay-menu__cart-pill">Cart <span id="cart-count" class="cart-count">0</span></span>
 					</button>
-					<aside class="overlay-menu__sidebar" id="overlay-menu" aria-hidden="true">
+					<aside class="overlay-menu__sidebar" id="overlay-menu" hidden>
 						<button class="overlay-menu__close" id="overlay-menu-close" type="button">
 							Close <span aria-hidden="true">✕</span>
 						</button>
@@ -206,7 +206,7 @@
             <div class="instagram-showcase-title">Check Out Our Latest Creations!</div>
             <div class="instagram-container">
                 <!-- SnapWidget -->
-                <iframe src="https://snapwidget.com/embed/1112051" class="snapwidget-widget" title="Posts from Instagram"></iframe>
+				<iframe src="https://snapwidget.com/embed/1112051" class="snapwidget-widget" title="Posts from Instagram" aria-hidden="true" tabindex="-1"></iframe>
             </div>
             <div class="instagram-follow">
                 <p>Follow <a href="https://instagram.com/yellowfarmhousestand" target="_blank" rel="noopener">@yellowfarmhousestand</a> for daily updates and behind-the-scenes content!</p>
@@ -257,8 +257,8 @@
 							<section>
 								<h3>Social</h3>
 								<ul class="icons alt">
-									<li><a href="https://www.facebook.com/YellowFarmhouseGirl/" target="_blank" rel="noopener" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="https://www.facebook.com/YellowFarmhouseGirl/" target="_blank" rel="noopener" class="icon brands alt fa-facebook-f" aria-label="Facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands alt fa-instagram" aria-label="Instagram"><span class="label">Instagram</span></a></li>
 								</ul>
 							</section>
 						</section>

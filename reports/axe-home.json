@@ -14,7 +14,7 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2025-11-20T00:31:17.751Z",
+  "timestamp": "2025-11-20T01:12:01.378Z",
   "url": "http://127.0.0.1:4173/index.html",
   "toolOptions": {
     "runOnly": {
@@ -289,6 +289,46 @@
       "nodes": []
     },
     {
+      "id": "frame-title-unique",
+      "impact": null,
+      "tags": [
+        "cat.text-alternatives",
+        "wcag2a",
+        "wcag412",
+        "TTv5",
+        "TT12.d",
+        "EN-301-549",
+        "EN-9.4.1.2",
+        "RGAAv4",
+        "RGAA-2.2.1"
+      ],
+      "description": "Ensure <iframe> and <frame> elements contain a unique title attribute",
+      "help": "Frames must have a unique title attribute",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title-unique?application=playwright",
+      "nodes": []
+    },
+    {
+      "id": "frame-title",
+      "impact": null,
+      "tags": [
+        "cat.text-alternatives",
+        "wcag2a",
+        "wcag412",
+        "section508",
+        "section508.22.i",
+        "TTv5",
+        "TT12.d",
+        "EN-301-549",
+        "EN-9.4.1.2",
+        "RGAAv4",
+        "RGAA-2.1.1"
+      ],
+      "description": "Ensure <iframe> and <frame> elements have an accessible name",
+      "help": "Frames must have an accessible name",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title?application=playwright",
+      "nodes": []
+    },
+    {
       "id": "html-xml-lang-mismatch",
       "impact": null,
       "tags": [
@@ -304,6 +344,29 @@
       "description": "Ensure that HTML elements with both valid lang and xml:lang attributes agree on the base language of the page",
       "help": "HTML elements with lang and xml:lang must have the same base language",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-xml-lang-mismatch?application=playwright",
+      "nodes": []
+    },
+    {
+      "id": "image-alt",
+      "impact": null,
+      "tags": [
+        "cat.text-alternatives",
+        "wcag2a",
+        "wcag111",
+        "section508",
+        "section508.22.a",
+        "TTv5",
+        "TT7.a",
+        "TT7.b",
+        "EN-301-549",
+        "EN-9.1.1.1",
+        "ACT",
+        "RGAAv4",
+        "RGAA-1.1.1"
+      ],
+      "description": "Ensure <img> elements have alternative text or a role of none or presentation",
+      "help": "Images must have alternative text",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright",
       "nodes": []
     },
     {
@@ -686,6 +749,58 @@
           "target": [
             "#overlay-menu-open"
           ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-allowed-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attributes are used correctly for the defined role"
+            }
+          ],
+          "none": [
+            {
+              "id": "aria-unsupported-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute is supported"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-allowed-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attributes are used correctly for the defined role"
+            }
+          ],
+          "none": [
+            {
+              "id": "aria-unsupported-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute is supported"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
+          ]
         }
       ]
     },
@@ -739,6 +854,42 @@
           "html": "<button class=\"overlay-menu__toggle\" id=\"overlay-menu-open\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-menu\">",
           "target": [
             "#overlay-menu-open"
+          ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-conditional-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-conditional-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
           ]
         }
       ]
@@ -818,6 +969,90 @@
       ]
     },
     {
+      "id": "aria-hidden-focus",
+      "impact": null,
+      "tags": [
+        "cat.name-role-value",
+        "wcag2a",
+        "wcag412",
+        "TTv5",
+        "TT6.a",
+        "EN-301-549",
+        "EN-9.4.1.2",
+        "RGAAv4",
+        "RGAA-7.1.1"
+      ],
+      "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
+      "help": "ARIA hidden element must not be focusable or contain focusable elements",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus?application=playwright",
+      "nodes": [
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "focusable-modal-open",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "No focusable elements while a modal is open"
+            },
+            {
+              "id": "focusable-disabled",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "No focusable elements contained within element"
+            },
+            {
+              "id": "focusable-not-tabbable",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "No focusable elements contained within element"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<span aria-hidden=\"true\">✕</span>",
+          "target": [
+            "span[aria-hidden=\"true\"]"
+          ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "focusable-modal-open",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "No focusable elements while a modal is open"
+            },
+            {
+              "id": "focusable-disabled",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "No focusable elements contained within element"
+            },
+            {
+              "id": "focusable-not-tabbable",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "No focusable elements contained within element"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<iframe src=\"https://snapwidget.com/embed/1112051\" class=\"snapwidget-widget\" title=\"Posts from Instagram\" aria-hidden=\"true\" tabindex=\"-1\"></iframe>",
+          "target": [
+            "iframe"
+          ]
+        }
+      ]
+    },
+    {
       "id": "aria-prohibited-attr",
       "impact": "serious",
       "tags": [
@@ -849,6 +1084,42 @@
           "html": "<button class=\"overlay-menu__toggle\" id=\"overlay-menu-open\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-menu\">",
           "target": [
             "#overlay-menu-open"
+          ]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "aria-prohibited-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [],
+          "all": [],
+          "none": [
+            {
+              "id": "aria-prohibited-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "ARIA attribute is allowed"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
           ]
         }
       ]
@@ -1018,6 +1289,70 @@
           "target": [
             "#overlay-menu-open"
           ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-valid-attr-value",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute values are valid"
+            },
+            {
+              "id": "aria-errormessage",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-errormessage exists and references elements visible to screen readers that use a supported aria-errormessage technique"
+            },
+            {
+              "id": "aria-level",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-level values are valid"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "aria-valid-attr-value",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute values are valid"
+            },
+            {
+              "id": "aria-errormessage",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-errormessage exists and references elements visible to screen readers that use a supported aria-errormessage technique"
+            },
+            {
+              "id": "aria-level",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "aria-level values are valid"
+            }
+          ],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
+          ]
         }
       ]
     },
@@ -1071,6 +1406,42 @@
           "html": "<button class=\"overlay-menu__toggle\" id=\"overlay-menu-open\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-menu\">",
           "target": [
             "#overlay-menu-open"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-valid-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute name is valid"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-valid-attr",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "critical",
+              "message": "ARIA attribute name is valid"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
           ]
         }
       ]
@@ -1196,13 +1567,6 @@
               ],
               "impact": "serious",
               "message": "Page has a landmark region"
-            },
-            {
-              "id": "header-present",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Page has a heading"
             }
           ],
           "all": [],
@@ -1729,7 +2093,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<aside class=\"overlay-menu__sidebar\" id=\"overlay-menu\" aria-hidden=\"true\">",
+          "html": "<aside class=\"overlay-menu__sidebar\" id=\"overlay-menu\" hidden=\"\">",
           "target": [
             "#overlay-menu"
           ]
@@ -1958,84 +2322,6 @@
       ]
     },
     {
-      "id": "frame-title-unique",
-      "impact": null,
-      "tags": [
-        "cat.text-alternatives",
-        "wcag2a",
-        "wcag412",
-        "TTv5",
-        "TT12.d",
-        "EN-301-549",
-        "EN-9.4.1.2",
-        "RGAAv4",
-        "RGAA-2.2.1"
-      ],
-      "description": "Ensure <iframe> and <frame> elements contain a unique title attribute",
-      "help": "Frames must have a unique title attribute",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title-unique?application=playwright",
-      "nodes": [
-        {
-          "any": [],
-          "all": [],
-          "none": [
-            {
-              "id": "unique-frame-title",
-              "data": "posts from instagram",
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element's title attribute is unique"
-            }
-          ],
-          "impact": null,
-          "html": "<iframe src=\"https://snapwidget.com/embed/1112051\" class=\"snapwidget-widget\" title=\"Posts from Instagram\"></iframe>",
-          "target": [
-            "iframe"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "frame-title",
-      "impact": null,
-      "tags": [
-        "cat.text-alternatives",
-        "wcag2a",
-        "wcag412",
-        "section508",
-        "section508.22.i",
-        "TTv5",
-        "TT12.d",
-        "EN-301-549",
-        "EN-9.4.1.2",
-        "RGAAv4",
-        "RGAA-2.1.1"
-      ],
-      "description": "Ensure <iframe> and <frame> elements have an accessible name",
-      "help": "Frames must have an accessible name",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title?application=playwright",
-      "nodes": [
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<iframe src=\"https://snapwidget.com/embed/1112051\" class=\"snapwidget-widget\" title=\"Posts from Instagram\"></iframe>",
-          "target": [
-            "iframe"
-          ]
-        }
-      ]
-    },
-    {
       "id": "html-has-lang",
       "impact": null,
       "tags": [
@@ -2109,220 +2395,6 @@
           "html": "<html lang=\"en\">",
           "target": [
             "html"
-          ]
-        },
-        {
-          "any": [],
-          "all": [],
-          "none": [
-            {
-              "id": "valid-lang",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Value of lang attribute is included in the list of valid languages"
-            }
-          ],
-          "impact": null,
-          "html": "<html lang=\"en\" class=\"\">",
-          "target": [
-            "iframe",
-            "html"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "image-alt",
-      "impact": null,
-      "tags": [
-        "cat.text-alternatives",
-        "wcag2a",
-        "wcag111",
-        "section508",
-        "section508.22.a",
-        "TTv5",
-        "TT7.a",
-        "TT7.b",
-        "EN-301-549",
-        "EN-9.1.1.1",
-        "ACT",
-        "RGAAv4",
-        "RGAA-1.1.1"
-      ],
-      "description": "Ensure <img> elements have alternative text or a role of none or presentation",
-      "help": "Images must have alternative text",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright",
-      "nodes": [
-        {
-          "any": [
-            {
-              "id": "has-alt",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has an alt attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "alt-space-value",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has a valid alt attribute value"
-            }
-          ],
-          "impact": null,
-          "html": "<img src=\"https://scontent.cdn...\" data-src-small=\"https://scontent.cdn...\" data-src-medium=\"https://scontent.cdn...\" data-src-large=\"https://scontent.cdn...\" class=\"object-fit thumbnail...\" loading=\"auto\" data-link=\"https://www.instagra...\" onerror=\"embed.imageError(thi...\" alt=\"Available in the Fa ...>",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-0 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"] > figure > img"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "has-alt",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has an alt attribute"
-            },
-            {
-              "id": "presentational-role",
-              "data": {
-                "role": "presentation"
-              },
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element's default semantics were overridden with role=\"presentation\""
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "alt-space-value",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has a valid alt attribute value"
-            }
-          ],
-          "impact": null,
-          "html": "<img src=\"https://scontent.cdn...\" data-src-small=\"https://scontent.cdn...\" data-src-medium=\"https://scontent.cdn...\" data-src-large=\"https://scontent.cdn...\" class=\"object-fit thumbnail...\" loading=\"auto\" data-link=\"https://www.instagra...\" onerror=\"embed.imageError(thi...\" alt=\"\" width=\"100%\">",
-          "target": [
-            "iframe",
-            "img[alt=\"\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "has-alt",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has an alt attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "alt-space-value",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has a valid alt attribute value"
-            }
-          ],
-          "impact": null,
-          "html": "<img src=\"https://scontent.cdn...\" data-src-small=\"https://scontent.cdn...\" data-src-medium=\"https://scontent.cdn...\" data-src-large=\"https://scontent.cdn...\" class=\"object-fit thumbnail...\" loading=\"auto\" data-link=\"https://www.instagra...\" onerror=\"embed.imageError(thi...\" alt=\"Freshly baked this  ...>",
-          "target": [
-            "iframe",
-            "img[alt=\"Freshly baked this morning!\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "has-alt",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has an alt attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "alt-space-value",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has a valid alt attribute value"
-            }
-          ],
-          "impact": null,
-          "html": "<img src=\"https://scontent.cdn...\" data-src-small=\"https://scontent.cdn...\" data-src-medium=\"https://scontent.cdn...\" data-src-large=\"https://scontent.cdn...\" class=\"object-fit thumbnail...\" loading=\"auto\" data-link=\"https://www.instagra...\" onerror=\"embed.imageError(thi...\" alt=\"Baked this morning  ...>",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-3 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"] > figure > img"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "has-alt",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has an alt attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "alt-space-value",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has a valid alt attribute value"
-            }
-          ],
-          "impact": null,
-          "html": "<img src=\"https://scontent.cdn...\" data-src-small=\"https://scontent.cdn...\" data-src-medium=\"https://scontent.cdn...\" data-src-large=\"https://scontent.cdn...\" class=\"object-fit thumbnail...\" loading=\"auto\" data-link=\"https://www.instagra...\" onerror=\"embed.imageError(thi...\" alt=\"Busy day filling la ...>",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-4 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"] > figure > img"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "has-alt",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has an alt attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "alt-space-value",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "critical",
-              "message": "Element has a valid alt attribute value"
-            }
-          ],
-          "impact": null,
-          "html": "<img src=\"https://scontent.cdn...\" data-src-small=\"https://scontent.cdn...\" data-src-medium=\"https://scontent.cdn...\" data-src-large=\"https://scontent.cdn...\" class=\"object-fit thumbnail...\" loading=\"auto\" data-link=\"https://www.instagra...\" onerror=\"embed.imageError(thi...\" alt=\"Filling the Farmsta ...>",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-5 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"] > figure > img"
           ]
         }
       ]
@@ -2543,7 +2615,7 @@
     },
     {
       "id": "link-name",
-      "impact": "serious",
+      "impact": null,
       "tags": [
         "cat.name-role-value",
         "wcag2a",
@@ -2663,627 +2735,6 @@
             }
           ],
           "impact": null,
-          "html": "<a rel=\"nofollow\" href=\"https://snapwidget.com/v/ig/18368804158087110/?src=Dg46zLJ2\" onclick=\"\" class=\"thumbnail hover-caption \" data-link=\"https://www.instagram.com/p/DRL8_Z2lNlE/\" target=\"_blank\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-0 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon facebook\" onclick=\"embed.shareFB('https...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-0 > .thumbnail-wrapper > .share-overlay > .facebook.icon[title=\"Share this image on Facebook\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon xicon\" onclick=\"embed.shareTwitter('...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-0 > .thumbnail-wrapper > .share-overlay > .xicon.icon[title=\"Share this image on X\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon pinterest\" onclick=\"embed.sharePinterest...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-0 > .thumbnail-wrapper > .share-overlay > .pinterest.icon[title=\"Share this image on Pinterest\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon facebook\" onclick=\"embed.shareFB('https...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-1 > .thumbnail-wrapper > .share-overlay > .facebook.icon[title=\"Share this image on Facebook\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon xicon\" onclick=\"embed.shareTwitter('...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-1 > .thumbnail-wrapper > .share-overlay > .xicon.icon[title=\"Share this image on X\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon pinterest\" onclick=\"embed.sharePinterest...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-1 > .thumbnail-wrapper > .share-overlay > .pinterest.icon[title=\"Share this image on Pinterest\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "has-visible-text",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has text that is visible to screen readers"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a rel=\"nofollow\" href=\"https://snapwidget.com/v/ig/18345779428201693/?src=Dg46zLJ2\" onclick=\"\" class=\"thumbnail hover-caption \" data-link=\"https://www.instagram.com/p/DRIYOyxkptj/\" target=\"_blank\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-2 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon facebook\" onclick=\"embed.shareFB('https...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-2 > .thumbnail-wrapper > .share-overlay > .facebook.icon[title=\"Share this image on Facebook\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon xicon\" onclick=\"embed.shareTwitter('...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-2 > .thumbnail-wrapper > .share-overlay > .xicon.icon[title=\"Share this image on X\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon pinterest\" onclick=\"embed.sharePinterest...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-2 > .thumbnail-wrapper > .share-overlay > .pinterest.icon[title=\"Share this image on Pinterest\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "has-visible-text",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has text that is visible to screen readers"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a rel=\"nofollow\" href=\"https://snapwidget.com/v/ig/18135620008418443/?src=Dg46zLJ2\" onclick=\"\" class=\"thumbnail hover-caption \" data-link=\"https://www.instagram.com/p/DRAm8zekpUc/\" target=\"_blank\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-3 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon facebook\" onclick=\"embed.shareFB('https...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-3 > .thumbnail-wrapper > .share-overlay > .facebook.icon[title=\"Share this image on Facebook\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon xicon\" onclick=\"embed.shareTwitter('...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-3 > .thumbnail-wrapper > .share-overlay > .xicon.icon[title=\"Share this image on X\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon pinterest\" onclick=\"embed.sharePinterest...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-3 > .thumbnail-wrapper > .share-overlay > .pinterest.icon[title=\"Share this image on Pinterest\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "has-visible-text",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has text that is visible to screen readers"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a rel=\"nofollow\" href=\"https://snapwidget.com/v/ig/18015722132796744/?src=Dg46zLJ2\" onclick=\"\" class=\"thumbnail hover-caption \" data-link=\"https://www.instagram.com/p/DQ8iqlDFDlu/\" target=\"_blank\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-4 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon facebook\" onclick=\"embed.shareFB('https...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-4 > .thumbnail-wrapper > .share-overlay > .facebook.icon[title=\"Share this image on Facebook\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon xicon\" onclick=\"embed.shareTwitter('...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-4 > .thumbnail-wrapper > .share-overlay > .xicon.icon[title=\"Share this image on X\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon pinterest\" onclick=\"embed.sharePinterest...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-4 > .thumbnail-wrapper > .share-overlay > .pinterest.icon[title=\"Share this image on Pinterest\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "has-visible-text",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has text that is visible to screen readers"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a rel=\"nofollow\" href=\"https://snapwidget.com/v/ig/18396473851193410/?src=Dg46zLJ2\" onclick=\"\" class=\"thumbnail hover-caption \" data-link=\"https://www.instagram.com/p/DQ3CX5AEbnk/\" target=\"_blank\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-5 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon facebook\" onclick=\"embed.shareFB('https...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-5 > .thumbnail-wrapper > .share-overlay > .facebook.icon[title=\"Share this image on Facebook\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon xicon\" onclick=\"embed.shareTwitter('...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-5 > .thumbnail-wrapper > .share-overlay > .xicon.icon[title=\"Share this image on X\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "non-empty-title",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has a title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
-          "html": "<a href=\"#\" title=\"Share this image on ...\" class=\"icon pinterest\" onclick=\"embed.sharePinterest...\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-5 > .thumbnail-wrapper > .share-overlay > .pinterest.icon[title=\"Share this image on Pinterest\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "has-visible-text",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has text that is visible to screen readers"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is not in tab order or has accessible text"
-            }
-          ],
-          "impact": null,
           "html": "<a href=\"https://instagram.com/yellowfarmhousestand\" target=\"_blank\" rel=\"noopener\">@yellowfarmhousestand</a>",
           "target": [
             "p > a[target=\"_blank\"][rel=\"noopener\"]"
@@ -3339,6 +2790,58 @@
           "html": "<a href=\"#\">yellowfarmhousetreats@gmail.com</a>",
           "target": [
             "section:nth-child(3) > p > a[href=\"#\"]"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-label",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "aria-label attribute exists and is not empty"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "focusable-no-name",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element is not in tab order or has accessible text"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a>",
+          "target": [
+            ".fa-facebook-f"
+          ]
+        },
+        {
+          "any": [
+            {
+              "id": "aria-label",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "aria-label attribute exists and is not empty"
+            }
+          ],
+          "all": [],
+          "none": [
+            {
+              "id": "focusable-no-name",
+              "data": null,
+              "relatedNodes": [],
+              "impact": "serious",
+              "message": "Element is not in tab order or has accessible text"
+            }
+          ],
+          "impact": null,
+          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a>",
+          "target": [
+            ".fa-instagram"
           ]
         },
         {
@@ -3401,25 +2904,6 @@
           "html": "<ul class=\"actions\">\n\t\t\t\t\t\t  <li><a href=\"#header\" class=\"button icon solid solo fa-arrow-down scrolly\">Continue</a></li>\n\t\t\t\t\t\t</ul>",
           "target": [
             "#intro > .actions"
-          ]
-        },
-        {
-          "any": [],
-          "all": [],
-          "none": [
-            {
-              "id": "only-listitems",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "List element only has direct children that are allowed inside <li> elements"
-            }
-          ],
-          "impact": null,
-          "html": "<ul class=\"media-grid clearfix\">",
-          "target": [
-            "iframe",
-            "ul"
           ]
         },
         {
@@ -3525,120 +3009,6 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li class=\"media-list-item no-border responsives-grid-item\" data-src=\"\" style=\"width: 33.333333333333%;\">",
-          "target": [
-            "iframe",
-            "li:nth-child(1)"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "listitem",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<li class=\"media-list-item no-border responsives-grid-item\" data-src=\"\" style=\"width: 33.333333333333%;\">",
-          "target": [
-            "iframe",
-            "li:nth-child(2)"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "listitem",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<li class=\"media-list-item no-border responsives-grid-item\" data-src=\"\" style=\"width: 33.333333333333%;\">",
-          "target": [
-            "iframe",
-            "li:nth-child(3)"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "listitem",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<li class=\"media-list-item no-border responsives-grid-item\" data-src=\"\" style=\"width: 33.333333333333%;\">",
-          "target": [
-            "iframe",
-            "li:nth-child(4)"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "listitem",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<li class=\"media-list-item no-border responsives-grid-item\" data-src=\"\" style=\"width: 33.333333333333%;\">",
-          "target": [
-            "iframe",
-            "li:nth-child(5)"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "listitem",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<li class=\"media-list-item no-border responsives-grid-item\" data-src=\"\" style=\"width: 33.333333333333%;\">",
-          "target": [
-            "iframe",
-            "li:nth-child(6)"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "listitem",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "List item has a <ul>, <ol> or role=\"list\" parent element"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
           "html": "<li><input type=\"submit\" value=\"Send Message\"></li>",
           "target": [
             "form > .actions > li"
@@ -3657,7 +3027,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\"><span class=\"label\">Facebook</span></a></li>",
+          "html": "<li><a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\" aria-label=\"Facebook\"><span class=\"label\">Facebook</span></a></li>",
           "target": [
             ".icons > li:nth-child(1)"
           ]
@@ -3675,7 +3045,7 @@
           "all": [],
           "none": [],
           "impact": null,
-          "html": "<li><a href=\"#\" class=\"icon brands alt fa-instagram\"><span class=\"label\">Instagram</span></a></li>",
+          "html": "<li><a href=\"#\" class=\"icon brands alt fa-instagram\" aria-label=\"Instagram\"><span class=\"label\">Instagram</span></a></li>",
           "target": [
             "li:nth-child(2)"
           ]
@@ -3771,101 +3141,6 @@
           "html": "<button class=\"overlay-menu__toggle\" id=\"overlay-menu-open\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-menu\">",
           "target": [
             "#overlay-menu-open"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "no-focusable-content",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element does not have focusable descendants"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<img src=\"https://scontent.cdn...\" data-src-small=\"https://scontent.cdn...\" data-src-medium=\"https://scontent.cdn...\" data-src-large=\"https://scontent.cdn...\" class=\"object-fit thumbnail...\" loading=\"auto\" data-link=\"https://www.instagra...\" onerror=\"embed.imageError(thi...\" alt=\"Available in the Fa ...>",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-0 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"] > figure > img"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "no-focusable-content",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element does not have focusable descendants"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<img src=\"https://scontent.cdn...\" data-src-small=\"https://scontent.cdn...\" data-src-medium=\"https://scontent.cdn...\" data-src-large=\"https://scontent.cdn...\" class=\"object-fit thumbnail...\" loading=\"auto\" data-link=\"https://www.instagra...\" onerror=\"embed.imageError(thi...\" alt=\"Freshly baked this  ...>",
-          "target": [
-            "iframe",
-            "img[alt=\"Freshly baked this morning!\"]"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "no-focusable-content",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element does not have focusable descendants"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<img src=\"https://scontent.cdn...\" data-src-small=\"https://scontent.cdn...\" data-src-medium=\"https://scontent.cdn...\" data-src-large=\"https://scontent.cdn...\" class=\"object-fit thumbnail...\" loading=\"auto\" data-link=\"https://www.instagra...\" onerror=\"embed.imageError(thi...\" alt=\"Baked this morning  ...>",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-3 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"] > figure > img"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "no-focusable-content",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element does not have focusable descendants"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<img src=\"https://scontent.cdn...\" data-src-small=\"https://scontent.cdn...\" data-src-medium=\"https://scontent.cdn...\" data-src-large=\"https://scontent.cdn...\" class=\"object-fit thumbnail...\" loading=\"auto\" data-link=\"https://www.instagra...\" onerror=\"embed.imageError(thi...\" alt=\"Busy day filling la ...>",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-4 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"] > figure > img"
-          ]
-        },
-        {
-          "any": [
-            {
-              "id": "no-focusable-content",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element does not have focusable descendants"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": null,
-          "html": "<img src=\"https://scontent.cdn...\" data-src-small=\"https://scontent.cdn...\" data-src-medium=\"https://scontent.cdn...\" data-src-large=\"https://scontent.cdn...\" class=\"object-fit thumbnail...\" loading=\"auto\" data-link=\"https://www.instagra...\" onerror=\"embed.imageError(thi...\" alt=\"Filling the Farmsta ...>",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-5 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"] > figure > img"
           ]
         },
         {
@@ -4139,187 +3414,6 @@
               "id": "color-contrast",
               "data": {
                 "contrastRatio": 0,
-                "fontSize": "11.4pt (15.2px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<div id=\"intro\">\n\t\t\t\t\t\t<h1>YELLOW FarmHOUSE&nbsp;<br>\n\t\t\t\t\t\tTreats</h1>\n\t\t\t\t\t\t<ul class=\"actions\">\n\t\t\t\t\t\t  <li><a href=\"#header\" class=\"button icon solid solo fa-arrow-down scrolly\">Continue</a></li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>",
-                  "target": [
-                    "#intro"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<button class=\"overlay-menu__close\" id=\"overlay-menu-close\" type=\"button\">\n\t\t\t\t\t\t\tClose <span aria-hidden=\"true\">✕</span>\n\t\t\t\t\t\t</button>",
-          "target": [
-            "#overlay-menu-close"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "messageKey": "nonBmp"
-              },
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element content contains only non-text characters"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<span aria-hidden=\"true\">✕</span>",
-          "target": [
-            "span[aria-hidden=\"true\"]"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "13.8pt (18.4px)",
-                "fontWeight": "normal",
-                "messageKey": "elmPartiallyObscured",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<button class=\"overlay-menu__toggle\" id=\"overlay-menu-open\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-menu\">",
-                  "target": [
-                    "#overlay-menu-open"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined because it's partially obscured by another element"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<button class=\"overlay-accordion__trigger\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-group-pages\">\n\t\t\t\t\t\t\t\t\tSite Pages\n\t\t\t\t\t\t\t\t</button>",
-          "target": [
-            "button[aria-controls=\"overlay-group-pages\"]"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "13.8pt (18.4px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<div id=\"intro\">\n\t\t\t\t\t\t<h1>YELLOW FarmHOUSE&nbsp;<br>\n\t\t\t\t\t\tTreats</h1>\n\t\t\t\t\t\t<ul class=\"actions\">\n\t\t\t\t\t\t  <li><a href=\"#header\" class=\"button icon solid solo fa-arrow-down scrolly\">Continue</a></li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>",
-                  "target": [
-                    "#intro"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<button class=\"overlay-accordion__trigger\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-group-products\">\n\t\t\t\t\t\t\t\t\tMenu Shortcuts\n\t\t\t\t\t\t\t\t</button>",
-          "target": [
-            "button[aria-controls=\"overlay-group-products\"]"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "13.8pt (18.4px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<div id=\"intro\">\n\t\t\t\t\t\t<h1>YELLOW FarmHOUSE&nbsp;<br>\n\t\t\t\t\t\tTreats</h1>\n\t\t\t\t\t\t<ul class=\"actions\">\n\t\t\t\t\t\t  <li><a href=\"#header\" class=\"button icon solid solo fa-arrow-down scrolly\">Continue</a></li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>",
-                  "target": [
-                    "#intro"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<button class=\"overlay-accordion__trigger\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-group-order\">\n\t\t\t\t\t\t\t\t\tOrder &amp; Info\n\t\t\t\t\t\t\t\t</button>",
-          "target": [
-            "button[aria-controls=\"overlay-group-order\"]"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
-                "fontSize": "13.8pt (18.4px)",
-                "fontWeight": "normal",
-                "messageKey": "bgGradient",
-                "expectedContrastRatio": "4.5:1"
-              },
-              "relatedNodes": [
-                {
-                  "html": "<div id=\"intro\">\n\t\t\t\t\t\t<h1>YELLOW FarmHOUSE&nbsp;<br>\n\t\t\t\t\t\tTreats</h1>\n\t\t\t\t\t\t<ul class=\"actions\">\n\t\t\t\t\t\t  <li><a href=\"#header\" class=\"button icon solid solo fa-arrow-down scrolly\">Continue</a></li>\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>",
-                  "target": [
-                    "#intro"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Element's background color could not be determined due to a background gradient"
-            }
-          ],
-          "all": [],
-          "none": [],
-          "impact": "serious",
-          "html": "<button class=\"overlay-accordion__trigger\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-group-visit\">\n\t\t\t\t\t\t\t\t\tVisit &amp; Connect\n\t\t\t\t\t\t\t\t</button>",
-          "target": [
-            "button[aria-controls=\"overlay-group-visit\"]"
-          ],
-          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
-        },
-        {
-          "any": [
-            {
-              "id": "color-contrast",
-              "data": {
-                "contrastRatio": 0,
                 "fontSize": "12.0pt (16px)",
                 "fontWeight": "normal",
                 "messageKey": "elmPartiallyObscured",
@@ -4381,252 +3475,5 @@
       ]
     }
   ],
-  "violations": [
-    {
-      "id": "aria-hidden-focus",
-      "impact": "serious",
-      "tags": [
-        "cat.name-role-value",
-        "wcag2a",
-        "wcag412",
-        "TTv5",
-        "TT6.a",
-        "EN-301-549",
-        "EN-9.4.1.2",
-        "RGAAv4",
-        "RGAA-7.1.1"
-      ],
-      "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
-      "help": "ARIA hidden element must not be focusable or contain focusable elements",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus?application=playwright",
-      "nodes": [
-        {
-          "any": [],
-          "all": [
-            {
-              "id": "focusable-disabled",
-              "data": null,
-              "relatedNodes": [
-                {
-                  "html": "<button class=\"overlay-menu__close\" id=\"overlay-menu-close\" type=\"button\">\n\t\t\t\t\t\t\tClose <span aria-hidden=\"true\">✕</span>\n\t\t\t\t\t\t</button>",
-                  "target": [
-                    "#overlay-menu-close"
-                  ]
-                },
-                {
-                  "html": "<button class=\"overlay-accordion__trigger\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-group-pages\">\n\t\t\t\t\t\t\t\t\tSite Pages\n\t\t\t\t\t\t\t\t</button>",
-                  "target": [
-                    "button[aria-controls=\"overlay-group-pages\"]"
-                  ]
-                },
-                {
-                  "html": "<button class=\"overlay-accordion__trigger\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-group-products\">\n\t\t\t\t\t\t\t\t\tMenu Shortcuts\n\t\t\t\t\t\t\t\t</button>",
-                  "target": [
-                    "button[aria-controls=\"overlay-group-products\"]"
-                  ]
-                },
-                {
-                  "html": "<button class=\"overlay-accordion__trigger\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-group-order\">\n\t\t\t\t\t\t\t\t\tOrder &amp; Info\n\t\t\t\t\t\t\t\t</button>",
-                  "target": [
-                    "button[aria-controls=\"overlay-group-order\"]"
-                  ]
-                },
-                {
-                  "html": "<button class=\"overlay-accordion__trigger\" type=\"button\" aria-expanded=\"false\" aria-controls=\"overlay-group-visit\">\n\t\t\t\t\t\t\t\t\tVisit &amp; Connect\n\t\t\t\t\t\t\t\t</button>",
-                  "target": [
-                    "button[aria-controls=\"overlay-group-visit\"]"
-                  ]
-                }
-              ],
-              "impact": "serious",
-              "message": "Focusable content should be disabled or be removed from the DOM"
-            }
-          ],
-          "none": [],
-          "impact": "serious",
-          "html": "<aside class=\"overlay-menu__sidebar\" id=\"overlay-menu\" aria-hidden=\"true\">",
-          "target": [
-            "#overlay-menu"
-          ],
-          "failureSummary": "Fix all of the following:\n  Focusable content should be disabled or be removed from the DOM"
-        }
-      ]
-    },
-    {
-      "id": "link-name",
-      "impact": "serious",
-      "tags": [
-        "cat.name-role-value",
-        "wcag2a",
-        "wcag244",
-        "wcag412",
-        "section508",
-        "section508.22.a",
-        "TTv5",
-        "TT6.a",
-        "EN-301-549",
-        "EN-9.2.4.4",
-        "EN-9.4.1.2",
-        "ACT",
-        "RGAAv4",
-        "RGAA-6.2.1"
-      ],
-      "description": "Ensure links have discernible text",
-      "help": "Links must have discernible text",
-      "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
-      "nodes": [
-        {
-          "any": [
-            {
-              "id": "has-visible-text",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element does not have text that is visible to screen readers"
-            },
-            {
-              "id": "aria-label",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "aria-label attribute does not exist or is empty"
-            },
-            {
-              "id": "aria-labelledby",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
-            },
-            {
-              "id": "non-empty-title",
-              "data": {
-                "messageKey": "noAttr"
-              },
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has no title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is in tab order and does not have accessible text"
-            }
-          ],
-          "impact": "serious",
-          "html": "<a rel=\"nofollow\" href=\"https://snapwidget.com/v/ig/17983671473916178/?src=Dg46zLJ2\" onclick=\"\" class=\"thumbnail hover-caption \" data-link=\"https://www.instagram.com/p/DRLKpR0kmqB/\" target=\"_blank\">",
-          "target": [
-            "iframe",
-            "#mediaImageWrapper-1 > .thumbnail-wrapper > .thumbnail.hover-caption[rel=\"nofollow\"]"
-          ],
-          "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
-        },
-        {
-          "any": [
-            {
-              "id": "has-visible-text",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element does not have text that is visible to screen readers"
-            },
-            {
-              "id": "aria-label",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "aria-label attribute does not exist or is empty"
-            },
-            {
-              "id": "aria-labelledby",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
-            },
-            {
-              "id": "non-empty-title",
-              "data": {
-                "messageKey": "noAttr"
-              },
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has no title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is in tab order and does not have accessible text"
-            }
-          ],
-          "impact": "serious",
-          "html": "<a href=\"https://www.facebook.com/YellowFarmhouseGirl/\" target=\"_blank\" rel=\"noopener\" class=\"icon brands alt fa-facebook-f\"><span class=\"label\">Facebook</span></a>",
-          "target": [
-            ".fa-facebook-f"
-          ],
-          "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
-        },
-        {
-          "any": [
-            {
-              "id": "has-visible-text",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element does not have text that is visible to screen readers"
-            },
-            {
-              "id": "aria-label",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "aria-label attribute does not exist or is empty"
-            },
-            {
-              "id": "aria-labelledby",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
-            },
-            {
-              "id": "non-empty-title",
-              "data": {
-                "messageKey": "noAttr"
-              },
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element has no title attribute"
-            }
-          ],
-          "all": [],
-          "none": [
-            {
-              "id": "focusable-no-name",
-              "data": null,
-              "relatedNodes": [],
-              "impact": "serious",
-              "message": "Element is in tab order and does not have accessible text"
-            }
-          ],
-          "impact": "serious",
-          "html": "<a href=\"#\" class=\"icon brands alt fa-instagram\"><span class=\"label\">Instagram</span></a>",
-          "target": [
-            ".fa-instagram"
-          ],
-          "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
-        }
-      ]
-    }
-  ]
+  "violations": []
 }

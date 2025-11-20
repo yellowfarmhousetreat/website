@@ -6,6 +6,7 @@
   --color-panel: #262f3a;
   --color-border: rgba(255, 255, 255, 0.15);
   --color-accent: #ffd86f;
+  --color-link-inline: #ffd86f;
   --color-highlight: #e74c3c;
   --color-text: #f5f5f5;
   --color-text-muted: #a0a0a0;
@@ -272,6 +273,20 @@ a:hover {
   border-radius: 999px;
   margin-left: 0.4rem;
   font-weight: 700;
+}
+
+.inline-link,
+.note-box a,
+.link-danger {
+  color: var(--color-link-inline);
+  text-decoration: underline;
+  text-decoration-thickness: 0.15rem;
+  text-underline-offset: 0.3rem;
+  font-weight: 600;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 body.overlay-menu-open {

@@ -5,6 +5,7 @@ const initOverlayMenu = () => {
   const overlayCloseBtn = document.getElementById('overlay-menu-close');
   const focusableSelector = 'a[href], area[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
   let currentFocusableItems = [];
+  let overlayHideTimer = null;
 
   if (!overlayWrapper || !overlayMenu || !overlayOpenBtn || !overlayCloseBtn) {
     return;
@@ -12,6 +13,8 @@ const initOverlayMenu = () => {
 
   overlayMenu.setAttribute('role', 'dialog');
   overlayMenu.setAttribute('aria-modal', 'false');
+  overlayMenu.hidden = true;
+  overlayMenu.classList.remove('is-open');
 
   const overlayTriggers = overlayWrapper.querySelectorAll('.overlay-accordion__trigger');
   const overlayPanels = overlayWrapper.querySelectorAll('.overlay-accordion__panel');
@@ -46,22 +49,37 @@ const initOverlayMenu = () => {
     return true;
   };
 
-  const setOverlayState = (isOpen) => {
-    overlayMenu.classList.toggle('is-open', isOpen);
-    overlayMenu.setAttribute('aria-hidden', String(!isOpen));
-    overlayMenu.setAttribute('aria-modal', String(isOpen));
-    overlayOpenBtn.classList.toggle('is-hidden', isOpen);
-    overlayOpenBtn.setAttribute('aria-expanded', String(isOpen));
-    document.body.classList.toggle('overlay-menu-open', isOpen);
-    if (isOpen) {
+  const openOverlayMenu = () => {
+    overlayMenu.hidden = false;
+    window.requestAnimationFrame(() => {
+      overlayMenu.classList.add('is-open');
       refreshFocusableItems();
       if (currentFocusableItems.length === 0) {
         overlayCloseBtn.focus();
       } else {
         currentFocusableItems[0].focus();
       }
+    });
+  };
+
+  const closeOverlayMenu = () => {
+    overlayMenu.classList.remove('is-open');
+    closeOverlayPanels();
+    overlayHideTimer = window.setTimeout(() => {
+      overlayMenu.hidden = true;
+    }, 320);
+  };
+
+  const setOverlayState = (isOpen) => {
+    window.clearTimeout(overlayHideTimer);
+    overlayMenu.setAttribute('aria-modal', String(isOpen));
+    overlayOpenBtn.classList.toggle('is-hidden', isOpen);
+    overlayOpenBtn.setAttribute('aria-expanded', String(isOpen));
+    document.body.classList.toggle('overlay-menu-open', isOpen);
+    if (isOpen) {
+      openOverlayMenu();
     } else {
-      closeOverlayPanels();
+      closeOverlayMenu();
     }
   };
 
