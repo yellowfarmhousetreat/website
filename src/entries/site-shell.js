@@ -14,7 +14,7 @@
 // Import third-party dependencies
 
 // Import core functionality (ISOLATED - won't break from other changes)
-import '../../assets/js/overlay-menu.js';
+import '../../assets/js/overlay-menu-simple.js';
 
 // Import page-specific modules
 import '../../assets/js/main.js';
