@@ -900,8 +900,8 @@
         }
     }
 
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', function() {
+    // Initialize function
+    function initializeOrderPage() {
         loadCartToOrder();
         updateCartCount();
         addFormValidation();
@@ -954,6 +954,14 @@
                 }
             });
         }
-    });
+    }
+    
+    // Initialize on page load - handle both scenarios (DOM ready and late load)
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeOrderPage);
+    } else {
+        // DOM already loaded (module imported after page load)
+        initializeOrderPage();
+    }
 
 })();
