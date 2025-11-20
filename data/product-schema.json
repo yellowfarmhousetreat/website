@@ -1,0 +1,16 @@
+{
+  "fields": {
+    "id": { "required": true, "type": "string", "description": "URL-safe product ID" },
+    "name": { "required": true, "type": "string", "description": "Product display name" },
+    "tier": { "required": false, "type": "string", "enum": ["Regular", "Fancy", "Complex"], "default": "Regular" },
+    "category": { "required": true, "type": "string", "enum": ["cookies", "cakes", "pies", "breads"], "description": "Product category" },
+    "description": { "required": true, "type": "string", "description": "Short product description" },
+    "image": { "required": true, "type": "string", "description": "Image path relative to root" },
+    "sizes": { "required": true, "type": "array", "description": "Array of size/price objects" },
+    "dietary": { "required": true, "type": "object", "description": "Dietary info object" },
+    "ingredients": { "required": false, "type": "string", "default": "See package for details" },
+    "allergens": { "required": false, "type": "string", "default": "See package for details" },
+    "shippable": { "required": false, "type": "boolean", "default": false },
+    "soldOut": { "required": false, "type": "boolean", "default": false }
+  }
+}
