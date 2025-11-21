@@ -560,8 +560,8 @@
         </div>
 
         <!-- Login Form -->
-        <div id="login-form" class="login-container">
-                        <div class="login-form">
+        <div id="login-form" class="login-container" style="display: flex !important;">
+                        <div class="login-form" style="border: 1px solid rgba(255,255,255,0.3);">
                                 <form id="admin-login-form" onsubmit="event.preventDefault(); handleLogin();">
                                     <h1>Farmhouse Admin</h1>
                                     <p>Click below to access the product manager.</p>
@@ -581,8 +581,12 @@
                         Changes saved locally - Use Reset to clear customizations
                     </div>
                 </div>
+            </div>
             <div id="product-list">
-                <!-- Products will be loaded here -->
+                <div style="padding: 2rem; text-align: center; color: white;">
+                    <h2>Loading Product Manager...</h2>
+                    <p>Please wait while we load the catalog.</p>
+                </div>
             </div>
         </div>
 
@@ -591,6 +595,10 @@
     </div>
 
     <script>
+        console.log("Admin Script Loaded");
+        window.onerror = function(msg, url, line) {
+            alert("JS Error: " + msg + "\nLine: " + line);
+        };
 /**
  * SECURE ADMIN INTERFACE FOR YELLOW FARMHOUSE TREATS
  * Allows remote product editing through web interface
@@ -739,29 +747,29 @@ class AdminInterface {
   }
 
   showLoginForm() {
-    document.getElementById('login-form').style.display = 'block';
+    document.getElementById('login-form').style.display = 'flex';
     
     // Add security disclaimer to login form if not already present
     const loginContainer = document.getElementById('login-form');
     if (!loginContainer.querySelector('.security-disclaimer')) {
       const disclaimer = document.createElement('div');
       disclaimer.className = 'security-disclaimer';
+      disclaimer.style.marginRight = '2rem'; // Add spacing for flex layout
       disclaimer.innerHTML = `
         <div style="
           background: rgba(255, 193, 7, 0.15);
           border: 2px solid rgba(255, 193, 7, 0.4);
           border-radius: 8px;
           padding: 1rem;
-          margin-bottom: 1.5rem;
           color: #ffffff;
           font-size: 0.85rem;
           line-height: 1.4;
+          max-width: 300px;
         ">
           <strong>SECURITY NOTICE:</strong><br>
-          This admin interface provides <strong>NO REAL SECURITY</strong>. The password is visible in the source code 
-          and can be bypassed using browser developer tools. Use only on trusted devices and networks.
+          This admin interface provides <strong>NO REAL SECURITY</strong>.
           <br><br>
-          <strong>For production:</strong> Edit data/products-data.json directly and deploy via Git.
+          <strong>For production:</strong> Edit data/products-data.json directly.
         </div>
       `;
       loginContainer.insertBefore(disclaimer, loginContainer.firstChild);
@@ -769,15 +777,23 @@ class AdminInterface {
   }
 
   showAdminPanel() {
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('admin-panel').style.display = 'block';
+    console.log("Showing Admin Panel...");
+    const loginForm = document.getElementById('login-form');
+    const adminPanel = document.getElementById('admin-panel');
+    
+    if (loginForm) loginForm.style.display = 'none';
+    if (adminPanel) {
+        adminPanel.style.display = 'block';
+        adminPanel.classList.remove('hidden');
+    }
+
     // Load products when admin panel is shown
     this.loadProducts().then(() => {
+      console.log("Products loaded successfully");
       this.renderProductList();
-      // this.renderOrderPauseToggle(); // Removed as it was missing in source
-    }).catch(() => {
+    }).catch((err) => {
+      console.error("Product load failed", err);
       this.renderProductList(); // Render with fallback data
-      // this.renderOrderPauseToggle(); // Removed as it was missing in source
     });
   }
 
@@ -819,9 +835,33 @@ class AdminInterface {
   }
 
   async loadProductsFromJson() {
-    const response = await fetch('../data/products-data.json?' + Date.now(), { cache: 'no-store' });
-    if (!response.ok) {
-      throw new Error('Failed to fetch products-data.json');
+    // Try multiple paths to find the data file
+    const paths = [
+        '/data/products-data.json',      // Server root (Vite/public)
+        '../data/products-data.json',    // Relative (if data is sibling to admin)
+        '../public/data/products-data.json' // Relative to source
+    ];
+
+    let response = null;
+    let error = null;
+
+    for (const path of paths) {
+        try {
+            console.log(`Trying to load products from: ${path}`);
+            const resp = await fetch(path + '?' + Date.now(), { cache: 'no-store' });
+            if (resp.ok) {
+                response = resp;
+                console.log(`Successfully loaded from: ${path}`);
+                break;
+            }
+        } catch (e) {
+            error = e;
+            console.warn(`Failed to load from ${path}`, e);
+        }
+    }
+
+    if (!response || !response.ok) {
+      throw new Error('Failed to fetch products-data.json from any known location');
     }
 
     const payload = await response.json();
