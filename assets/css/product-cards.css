@@ -420,42 +420,6 @@
   letter-spacing: 0.15em;
 }
 
-/* Info toggle button - Front (ⓘ circle) */
-.product-card-front .info-toggle {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  width: 44px;
-  height: 44px;
-  background: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #8b7355;
-  font-size: 2rem;
-  font-weight: 400;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-  z-index: 10;
-  font-family: Georgia, serif;
-  -webkit-tap-highlight-color: rgba(139, 115, 85, 0.2);
-  padding: 0;
-  margin: 0;
-}
-
-.product-card-front .info-toggle::before {
-  content: 'ⓘ';
-}
-
-.product-card-front .info-toggle:hover {
-  opacity: 0.7;
-}
-
-.product-card-front .info-toggle:active {
-  opacity: 0.5;
-}
-
 /* ===========================
    CARD BACK - Ingredients Label Style
    =========================== */
@@ -561,42 +525,6 @@
 .allergen-info strong {
   font-weight: 900;
   color: #000;
-}
-
-/* Info toggle button - Back (↩ curved arrow) */
-.product-card-back .info-toggle {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  width: 44px;
-  height: 44px;
-  background: #000;
-  border: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 1.6rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-  z-index: 10;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
-  padding: 0;
-  margin: 0;
-}
-
-.product-card-back .info-toggle::before {
-  content: '↩';
-}
-
-.product-card-back .info-toggle:hover {
-  opacity: 0.8;
-}
-
-.product-card-back .info-toggle:active {
-  opacity: 0.6;
 }
 
 /* ===========================

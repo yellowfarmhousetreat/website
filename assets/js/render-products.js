@@ -117,8 +117,6 @@ class SimpleProductRenderer {
             </div>
             
             <p class="product-description">${product.description}</p>
-            
-            <div class="info-toggle" role="button" tabindex="0" aria-label="View ingredients"></div>
           </div>
         </div>
 
@@ -139,7 +137,6 @@ class SimpleProductRenderer {
               <h4>Nutrition Notes</h4>
               <p>${nutritionText}</p>
             </div>
-            <div class="info-toggle" role="button" tabindex="0" aria-label="Return to front"></div>
           </div>
         </div>
       </div>
@@ -176,24 +173,6 @@ class SimpleProductRenderer {
       
       console.log('Card clicked, toggling flip for:', product.name);
       card.classList.toggle('flipped');
-    });
-
-    // Info toggle specific handler (redundant but keeps the button semantic)
-    const infoToggles = card.querySelectorAll('.info-toggle');
-    infoToggles.forEach(toggle => {
-      toggle.addEventListener('click', (e) => {
-        console.log('Flip toggle clicked for:', product.name);
-        e.stopPropagation();
-        card.classList.toggle('flipped');
-      });
-      
-      // Keyboard accessibility
-      toggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          card.classList.toggle('flipped');
-        }
-      });
     });
 
     // Add to cart handler
