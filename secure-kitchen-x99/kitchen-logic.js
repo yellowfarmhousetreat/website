@@ -28,6 +28,8 @@ class AdminInterface {
     constructor() {
         this.isAuthenticated = false;
         this.products = [];
+        this.theme = null;
+        this.currentTab = 'products';
         this.backupData = null;
         this.dietaryPricing = { ...DEFAULT_DIETARY_PRICING };
         this.paymentMethods = { ...DEFAULT_PAYMENT_METHODS };
@@ -42,6 +44,30 @@ class AdminInterface {
         this.setupEventListeners();
         this.checkAuthentication();
         this.loadAdminState(); // Load "Pause Orders" state
+        this.loadTheme(); // Load Theme Data
+    }
+
+    async loadTheme() {
+        try {
+            const paths = ['/data/theme.json', '../data/theme.json', '../public/data/theme.json'];
+            for (const path of paths) {
+                try {
+                    const resp = await fetch(path + '?t=' + Date.now());
+                    if (resp.ok) {
+                        this.theme = await resp.json();
+                        console.log('Theme loaded for editing');
+                        return;
+                    }
+                } catch (e) {}
+            }
+            // Fallback default theme if load fails
+            this.theme = {
+                colors: { bg: "#1a1a23", accent: "#ffd86f" },
+                content: { siteTitle: "Yellow Farmhouse Treats" }
+            };
+        } catch (e) {
+            console.error('Theme load error', e);
+        }
     }
 
     // --- Site-wide state persistence using window.siteConfig ---
@@ -171,37 +197,119 @@ class AdminInterface {
         }
 
         this.loadProducts().then(() => {
-            this.renderProductList();
-            this.renderOrderPauseToggle();
+            this.renderMainInterface();
         }).catch((err) => {
             console.error("Product load failed", err);
-            this.renderProductList();
-            this.renderOrderPauseToggle();
+            this.renderMainInterface();
         });
+    }
+
+    renderMainInterface() {
+        const container = document.getElementById('product-list');
+        container.innerHTML = `
+            <div class="admin-tabs" style="display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+                <button class="btn ${this.currentTab === 'products' ? 'btn-primary' : 'btn-secondary'}" onclick="adminInterface.switchTab('products')">Products</button>
+                <button class="btn ${this.currentTab === 'theme' ? 'btn-primary' : 'btn-secondary'}" onclick="adminInterface.switchTab('theme')">Theme & Content</button>
+            </div>
+            <div id="tab-content"></div>
+        `;
+        
+        if (this.currentTab === 'products') {
+            this.renderProductList();
+        } else if (this.currentTab === 'theme') {
+            this.renderThemeEditor();
+        }
+    }
+
+    switchTab(tab) {
+        this.currentTab = tab;
+        this.renderMainInterface();
+    }
+
+    renderThemeEditor() {
+        const container = document.getElementById('tab-content');
+        if (!this.theme) {
+            container.innerHTML = '<p>Loading theme data...</p>';
+            return;
+        }
+
+        const colors = this.theme.colors || {};
+        const content = this.theme.content || {};
+
+        container.innerHTML = `
+            <div class="admin-header">
+                <h2>Theme & Content Editor</h2>
+                <div class="admin-actions">
+                    <button onclick="adminInterface.saveTheme()" class="btn btn-success">Save Theme Config</button>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <div class="admin-product-card">
+                    <div class="product-header"><h3>🎨 Color Palette</h3></div>
+                    <div class="product-form">
+                        ${Object.entries(colors).map(([key, val]) => `
+                            <div class="form-group">
+                                <label>${key.charAt(0).toUpperCase() + key.slice(1)} Color:</label>
+                                <div style="display: flex; gap: 10px;">
+                                    <input type="color" value="${val}" onchange="adminInterface.updateThemeColor('${key}', this.value)" style="width: 50px; padding: 0;">
+                                    <input type="text" value="${val}" onchange="adminInterface.updateThemeColor('${key}', this.value)">
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="admin-product-card">
+                    <div class="product-header"><h3>📝 Site Content</h3></div>
+                    <div class="product-form">
+                        <div class="form-group">
+                            <label>Site Title:</label>
+                            <input type="text" value="${this.sanitizeText(content.siteTitle)}" onchange="adminInterface.updateThemeContent('siteTitle', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone:</label>
+                            <input type="text" value="${this.sanitizeText(content.phone)}" onchange="adminInterface.updateThemeContent('phone', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="text" value="${this.sanitizeText(content.email)}" onchange="adminInterface.updateThemeContent('email', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Address (HTML allowed):</label>
+                            <textarea onchange="adminInterface.updateThemeContent('address', this.value)">${this.sanitizeText(content.address)}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    updateThemeColor(key, value) {
+        if (!this.theme.colors) this.theme.colors = {};
+        this.theme.colors[key] = value;
+        // Live preview
+        const cssVar = `--color-${key.replace(/([A-Z])/g, "-$1").toLowerCase()}`;
+        document.documentElement.style.setProperty(cssVar, value);
+    }
+
+    updateThemeContent(key, value) {
+        if (!this.theme.content) this.theme.content = {};
+        this.theme.content[key] = value;
+    }
+
+    saveTheme() {
+        const json = JSON.stringify(this.theme, null, 2);
+        this.downloadFile(json, 'theme.json', 'application/json');
+        this.showMessage('Theme file downloaded! Upload to public/data/', 'success');
     }
 
     // --- Data Loading (The "Throughput" Design) ---
     async loadProducts() {
-        // Strategy: Try ProductLoader first (preferred), then fallback to manual fetch
-        if (typeof ProductLoader !== 'undefined') {
-            try {
-                console.log("Attempting to load via ProductLoader...");
-                // Try the Vite path first
-                const loader = new ProductLoader({ dataUrl: '../data/products-data.json' });
-                const payload = await loader.loadData(true);
-                
-                this.processLoadedData(payload);
-                this.showMessage(`Loaded ${this.products.length} products via shared loader`, 'success');
-                return;
-            } catch (e) {
-                console.warn("ProductLoader failed with default path, trying fallback...", e);
-            }
-        }
-
-        // Fallback to manual loading with multiple path attempts
+        // Strategy: Manual loading with multiple path attempts
         try {
             await this.loadProductsFromJson();
-            this.showMessage(`Loaded ${this.products.length} products via fallback`, 'success');
+            this.showMessage(`Loaded ${this.products.length} products`, 'success');
         } catch (error) {
             console.error('All product load attempts failed:', error);
             this.showMessage('Error loading products. Check console.', 'error');
@@ -374,7 +482,7 @@ class AdminInterface {
     }
 
     renderProductList() {
-        const container = document.getElementById('product-list');
+        const container = document.getElementById('tab-content');
         container.innerHTML = `
       <div class="admin-header">
         <h2>Product Management <span style="font-size: 0.6em; color: #ff6b6b; font-weight: normal;">(Development Tool)</span></h2>

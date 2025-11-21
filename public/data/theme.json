@@ -1,0 +1,25 @@
+{
+  "colors": {
+    "bg": "#1a1a23",
+    "surface": "#212931",
+    "panel": "#262f3a",
+    "accent": "#ffd86f",
+    "btnPrimary": "#e74c3c",
+    "btnHover": "#c73529",
+    "success": "#27ae60",
+    "danger": "#e74c3c"
+  },
+  "content": {
+    "siteTitle": "Yellow Farmhouse Treats",
+    "heroTitle": "YELLOW FarmHOUSE Treats",
+    "address": "22659 Farmway Road<br />Caldwell, ID 83646",
+    "phone": "(805) 709-4686",
+    "email": "yellowfarmhousetreats@gmail.com",
+    "facebook": "https://www.facebook.com/YellowFarmhouseGirl/",
+    "instagram": "https://instagram.com/yellowfarmhousestand"
+  },
+  "metadata": {
+    "lastUpdated": "2025-11-20T12:00:00Z",
+    "version": "1.0"
+  }
+}
