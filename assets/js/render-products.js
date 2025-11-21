@@ -99,9 +99,10 @@ class SimpleProductRenderer {
     const nutritionText = product.nutrition || 'Approx. 200–350 calories per serving. Contact us for detailed macros.';
 
     // 1. The Flippable Card (Visuals Only)
+    // CRITICAL: Structure must be .product-card-inner > .product-card-front + .product-card-back (Siblings)
     card.innerHTML = `
       <div class="product-card-inner">
-        <!-- FRONT -->
+        <!-- FRONT FACE -->
         <div class="product-card-front">
           ${soldOutBadge}
           <img src="${imagePath}" alt="${imageAlt}" class="product-image">
@@ -112,7 +113,7 @@ class SimpleProductRenderer {
           </div>
         </div>
 
-        <!-- BACK -->
+        <!-- BACK FACE -->
         <div class="product-card-back">
           <div class="back-content">
             <h4>Ingredients & Allergens</h4>
