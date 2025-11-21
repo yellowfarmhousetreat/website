@@ -185,9 +185,12 @@ class ProductLoader {
             ? '<p class="product-status">Currently sold out.</p>'
             : '';
 
+        // Resolve image path using metadata or fallback
+        const imagePath = this.resolveImagePath(product);
+
         card.innerHTML = `
             ${shippingBadge}
-            <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='images/placeholder.jpg'">
+            <img src="${imagePath}" alt="${product.name}" class="product-img" onerror="this.src='images/placeholder.jpg'">
             <div class="product-info">
                 <h3>${product.name}</h3>
                 <p>${product.description || ''}</p>
@@ -216,6 +219,26 @@ class ProductLoader {
         `;
 
         return card;
+    }
+
+    resolveImagePath(product) {
+        const basePath = (this.metadata && this.metadata.imageBasePath) ? this.metadata.imageBasePath : 'images/products/';
+        
+        // 1. Try V2 Schema (nested images object)
+        if (product.images && product.images.primary) {
+            // If it's an absolute path or starts with /, return as is
+            if (product.images.primary.match(/^(http|\/)/)) return product.images.primary;
+            return basePath + product.images.primary;
+        }
+        
+        // 2. Try V1 Schema (flat image property)
+        if (product.image) {
+            if (product.image.match(/^(http|\/)/)) return product.image;
+            return basePath + product.image;
+        }
+
+        // 3. Fallback
+        return 'images/placeholder.jpg';
     }
 
     generateDietaryOptions(product) {

@@ -29,7 +29,7 @@ const getHtmlEntries = (directories) => {
   return entries;
 };
 
-const htmlEntries = getHtmlEntries(['.', 'admin']);
+const htmlEntries = getHtmlEntries(['.', 'secure-kitchen-x99']);
 
 export default defineConfig({
   root: __dirname,
