@@ -56,24 +56,33 @@
 }
 
 /* ===========================
+   PRODUCT CONTAINER
+   Wraps the card and the controls
+   =========================== */
+.product-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 380px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===========================
    PRODUCT CARD BASE STRUCTURE
    Smooth responsive sizing
    =========================== */
 
 .product-card {
   perspective: 1500px;
-  height: clamp(480px, 60vh, 560px);
-  max-width: 380px;
+  height: clamp(320px, 40vh, 400px); /* Reduced height since controls are out */
   width: 100%;
-  margin: 0 auto;
   cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .product-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-4px);
 }
 
 .product-card-inner {
@@ -211,6 +220,28 @@
   font-style: italic;
 }
 
+.tap-hint {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: #8b7355;
+  text-align: center;
+  margin-top: auto;
+  padding-top: 8px;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ===========================
+   PRODUCT CONTROLS (Below Card)
+   =========================== */
+.product-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0 0.5rem;
+}
+
 .dietary-tags {
   display: flex;
   gap: 4px;
@@ -239,25 +270,22 @@
 /* Size options - Compact, clickable list */
 .sizes-list {
   list-style: none;
-  padding: 4px;
-  margin: 2px 0;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  background: #ffffff;
-  border: 2px solid #8b7355;
-  border-radius: 3px;
+  gap: 4px;
 }
 
 .sizes-list li {
   font-family: 'Courier New', monospace;
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: #3d2f24;
-  padding: 4px 6px;
+  padding: 8px 12px;
   background: #f5f3ed;
   border: 1px solid #d4c4b0;
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
@@ -265,7 +293,6 @@
   justify-content: space-between;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  min-height: 28px;
 }
 
 .sizes-list li:hover {
@@ -282,6 +309,7 @@
   color: #fdfbf7;
   border-color: #8b7355;
   font-weight: 700;
+  box-shadow: 0 2px 4px rgba(139, 115, 85, 0.3);
 }
 
 /* Dietary options - Minimal compressed checkboxes */
@@ -289,30 +317,32 @@
   background: transparent;
   border: none;
   padding: 0;
-  margin: 1px 0;
+  margin: 0;
   display: flex;
   flex-direction: row;
-  gap: 6px;
+  gap: 12px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .dietary-checkbox {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 6px;
   font-family: 'Courier New', monospace;
-  font-size: 0.6rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
   color: #6b5844;
   cursor: pointer;
   user-select: none;
-  padding: 0;
-  line-height: 1;
+  padding: 4px 8px;
+  background: rgba(139, 115, 85, 0.1);
+  border-radius: 4px;
 }
 
 .dietary-checkbox input[type='checkbox'] {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   cursor: pointer;
   accent-color: #8b7355;
   margin: 0;
@@ -320,20 +350,27 @@
 
 .dietary-checkbox:hover {
   color: #8b7355;
+  background: rgba(139, 115, 85, 0.15);
 }
 
-/* Quantity selector - Inline and compact */
+/* Cart Actions Row */
+.cart-actions {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+/* Quantity selector */
 .quantity-selector {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  margin: 2px 0;
-  padding: 4px 6px;
+  gap: 8px;
+  padding: 0 12px;
   background: #ffffff;
   border: 2px solid #8b7355;
-  border-radius: 3px;
-  min-height: 28px;
+  border-radius: 4px;
+  height: 44px;
 }
 
 .quantity-selector label {
@@ -347,22 +384,19 @@
 }
 
 .quantity-selector input {
-  width: 50px;
-  padding: 4px 6px;
-  border: 1px solid #8b7355;
-  background: #fff;
+  width: 40px;
+  padding: 4px;
+  border: none;
+  background: transparent;
   color: #3d2f24;
   font-family: 'Courier New', monospace;
   font-weight: 700;
   text-align: center;
-  border-radius: 2px;
-  font-size: 0.85rem;
+  font-size: 1rem;
 }
 
 .quantity-selector input:focus {
   outline: none;
-  border-color: #6f5a44;
-  box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.2);
 }
 
 /* Add to cart button */
@@ -370,19 +404,21 @@
   background: #8b7355;
   color: #fdfbf7;
   border: none;
-  padding: 8px 12px;
+  padding: 0 20px;
   font-family: 'Courier New', monospace;
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 4px;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-top: 2px;
-  min-height: 36px;
+  height: 44px;
   -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-to-cart-btn:hover {
@@ -534,19 +570,20 @@
 
 @media (max-width: 1024px) {
   .product-card {
-    height: clamp(460px, 55vh, 520px);
+    height: clamp(300px, 40vh, 380px);
     max-width: 360px;
   }
 }
 
 @media (max-width: 768px) {
   .product-card {
-    height: clamp(440px, 50vh, 500px);
+    height: clamp(280px, 45vh, 360px);
     max-width: 340px;
   }
 
   .product-card .product-image {
     height: clamp(120px, 18vh, 150px);
+    margin-top: clamp(30px, 6vh, 40px);
   }
   
   .back-content h4 {
@@ -560,12 +597,13 @@
 
 @media (max-width: 480px) {
   .product-card {
-    height: clamp(420px, 65vh, 520px);
+    height: clamp(260px, 50vh, 340px);
     max-width: 100%;
   }
   
   .product-card .product-image {
     height: clamp(100px, 15vh, 140px);
+    margin-top: clamp(24px, 5vh, 32px);
   }
   
   .product-name {
@@ -577,20 +615,17 @@
   }
   
   .sizes-list li {
-    font-size: 0.75rem;
-    padding: 3px 5px;
-    min-height: 24px;
+    font-size: 0.8rem;
+    padding: 8px 10px;
   }
   
   .add-to-cart-btn {
-    padding: 6px 10px;
-    font-size: 0.72rem;
-    min-height: 32px;
+    padding: 0 16px;
+    font-size: 0.85rem;
   }
   
   .quantity-selector {
-    padding: 3px 5px;
-    min-height: 24px;
+    padding: 0 8px;
   }
   
   .quantity-selector label {
@@ -598,9 +633,8 @@
   }
   
   .quantity-selector input {
-    width: 45px;
-    padding: 3px 5px;
-    font-size: 0.8rem;
+    width: 36px;
+    font-size: 0.9rem;
   }
 }
 

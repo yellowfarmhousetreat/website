@@ -33,9 +33,12 @@ class SimpleProductRenderer {
 
   // Create a single product card
   createCard(product) {
+    const container = document.createElement('div');
+    container.className = 'product-container';
+    container.setAttribute('data-product-id', product.id);
+
     const card = document.createElement('div');
     card.className = 'product-card';
-    card.setAttribute('data-product-id', product.id);
     // Mark as ready so product-card-info.js doesn't try to re-wrap it
     card.dataset.flipReady = 'true';
 
@@ -67,11 +70,6 @@ class SimpleProductRenderer {
     // Handle image path - support both old 'image' property and new 'images.primary' structure
     // BYPASS: Using placeholder to debug loading issues as requested
     const imagePath = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22300%22%20height%3D%22200%22%20viewBox%3D%220%200%20300%20200%22%3E%3Crect%20fill%3D%22%23f0f0f0%22%20width%3D%22300%22%20height%3D%22200%22%2F%3E%3Ctext%20fill%3D%22%23888%22%20font-family%3D%22sans-serif%22%20font-size%3D%2224%22%20dy%3D%2210.5%22%20font-weight%3D%22bold%22%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%3EImage%20Bypass%3C%2Ftext%3E%3C%2Fsvg%3E';
-    /* 
-    const imagePath = product.images?.primary 
-      ? `/images/products/${product.images.primary}`
-      : product.image || '/images/placeholder.jpg';
-    */
     
     const imageAlt = product.images?.alt || product.name;
     
@@ -94,6 +92,7 @@ class SimpleProductRenderer {
     // Handle nutrition - use product specific or default
     const nutritionText = product.nutrition || 'Approx. 200–350 calories per serving. Contact us for detailed macros.';
 
+    // 1. The Flippable Card (Visuals Only)
     card.innerHTML = `
       <div class="product-card-inner">
         <!-- FRONT -->
@@ -102,21 +101,8 @@ class SimpleProductRenderer {
           <img src="${imagePath}" alt="${imageAlt}" class="product-image">
           <div class="product-info-front">
             <h3 class="product-name">${product.name}</h3>
-            
-            ${dietaryHtml}
-            
-            <ul class="sizes-list">${sizeHtml}</ul>
-            
-            <button class="add-to-cart-btn" ${product.soldOut ? 'disabled' : ''}>
-              ${product.soldOut ? 'Out of Stock' : 'Add to Cart'}
-            </button>
-            
-            <div class="quantity-selector">
-              <label for="qty-${product.id}">Qty:</label>
-              <input type="number" id="qty-${product.id}" class="qty-input" value="1" min="1" max="100">
-            </div>
-            
             <p class="product-description">${product.description}</p>
+            <div class="tap-hint">Tap card for ingredients</div>
           </div>
         </div>
 
@@ -142,52 +128,65 @@ class SimpleProductRenderer {
       </div>
     `;
 
+    // 2. The Controls (Static, below card)
+    const controls = document.createElement('div');
+    controls.className = 'product-controls';
+    controls.innerHTML = `
+      ${dietaryHtml}
+      <ul class="sizes-list">${sizeHtml}</ul>
+      
+      <div class="cart-actions">
+        <div class="quantity-selector">
+          <label for="qty-${product.id}">Qty</label>
+          <input type="number" id="qty-${product.id}" class="qty-input" value="1" min="1" max="100">
+        </div>
+        
+        <button class="add-to-cart-btn" ${product.soldOut ? 'disabled' : ''}>
+          ${product.soldOut ? 'Out of Stock' : 'Add to Cart'}
+        </button>
+      </div>
+    `;
+
+    container.appendChild(card);
+    container.appendChild(controls);
+
     // Size selection handler
-    const sizeItems = card.querySelectorAll('.sizes-list li');
+    const sizeItems = controls.querySelectorAll('.sizes-list li');
     sizeItems.forEach(item => {
       item.addEventListener('click', () => {
         sizeItems.forEach(li => li.classList.remove('selected'));
         item.classList.add('selected');
-        card.dataset.selectedSize = item.dataset.sizeIndex;
-        card.dataset.selectedPrice = item.dataset.price;
+        container.dataset.selectedSize = item.dataset.sizeIndex;
+        container.dataset.selectedPrice = item.dataset.price;
       });
     });
 
     // Pre-select first size
     if (sizeItems.length > 0) {
       sizeItems[0].classList.add('selected');
-      card.dataset.selectedSize = '0';
-      card.dataset.selectedPrice = sizeItems[0].dataset.price;
+      container.dataset.selectedSize = '0';
+      container.dataset.selectedPrice = sizeItems[0].dataset.price;
     }
 
-    // Flip animation - Allow clicking the whole card to flip (like the original design)
-    // but prevent flipping when interacting with controls
-    card.addEventListener('click', (e) => {
-      // Don't flip if clicking buttons, inputs, or their labels
-      if (e.target.closest('button') || 
-          e.target.closest('input') || 
-          e.target.closest('label') ||
-          e.target.closest('.add-to-cart-btn')) {
-        return;
-      }
-      
+    // Flip animation - Click anywhere on card
+    card.addEventListener('click', () => {
       console.log('Card clicked, toggling flip for:', product.name);
       card.classList.toggle('flipped');
     });
 
     // Add to cart handler
-    const addBtn = card.querySelector('.add-to-cart-btn');
+    const addBtn = controls.querySelector('.add-to-cart-btn');
     addBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       if (product.soldOut) return;
       
-      const qty = parseInt(card.querySelector('.qty-input').value);
-      const sizeIndex = parseInt(card.dataset.selectedSize);
+      const qty = parseInt(controls.querySelector('.qty-input').value);
+      const sizeIndex = parseInt(container.dataset.selectedSize);
       const selectedSize = product.sizes[sizeIndex];
       
       // Check dietary checkboxes
-      const gfCheckbox = card.querySelector('.gf-checkbox');
-      const sfCheckbox = card.querySelector('.sf-checkbox');
+      const gfCheckbox = controls.querySelector('.gf-checkbox');
+      const sfCheckbox = controls.querySelector('.sf-checkbox');
       const isGF = gfCheckbox?.checked || false;
       const isSF = sfCheckbox?.checked || false;
       
@@ -243,7 +242,7 @@ class SimpleProductRenderer {
       }
     });
 
-    return card;
+    return container;
   }
 
   // Render all products
