@@ -216,8 +216,8 @@ class SimpleProductRenderer {
         const existingIndex = cart.findIndex(item => 
           item.name === product.name && 
           item.size === selectedSize.name &&
-          item.isGF === isGF &&
-          item.isSF === isSF
+          item.glutenFree === isGF &&
+          item.sugarFree === isSF
         );
         
         if (existingIndex > -1) {
@@ -229,8 +229,8 @@ class SimpleProductRenderer {
             size: selectedSize.name,
             price: finalPrice,
             quantity: qty,
-            isGF: isGF,
-            isSF: isSF
+            glutenFree: isGF,
+            sugarFree: isSF
           });
         }
         

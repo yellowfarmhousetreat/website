@@ -196,6 +196,15 @@
         document.getElementById('summaryDeposit').textContent = '$' + deposit.toFixed(2);
         document.getElementById('summaryBalance').textContent = '$' + balance.toFixed(2);
         
+        // Update hidden form fields for Formspree
+        const totalInput = document.getElementById('orderTotal');
+        const depositInput = document.getElementById('orderDeposit');
+        const shippingInput = document.getElementById('shippingCostInput');
+        
+        if (totalInput) totalInput.value = '$' + total.toFixed(2);
+        if (depositInput) depositInput.value = '$' + deposit.toFixed(2);
+        if (shippingInput) shippingInput.value = '$' + shipping.toFixed(2);
+        
         // Update payment amount displays
         if (document.getElementById('depositAmountDisplay')) {
             document.getElementById('depositAmountDisplay').textContent = '$' + deposit.toFixed(2);
