@@ -173,58 +173,23 @@ class AdminInterface {
     this.setupEventListeners();
     this.checkAuthentication();
     // Load products after authentication check
-    this.displaySecurityWarning();
+    // this.displaySecurityWarning();
   }
 
   // Display security warning
   displaySecurityWarning() {
-    console.warn('SECURITY WARNING: This admin interface provides NO REAL SECURITY!');
-    console.warn('Client-side authentication can be bypassed by anyone with basic web knowledge');
-    console.warn('Password is visible in source code: View Source -> Search for "FarmhouseBaker"');
-    console.warn('Use ONLY on trusted devices and networks - NEVER in production!');
-    console.warn('For real security, edit data/products-data.json directly and use Git for deployment');
-    
-    // Show warning banner
-    this.showSecurityBanner();
+    // Warning disabled
   }
 
   // Show security warning banner
   showSecurityBanner() {
-    const banner = document.createElement('div');
-    banner.id = 'security-warning-banner';
-    banner.innerHTML = `
-      <div style="
-        background: linear-gradient(135deg, #ff4757, #ff3742);
-        color: white;
-        padding: 1rem;
-        text-align: center;
-        font-weight: bold;
-        border-bottom: 3px solid #ff1e2d;
-        box-shadow: 0 2px 8px rgba(255, 71, 87, 0.3);
-        position: sticky;
-        top: 0;
-        z-index: 9999;
-      ">
-        DEVELOPMENT TOOL - NO REAL SECURITY<br>
-        <small style="font-weight: normal; opacity: 0.9;">
-          This interface can be bypassed by anyone - Use only on trusted networks - Password visible in source code
-        </small>
-      </div>
-    `;
-    document.body.insertBefore(banner, document.body.firstChild);
+    // Banner disabled
   }
 
-  // Security: Simple but effective authentication
+  // Security: Authentication bypassed
   checkAuthentication() {
-    const authToken = sessionStorage.getItem('admin_auth');
-    const validToken = this.generateToken();
-    
-    if (authToken === validToken) {
-      this.isAuthenticated = true;
-      this.showAdminPanel();
-    } else {
-      this.showLoginForm();
-    }
+    this.isAuthenticated = true;
+    this.showAdminPanel();
   }
 
   // Generate secure token (you should change this password)
@@ -235,39 +200,15 @@ class AdminInterface {
 
   // Update product data
   updateProduct(index, field, value) {
-    document.getElementById('login-form').style.display = 'block';
-    
-    // Add security disclaimer to login form if not already present
-    const loginContainer = document.getElementById('login-form');
-    if (!loginContainer.querySelector('.security-disclaimer')) {
-      const disclaimer = document.createElement('div');
-      disclaimer.className = 'security-disclaimer';
-      disclaimer.innerHTML = `
-        <div style="
-          background: rgba(255, 193, 7, 0.15);
-          border: 2px solid rgba(255, 193, 7, 0.4);
-          border-radius: 8px;
-          padding: 1rem;
-          margin-bottom: 1.5rem;
-          color: #ffffff;
-          font-size: 0.85rem;
-          line-height: 1.4;
-        ">
-          <strong>SECURITY NOTICE:</strong><br>
-          This admin interface provides <strong>NO REAL SECURITY</strong>. The password is visible in the source code 
-          and can be bypassed using browser developer tools. Use only on trusted devices and networks.
-          <br><br>
-          <strong>For production:</strong> Edit data/products-data.json directly and deploy via Git.
-        </div>
-      `;
-      loginContainer.insertBefore(disclaimer, loginContainer.firstChild);
+    if (this.products[index]) {
+      this.products[index][field] = value;
     }
   }
 
   showAdminPanel() {
     document.getElementById('login-form').style.display = 'none';
     document.getElementById('admin-panel').style.display = 'block';
-    this.renderPasswordForm();
+    // this.renderPasswordForm();
     // Load products when admin panel is shown
     this.loadProducts().then(() => {
       this.renderProductList();
@@ -330,6 +271,10 @@ class AdminInterface {
     }
 
     const payload = await response.json();
+    this.loadProductsFromPayload(payload);
+  }
+
+  loadProductsFromPayload(payload) {
     const rawProducts = Array.isArray(payload.products) ? payload.products : [];
     this.products = rawProducts.map(product => this.convertToAdminFormat(product));
     this.backupData = JSON.stringify(this.products, null, 2);
@@ -337,6 +282,34 @@ class AdminInterface {
     this.paymentMethods = payload.paymentMethods || {};
     this.shippingZones = payload.shippingZones || {};
     this.catalogVersion = payload.version || '';
+    
+    this.renderProductList();
+  }
+
+  handleFileSelect(event) {
+    const file = event.target.files[0];
+    if (file) {
+        this.processImportFile(file);
+    }
+  }
+
+  processImportFile(file) {
+    if (file.type !== 'application/json' && !file.name.endsWith('.json')) {
+        this.showMessage('Please select a valid JSON file', 'error');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const payload = JSON.parse(e.target.result);
+            this.loadProductsFromPayload(payload);
+            this.showMessage('File loaded successfully!', 'success');
+        } catch (error) {
+            this.showMessage('Error parsing JSON file: ' + error.message, 'error');
+        }
+    };
+    reader.readAsText(file);
   }
 
   // Convert complex product format to simple admin format
@@ -348,6 +321,24 @@ class AdminInterface {
     const originalSizes = product.sizes ? JSON.parse(JSON.stringify(product.sizes)) : [
       { name: 'dozen', price: basePrice }
     ];
+
+    // Handle complex image structure
+    let image = product.image || '';
+    if (product.images && product.images.primary) {
+      image = product.images.primary;
+    }
+
+    // Handle ingredients array
+    let ingredients = product.ingredients || '';
+    if (Array.isArray(ingredients)) {
+      ingredients = ingredients.join(', ');
+    }
+
+    // Handle allergens object
+    let allergens = product.allergens || [];
+    if (product.allergens && !Array.isArray(product.allergens) && product.allergens.contains) {
+      allergens = product.allergens.contains.map(a => a.toLowerCase());
+    }
     
     return {
       id: product.id,
@@ -356,18 +347,18 @@ class AdminInterface {
       unit: baseUnit,
       category: product.category,
       description: product.description || '',
-      ingredients: product.ingredients || '',
-      allergens: product.allergens || [],
-      image: product.image || '',
+      ingredients: ingredients,
+      allergens: allergens,
+      image: image,
       glutenFree: product.dietary ? product.dietary.glutenFree || false : false,
       sugarFree: product.dietary ? product.dietary.sugarFree || false : false,
       // vegan removed
-      glutenFreePrice: product.glutenFreePrice || 3,
-      sugarFreePrice: product.sugarFreePrice || 3,
+      glutenFreePrice: product.dietaryPricing ? product.dietaryPricing.glutenFree || 3 : 3,
+      sugarFreePrice: product.dietaryPricing ? product.dietaryPricing.sugarFree || 3 : 3,
       // veganPrice removed
       shippingEligible: product.shippable || false,
-      baseShippingCost: product.baseShippingCost || 5,
-      perPoundRate: product.perPoundRate || 2,
+      baseShippingCost: product.shipping ? product.shipping.baseShippingCost || 5 : 5,
+      perPoundRate: product.shipping ? product.shipping.perPoundRate || 2 : 2,
       featured: product.featured || false,
       tier: product.tier || 'Regular',
       emoji: product.emoji || '',
@@ -755,7 +746,7 @@ class AdminInterface {
   }
 
   // Convert admin format back to complex format for export
-    convertFromAdminFormat(product) {
+  convertFromAdminFormat(product) {
     // Generate sizes array based on unit and price
     let sizes = [];
     if (product.originalSizes && product.originalSizes.length > 0) {
@@ -769,35 +760,58 @@ class AdminInterface {
       sizes = this.generateDefaultSizes(product);
     }
 
+    // Reconstruct ingredients array
+    const ingredientsArray = product.ingredients 
+      ? product.ingredients.split(',').map(i => i.trim()).filter(i => i.length > 0)
+      : [];
+
+    // Reconstruct allergens object
+    const allergensList = product.allergens || [];
+    const allergensObj = {
+      contains: allergensList.map(a => a.charAt(0).toUpperCase() + a.slice(1)),
+      mayContain: ["Tree Nuts", "Peanuts", "Soy"],
+      facilityStatement: "Produced in a facility that also processes tree nuts, peanuts, and soy."
+    };
+
+    // Reconstruct images object
+    const imageObj = {
+      primary: product.image,
+      gallery: [product.image],
+      thumbnail: product.image ? product.image.replace(/(\.[\w\d_-]+)$/i, '_thumb$1') : '',
+      alt: `${product.name} - freshly baked`
+    };
+
+    // Reconstruct tags
+    const tags = [product.category];
+    if (product.featured) tags.push('specialty');
+    if (product.category === 'cakes' && product.name.toLowerCase().includes('chocolate')) tags.push('chocolate');
+
     return {
       id: product.id,
       name: product.name,
       ...(product.tier && { tier: product.tier }),
       category: product.category,
       description: product.description,
-      ingredients: product.ingredients || '',
-      allergens: product.allergens || [],
+      ingredients: ingredientsArray,
+      allergens: allergensObj,
       ...(product.emoji && { emoji: product.emoji }),
-      image: product.image,
+      images: imageObj,
       sizes: sizes,
       dietary: {
         glutenFree: product.glutenFree || false,
         sugarFree: product.sugarFree || false,
-        // vegan removed
-      },
-      dietaryPricing: {
-        glutenFree: product.glutenFreePrice || 3,
-        sugarFree: product.sugarFreePrice || 3,
-        // veganPrice removed
+        vegan: false
       },
       shippable: product.shippingEligible || false,
+      soldOut: product.soldOut || false,
+      featured: product.featured || false,
+      tags: tags,
       ...(product.shippingEligible && {
         shipping: {
           baseShippingCost: product.baseShippingCost || 5,
           perPoundRate: product.perPoundRate || 2
         }
-      }),
-      idahoDisclaimer: "This product was produced in a home kitchen that is not subject to public health inspection that may also process common food allergens. If you have safety concerns, contact your local health department."
+      })
     };
   }
 
@@ -1159,7 +1173,31 @@ TO UPDATE YOUR MAIN FILE:
   }
 
     setupEventListeners() {
-        // Additional event listeners can be added here
+        // Drag and drop for import
+        const dropZone = document.getElementById('import-drop-zone');
+        if (dropZone) {
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor = '#f4d03f';
+                dropZone.style.background = 'rgba(244, 208, 63, 0.1)';
+            });
+
+            dropZone.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                dropZone.style.background = 'rgba(255, 255, 255, 0.05)';
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                dropZone.style.background = 'rgba(255, 255, 255, 0.05)';
+                
+                if (e.dataTransfer.files.length > 0) {
+                    this.processImportFile(e.dataTransfer.files[0]);
+                }
+            });
+        }
     }
 }
 

@@ -186,6 +186,23 @@
 </head>
 <body>
     <div class="container">
+        <!-- Drag and Drop Import Zone -->
+        <div id="import-drop-zone" style="
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        " onclick="document.getElementById('file-input').click()">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">📂</div>
+            <h3 style="color: #f4d03f; margin-bottom: 0.5rem;">Drag & Drop 'products-data.json' Here</h3>
+            <p style="color: rgba(255, 255, 255, 0.7);">or click to select file to edit</p>
+            <input type="file" id="file-input" accept=".json" style="display: none;" onchange="adminInterface.handleFileSelect(event)">
+        </div>
+
         <!-- Security Notice -->
         <div class="security-notice">
             <strong>⚠️ Admin Access Only</strong> - This page is for authorized personnel only. 
