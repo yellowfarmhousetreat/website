@@ -91,6 +91,7 @@
   height: 100%;
   transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1);
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
@@ -112,6 +113,8 @@
   opacity: 1 !important;
   top: 0;
   left: 0;
+  /* Manage visibility and interaction during flip */
+  transition: z-index 0s 0.35s;
 }
 
 /* ===========================
@@ -140,6 +143,7 @@
 
 /* When flipped, Front goes to back and becomes non-interactive */
 .product-card.flipped .product-card-front {
+  z-index: 0;
   pointer-events: none;
 }
 
@@ -472,6 +476,7 @@
 
 /* When flipped, Back comes to front and becomes interactive */
 .product-card.flipped .product-card-back {
+  z-index: 3;
   pointer-events: auto;
 }
 
