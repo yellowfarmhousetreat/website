@@ -66,6 +66,7 @@
   max-width: 380px;
   margin: 0 auto;
   width: 100%;
+  perspective: 1000px;
 }
 
 /* ===========================
@@ -74,7 +75,6 @@
    =========================== */
 
 .product-card {
-  perspective: 1500px;
   height: clamp(320px, 40vh, 400px); /* Reduced height since controls are out */
   width: 100%;
   cursor: pointer;
@@ -89,7 +89,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: transform 0.6s ease;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -109,12 +109,8 @@
   border-radius: 4px;
   box-sizing: border-box;
   background-color: #fdfbf7;
-  /* Ensure cards are completely opaque like physical cards */
-  opacity: 1 !important;
   top: 0;
   left: 0;
-  /* Manage visibility and interaction during flip */
-  transition: z-index 0s 0.35s;
 }
 
 /* ===========================
@@ -136,14 +132,10 @@
     rgba(139, 115, 85, 0.08) 29px
   );
   transform: rotateY(0deg);
-  
-  /* Front is interactive and on top by default */
-  z-index: 2;
 }
 
 /* When flipped, Front goes to back and becomes non-interactive */
 .product-card.flipped .product-card-front {
-  z-index: 0;
   pointer-events: none;
 }
 
@@ -468,15 +460,10 @@
   overflow-y: auto;
   font-family: 'Courier New', monospace;
   color: #000;
-  opacity: 1 !important;
-  
-  /* Back is hidden and non-interactive by default */
-  z-index: 1;
 }
 
 /* When flipped, Back comes to front and becomes interactive */
 .product-card.flipped .product-card-back {
-  z-index: 3;
   pointer-events: auto;
 }
 
